@@ -52,10 +52,13 @@ website:[CS231n: Convolutional Neural Networks for Visual Recognition](http://cs
 
 沒辦法透過[硬編碼](https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB)的方式在這些問題下輕易的分類出貓咪
 ## 機器學習: 數據驅動方法
+寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。
+因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。
 流程：
 1. 收集數據集(影像與對應的類別標記)
 1. 機器學習演算法訓練分類器
 1. 使用分類器預測新讀進來的影像
+
 ## Nearest Neighbor Classifier
 ### Nearest Neighbor
 * 比較兩影像之間的距離
