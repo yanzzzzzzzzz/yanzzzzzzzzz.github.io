@@ -8,8 +8,6 @@ math: true
 toc : true
 ---
 
-# Image Classification
-
 website:[CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu/)
 
 影像分類是電腦視覺的核心任務

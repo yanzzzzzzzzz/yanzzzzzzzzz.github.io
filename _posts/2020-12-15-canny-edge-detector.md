@@ -21,6 +21,8 @@ toc : true
 設定高閾值與低閾值
 
 ![](/assets/img/post_img/Hysteresis-2.png){: width="400"}
+
+
 低於低閾值的不是edge，如線段(D)
 高於高閾值的是強edge，如線段(A)、(B)
 介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接
