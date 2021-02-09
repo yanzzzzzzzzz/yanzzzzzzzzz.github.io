@@ -40,7 +40,7 @@ ex:騎車看到紅燈會停車、看到貓咪會想用手去摸...
 如何建構一個方法(演算法)可以像人眼一樣識別幾何、分析物體、由影像取出我們想知道的資訊。
 
 
-![](/assets/img/post_img/computer-see.JPG){: width="400"}
+![](/assets/img/post_img/computer-see.png){: width="400"}
 
 
 ## 電腦視覺應用
