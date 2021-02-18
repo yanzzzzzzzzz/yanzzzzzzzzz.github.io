@@ -1,4 +1,12 @@
-#  filtering
+---
+title: cs131-lecture-3-Filters-and-convolutions
+author: yanz
+date: 2021-02-18 16:32:00 +0800
+categories: [course]
+tags: [cs131]
+math: true
+toc : true
+---
 
 ## 概述
 > What is filtering：Forming a new image whose pixel values are transformed
@@ -15,26 +23,24 @@ from original pixel values
 
 ![](/assets/img/post_img/feature-in-filtering_1.png){: width="400"}
 
-## convolution
+## convolution & correlation
+convolution 公式：
+
 ![](/assets/img/post_img/2D-Discrete-Convolution.png){: width="400"}
-## correlation
+
+
+correlation 公式：
+
 ![](/assets/img/post_img/correlation.png){: width="400"}
 
 compare with convolution & correlation
 
 ![](/assets/img/post_img/convolution-cross-correlation.png){: width="400"}
 
+
+convolution的符號是$ f*g $，correlation的符號是$ f**g $
 convolution先對filter mask做轉置再做correlation
 
-## convolution
-
-## correlation
-
-compare
-
-![](/assets/img/post_img/convolution-cross-correlation.png){: width="400"}
-
-convolution 先將filter mask反轉再進行correlation
 
 ## 參考
 [影像修復matlab example](https://la.mathworks.com/help/images/ref/inpaintexemplar.html)
