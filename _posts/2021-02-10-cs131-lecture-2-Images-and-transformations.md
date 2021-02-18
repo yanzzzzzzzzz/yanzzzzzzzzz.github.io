@@ -26,11 +26,12 @@ toc : true
 ### 變換矩陣 transformation matrix
 
 * 對原x,y座標進行縮放
+
 ![](/assets/img/post_img/transformation-matrices.png){: width="400"}
 
 
-
 * 角度轉換
+
 ![](/assets/img/post_img/rotate-matrix.png){: width="400"}
 
 矩陣可以做多重轉換：
