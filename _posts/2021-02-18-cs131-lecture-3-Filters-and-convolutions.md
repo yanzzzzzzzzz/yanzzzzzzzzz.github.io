@@ -19,9 +19,9 @@ from original pixel values
     * 擷取特徵：edge, corners, blobs detection...
     * 其他應用：超解析度成像super-resolution, 影像修復in-painting, 去噪de-noising
 
-![](/assets/img/post_img/feature-in-filtering.png){: width="400"}
+![](/assets/img/post_img/feature-in-filtering.png){: width="800"}
 
-![](/assets/img/post_img/feature-in-filtering_1.png){: width="400"}
+![](/assets/img/post_img/feature-in-filtering_1.png){: width="800"}
 
 ## convolution & correlation
 convolution 公式：
@@ -38,7 +38,7 @@ compare with convolution & correlation
 ![](/assets/img/post_img/convolution-cross-correlation.png){: width="400"}
 
 
-convolution的符號是$ f*g $，correlation的符號是$ f**g $
+convolution的符號是$$ f*g $$，correlation的符號是$$ f**g $$
 convolution先對filter mask做轉置再做correlation
 
 
