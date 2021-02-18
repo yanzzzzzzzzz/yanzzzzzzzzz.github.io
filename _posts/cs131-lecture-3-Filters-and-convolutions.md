@@ -15,6 +15,16 @@ from original pixel values
 
 ![](/assets/img/post_img/feature-in-filtering_1.png){: width="400"}
 
+## convolution
+![](/assets/img/post_img/2D-Discrete-Convolution.png){: width="400"}
+## correlation
+![](/assets/img/post_img/correlation.png){: width="400"}
+
+compare with convolution & correlation
+
+![](/assets/img/post_img/convolution-cross-correlation.png){: width="400"}
+
+convolution先對filter mask做轉置再做correlation
 
 ## convolution
 
