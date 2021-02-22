@@ -45,9 +45,26 @@ edge detection Using First/Second Derivative
 
 ![](/assets/img/post_img/gy-in-2d-derivative.png)
 
+
+* gradient vector：對x,y方向進行偏微分，也就是用上述兩個Gx, Gy的mask個別對影像進行convolution
+* gradient magnitude：透過x,y方向梯度的加總得到最終梯度強度
+* gradient direction：gradient vector中gradient變化量最大的角度
+
+![](/assets/img/post_img/gradient-vector.png)
+
+## noise對edge detection的影響
+* noise對邊緣檢測的影響不大
+* 若有較大的影響可以考慮先對影像進行平滑運算
+    * Median filter
+    * Gaussian filter
+    * Bilateral filter
+
+Tradeoff：影像模糊度越強，noise越少，但edge也會被模糊掉
+
+
 補充：
 消失點 vanishing point
-![](/assets/img/post_img/vanishing-point.png)
+![](/assets/img/post_img/vanishing-point.png){: width="400" height="400"}
 
 消失點是三維空間中所有平行線相交的交點。
 消失點的應用在檢測道路上有很大的幫助，在二維影像中車道最終會在消失點相交，但真實空間的車道是平行的。
