@@ -13,8 +13,6 @@ toc : true
 * 用edge來提取資訊、辨識物件
 * 回復幾何形狀與消失點(vanishing point)
 
-
-
 ## edge產生原因
 * 表面法向不連續性(Surface normal discontinuity)：區塊內看到多個不同角度的表面
 * 深度不連續性 (Depth discontinuity)：由物體前後距離不一所產生邊緣
@@ -61,10 +59,45 @@ edge detection Using First/Second Derivative
 
 Tradeoff：影像模糊度越強，noise越少，但edge也會被模糊掉
 
+## edge detector 
 
-補充：
+好的edge detector應避免這些事情發生
+* Poor robustness to noise：對noise抵抗能力低
+* Poor localization：與真實edge位置仍有小幅度差距
+* Too many responses：檢出太多不必要edge
+
+![](/assets/img/post_img/bad-edge-detector.png)
+
+### Sobel edge detector
+
+Sobel Operator 
+
+![](/assets/img/post_img/sobel-operator.png)
+
+由`高斯平滑 + 一階微分` 組成
+
+![](/assets/img/post_img/sobel-operator-explain.png)
+
+gradient magnitude & gradient direction
+
+![](/assets/img/post_img/sobel-magnitude-direction.png)
+
+
+![](/assets/img/post_img/sobel-result.png)
+
+缺點
+* 準確率差，誤判率高
+* 對noise敏感
+
+
+### Canny edge detector
+
+詳見[canny-edge-detector](https://yanzzzzzzzzz.github.io/posts/canny-edge-detector/)
+
+## 補充
 消失點 vanishing point
-![](/assets/img/post_img/vanishing-point.png){: width="400" height="400"}
+
+![](/assets/img/post_img/vanishing-point.png){: width="600" height="300"}
 
 消失點是三維空間中所有平行線相交的交點。
 消失點的應用在檢測道路上有很大的幫助，在二維影像中車道最終會在消失點相交，但真實空間的車道是平行的。
