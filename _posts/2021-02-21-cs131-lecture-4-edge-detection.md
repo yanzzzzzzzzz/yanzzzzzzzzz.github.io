@@ -94,12 +94,73 @@ gradient magnitude & gradient direction
 
 詳見[canny-edge-detector](https://yanzzzzzzzzz.github.io/posts/canny-edge-detector/)
 
+## Line Detection
+直線是一個很常見的特徵，例如在建築物、道路、零件電路板等都看得到
+從edge資訊更進一步找出直線
+### Naïve method
+
+![](/assets/img/post_img/line-detection.png)
+
+對影像中的edge點任取兩個點，檢查在此點形成的線上是否有其他edge點
+當點數量大於一定值時，視為真正的直線
+缺點：
+* 時間複雜度為$$ O(N^2) $$ ，N為edge數量
+
+### Hough transform
+與蠻力法相似，用投票的方式來找出合適的線段
+但不同的地方在於使用hough space將直線透過另一種公式做轉換
+
+####　Hough space
+直線方程式
+$$ y=ax+b $$(1)
+但這個方程式(1)不能表示垂直的線段
+
+$$ r = xcos \theta + ysin \theta $$ (2)
+
+![](/assets/img/post_img/hough-space.png)
+
+因此由公式(2)可以簡單的改變$$ \theta $$ 值組合出多種不同角度的直線
+
+![](/assets/img/post_img/hough-space-1.png)
+
+單個edge點(x,y)在$$ r,\theta $$ hough space下所呈現多條直線的結果為
+
+![](/assets/img/post_img/hough-space-2.png)
+
+可以看到單個點在$$ r,\theta $$空間下畫出一條彎曲線
+
+
+加上不同edge座標點，可以在hough space下畫出多條彎曲線
+並且有疊加交點，而此交點正好是兩點所形成的直線$$ \r, \theta $$
+
+![](/assets/img/post_img/hough-space-3.png)
+
+
+可篩選交點數較多的點為真實直線，也可以篩選指定直線角度範圍
+
+![](/assets/img/post_img/hough-transform.png)
+
+
+優點：
+* 概念簡單，好實現
+* 相同概念也可以用在[檢測圓形](https://youtu.be/Ltqt24SQQoI?t=185)
+
+缺點：
+* 只得到直線角度資訊，沒有直線長度資訊
+
+
 ## 補充
-消失點 vanishing point
+
+### 消失點 vanishing point
 
 ![](/assets/img/post_img/vanishing-point.png){: width="600" height="300"}
 
 消失點是三維空間中所有平行線相交的交點。
 消失點的應用在檢測道路上有很大的幫助，在二維影像中車道最終會在消失點相交，但真實空間的車道是平行的。
 透過edge尋找消失點，進行道路檢測。
+
 [VPGNet: Vanishing Point Guided Network for Lane and Road Marking Detection and Recognition ICCV2017-用DeepLearning 進行消失點檢測影片](https://youtu.be/jnewRlt6UbI)
+
+## 參考
+
+[Line Detection by Hough transformation](http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/HoughTrans_lines_09.pdf)
