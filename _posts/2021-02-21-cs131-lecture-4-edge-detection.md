@@ -123,15 +123,15 @@ $$ r = xcos \theta + ysin \theta $$ (2)
 
 ![](/assets/img/post_img/hough-space-1.png)
 
-單個edge點(x,y)在$$ r,\theta $$ hough space下所呈現多條直線的結果為
+單個edge點(x,y)在$$ [r,\theta] $$ hough space下所呈現多條直線的結果為
 
 ![](/assets/img/post_img/hough-space-2.png)
 
-可以看到單個點在$$ r,\theta $$空間下畫出一條彎曲線
+可以看到單個點在$$ [r,\theta] $$空間下畫出一條彎曲線
 
 
 加上不同edge座標點，可以在hough space下畫出多條彎曲線
-並且有疊加交點，而此交點正好是兩點所形成的直線$$ \r, \theta $$
+並且有疊加交點，而此交點正好是兩點所形成的直線$$ [r, \theta] $$
 
 ![](/assets/img/post_img/hough-space-3.png)
 
