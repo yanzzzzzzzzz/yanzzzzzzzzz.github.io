@@ -521,6 +521,10 @@ footer {
 
 /* --- Effects classes --- */
 
+.semi-bold {
+  font-weight: 600 !important;
+}
+
 .loaded {
   display: block !important;
 
@@ -811,9 +815,6 @@ $sidebar-display: "sidebar-display";
 
 #search-result-wrapper {
   display: none;
-  position: fixed;
-  top: 0;
-  padding-top: 3rem;
   height: 100%;
   overflow: auto;
   .post-content {
@@ -944,7 +945,7 @@ $sidebar-display: "sidebar-display";
   }
 
   > div {
-    max-width: 100%;
+    width: 100%;
 
     &:not(:last-child) {
       margin-bottom: 1rem;
@@ -1257,6 +1258,10 @@ $sidebar-display: "sidebar-display";
     min-width: 150px;
   }
 
+  #search-result-wrapper {
+    margin-top: 3rem;
+  }
+
   div.post-content .table-wrapper > table {
     min-width: 70%;
   }
@@ -1309,10 +1314,6 @@ $sidebar-display: "sidebar-display";
 
   #topbar-wrapper {
     left: 210px;
-  }
-
-  #search-result-wrapper {
-    width: calc(100% - 210px);
   }
 
   #search-results > div {
@@ -1392,12 +1393,8 @@ $sidebar-display: "sidebar-display";
     transition: all 0.3s ease-in-out;
   }
 
-  #search-result-wrapper {
-    width: calc(100% - 260px);
-  }
-
   #search-results > div {
-    max-width: 46%;
+    width: 46%;
     &:nth-child(odd) {
       margin-right: 1.5rem;
     }
@@ -1608,7 +1605,6 @@ $sidebar-display: "sidebar-display";
   }
 
   #search-result-wrapper {
-    width: calc(100% - #{$sidebar-width-large});
     > div {
       max-width: #{$main-content-max-width};
     }
@@ -1651,7 +1647,7 @@ $sidebar-display: "sidebar-display";
   }
 
   #search-result-wrapper {
-    padding-right: calc(100% - #{$sidebar-width-large} - 1530px);
+    padding-right: calc(100% - #{$sidebar-width-large} - 1180px);
   }
 
   #panel-wrapper {
