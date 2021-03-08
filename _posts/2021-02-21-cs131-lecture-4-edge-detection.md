@@ -1,5 +1,5 @@
 ---
-title: cs131-lecture-4-edge-detection
+title: cs131 lecture 4 Edge Detection
 author: yanz
 date: 2021-02-21 23:37:00 +0800
 categories: [course]

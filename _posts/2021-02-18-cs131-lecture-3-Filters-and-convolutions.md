@@ -1,5 +1,5 @@
 ---
-title: cs131-lecture-3-Filters-and-convolutions
+title: cs131 lecture 3 Filters And Convolutions
 author: yanz
 date: 2021-02-18 16:32:00 +0800
 categories: [course]

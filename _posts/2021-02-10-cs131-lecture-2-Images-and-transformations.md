@@ -1,5 +1,5 @@
 ---
-title: cs131-lecture-2-Images-and-transformations
+title: cs131 lecture 2 Images And Transformations
 author: yanz
 date: 2021-02-10 11:10:00 +0800
 categories: [course]

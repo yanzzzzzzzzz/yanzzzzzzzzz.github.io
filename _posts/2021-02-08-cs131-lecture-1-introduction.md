@@ -1,5 +1,5 @@
 ---
-title: cs131-lecture-1-introduction
+title: cs131 lecture 1 Introduction
 author: yanz
 date: 2021-02-08 23:06:00 +0800
 categories: [course]
