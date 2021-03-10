@@ -5,4 +5,11 @@ order: 4
 ---
 
 
-> **Note**: Add Markdown syntax content to file `_tabs/about.md` and it will show up on this page.
+# Education:
+B.S., in Computer Science, 2017, National Chin-Yi University of Technology
+
+M.S., in Computer Science, 2019, National Chin-Yi University of Technology
+
+# About Me
+I am currently a software engineer focus on automated optical inspection technology. 
+
