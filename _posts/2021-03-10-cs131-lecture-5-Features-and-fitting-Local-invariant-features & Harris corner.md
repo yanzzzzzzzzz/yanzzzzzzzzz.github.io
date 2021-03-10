@@ -8,6 +8,7 @@ math: true
 toc : true
 ---
 
+使用特徵點來尋找物件、定位、全景拼接
 
 ## 使用Local Invariant Features動機
 * 全局特徵有它的限制性
@@ -39,9 +40,11 @@ toc : true
 ![](/assets/img/post_img/harris-corner-explain.png)
 
 量測單點亮度變化公式：
+
 $$ I(x+u,y+v) - I(x,y) $$
 
 計算整個小視窗內的亮度變化公式：
+
 $$\sum_{xy}w(x,y)[I(x+u,y+v)-I(x,y)]^2 $$
 
 其中window function可以使用加權函數、高斯函數
@@ -82,11 +85,11 @@ $${\theta} = det(M) - {\alpha}trace(M)^2 = {\lambda_1}{\lambda_2}-{\alpha}({\lam
 
 快速逼近法：
 * 避免計算特徵值
-* $$ {\alpha}是常數，範圍可選在[0.04,0.06]之間$$
+* $${\alpha}是常數，範圍可選在[0.04,0.06]之間$$
 
 note
-* det：行列式，在矩陣上計算得到純量
-* trace：跡，矩陣對角線上的總和
+* det：Determinants，在矩陣上計算得到純量
+* trace：trace，矩陣對角線上的總和
 
 ### Harris corner特性
 
