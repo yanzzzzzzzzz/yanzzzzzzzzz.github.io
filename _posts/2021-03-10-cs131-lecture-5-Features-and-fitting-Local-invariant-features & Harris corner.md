@@ -1,5 +1,5 @@
 ---
-title: cs131 lecture 5 Features And Fitting-Local invariant features & Harris corner
+title: cs131 lecture 5 Features And Fitting-Local Invariant Features & Harris Corner
 author: yanz
 date: 2021-03-10 11:13:00 +0800
 categories: [course]
