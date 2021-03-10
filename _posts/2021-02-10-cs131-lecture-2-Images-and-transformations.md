@@ -71,6 +71,7 @@ $$ p'=R_2R_1Sp $$
 因此座標位置也跟著等比例縮小了
 
 #### 2D座標平移、縮放、旋轉
+
 ![](/assets/img/post_img/shift-roate-scaling.png){: width="400"}
 
 ## 參考
