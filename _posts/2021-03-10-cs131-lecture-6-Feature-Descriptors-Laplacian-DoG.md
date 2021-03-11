@@ -8,32 +8,30 @@ math: true
 toc : true
 ---
 
-## 問題
+# 問題
 Harris corner 沒有尺度不變性
 
 ![](/assets/img/post_img/harris-corner-scale-invariant.png)
 
 在不同尺度下所呈現的角點響應函數都不同，Image 1的最小圓圈範圍是跟Image 2最大圓圈範圍才會相同
 
-## 解決方法
+# 解決方法
 
 ![](/assets/img/post_img/scale-selection.png)
 
 希望能設計一個scale invariant detection function可以讓每張影像都找得到一個穩定的尖峰
 
-### Scale Invariant Detection
+## Scale Invariant Detection
 
 使用Laplacian與Difference of Gaussians kernel來對影像進行不同尺度的縮放
 
-#### Laplacian kernel
+### Laplacian kernel
 
 $$L = \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$$
 
-Laplacian:
-
 ![](/assets/img/post_img/Laplacian-kernel.png)
 
-####  Difference of Gaussians(DoG)
+###  Difference of Gaussians(DoG)
 
 $$DoG = G(x,y,k{\sigma}) - G(x,y,{\sigma}) $$
 
@@ -41,14 +39,13 @@ $$DoG = G(x,y,k{\sigma}) - G(x,y,{\sigma}) $$
 
 $$G(x,y,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$$
 
-DoG:
 
 ![](/assets/img/post_img/DoG.png)
 
 對影像逐漸加深模糊度，越模糊所保留的細節越少
 高斯差所得到的影像細節隨著$$\sigma$$越大細節越粗糙
 
-### Scale Invariant Detections
+## Scale Invariant Detections
 
 ![](/assets/img/post_img/scale-invariant-detectors.png)
 

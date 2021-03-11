@@ -37,7 +37,7 @@ SIFT descriptor(SIFT=Scale-Invariant Feature Transform)
 
 * 8方向的直方圖，4x4個直方圖陣列，會有8x4x4=128個向量
 * SIFT描述子是一個長度為128的向量，並有帶有旋轉不變性與尺度不變性
-* 可以比較影像A與影像B的向量來尋找配對的關鍵點
+* 可以比較影像A與影像B的各自的向量來尋找配對的關鍵點
 
 ## 參考
 [David G. Lowe,"Distinctive Image Features from Scale-Invariant Keypoints"," International Journal of Computer Vision, 60, 2 (2004), pp. 91-110](https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf)
