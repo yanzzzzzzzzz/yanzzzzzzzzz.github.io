@@ -1,25 +1,20 @@
 
 
-SIFT影像局部描述子介紹
+# SIFT描述子介紹
 
-檢測局部點ok
-下一步，怎麼進一步描述他們更容易匹配
-Descriptor:向量化關鍵點鄰域內容的，並具有不變性與獨特性
+我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配
+也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?
 
-旋轉不變性描述子
 
+## SIFT descriptor(SIFT=Scale-Invariant Feature Transform)
 建構一個旋轉不變性描述子
-* 從DoG得到一個關鍵點與尺度
-* 從關鍵點選擇出一個特徵角度
-* 對所有關鍵點描述相對於特徵角度的方向
+* 從DoG得到一個帶有尺度不變性的關鍵點
+* 從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像，因為很慢)
 
-SIFT descriptor(SIFT=Scale-Invariant Feature Transform)
-* 基於梯度的描述子來擷取關鍵點周圍的特徵
-* 使用關鍵點對應的模糊影像區域
-* 從關鍵點周圍取出影像梯度
-* 為了具有旋轉不變性，旋轉梯度方向和位置
-    * 取消旋轉，並直接在對應關鍵點存取得到的梯度方向
-    * 也可以直接旋轉整張影像，但很慢
+![](/assets/img/post_img/keypoint-neightborhood.png)
+
+
+### SIFT流程
 
 ![](/assets/img/post_img/gradient-direction.png)
 
