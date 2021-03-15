@@ -109,6 +109,6 @@ note
 
 ## 參考
 
-[Harris Corner Detector 公式推導以及具體含義](https://blog.csdn.net/u011534057/article/details/77775974)
-[图像特征之Harris角点检测](https://senitco.github.io/2017/06/18/image-feature-harris/)
-[why eigenvalues concerned in Harris corner detection?](https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection)
+* [Harris Corner Detector 公式推導以及具體含義](https://blog.csdn.net/u011534057/article/details/77775974)
+* [图像特征之Harris角点检测](https://senitco.github.io/2017/06/18/image-feature-harris/)
+* [why eigenvalues concerned in Harris corner detection?](https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection)
