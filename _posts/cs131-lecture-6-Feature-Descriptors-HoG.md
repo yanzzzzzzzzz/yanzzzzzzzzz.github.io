@@ -1,12 +1,17 @@
+---
+title: cs131 lecture 6 Feature Descriptors-HoG
+author: yanz
+date: 2021-03-16 10:50:00 +0800
+categories: [course]
+tags: [cs131]
+math: true
+toc : true
+---
 
-其他描述影像特徵的方法-HoG histogram of Oriented Gradients，梯度角度直方圖
+另一種描述影像特徵的方法，HoG(Histogram of Oriented Gradients)，方向梯度直方圖
 特徵描述子
-* 尋找可以區分物件的獨特特徵
-* 挑戰
-    * 各種不同的物件型態，與變化幅度大的外觀
-    * 雜亂背景與不同的成像亮度
 
-
+## HoG簡介
 局部的物件外觀與形狀經常由局部亮度梯度或邊緣方向顯現出來，因此透過局部梯度資訊建立一個梯度角度直方圖的特徵
 
 ## HoG流程
@@ -25,3 +30,7 @@
 ## 與SIFT1不同的地方
 * HoG通常用來描述更大的影像區域，SIFT用關鍵點來進行匹配
 * SIFT是對整體梯度進行正規化，HoG是使用周圍的cell區塊
+
+## 參考
+* [一文講解方向梯度直方圖（hog）](https://zhuanlan.zhihu.com/p/85829145)
+* [A Gentle Introduction Into The Histogram Of Oriented Gradients](https://medium.com/analytics-vidhya/a-gentle-introduction-into-the-histogram-of-oriented-gradients-fdee9ed8f2aa)

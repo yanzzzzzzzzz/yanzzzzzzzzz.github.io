@@ -13,13 +13,13 @@ Harris corner 沒有尺度不變性
 
 ![](/assets/img/post_img/harris-corner-scale-invariant.png)
 
-在不同尺度下所呈現的角點響應函數都不同，Image 1的最小圓圈範圍是跟Image 2最大圓圈範圍才會相同
+在不同尺度下所呈現的角點響應函數都不同，Image 1的最小圓圈範圍是跟Image 2最大圓圈範圍才會有相同的角點結果
 
 # 解決方法
 
 ![](/assets/img/post_img/scale-selection.png)
 
-希望能設計一個scale invariant detection function可以讓每張影像都找得到一個穩定的尖峰
+希望能設計一個scale invariant detection function可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果
 
 ## Scale Invariant Detection
 
@@ -31,13 +31,13 @@ $$L = \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$$
 
 ![](/assets/img/post_img/Laplacian-kernel.png)
 
-###  Difference of Gaussians(DoG)
-
-$$DoG = G(x,y,k{\sigma}) - G(x,y,{\sigma}) $$
-
 其中G是高斯函數
 
 $$G(x,y,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$$
+
+###  Difference of Gaussians(DoG)
+
+$$DoG = G(x,y,k{\sigma}) - G(x,y,{\sigma}) $$
 
 
 ![](/assets/img/post_img/DoG.png)
