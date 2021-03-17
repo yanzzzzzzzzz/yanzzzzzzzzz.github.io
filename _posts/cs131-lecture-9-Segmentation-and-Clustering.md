@@ -5,3 +5,9 @@ image segmentation
 
 ## 視覺上分群的範例
 依照格式塔原則進行舉例
+
+* Similarity 相似
+
+* Symmetry 對稱
+
+* Common Fate 共同命運 
