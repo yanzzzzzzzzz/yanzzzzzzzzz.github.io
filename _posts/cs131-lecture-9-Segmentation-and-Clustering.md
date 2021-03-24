@@ -23,5 +23,19 @@ image segmentation
 * Euclidean distance
 * Cosine similarity
 
+歐式距離：
+![](/assets/img/post_img/Euclidean-distance.png)
+
+餘弦相似性，概念是比對兩向量的夾角角度：
+
+ ![](/assets/img/post_img/cosin-similarity.png)
+
+
+### 分群演算法理想特性
+* [可擴縮性（Scalability）](https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7)
+* 可以處理不同的資料型態
+* 簡單的參數調整與設定
+* 可說明性，呈現的結果是可解釋的
+* 約束性，演算法可由使用者預先設定的限制下動作
 ## 參考
 [視覺法則 – 格式塔原則](https://uiclub.tw/2015/09/05/visual-principles-gestalt-principles/)
