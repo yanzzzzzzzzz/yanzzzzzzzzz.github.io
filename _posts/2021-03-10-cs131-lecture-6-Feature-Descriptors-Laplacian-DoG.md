@@ -1,7 +1,7 @@
 ---
 title: cs131 lecture 6 Feature Descriptors-Laplacian & DoG
 author: yanz
-date: 2021-03-10 14:55:00 +0800
+date: 2021-03-10 20:55:00 +0800
 categories: [course]
 tags: [cs131]
 math: true

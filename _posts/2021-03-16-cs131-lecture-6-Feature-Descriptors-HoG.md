@@ -1,7 +1,7 @@
 ---
 title: cs131 lecture 6 Feature Descriptors-HoG
 author: yanz
-date: 2021-03-16 10:50:00 +0800
+date: 2021-03-16 21:50:00 +0800
 categories: [course]
 tags: [cs131]
 math: true

@@ -1,7 +1,7 @@
 ---
 title: cs131 lecture 6 Feature Descriptors-SIFT
 author: yanz
-date: 2021-03-15 16:30:00 +0800
+date: 2021-03-15 22:30:00 +0800
 categories: [course]
 tags: [cs131]
 math: true
