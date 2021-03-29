@@ -15,7 +15,7 @@ toc : true
 
 ![](/assets/img/post_img/k-means-formula-1.png)
 
-![](/assets/img/post_img/k-means-formula-2.png){: width="78" height="350"}
+![](/assets/img/post_img/k-means-formula-2.png)
 
 參數定義：
 * $$t$$：迭代次數
