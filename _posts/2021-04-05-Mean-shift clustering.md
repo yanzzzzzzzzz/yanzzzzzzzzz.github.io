@@ -17,6 +17,7 @@ toc : true
 1. 重複步驟2~3直到收斂
 
 重心計算公式：
+
 ![](/assets/img/post_img/mean-shift-fomula.png)
 
 其中$$x是輸入的資料集,x={x_1,x_2...x_k},x_i是第i個資料$$
