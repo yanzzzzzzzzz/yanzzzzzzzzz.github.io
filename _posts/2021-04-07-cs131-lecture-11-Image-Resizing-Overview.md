@@ -36,7 +36,7 @@ toc : true
 
 重要指的可以是人眼經常會去特別關注的地方
 
-## 相關論文
+## 相關論文與應用
 
 ![](/assets/img/post_img/General-Retargeting-Framework.png)
 
