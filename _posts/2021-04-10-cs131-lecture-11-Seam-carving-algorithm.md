@@ -8,10 +8,6 @@ math: true
 toc : true
 ---
 
-
-從上回的影像調整大小部分定義
-$$m \times n &rarr; m' \times n', 其中n'<n$$
-
 如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊
 
 ## Basie Idea
