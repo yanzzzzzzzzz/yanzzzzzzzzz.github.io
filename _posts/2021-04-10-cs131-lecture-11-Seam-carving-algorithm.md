@@ -3,7 +3,7 @@ title: cs131 lecture 11 Image Resizing-Seam Carving
 author: yanz
 date: 2021-04-10 18:23:00 +0800
 categories: [course]
-tags: [cs131][Dynamic Programming]
+tags: [cs131]
 math: true
 toc : true
 ---
