@@ -2,8 +2,8 @@
 title: K-nearest-neighbor-algorithm
 author: yanz
 date: 2021-04-17 15:23:00 +0800
-categories: []
-tags: []
+categories: [course]
+tags: [cs131]
 math: true
 toc : true
 ---

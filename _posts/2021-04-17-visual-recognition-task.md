@@ -2,8 +2,8 @@
 title: cs131 lecture 12 visual recognition 
 author: yanz
 date: 2021-04-17 17:35:00 +0800
-categories: []
-tags: []
+categories: [course]
+tags: [cs131]
 math: true
 toc : true
 ---
