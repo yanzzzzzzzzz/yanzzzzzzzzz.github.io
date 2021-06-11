@@ -1,5 +1,5 @@
 ---
-title: cs131 lecture 12 Visual bag of words
+title: cs131 lecture 13 Visual bag of words
 author: yanz
 date: 2021-04-17 17:35:00 +0800
 categories: [course]
