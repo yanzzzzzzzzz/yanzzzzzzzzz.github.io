@@ -30,17 +30,37 @@ Visual bag of words 詞袋模型
     * [Barnard et al. 2003](https://www.researchgate.net/profile/Kobus-Barnard/publication/232650255_The_Effects_of_Segmentation_and_Feature_Choice_in_a_Translation_Model_of_Object_Recognition/links/00b7d51ed4acd0435f000000/The-Effects-of-Segmentation-and-Feature-Choice-in-a-Translation-Model-of-Object-Recognition.pdf)
 
 ## 學習視覺詞彙
-將剛剛取出的特徵向量，使用分群法來取出各群之間的群心
+假設資料集中有狗、貓、飛機、山丘
+透過剛剛的特徵提取可能會找到狗尾巴、貓耳朵、飛機的機翼、山丘上的樹等特徵
+這些特徵之間會因為他們影像所呈現的方式而有相似性
+我們在透過一個歸納個方法來將一群相似的特徵聚集再一起
+使用[k-means分群法](https://yanzzzzzzzzz.github.io/posts/k-means-clustering/)來將相似的特徵組成一群
+再取出各群之間的群心代表該群的特徵向量
 * 問題:如何選擇視覺詞彙的大小
     * 太小，此特徵向量不能表示所有群內的特徵性
     * 太大，量化失真，overfitting
 
 ## Vector quantization 向量量化
 ### 介紹codebook
-codebook概念：codebook是由一群codevector或codeword組合而成，輸入資料經過如k means取得特徵，這特徵就代表是一組code vector，最終的目標是透過這些codevector來代表輸入的資料
+codebook概念：codebook是由一群codevector或codeword組合而成，最終目標是以這些編碼向量來代表空間中全部的資料向量(ex:k means各群心的結果)
 
-簡單來說，一組大資料用codebook內的向量集合來表示，用來降維，降低資料量
+簡單來說，一組大資料用codebook內的codeword組合而成，用來降維，降低資料量
 
 ## 通過視覺詞彙的頻率來代表影像
 
 ![](/assets/img/post_img/Visual-bag-of-words-Frequency.png)
+
+上圖可以看到當輸入的影像進來時，可以透過各個不同的特徵來評估他屬於哪一類，達到影像分類的效果
+
+## 範例
+可參考[BagOfVisualWords](https://github.com/ymdatta/BagOfVisualWords)
+
+作者使用11個類別，每類影像數不同
+
+輸入影像後，取[SIFT descriptor](https://yanzzzzzzzzz.github.io/posts/cs131-lecture-6-Feature-Descriptors-SIFT/)
+
+再透過k-means分群法將特徵分成1000群
+
+訓練一個SVM mdoel，輸入資料為k-means的群心與對應的類別標籤
+
+輸入測試資料進行分類評估model準確度
