@@ -1,3 +1,12 @@
+---
+title: Spatial Pyramid Matching
+author: yanz
+date: 2021-06-14 22:18:00 +0800
+categories: [paper reading]
+tags: [Image Classification]
+math: true
+toc : true
+---
 論文閱讀：[Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories](https://hal.inria.fr/inria-00548585/document)
 作者Svetlana Lazebnik, Cordelia Schmid, Jean Ponce
 

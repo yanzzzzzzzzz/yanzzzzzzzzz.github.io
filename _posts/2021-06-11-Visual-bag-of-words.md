@@ -1,7 +1,7 @@
 ---
 title: cs131 lecture 13 Visual bag of words
 author: yanz
-date: 2021-04-17 17:35:00 +0800
+date: 2021-06-11 23:06:00 +0800
 categories: [course]
 tags: [cs131]
 math: true
