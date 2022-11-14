@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊 Basie Idea不重要的資訊代表影像梯度變化小的地方，定義一個energy function&#x2F;   使用梯度來作為energy function的原因：  邊界代表紋理資訊 人眼對edge比較敏感，平滑處就可以被視為不重要資訊 概念很簡單    左圖對整張影像濾除低能量pixel 中間對每行方向濾除最低能量pi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs131 lecture 11 Image Resizing-Seam Carving">
+<meta property="og:url" content="http://example.com/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/index.html">
+<meta property="og:site_name" content="yanzzzz blog">
+<meta property="og:description" content="如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊 Basie Idea不重要的資訊代表影像梯度變化小的地方，定義一個energy function&#x2F;   使用梯度來作為energy function的原因：  邊界代表紋理資訊 人眼對edge比較敏感，平滑處就可以被視為不重要資訊 概念很簡單    左圖對整張影像濾除低能量pixel 中間對每行方向濾除最低能量pi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/energy-function.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/gradient-based-pixel-removal.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/seam-cost-dp.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/seam-cost-dp_1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/seam-carving-backtracking.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/seam-carving-result.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/retargeting-both-dim.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/mulit-size-images.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/Object-Removal.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/seam-carving-limitations.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/face-detection_seam-carving.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/preserved-energy.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/forward-energy.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/forward-energy-1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png">
+<meta property="article:published_time" content="2021-04-10T10:23:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T02:32:40.732Z">
+<meta property="article:author" content="yanzzzz">
+<meta property="article:tag" content="cs131">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/energy-function.png">
+
+<link rel="canonical" href="http://example.com/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>cs131 lecture 11 Image Resizing-Seam Carving | yanzzzz blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yanzzzz blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs131 lecture 11 Image Resizing-Seam Carving
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-10 18:23:00" itemprop="dateCreated datePublished" datetime="2021-04-10T18:23:00+08:00">2021-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊</p>
+<h2 id="Basie-Idea"><a href="#Basie-Idea" class="headerlink" title="Basie Idea"></a>Basie Idea</h2><p>不重要的資訊代表影像梯度變化小的地方，定義一個energy function&#x2F;</p>
+<img src='https://yanzzzzzzzzz.github.io/img/energy-function.png'  width='400'/>
+
+<p>使用梯度來作為energy function的原因：</p>
+<ul>
+<li>邊界代表紋理資訊</li>
+<li>人眼對edge比較敏感，平滑處就可以被視為不重要資訊</li>
+<li>概念很簡單</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/gradient-based-pixel-removal.png'  width='400'/>
+
+<p>左圖對整張影像濾除低能量pixel</p>
+<p>中間對每行方向濾除最低能量pixel</p>
+<p>右圖對每列方向濾除最低能量pixel，看起來結果較好一點，但仍看得出來階梯處有扭曲的感覺</p>
+<h2 id="Seam-Carving"><a href="#Seam-Carving" class="headerlink" title="Seam Carving"></a>Seam Carving</h2><blockquote>
+<p>接縫裁剪(Seam Carving)，是一個可以針對圖像內容做正確縮放的算法。概念上，算法會找出一系列的接縫（seam）（接縫是在圖像中最不重要的一連串像素），接著利用接縫對圖像做縮放。如果是要縮小圖像，則移除這些接縫，若是放大，則在這些接縫的位置上，插入一些像素。接縫裁剪可以人工定義一些不會被修改的像素區域，也可以從圖像中移除整個物體。by wiki</p>
+</blockquote>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li>輸入要變化的影像與尺寸</li>
+<li>計算energy function</li>
+<li>從energy function計算seam cost $M$</li>
+<li>選出裁切方向最小的seam carving</li>
+<li>濾除足夠多的行列直到與輸入尺寸相同</li>
+</ol>
+<p>計算Seam cost的部分，主要使用動態規劃的方法來實作，因為每次計算seam cost時必須計算與鄰居周圍的相關資訊</p>
+<p>重新定義參數：</p>
+<ul>
+<li>$E$是前面提到的energy function，$E(i,j)是在影像上對應i,j的座標點能量值$</li>
+<li>$M$是seam cost，用來評估將該點作為seam carving時依據，$M$的計算公式：</li>
+</ul>
+<p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
+<ul>
+<li>可以從公式看到，seam cost所代表的意義就是由該點所對應的energy function，加上鄰近上方像素的最小點，就可以當作今天要把該點去除或展開時的一個成本，成本高低代表該點是重要資訊的指標</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp.png'  width='400'/>
+
+<h4 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h4><p>由於seam cost公式是計算矩陣$M$，其中又參考到自身周圍計算過的數值，因此需要用到動態規劃(Dynamic Programming, DP)</p>
+<p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp_1.png'  width='400'/>
+
+
+<h4 id="Searching-for-Minimum"><a href="#Searching-for-Minimum" class="headerlink" title="Searching for Minimum"></a>Searching for Minimum</h4><p>得到seam cost矩陣後，從最下方開始尋找最小向上路徑</p>
+<p>搜尋方式是先選出下方最小起始點，向上沿著上方周圍三個鄰居來選擇最小數值，直到矩陣上方列</p>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-carving-backtracking.png'  width='400'/>
+
+
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><img src='https://yanzzzzzzzzz.github.io/img/seam-carving-result.png'  width='400'/>
+
+<p> 一隻胖鳥經過Scaling瘦身成功，Retarget才能呈現他的身材!</p>
+<h3 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h3><h4 id="Imporve-the-running-time"><a href="#Imporve-the-running-time" class="headerlink" title="Imporve the running time"></a>Imporve the running time</h4><p>在流程中，我們只需更新被濾除掉的seam carving像素點集合周圍的energy funciton，而不必更新整張影像的energy function</p>
+<h4 id="Retargeting-in-Both-Dimensions"><a href="#Retargeting-in-Both-Dimensions" class="headerlink" title="Retargeting in Both Dimensions"></a>Retargeting in Both Dimensions</h4><p>在流程中，如果都需要調整寬高，那應該先調整哪個方向</p>
+<p>或著是透過一個方法同時調整寬高</p>
+<p>同時重新調整寬高的思路，同時考慮到x,y方向的seam cost</p>
+<p>並將他合成一個選擇公式：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/retargeting-both-dim.png'  width='400'/>
+
+<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam </p>
+<h4 id="Multi-Size-Image-Representation"><a href="#Multi-Size-Image-Representation" class="headerlink" title="Multi-Size Image Representation"></a>Multi-Size Image Representation</h4><p>上述流程是在知道輸入調整尺寸的情況下做演算</p>
+<p>那假如在不確定輸入尺寸的情況下(ex:顯示的尺寸可能有各種不同的組合)</p>
+<p>要如何做到即時resizing的轉換</p>
+<img src='https://yanzzzzzzzzz.github.io/img/mulit-size-images.png'  width='400'/>
+
+<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam </p>
+<h4 id="Object-Removal"><a href="#Object-Removal" class="headerlink" title="Object Removal"></a>Object Removal</h4><p>設定mask來保護&#x2F;移除指定的區塊</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Object-Removal.png'  width='400'/>
+
+<h4 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h4><p>seam carving的侷限性，低能量區域</p>
+<ul>
+<li>低能量區域的移除造成影像細節的幾何變化</li>
+<li>低能量區域在某些情形下也可能是重要資訊，ex:人臉</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-carving-limitations.png'  width='400'/>
+
+<p>改善方法：<br>使用自訂義限制，ex:人臉因為低能量區域被移除造成人臉扭曲，那就用人臉檢測保護臉部區塊+seam carving</p>
+<img src='https://yanzzzzzzzzz.github.io/img/face-detection_seam-carving.png'  width='400'/>
+
+<h4 id="Improvement-forward-energy"><a href="#Improvement-forward-energy" class="headerlink" title="Improvement: forward energy"></a>Improvement: forward energy</h4><p>seam carving導致平均能量不停上升，並且會有鋸齒狀的邊緣</p>
+<img src='https://yanzzzzzzzzz.github.io/img/preserved-energy.png'  width='400'/>
+改變移除策略：
+不移除最小能量的seam，而是移除插入能量最小的seam
+
+<img src='https://yanzzzzzzzzz.github.io/img/forward-energy.png'  width='400'/>
+
+<p>$C_L$是計算移除$𝑝_{𝑖,𝑗}$後左右,上下的能量,以此類推<br>得到每個移除接縫後的能量總和，用來評估哪個方向的像素被移除可以得到較小的能量</p>
+<p>小能量代表移除後得到平滑影像，大能量代表出現梯度變化大(扭曲、鋸齒狀)的結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/forward-energy-1.png'  width='400'/>
+
+
+<p>比較forward &amp; backward結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png'  width='400'/>
+
+<p><a target="_blank" rel="noopener" href="https://faculty.idc.ac.il/arik/SCWeb/vidret/results/image_results.html">更多差異圖</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://avikdas.com/2019/07/29/improved-seam-carving-with-forward-energy.html">Improved seam carving with forward energy</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cs131/" rel="tag"># cs131</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/" rel="prev" title="cs131 lecture 11 Image Resizing-Image Retargeting Overview">
+      <i class="fa fa-chevron-left"></i> cs131 lecture 11 Image Resizing-Image Retargeting Overview
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/" rel="next" title="K-nearest-neighbor-algorithm">
+      K-nearest-neighbor-algorithm <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basie-Idea"><span class="nav-number">1.</span> <span class="nav-text">Basie Idea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seam-Carving"><span class="nav-number">2.</span> <span class="nav-text">Seam Carving</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Programming"><span class="nav-number">2.1.1.</span> <span class="nav-text">Dynamic Programming</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Searching-for-Minimum"><span class="nav-number">2.1.2.</span> <span class="nav-text">Searching for Minimum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">2.2.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extensions"><span class="nav-number">2.3.</span> <span class="nav-text">Extensions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Imporve-the-running-time"><span class="nav-number">2.3.1.</span> <span class="nav-text">Imporve the running time</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retargeting-in-Both-Dimensions"><span class="nav-number">2.3.2.</span> <span class="nav-text">Retargeting in Both Dimensions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Size-Image-Representation"><span class="nav-number">2.3.3.</span> <span class="nav-text">Multi-Size Image Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-Removal"><span class="nav-number">2.3.4.</span> <span class="nav-text">Object Removal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Limitations"><span class="nav-number">2.3.5.</span> <span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-forward-energy"><span class="nav-number">2.3.6.</span> <span class="nav-text">Improvement: forward energy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yanzzzz</p>
+  <div class="site-description" itemprop="description">yanzzzz blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanzzzz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src=""></script>
+
+</body>
+</html>

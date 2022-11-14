@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="論文閱讀：Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories作者Svetlana Lazebnik, Cordelia Schmid, Jean Ponce Abstract本論文提出一個方法來進行場景辨識 將影像劃分成越來越細的子區域 並計算每個子區域內的局部特徵直方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spatial Pyramid Matching">
+<meta property="og:url" content="http://example.com/2021/06/14/2021-06-14-spatial-pyramid-matching/index.html">
+<meta property="og:site_name" content="yanzzzz blog">
+<meta property="og:description" content="論文閱讀：Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories作者Svetlana Lazebnik, Cordelia Schmid, Jean Ponce Abstract本論文提出一個方法來進行場景辨識 將影像劃分成越來越細的子區域 並計算每個子區域內的局部特徵直方">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/weak-strong-features.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/spatial-pyramid-matching.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/spatial-pyramid-matching-1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/SPM-fomula.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/histogram-intersection.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/SPM-fomula-2.PNG">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/SPM-fomula-1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/SPM-fomula-3.png">
+<meta property="article:published_time" content="2021-06-14T14:18:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T02:32:40.735Z">
+<meta property="article:author" content="yanzzzz">
+<meta property="article:tag" content="Image Classification">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/weak-strong-features.png">
+
+<link rel="canonical" href="http://example.com/2021/06/14/2021-06-14-spatial-pyramid-matching/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Spatial Pyramid Matching | yanzzzz blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yanzzzz blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/14/2021-06-14-spatial-pyramid-matching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spatial Pyramid Matching
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-14 22:18:00" itemprop="dateCreated datePublished" datetime="2021-06-14T22:18:00+08:00">2021-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper-reading/" itemprop="url" rel="index"><span itemprop="name">paper reading</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>論文閱讀：<a target="_blank" rel="noopener" href="https://hal.inria.fr/inria-00548585/document">Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories</a><br>作者Svetlana Lazebnik, Cordelia Schmid, Jean Ponce</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>本論文提出一個方法來進行場景辨識</p>
+<p>將影像劃分成越來越細的子區域</p>
+<p>並計算每個子區域內的局部特徵直方圖</p>
+<h2 id="Feature-extration"><a href="#Feature-extration" class="headerlink" title="Feature extration"></a>Feature extration</h2><p>可以分成兩種特徵</p>
+<ul>
+<li>weak features<ul>
+<li>oriented edge points</li>
+<li>visual vocabulary較少</li>
+</ul>
+</li>
+<li>strong features<ul>
+<li>SIFT</li>
+<li>visual vocabulary較多</li>
+</ul>
+</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/weak-strong-features.png'  width='400'/>
+
+<h2 id="Spatial-Pyramid-Matching"><a href="#Spatial-Pyramid-Matching" class="headerlink" title="Spatial Pyramid Matching"></a>Spatial Pyramid Matching</h2><h3 id="Create-Pyramid-Histogram"><a href="#Create-Pyramid-Histogram" class="headerlink" title="Create Pyramid Histogram"></a>Create Pyramid Histogram</h3><img src='https://yanzzzzzzzzz.github.io/img/spatial-pyramid-matching.png'  width='400'/>
+
+<p>右上圓圓像細胞的是輸入的影像</p>
+<p>左邊三個level是本篇文章提出的一個分割方法</p>
+<p>隨著level提高, 分割的數量逐漸增加, 概念就跟金字塔一樣</p>
+<p>從level 0來看，將輸入的影像經過特徵萃取</p>
+<p>每個點代表不同的Bag Of Visual Words</p>
+<p>計算每個特徵個別總和並用直方圖表示，如level 0下的長條形</p>
+<img src='https://yanzzzzzzzzz.github.io/img/spatial-pyramid-matching-1.png'  width='400'/>
+
+<p>而在level 0最終可以得到一個1*3的向量來表達這張影像</p>
+<p>到level 1部分，將影像切成4等份</p>
+<p>因此下面的直方圖也會有四份</p>
+<p>順序是對應著圖中的紅色數字進行量化</p>
+<p>level 1就可以得到1*12的向量</p>
+<p>level 2就可以得到1*48</p>
+<p>再拿這些向量去對其他影像進行比對</p>
+<h3 id="Pyramid-Matching"><a href="#Pyramid-Matching" class="headerlink" title="Pyramid Matching"></a>Pyramid Matching</h3><p>在原論文3.1節寫到如何匹配</p>
+<p>定義X,Y是兩個取出d維特徵向量的集合</p>
+<p>$ \ell $ 是金字塔的等級，第l等級會有 $ 2^{\ell} $ 的網格數</p>
+<p>每個網格會有$D&#x3D; 2^{\ell d} $的維度向量</p>
+<p>定義 $ H^{\ell}_X $, $ H^{\ell}_Y $ 是X,Y對應的histogram</p>
+<p>匹配公式：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/SPM-fomula.png'  width='400'/>
+
+<p>用下面的例子來簡單舉例：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/histogram-intersection.png'  width='400'/>
+
+<p>可以看到在level 0 兩邊都至有8個點</p>
+<p>level 1 左上最少 1, 右上最少 1, 左下最少 2, 右下最少 2 點以此類推</p>
+<p>其實公式的精神就是再說，取出X,Y每個格子的的最小數量作為交集數量</p>
+<p>而level與交集數量的關係：</p>
+<p>level 0 是一個全局的角度，因此早期的匹配到很多點數量不代表真的相似，因為level 0並沒有任何空間的訊息，隨著level越來越高，分割越細，所match到的點數量越能表示他們的相似程度</p>
+<p>因此每層的權重公式：</p>
+<p>level0 權重 &#x3D; $ \frac{1}{2^L} $</p>
+<p>其他 &#x3D; $ \frac{1}{2^{L-\ell+1}} $</p>
+<p>由於金字塔的計算方式，會有點數重複計算到的問題，為了消去這個重複性</p>
+<p>計算第 0 層到第 $ L-1 $ 的實際點數公式為：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/SPM-fomula-2.PNG'  width='400'/>
+
+<p>把上述兩個公式合在一起得到pyramid match kernel：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/SPM-fomula-1.png'  width='400'/>
+
+<p>論文將所有特徵向量量化成M個離散形式，最終公式為：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/SPM-fomula-3.png'  width='400'/>
+
+<p>使用SVM訓練模型來進行多個類別分類</p>
+<h2 id="Sample-Code"><a href="#Sample-Code" class="headerlink" title="Sample Code"></a>Sample Code</h2><p><a target="_blank" rel="noopener" href="https://github.com/TrungTVo/spatial-pyramid-matching-scene-recognition">Spatial Pyramid Matching Scene Recognition</a></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://hal.inria.fr/inria-00548585/document">Svetlana Lazebnik, Cordelia Schmid, Jean Ponce. Beyond bags of features: spatial pyramid matching<br>for recognizing natural scene categories. IEEE Conference on Computer Vision &amp; Pattern Recognition<br>(CPRV ’06), Jun 2006, New York, United States. pp.2169 - 2178, ff10.1109&#x2F;CVPR.2006.68ff. ffinria00548585f</a></p>
+<p><a target="_blank" rel="noopener" href="https://slideplayer.com/slide/7839159/">Spatial Pyramid Matching presented by Lubomir Bourdev</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6MwuK2wHlOg&t=336s&ab_channel=Cogneethi">C 7.2 | Spatial Pyramid Matching | SPM | CNN | Object Detection | Machine learning | EvODN
+</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Image-Classification/" rel="tag"># Image Classification</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/11/2021-06-11-Visual-bag-of-words/" rel="prev" title="cs131 lecture 13 Visual bag of words">
+      <i class="fa fa-chevron-left"></i> cs131 lecture 13 Visual bag of words
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/10/2021-08-10-dpm_detection/" rel="next" title="cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation">
+      cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-extration"><span class="nav-number">2.</span> <span class="nav-text">Feature extration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spatial-Pyramid-Matching"><span class="nav-number">3.</span> <span class="nav-text">Spatial Pyramid Matching</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Pyramid-Histogram"><span class="nav-number">3.1.</span> <span class="nav-text">Create Pyramid Histogram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pyramid-Matching"><span class="nav-number">3.2.</span> <span class="nav-text">Pyramid Matching</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Code"><span class="nav-number">4.</span> <span class="nav-text">Sample Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yanzzzz</p>
+  <div class="site-description" itemprop="description">yanzzzz blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanzzzz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src=""></script>
+
+</body>
+</html>

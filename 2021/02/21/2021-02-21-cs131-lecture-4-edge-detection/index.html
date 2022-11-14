@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="edge 的重要性 大部分的形狀等資訊可以從邊緣分析出來 用 edge 來提取資訊、辨識物件 回復幾何形狀與消失點(vanishing point)  edge 產生原因 表面法向不連續性(Surface normal discontinuity)：區塊內看到多個不同角度的表面 深度不連續性 (Depth discontinuity)：由物體前後距離不一所產生邊緣 表面顏色不連續性 (Surfac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs131 lecture 4 Edge Detection">
+<meta property="og:url" content="http://example.com/2021/02/21/2021-02-21-cs131-lecture-4-edge-detection/index.html">
+<meta property="og:site_name" content="yanzzzz blog">
+<meta property="og:description" content="edge 的重要性 大部分的形狀等資訊可以從邊緣分析出來 用 edge 來提取資訊、辨識物件 回復幾何形狀與消失點(vanishing point)  edge 產生原因 表面法向不連續性(Surface normal discontinuity)：區塊內看到多個不同角度的表面 深度不連續性 (Depth discontinuity)：由物體前後距離不一所產生邊緣 表面顏色不連續性 (Surfac">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/edge-origin.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/edge-in-derivatives.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/1d-derivatives.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/edge-in-derivatives-2d-function.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/gx-in-2d-derivative.PNG">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/gy-in-2d-derivative.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/gradient-vector.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/bad-edge-detector.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/sobel-operator.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/sobel-operator-explain.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/sobel-magnitude-direction.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/sobel-result.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/line-detection.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/hough-space.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/hough-space-1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/hough-space-2.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/hough-space-3.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/hough-transform.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/vanishing-point.png">
+<meta property="article:published_time" content="2021-02-21T15:37:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T02:32:40.719Z">
+<meta property="article:author" content="yanzzzz">
+<meta property="article:tag" content="cs131">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/edge-origin.png">
+
+<link rel="canonical" href="http://example.com/2021/02/21/2021-02-21-cs131-lecture-4-edge-detection/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>cs131 lecture 4 Edge Detection | yanzzzz blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yanzzzz blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/21/2021-02-21-cs131-lecture-4-edge-detection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs131 lecture 4 Edge Detection
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-21 23:37:00" itemprop="dateCreated datePublished" datetime="2021-02-21T23:37:00+08:00">2021-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="edge-的重要性"><a href="#edge-的重要性" class="headerlink" title="edge 的重要性"></a>edge 的重要性</h2><ul>
+<li>大部分的形狀等資訊可以從邊緣分析出來</li>
+<li>用 edge 來提取資訊、辨識物件</li>
+<li>回復幾何形狀與消失點(vanishing point)</li>
+</ul>
+<h2 id="edge-產生原因"><a href="#edge-產生原因" class="headerlink" title="edge 產生原因"></a>edge 產生原因</h2><ul>
+<li>表面法向不連續性(Surface normal discontinuity)：區塊內看到多個不同角度的表面</li>
+<li>深度不連續性 (Depth discontinuity)：由物體前後距離不一所產生邊緣</li>
+<li>表面顏色不連續性 (Surface color discontinuity)：物體改變顏色，例如材質顏色改變</li>
+<li>亮度不連續性 (Illumination discontinuity)：陰影，光線亮度變化</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/edge-origin.png"  width="400"/>
+
+<h2 id="邊緣檢測在一階微分應用"><a href="#邊緣檢測在一階微分應用" class="headerlink" title="邊緣檢測在一階微分應用"></a>邊緣檢測在一階微分應用</h2><p>edge detection Using First&#x2F;Second Derivative<br><img src="https://yanzzzzzzzzz.github.io/img/edge-in-derivatives.png"  width="400"/></p>
+<p>透過一階微分找出亮度變化大的地方</p>
+<h3 id="First-Derivative"><a href="#First-Derivative" class="headerlink" title="First Derivative"></a>First Derivative</h3><p>1D function：<br><img src="https://yanzzzzzzzzz.github.io/img/1d-derivatives.png"  width="400"/></p>
+<p>2D function：<br><img src="https://yanzzzzzzzzz.github.io/img/edge-in-derivatives-2d-function.png"  width="400"/></p>
+<p>轉換成 2D mask&#x2F;filter<br><img src="https://yanzzzzzzzzz.github.io/img/gx-in-2d-derivative.PNG"  width="400"/><br><img src="https://yanzzzzzzzzz.github.io/img/gy-in-2d-derivative.png"  width="400"/></p>
+<ul>
+<li>gradient vector：對 x,y 方向進行偏微分，也就是用上述兩個 Gx, Gy 的 mask 個別對影像進行 convolution</li>
+<li>gradient magnitude：透過 x,y 方向梯度的加總得到最終梯度強度</li>
+<li>gradient direction：gradient vector 中 gradient 變化量最大的角度<img src="https://yanzzzzzzzzz.github.io/img/gradient-vector.png"  width="400"/></li>
+</ul>
+<h2 id="noise-對-edge-detection-的影響"><a href="#noise-對-edge-detection-的影響" class="headerlink" title="noise 對 edge detection 的影響"></a>noise 對 edge detection 的影響</h2><ul>
+<li>noise 對邊緣檢測的影響不大</li>
+<li>若有較大的影響可以考慮先對影像進行平滑運算<ul>
+<li>Median filter</li>
+<li>Gaussian filter</li>
+<li>Bilateral filter</li>
+</ul>
+</li>
+</ul>
+<p>Tradeoff：影像模糊度越強，noise 越少，但 edge 也會被模糊掉</p>
+<h2 id="edge-detector"><a href="#edge-detector" class="headerlink" title="edge detector"></a>edge detector</h2><p>好的 edge detector 應避免這些事情發生</p>
+<ul>
+<li>Poor robustness to noise：對 noise 抵抗能力低</li>
+<li>Poor localization：與真實 edge 位置仍有小幅度差距</li>
+<li>Too many responses：檢出太多不必要 edge<img src="https://yanzzzzzzzzz.github.io/img/bad-edge-detector.png"  width="400"/></li>
+</ul>
+<h3 id="Sobel-edge-detector"><a href="#Sobel-edge-detector" class="headerlink" title="Sobel edge detector"></a>Sobel edge detector</h3><p>Sobel Operator<br><img src="https://yanzzzzzzzzz.github.io/img/sobel-operator.png"  width="400"/></p>
+<p>由<code>高斯平滑 + 一階微分</code> 組成<br><img src="https://yanzzzzzzzzz.github.io/img/sobel-operator-explain.png"  width="400"/></p>
+<p>gradient magnitude &amp; gradient direction<br><img src="https://yanzzzzzzzzz.github.io/img/sobel-magnitude-direction.png"  width="400"/><br><img src="https://yanzzzzzzzzz.github.io/img/sobel-result.png"  width="400"/></p>
+<p>缺點</p>
+<ul>
+<li>準確率差，誤判率高</li>
+<li>對 noise 敏感</li>
+</ul>
+<h3 id="Canny-edge-detector"><a href="#Canny-edge-detector" class="headerlink" title="Canny edge detector"></a>Canny edge detector</h3><p>詳見<a target="_blank" rel="noopener" href="https://yanzzzzzzzzz.github.io/posts/canny-edge-detector/">canny-edge-detector</a></p>
+<h2 id="Line-Detection"><a href="#Line-Detection" class="headerlink" title="Line Detection"></a>Line Detection</h2><p>直線是一個很常見的特徵，例如在建築物、道路、零件電路板等都看得到<br>從 edge 資訊更進一步找出直線</p>
+<h3 id="Naive-method"><a href="#Naive-method" class="headerlink" title="Naïve method"></a>Naïve method</h3><img src="https://yanzzzzzzzzz.github.io/img/line-detection.png"  width="400"/>
+
+<p>對影像中的 edge 點任取兩個點，檢查在此點形成的線上是否有其他 edge 點<br>當點數量大於一定值時，視為真正的直線<br>缺點：</p>
+<ul>
+<li>時間複雜度為$ O(N^2) $ ，N 為 edge 數量</li>
+</ul>
+<h3 id="Hough-transform"><a href="#Hough-transform" class="headerlink" title="Hough transform"></a>Hough transform</h3><p>與蠻力法相似，用投票的方式來找出合適的線段<br>但不同的地方在於使用 hough space 將直線透過另一種公式做轉換</p>
+<h4 id="Hough-space"><a href="#Hough-space" class="headerlink" title="Hough space"></a>Hough space</h4><p>直線方程式<br>$ y&#x3D;ax+b $(1)<br>但這個方程式(1)不能表示垂直的線段</p>
+<p>$ r &#x3D; xcos \theta + ysin \theta $ (2)<br><img src="https://yanzzzzzzzzz.github.io/img/hough-space.png"  width="400"/></p>
+<p>因此由公式(2)可以簡單的改變$ \theta $ 值組合出多種不同角度的直線<br><img src="https://yanzzzzzzzzz.github.io/img/hough-space-1.png"  width="400"/></p>
+<p>單個 edge 點(x,y)在$ [r,\theta] $ hough space 下所呈現多條直線的結果為<br><img src="https://yanzzzzzzzzz.github.io/img/hough-space-2.png"  width="400"/></p>
+<p>可以看到單個點在$ [r,\theta] $空間下畫出一條彎曲線</p>
+<p>加上不同 edge 座標點，可以在 hough space 下畫出多條彎曲線<br>並且有疊加交點，而此交點正好是兩點所形成的直線$ [r, \theta] $<br><img src="https://yanzzzzzzzzz.github.io/img/hough-space-3.png"  width="400"/></p>
+<p>可篩選交點數較多的點為真實直線，也可以篩選指定直線角度範圍<br><img src="https://yanzzzzzzzzz.github.io/img/hough-transform.png"  width="400"/></p>
+<p>優點：</p>
+<ul>
+<li>概念簡單，好實現</li>
+<li>相同概念也可以用在<a target="_blank" rel="noopener" href="https://youtu.be/Ltqt24SQQoI?t=185">檢測圓形</a></li>
+</ul>
+<p>缺點：</p>
+<ul>
+<li>只得到直線角度資訊，沒有直線長度資訊</li>
+</ul>
+<h2 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h2><h3 id="消失點-vanishing-point"><a href="#消失點-vanishing-point" class="headerlink" title="消失點 vanishing point"></a>消失點 vanishing point</h3><img src="https://yanzzzzzzzzz.github.io/img/vanishing-point.png"  width="400"/>
+
+<p>消失點是三維空間中所有平行線相交的交點。<br>消失點的應用在檢測道路上有很大的幫助，在二維影像中車道最終會在消失點相交，但真實空間的車道是平行的。<br>透過 edge 尋找消失點，進行道路檢測。</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/jnewRlt6UbI">VPGNet: Vanishing Point Guided Network for Lane and Road Marking Detection and Recognition ICCV2017-用 DeepLearning 進行消失點檢測影片</a></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/HoughTrans_lines_09.pdf">Line Detection by Hough transformation</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cs131/" rel="tag"># cs131</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/" rel="prev" title="cs131 lecture 3 Filters And Convolutions">
+      <i class="fa fa-chevron-left"></i> cs131 lecture 3 Filters And Convolutions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/" rel="next" title="cs131 lecture 5 Features And Fitting-RANSAC">
+      cs131 lecture 5 Features And Fitting-RANSAC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#edge-%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">edge 的重要性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#edge-%E7%94%A2%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">edge 產生原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8A%E7%B7%A3%E6%AA%A2%E6%B8%AC%E5%9C%A8%E4%B8%80%E9%9A%8E%E5%BE%AE%E5%88%86%E6%87%89%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">邊緣檢測在一階微分應用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#First-Derivative"><span class="nav-number">3.1.</span> <span class="nav-text">First Derivative</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noise-%E5%B0%8D-edge-detection-%E7%9A%84%E5%BD%B1%E9%9F%BF"><span class="nav-number">4.</span> <span class="nav-text">noise 對 edge detection 的影響</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#edge-detector"><span class="nav-number">5.</span> <span class="nav-text">edge detector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sobel-edge-detector"><span class="nav-number">5.1.</span> <span class="nav-text">Sobel edge detector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canny-edge-detector"><span class="nav-number">5.2.</span> <span class="nav-text">Canny edge detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Line-Detection"><span class="nav-number">6.</span> <span class="nav-text">Line Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Naive-method"><span class="nav-number">6.1.</span> <span class="nav-text">Naïve method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hough-transform"><span class="nav-number">6.2.</span> <span class="nav-text">Hough transform</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hough-space"><span class="nav-number">6.2.1.</span> <span class="nav-text">Hough space</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%9C%E5%85%85"><span class="nav-number">7.</span> <span class="nav-text">補充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E5%A4%B1%E9%BB%9E-vanishing-point"><span class="nav-number">7.1.</span> <span class="nav-text">消失點 vanishing point</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">8.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yanzzzz</p>
+  <div class="site-description" itemprop="description">yanzzzz blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanzzzz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src=""></script>
+
+</body>
+</html>

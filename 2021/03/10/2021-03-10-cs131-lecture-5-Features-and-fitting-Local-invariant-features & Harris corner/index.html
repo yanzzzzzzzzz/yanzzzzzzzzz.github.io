@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="使用特徵點來尋找物件、定位、全景拼接 使用 Local Invariant Features 動機 全局特徵有它的限制性 增強對遮擋、角度變化的魯棒性  常見的方法 找到多個獨特的關鍵點 定義一個 window 大小把 key points 的的周圍資訊取出來 提取周圍資訊並做正規化 計算正規化區域的局部描述子，例如使用區域色彩資訊 匹配局部描述子  好的 Local Features 特性 區塊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs131 lecture 5 Features And Fitting-Local Invariant Features &amp; Harris Corner">
+<meta property="og:url" content="http://example.com/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/index.html">
+<meta property="og:site_name" content="yanzzzz blog">
+<meta property="og:description" content="使用特徵點來尋找物件、定位、全景拼接 使用 Local Invariant Features 動機 全局特徵有它的限制性 增強對遮擋、角度變化的魯棒性  常見的方法 找到多個獨特的關鍵點 定義一個 window 大小把 key points 的的周圍資訊取出來 提取周圍資訊並做正規化 計算正規化區域的局部描述子，例如使用區域色彩資訊 匹配局部描述子  好的 Local Features 特性 區塊">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/DoG.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/DoG.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-explain.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/Taylor-expansion.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/Taylor-expansion-first.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-formula.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-2.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-3.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-explain-lambda.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner-invariant.png">
+<meta property="article:published_time" content="2021-03-10T11:13:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T02:32:40.721Z">
+<meta property="article:author" content="yanzzzz">
+<meta property="article:tag" content="cs131">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/harris-corner.png">
+
+<link rel="canonical" href="http://example.com/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>cs131 lecture 5 Features And Fitting-Local Invariant Features & Harris Corner | yanzzzz blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yanzzzz blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs131 lecture 5 Features And Fitting-Local Invariant Features & Harris Corner
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-10 19:13:00" itemprop="dateCreated datePublished" datetime="2021-03-10T19:13:00+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>使用特徵點來尋找物件、定位、全景拼接</p>
+<h2 id="使用-Local-Invariant-Features-動機"><a href="#使用-Local-Invariant-Features-動機" class="headerlink" title="使用 Local Invariant Features 動機"></a>使用 Local Invariant Features 動機</h2><ul>
+<li>全局特徵有它的限制性</li>
+<li>增強對遮擋、角度變化的魯棒性</li>
+</ul>
+<h3 id="常見的方法"><a href="#常見的方法" class="headerlink" title="常見的方法"></a>常見的方法</h3><ol>
+<li>找到多個獨特的關鍵點</li>
+<li>定義一個 window 大小把 key points 的的周圍資訊取出來</li>
+<li>提取周圍資訊並做正規化</li>
+<li>計算正規化區域的局部描述子，例如使用區域色彩資訊</li>
+<li>匹配局部描述子</li>
+</ol>
+<h3 id="好的-Local-Features-特性"><a href="#好的-Local-Features-特性" class="headerlink" title="好的 Local Features 特性"></a>好的 Local Features 特性</h3><ul>
+<li>區塊特徵萃取要有重複性與準確性</li>
+<li>特徵是局部的獨特，對變形與雜亂背景有魯棒性</li>
+<li>要能萃取夠多的特徵進行比對</li>
+<li>計算方法越快越好</li>
+</ul>
+<h2 id="Harris-Corner"><a href="#Harris-Corner" class="headerlink" title="Harris Corner"></a>Harris Corner</h2><p>設計準則：可以很簡單的用一個小視窗當作視野範圍辨認出角點<br>如果在角點，往任意方向移動這個小視窗應該會有很大的亮度變化</p>
+<img src='https://yanzzzzzzzzz.github.io/img/harris-corner.png'  width='400'/>
+<img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/>
+
+<h3 id="Formulation"><a href="#Formulation" class="headerlink" title="Formulation"></a>Formulation</h3><p>移動小視窗的中心座標點$[x,y]到[x+u,y+v]$來計算移動後的亮度變化<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/><br><img src='https://yanzzzzzzzzz.github.io/img/harris-corner-explain.png'  width='400'/></p>
+<p>量測單點亮度變化公式：</p>
+<p>$ I(x+u,y+v) - I(x,y) $</p>
+<p>計算整個小視窗內的亮度變化公式：</p>
+<p>$\sum_{xy}w(x,y)[I(x+u,y+v)-I(x,y)]^2 $</p>
+<p>其中 window function 可以使用加權函數、高斯函數</p>
+<p>利用泰勒展開式對$I(x+u,y+v)$<br><img src="https://yanzzzzzzzzz.github.io/img/Taylor-expansion.png"  width="400"/></p>
+<p>其中一階近似為<br><img src="https://yanzzzzzzzzz.github.io/img/Taylor-expansion-first.png"  width="400"/></p>
+<p>將一階近似帶入 harris corner 公式<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula.png"  width="400"/></p>
+<p>最終<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-1.png"  width="400"/></p>
+<p>其中 M 是一個 2x2 的矩陣用來計算影像導數<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-2.png"  width="400"/></p>
+<p>M 是對稱矩陣，求其特徵值<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-3.png"  width="400"/></p>
+<p>可以把矩陣 M 想像成是一個橢圓型，其中它的軸長是$\lambda_1 , \lambda_2$，方向由 R 定義<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-explain-lambda.png"  width="400"/></p>
+<p>可以看到$\lambda_1 , \lambda_2$ 與影像的關係，而我們只關心 corner 的地方，試著將 corner 位置的值透過一個公式過濾出來</p>
+<p>設計邊緣響應函數：</p>
+<p>${\theta} &#x3D; det(M) - {\alpha}trace(M)^2 &#x3D; {\lambda_1}{\lambda_2}-{\alpha}({\lambda_1}+{\lambda_2})^2$</p>
+<p>快速逼近法：</p>
+<ul>
+<li>避免計算特徵值</li>
+<li>${\alpha}是常數，範圍可選在[0.04,0.06]之間$</li>
+</ul>
+<p>note</p>
+<ul>
+<li>det：Determinants，在矩陣上計算得到純量</li>
+<li>trace：trace，矩陣對角線上的總和</li>
+</ul>
+<h3 id="Harris-corner-特性"><a href="#Harris-corner-特性" class="headerlink" title="Harris corner 特性"></a>Harris corner 特性</h3><ol>
+<li>參數$\alpha$對角點檢測的影響：加大$\alpha$值，減少角點檢測數量；降低$\alpha$值，增加角點數量</li>
+<li>具有旋轉不變性，但沒有尺度不變性，視野範圍內看到的角點，放大視野範圍後會變成 edge<img src="https://yanzzzzzzzzz.github.io/img/harris-corner-invariant.png"  width="400"/></li>
+</ol>
+<h2 id="特徵檢測器相關論文"><a href="#特徵檢測器相關論文" class="headerlink" title="特徵檢測器相關論文"></a>特徵檢測器相關論文</h2><ul>
+<li>Hessian &amp; Harris [Beaudet ‘78], [Harris ‘88]</li>
+<li>Laplacian, DoG [Lindeberg ‘98], [Lowe ‘99]</li>
+<li>Harris-&#x2F;Hessian-Laplace [Mikolajczyk &amp; Schmid ‘01]</li>
+<li>Harris-&#x2F;Hessian-Affine [Mikolajczyk &amp; Schmid ‘04]</li>
+<li>EBR and IBR [Tuytelaars &amp; Van Gool ‘04]</li>
+<li>MSER [Matas ‘02]</li>
+<li>Salient Regions [Kadir &amp; Brady ‘01]</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011534057/article/details/77775974">Harris Corner Detector 公式推導以及具體含義</a></li>
+<li><a target="_blank" rel="noopener" href="https://senitco.github.io/2017/06/18/image-feature-harris/">图像特征之 Harris 角点检测</a></li>
+<li><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection">why eigenvalues concerned in Harris corner detection?</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cs131/" rel="tag"># cs131</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/" rel="prev" title="cs131 lecture 5 Features And Fitting-RANSAC">
+      <i class="fa fa-chevron-left"></i> cs131 lecture 5 Features And Fitting-RANSAC
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/" rel="next" title="cs131 lecture 6 Feature Descriptors-Laplacian & DoG">
+      cs131 lecture 6 Feature Descriptors-Laplacian & DoG <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Local-Invariant-Features-%E5%8B%95%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">使用 Local Invariant Features 動機</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">常見的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%BD%E7%9A%84-Local-Features-%E7%89%B9%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">好的 Local Features 特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Harris-Corner"><span class="nav-number">2.</span> <span class="nav-text">Harris Corner</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Formulation"><span class="nav-number">2.1.</span> <span class="nav-text">Formulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Harris-corner-%E7%89%B9%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">Harris corner 特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%B5%E6%AA%A2%E6%B8%AC%E5%99%A8%E7%9B%B8%E9%97%9C%E8%AB%96%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">特徵檢測器相關論文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yanzzzz</p>
+  <div class="site-description" itemprop="description">yanzzzz blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanzzzz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src=""></script>
+
+</body>
+</html>

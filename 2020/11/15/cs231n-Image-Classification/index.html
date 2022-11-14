@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="website:CS231n: Convolutional Neural Networks for Visual Recognition 影像分類是電腦視覺的核心任務，但其中有許多障礙要克服 遇到的問題Semantic Gap 語義鴻溝 Semantic Gap指的是在不同系統中形成的結構造成差異 人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程 人眼看到的是物">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Image Classification">
+<meta property="og:url" content="http://example.com/2020/11/15/cs231n-Image-Classification/index.html">
+<meta property="og:site_name" content="yanzzzz blog">
+<meta property="og:description" content="website:CS231n: Convolutional Neural Networks for Visual Recognition 影像分類是電腦視覺的核心任務，但其中有許多障礙要克服 遇到的問題Semantic Gap 語義鴻溝 Semantic Gap指的是在不同系統中形成的結構造成差異 人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程 人眼看到的是物">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/d3418806.jpg">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/liquid-cat.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg">
+<meta property="article:published_time" content="2020-11-15T15:33:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T02:32:40.740Z">
+<meta property="article:author" content="yanzzzz">
+<meta property="article:tag" content="cs231n">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/d3418806.jpg">
+
+<link rel="canonical" href="http://example.com/2020/11/15/cs231n-Image-Classification/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Image Classification | yanzzzz blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yanzzzz blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/15/cs231n-Image-Classification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Image Classification
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-11-15 23:33:00" itemprop="dateCreated datePublished" datetime="2020-11-15T23:33:00+08:00">2020-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>website:<a target="_blank" rel="noopener" href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
+<p>影像分類是電腦視覺的核心任務，但其中有許多障礙要克服</p>
+<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><h3 id="Semantic-Gap-語義鴻溝"><a href="#Semantic-Gap-語義鴻溝" class="headerlink" title="Semantic Gap 語義鴻溝"></a>Semantic Gap 語義鴻溝</h3><ul>
+<li>Semantic Gap指的是在不同系統中形成的結構造成差異</li>
+<li>人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程</li>
+<li>人眼看到的是物體是光線照射到物體，經過反射後部份光線射入我們的眼睛。人腦所想的通常是高階特徵ex:飛機、汽車、室內空間</li>
+<li>在電腦中看到的數位影像是個三維tensor(R, G, B channel)。電腦主要觀察低階特徵ex:顏色分布、紋理(texture)</li>
+</ul>
+<h3 id="Viewpoint-variation-視野角度變化"><a href="#Viewpoint-variation-視野角度變化" class="headerlink" title="Viewpoint variation 視野角度變化"></a>Viewpoint variation 視野角度變化</h3><ul>
+<li>攝影機視野改變造成觀測結果產生變化</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/d3418806.jpg"  width="400"/>
+
+<h3 id="Background-Clutter-非均值的背景"><a href="#Background-Clutter-非均值的背景" class="headerlink" title="Background Clutter 非均值的背景"></a>Background Clutter 非均值的背景</h3><ul>
+<li>背景可能非常雜亂</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg"  width="400"/>
+
+<h3 id="Illumination-亮度的變化"><a href="#Illumination-亮度的變化" class="headerlink" title="Illumination 亮度的變化"></a>Illumination 亮度的變化</h3><ul>
+<li>不同的燈源，打光方式造成同一個物體不同成像結果</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg"  width="400"/>
+
+<h3 id="Occlusion-被遮蔽的物體"><a href="#Occlusion-被遮蔽的物體" class="headerlink" title="Occlusion 被遮蔽的物體"></a>Occlusion 被遮蔽的物體</h3><ul>
+<li>物體被遮擋一部分，但還是可以透過特徵來辨認出來</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg"  width="400"/>
+
+<h3 id="Deformation-物體形狀的變化"><a href="#Deformation-物體形狀的變化" class="headerlink" title="Deformation 物體形狀的變化"></a>Deformation 物體形狀的變化</h3><img src="https://yanzzzzzzzzz.github.io/img/liquid-cat.png"  width="400"/>
+
+<img src="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png"  width="400"/>
+
+<h3 id="Intraclass-variation-同類型的不同變化"><a href="#Intraclass-variation-同類型的不同變化" class="headerlink" title="Intraclass variation 同類型的不同變化"></a>Intraclass variation 同類型的不同變化</h3><img src="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg"  width="400"/>
+
+<p>沒辦法透過<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB">硬編碼</a>的方式在這些問題下輕易的分類出貓咪</p>
+<h2 id="機器學習-數據驅動方法"><a href="#機器學習-數據驅動方法" class="headerlink" title="機器學習: 數據驅動方法"></a>機器學習: 數據驅動方法</h2><p>寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。<br>因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。<br>流程：</p>
+<ol>
+<li>收集數據集(影像與對應的類別標記)</li>
+<li>機器學習演算法訓練分類器</li>
+<li>使用分類器預測新讀進來的影像</li>
+</ol>
+<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><h3 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h3><ul>
+<li>比較兩影像之間的距離<br>L1距離公式:$d_1(I_1, I_2) &#x3D; \sum_{p} |I^P_1 - I^P_2|$</li>
+</ul>
+<p>$其中I_1, I_2 是影像,P是I_1, I_2像素點的索引$</p>
+<p>這個距離公式就是<code>逐點計算兩影像像素值差異的總和</code>，加絕對值是為了避免正負號誤差加總後造成抵銷</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yanzzzzzzzzz/K-Nearest-Neighbor-Classifier">實作KNN測試cifar10 in github</a></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51979923">跟着cs231n学英语（Module 1)</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cs231n/" rel="tag"># cs231n</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/15/2020-12-15-canny-edge-detector/" rel="next" title="Canny Edge Detector">
+      Canny Edge Detector <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">遇到的問題</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Semantic-Gap-%E8%AA%9E%E7%BE%A9%E9%B4%BB%E6%BA%9D"><span class="nav-number">1.1.</span> <span class="nav-text">Semantic Gap 語義鴻溝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Viewpoint-variation-%E8%A6%96%E9%87%8E%E8%A7%92%E5%BA%A6%E8%AE%8A%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">Viewpoint variation 視野角度變化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Background-Clutter-%E9%9D%9E%E5%9D%87%E5%80%BC%E7%9A%84%E8%83%8C%E6%99%AF"><span class="nav-number">1.3.</span> <span class="nav-text">Background Clutter 非均值的背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Illumination-%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%AE%8A%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">Illumination 亮度的變化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Occlusion-%E8%A2%AB%E9%81%AE%E8%94%BD%E7%9A%84%E7%89%A9%E9%AB%94"><span class="nav-number">1.5.</span> <span class="nav-text">Occlusion 被遮蔽的物體</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deformation-%E7%89%A9%E9%AB%94%E5%BD%A2%E7%8B%80%E7%9A%84%E8%AE%8A%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">Deformation 物體形狀的變化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intraclass-variation-%E5%90%8C%E9%A1%9E%E5%9E%8B%E7%9A%84%E4%B8%8D%E5%90%8C%E8%AE%8A%E5%8C%96"><span class="nav-number">1.7.</span> <span class="nav-text">Intraclass variation 同類型的不同變化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E6%95%B8%E6%93%9A%E9%A9%85%E5%8B%95%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">機器學習: 數據驅動方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nearest-Neighbor-Classifier"><span class="nav-number">3.</span> <span class="nav-text">Nearest Neighbor Classifier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nearest-Neighbor"><span class="nav-number">3.1.</span> <span class="nav-text">Nearest Neighbor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yanzzzz</p>
+  <div class="site-description" itemprop="description">yanzzzz blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanzzzz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src=""></script>
+
+</body>
+</html>
