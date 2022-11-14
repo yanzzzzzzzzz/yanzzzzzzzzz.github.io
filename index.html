@@ -805,7 +805,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-14 10:44:21" itemprop="dateModified" datetime="2022-11-14T10:44:21+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -859,7 +859,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="學習視覺詞彙"><a href="#學習視覺詞彙" class="headerlink" title="學習視覺詞彙"></a>學習視覺詞彙</h2><p>假設資料集中有狗、貓、飛機、山丘<br>透過剛剛的特徵提取可能會找到狗尾巴、貓耳朵、飛機的機翼、山丘上的樹等特徵<br>這些特徵之間會因為他們影像所呈現的方式而有相似性<br>我們在透過一個歸納個方法來將一群相似的特徵聚集再一起<br>使用<a target="_blank" rel="noopener" href="https://yanzzzzzzzzz.github.io/posts/k-means-clustering/">k-means分群法</a>來將相似的特徵組成一群<br>再取出各群之間的群心代表該群的特徵向量</p>
+<h2 id="學習視覺詞彙"><a href="#學習視覺詞彙" class="headerlink" title="學習視覺詞彙"></a>學習視覺詞彙</h2><p>假設資料集中有狗、貓、飛機、山丘<br>透過剛剛的特徵提取可能會找到狗尾巴、貓耳朵、飛機的機翼、山丘上的樹等特徵<br>這些特徵之間會因為他們影像所呈現的方式而有相似性<br>我們在透過一個歸納個方法來將一群相似的特徵聚集再一起<br>使用k-means分群法來將相似的特徵組成一群<br>再取出各群之間的群心代表該群的特徵向量</p>
 <ul>
 <li>問題:如何選擇視覺詞彙的大小<ul>
 <li>太小，此特徵向量不能表示所有群內的特徵性</li>
@@ -874,7 +874,7 @@
 <p>上圖可以看到當輸入的影像進來時，可以透過各個不同的特徵來評估他屬於哪一類，達到影像分類的效果</p>
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>可參考<a target="_blank" rel="noopener" href="https://github.com/ymdatta/BagOfVisualWords">BagOfVisualWords</a></p>
 <p>作者使用11個類別，每類影像數不同</p>
-<p>輸入影像後，取<a target="_blank" rel="noopener" href="https://yanzzzzzzzzz.github.io/posts/cs131-lecture-6-Feature-Descriptors-SIFT/">SIFT descriptor</a></p>
+<p>輸入影像後，取SIFT descriptor</p>
 <p>再透過k-means分群法將特徵分成1000群</p>
 <p>訓練一個SVM mdoel，輸入資料為k-means的群心與對應的類別標籤</p>
 <p>輸入測試資料進行分類評估model準確度</p>
@@ -928,7 +928,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-14 10:43:52" itemprop="dateModified" datetime="2022-11-14T10:43:52+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -956,7 +956,7 @@
 <li>Objection localization</li>
 <li>VQA(Visual Question Answering)</li>
 </ul>
-<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考<a target="_blank" rel="noopener" href="https://yanzzzzzzzzz.github.io/posts/cs231n-Image-Classification/">cs231n Image Classification</a></p>
+<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
 <h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a target="_blank" rel="noopener" href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
 <p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
@@ -1038,7 +1038,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-14 10:44:27" itemprop="dateModified" datetime="2022-11-14T10:44:27+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1068,7 +1068,6 @@
 <li>Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差</li>
 <li>Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果</li>
 </ul>
-<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><p>參考<a target="_blank" rel="noopener" href="https://yanzzzzzzzzz.github.io/posts/cs231n-Image-Classification/">cs231n Image Classification內的NN classifier</a></p>
 <h2 id="K-nearest-neighbor-classifier"><a href="#K-nearest-neighbor-classifier" class="headerlink" title="K-nearest neighbor classifier"></a>K-nearest neighbor classifier</h2><p>KNN的概念是由nearest neighbor algorithm衍伸出來，NN是透過一群已經存在的訓練資料與標籤當作基底，來對測試資料進行比對，輸出與訓練資料相似度高的類別當作結果</p>
 <p>而KNN與NN不同的則是取出前K個相近的資料做參考，來決定最終輸出的類別結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/knn-example.png'  width='400'/>
@@ -1606,5 +1605,6 @@
   
 
   
+
 </body>
 </html>

@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="機器學習架構   分成training與Testing階段 Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差 Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果  Nearest Neighbor Classifier參考cs231n Image">
+  <meta name="description" content="機器學習架構   分成training與Testing階段 Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差 Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果  K-nearest neighbor classifierKNN的概念是由near">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K-nearest-neighbor-algorithm">
 <meta property="og:url" content="http://example.com/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/index.html">
 <meta property="og:site_name" content="yanzzzz blog">
-<meta property="og:description" content="機器學習架構   分成training與Testing階段 Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差 Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果  Nearest Neighbor Classifier參考cs231n Image">
+<meta property="og:description" content="機器學習架構   分成training與Testing階段 Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差 Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果  K-nearest neighbor classifierKNN的概念是由near">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/ml-framework.png">
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/knn-example.png">
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/cross-validation.png">
 <meta property="article:published_time" content="2021-04-17T07:23:00.000Z">
-<meta property="article:modified_time" content="2022-11-14T02:32:40.733Z">
+<meta property="article:modified_time" content="2022-11-14T02:44:27.941Z">
 <meta property="article:author" content="yanzzzz">
 <meta property="article:tag" content="cs131">
 <meta name="twitter:card" content="summary">
@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-14 10:44:27" itemprop="dateModified" datetime="2022-11-14T10:44:27+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,7 +217,6 @@
 <li>Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差</li>
 <li>Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果</li>
 </ul>
-<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><p>參考<a target="_blank" rel="noopener" href="https://yanzzzzzzzzz.github.io/posts/cs231n-Image-Classification/">cs231n Image Classification內的NN classifier</a></p>
 <h2 id="K-nearest-neighbor-classifier"><a href="#K-nearest-neighbor-classifier" class="headerlink" title="K-nearest neighbor classifier"></a>K-nearest neighbor classifier</h2><p>KNN的概念是由nearest neighbor algorithm衍伸出來，NN是透過一群已經存在的訓練資料與標籤當作基底，來對測試資料進行比對，輸出與訓練資料相似度高的類別當作結果</p>
 <p>而KNN與NN不同的則是取出前K個相近的資料做參考，來決定最終輸出的類別結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/knn-example.png'  width='400'/>
@@ -299,6 +298,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -345,7 +345,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">機器學習架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nearest-Neighbor-Classifier"><span class="nav-number">2.</span> <span class="nav-text">Nearest Neighbor Classifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-nearest-neighbor-classifier"><span class="nav-number">3.</span> <span class="nav-text">K-nearest neighbor classifier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN%E6%BC%94%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">KNN演算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN-%E7%B4%B0%E7%AF%80%E6%95%B4%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">KNN 細節整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%B1%BA%E5%AE%9A%E5%8F%83%E6%95%B8k"><span class="nav-number">3.3.</span> <span class="nav-text">如何決定參數k</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cross-validate"><span class="nav-number">3.3.1.</span> <span class="nav-text">cross validate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E4%BC%BC%E5%BA%A6%E6%AF%94%E5%B0%8D"><span class="nav-number">3.4.</span> <span class="nav-text">相似度比對</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">機器學習架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-nearest-neighbor-classifier"><span class="nav-number">2.</span> <span class="nav-text">K-nearest neighbor classifier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN%E6%BC%94%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">KNN演算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN-%E7%B4%B0%E7%AF%80%E6%95%B4%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">KNN 細節整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%B1%BA%E5%AE%9A%E5%8F%83%E6%95%B8k"><span class="nav-number">2.3.</span> <span class="nav-text">如何決定參數k</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cross-validate"><span class="nav-number">2.3.1.</span> <span class="nav-text">cross validate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E4%BC%BC%E5%BA%A6%E6%AF%94%E5%B0%8D"><span class="nav-number">2.4.</span> <span class="nav-text">相似度比對</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">參考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -529,6 +529,26 @@
     });
   </script>
   <script type="text/javascript" src=""></script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '9ba7a47c2c2d18565b74',
+      clientSecret: '9c9800d190858e2f87f0cd98e2bd8d32ef004949',
+      repo        : 'yanzzzzzzzzz.github.io',
+      owner       : 'yanzzzzzzzzz',
+      admin       : ['yanzzzzzzzzz'],
+      id          : 'd32fd97dd6127bf877be9a6924632870',
+        language: 'zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
