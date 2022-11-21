@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="yanzzzz blog">
@@ -136,6 +137,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -145,6 +147,125 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/14/utterancesInHexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/14/utterancesInHexo/" class="post-title-link" itemprop="url">在hexo新增留言板功能(utterances)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-14 22:58:51" itemprop="dateCreated datePublished" datetime="2022-11-14T22:58:51+08:00">2022-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 10:23:04" itemprop="dateModified" datetime="2022-11-21T10:23:04+08:00">2022-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>過去對 blog 的留言板功能用過 <a target="_blank" rel="noopener" href="https://disqus.com/">Disqus</a>，用了之後會在留言處自動插入廣告<br>看到 utterances 使用 github issue 當作留言板的儲存位置覺得滿酷的，就來研究一下</p>
+<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><ul>
+<li>hexo 6.3.0</li>
+<li>Next theme</li>
+<li>npm 8.5.5</li>
+<li>Windows 10</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<li><p>到 GitHub 創建一個公開的儲存庫</p>
+</li>
+<li><p>到<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">utterances app</a>並在 GitHub 上啟用，選擇剛剛新增的儲存庫</p>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_1.png"  width="400"/>
+</li>
+<li><p>到<a target="_blank" rel="noopener" href="https://utteranc.es/">utterances</a>官網進行參數設定，下拉到 Repository 處 repo:填入留言板綁定的專案名，圖片中有提到要注意的事項:專案要是公開的、有授權<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">utterances app</a></p>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration.png"  width="400"/>
+</li>
+<li><p>設定 issue 標題取名方式，有以下幾種:</p>
+<ul>
+<li>Issue title contains page pathname</li>
+<li>Issue title contains page URL</li>
+<li>Issue title contains page title</li>
+<li>Issue title contains page og:title</li>
+<li>Specific issue number</li>
+<li>Issue title contains specific term</li>
+</ul>
+</li>
+<li><p>設定 issue 標記名稱(選填)</p>
+</li>
+<li><p>設定留言板主題配色</p>
+<ul>
+<li>GitHub Light</li>
+<li>GitHub Dark</li>
+<li>Preferred Color Scheme</li>
+<li>GitHub Dark Orange</li>
+<li>Icy Dark</li>
+<li>Dark Blue</li>
+<li>Photon Dark</li>
+<li>Boxy Light</li>
+<li>Gruvbox Dark</li>
+</ul>
+</li>
+<li><p>建立好的儲存庫透過 hexo 建置好一個 blog，並修改成 Next 樣式</p>
+</li>
+<li><p>複製自動產生的程式碼到 themes\next\layout_partials\comments.swig</p>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_2.png"  width="400"/>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_3.png"  width="400"/>
+</li>
+<li><p>在 theme\next_config.yml 最下面加入啟用 utterances 語法</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">utterances</span>: <span class="attr">enable</span>: <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="我碰到的-bug"><a href="#我碰到的-bug" class="headerlink" title="我碰到的 bug"></a>我碰到的 bug</h2><p>官方教學跟各種線上教學都非常多也非常詳細，但我竟然 Debug 了一小時…<br>在做完以上流程後出現了留言功能，但在按下登入時…<br><img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_4.png"  width="400"/><br>網址是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/2022/11/14/post/?utterances=2ea222cae0003a078fc8aa047N244Fhi3TkHCsP8Hl%2F9pfC29qC7R2n1HjJm3apPbnWhu6UcHQz8c0ueHm%2FWRMWuA7WS2%2FFH1ykmbf2OxNakOqPEWQR4krMr7rU6vwG7gyd0lpDR1hf4r%2FuNirY%3D</span><br></pre></td></tr></table></figure>
+<p>按下登入建後轉址的組成方式是config.yml內的url+文章路徑+一串不知道<br>後來發現是_config 的 url 跑掉，因此在導向至 utterances app 時出錯，因此將url，改成設定的 repo 位置就可以了<br><img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_5.png"  width="400"/></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -370,7 +491,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-14 16:19:44" itemprop="dateModified" datetime="2022-11-14T16:19:44+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -448,7 +569,7 @@
 <p>$ S_i 是到C_i層還沒被分類的sample $</p>
 <p>$ C_iS_i第i層分離出來的sample數 $</p>
 <p>$ S_i^*是第i層還沒被分離出來的sample $</p>
-<p>$ N_i^<em>是 S_i^</em>的數量 $</p>
+<p>$ N_i^* 是 S_i^* 的數量 $</p>
 <p>$ N_0是所有sample$</p>
 <p>$ N_i是到第i層的sample數量 $</p>
 <p>$ N_i^- 是第i層還沒被分類出來的數量 $</p>
@@ -1294,96 +1415,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/" class="post-title-link" itemprop="url">cs131 lecture 11 Image Resizing-Image Retargeting Overview</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-07 23:02:00" itemprop="dateCreated datePublished" datetime="2021-04-07T23:02:00+08:00">2021-04-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
-<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
-<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
-<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
-
-<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
-<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
-<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
-<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
-<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
-<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
-<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
-<p>重要指的可以是人眼經常會去特別關注的地方</p>
-<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
-
-<p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1453,7 +1484,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1462,7 +1493,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -1513,6 +1544,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -1525,6 +1558,8 @@
 
 
 <script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
 
 
 

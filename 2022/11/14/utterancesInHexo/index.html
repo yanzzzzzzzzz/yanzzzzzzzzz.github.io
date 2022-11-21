@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言過去對 blog 的留言板功能用過 Disqus，用了之後會在留言處自動插入廣告看到 utterances 使用 github issue 當作留言板的儲存位置覺得滿酷的，就來研究一下 安裝環境 hexo 6.3.0 Next theme npm 8.5.5 Windows 10  流程 到 GitHub 創建一個公開的儲存庫  到utterances app並在 GitHub 上啟用，選擇剛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在hexo新增留言板功能(utterances)">
+<meta property="og:url" content="https://yanzzzzzzzzz.github.io/2022/11/14/utterancesInHexo/index.html">
+<meta property="og:site_name" content="yanzzzz blog">
+<meta property="og:description" content="前言過去對 blog 的留言板功能用過 Disqus，用了之後會在留言處自動插入廣告看到 utterances 使用 github issue 當作留言板的儲存位置覺得滿酷的，就來研究一下 安裝環境 hexo 6.3.0 Next theme npm 8.5.5 Windows 10  流程 到 GitHub 創建一個公開的儲存庫  到utterances app並在 GitHub 上啟用，選擇剛">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration_1.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration_2.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration_3.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration_4.png">
+<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration_5.png">
+<meta property="article:published_time" content="2022-11-14T14:58:51.000Z">
+<meta property="article:modified_time" content="2022-11-21T02:23:04.467Z">
+<meta property="article:author" content="yanzzzz">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/utterances_configuration_1.png">
+
+<link rel="canonical" href="https://yanzzzzzzzzz.github.io/2022/11/14/utterancesInHexo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>在hexo新增留言板功能(utterances) | yanzzzz blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yanzzzz blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/14/utterancesInHexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在hexo新增留言板功能(utterances)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-14 22:58:51" itemprop="dateCreated datePublished" datetime="2022-11-14T22:58:51+08:00">2022-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 10:23:04" itemprop="dateModified" datetime="2022-11-21T10:23:04+08:00">2022-11-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>過去對 blog 的留言板功能用過 <a target="_blank" rel="noopener" href="https://disqus.com/">Disqus</a>，用了之後會在留言處自動插入廣告<br>看到 utterances 使用 github issue 當作留言板的儲存位置覺得滿酷的，就來研究一下</p>
+<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><ul>
+<li>hexo 6.3.0</li>
+<li>Next theme</li>
+<li>npm 8.5.5</li>
+<li>Windows 10</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<li><p>到 GitHub 創建一個公開的儲存庫</p>
+</li>
+<li><p>到<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">utterances app</a>並在 GitHub 上啟用，選擇剛剛新增的儲存庫</p>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_1.png"  width="400"/>
+</li>
+<li><p>到<a target="_blank" rel="noopener" href="https://utteranc.es/">utterances</a>官網進行參數設定，下拉到 Repository 處 repo:填入留言板綁定的專案名，圖片中有提到要注意的事項:專案要是公開的、有授權<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">utterances app</a></p>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration.png"  width="400"/>
+</li>
+<li><p>設定 issue 標題取名方式，有以下幾種:</p>
+<ul>
+<li>Issue title contains page pathname</li>
+<li>Issue title contains page URL</li>
+<li>Issue title contains page title</li>
+<li>Issue title contains page og:title</li>
+<li>Specific issue number</li>
+<li>Issue title contains specific term</li>
+</ul>
+</li>
+<li><p>設定 issue 標記名稱(選填)</p>
+</li>
+<li><p>設定留言板主題配色</p>
+<ul>
+<li>GitHub Light</li>
+<li>GitHub Dark</li>
+<li>Preferred Color Scheme</li>
+<li>GitHub Dark Orange</li>
+<li>Icy Dark</li>
+<li>Dark Blue</li>
+<li>Photon Dark</li>
+<li>Boxy Light</li>
+<li>Gruvbox Dark</li>
+</ul>
+</li>
+<li><p>建立好的儲存庫透過 hexo 建置好一個 blog，並修改成 Next 樣式</p>
+</li>
+<li><p>複製自動產生的程式碼到 themes\next\layout_partials\comments.swig</p>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_2.png"  width="400"/>
+<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_3.png"  width="400"/>
+</li>
+<li><p>在 theme\next_config.yml 最下面加入啟用 utterances 語法</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">utterances</span>: <span class="attr">enable</span>: <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="我碰到的-bug"><a href="#我碰到的-bug" class="headerlink" title="我碰到的 bug"></a>我碰到的 bug</h2><p>官方教學跟各種線上教學都非常多也非常詳細，但我竟然 Debug 了一小時…<br>在做完以上流程後出現了留言功能，但在按下登入時…<br><img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_4.png"  width="400"/><br>網址是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/2022/11/14/post/?utterances=2ea222cae0003a078fc8aa047N244Fhi3TkHCsP8Hl%2F9pfC29qC7R2n1HjJm3apPbnWhu6UcHQz8c0ueHm%2FWRMWuA7WS2%2FFH1ykmbf2OxNakOqPEWQR4krMr7rU6vwG7gyd0lpDR1hf4r%2FuNirY%3D</span><br></pre></td></tr></table></figure>
+<p>按下登入建後轉址的組成方式是config.yml內的url+文章路徑+一串不知道<br>後來發現是_config 的 url 跑掉，因此在導向至 utterances app 時出錯，因此將url，改成設定的 repo 位置就可以了<br><img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_5.png"  width="400"/></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/blog/" rel="tag"># blog</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/08/2021-11-08-Optical%20Flow/" rel="prev" title="cs131 lecture 15 Optical flow">
+      <i class="fa fa-chevron-left"></i> cs131 lecture 15 Optical flow
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+  <script src="https://utteranc.es/client.js"
+        repo="yanzzzzzzzzz/yanzzzzzzzzz.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">安裝環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%A2%B0%E5%88%B0%E7%9A%84-bug"><span class="nav-number">4.</span> <span class="nav-text">我碰到的 bug</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yanzzzz</p>
+  <div class="site-description" itemprop="description">yanzzzz blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanzzzz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
