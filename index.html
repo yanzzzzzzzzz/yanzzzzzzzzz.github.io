@@ -151,6 +151,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/21/nvm-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/21/nvm-install/" class="post-title-link" itemprop="url">Node Version Manager (NVM):安裝、切換Node.js版本的管理器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-11-21 10:51:00 / Modified: 14:10:14" itemprop="dateCreated datePublished" datetime="2022-11-21T10:51:00+08:00">2022-11-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="nvm介紹"><a href="#nvm介紹" class="headerlink" title="nvm介紹"></a>nvm介紹</h2><p>Node Version Manager (NVM) 是用來管理Node.js版本，可以同時安裝多個不同版本，因應不同專案環境去快速做切換</p>
+<h2 id="安裝方式"><a href="#安裝方式" class="headerlink" title="安裝方式"></a>安裝方式</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>Windows環境下到<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">nvm-windows Releases</a>提供最新版本的安裝檔案，Assets處下載nvm-setup的檔案</p>
+<p>執行exe檔案進行安裝流程</p>
+<p>安裝完成後在cmd輸入nvm測試是否安裝成功  若成功會跳出nvm version</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>使用cURL 或 Wget command:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>執行以上任何一個command都會下載並執行script，並儲存nvm repo到<code>~/.nvm</code>，並將source line新增至profile設定</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">&quot;<span class="subst">$([ -z <span class="string">&quot;<span class="variable">$&#123;XDG_CONFIG_HOME-&#125;</span>&quot;</span> ] &amp;&amp; printf %s <span class="string">&quot;<span class="variable">$&#123;HOME&#125;</span>/.nvm&quot;</span> || printf %s <span class="string">&quot;<span class="variable">$&#123;XDG_CONFIG_HOME&#125;</span>/nvm&quot;</span>)</span>&quot;</span></span><br><span class="line">[ -s <span class="string">&quot;<span class="variable">$NVM_DIR</span>/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="string">&quot;<span class="variable">$NVM_DIR</span>/nvm.sh&quot;</span> <span class="comment"># This loads nvm</span></span><br></pre></td></tr></table></figure>
+
+<p>確認nvm是否安裝成功</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
+
+<p>Troubleshooting:<br>當出現<code>nvm: command not found</code>時, 試著重新開一個terminal再次輸入</p>
+<p>若還是出現相同錯誤，則在不同類型終端機下下執行command:</p>
+<p>bash: <code>source ~/.bashrc</code></p>
+<p>zsh: <code>source ~/.zshrc</code></p>
+<p>ksh: <code>source ~/.profile</code></p>
+<h2 id="nvm指令"><a href="#nvm指令" class="headerlink" title="nvm指令"></a>nvm指令</h2><blockquote>
+<p>以下提到的<code>&lt;version&gt;</code>都可以換成任意版本號碼</p>
+</blockquote>
+<h3 id="確認版本"><a href="#確認版本" class="headerlink" title="確認版本"></a>確認版本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="安裝最新版本Node-js"><a href="#安裝最新版本Node-js" class="headerlink" title="安裝最新版本Node.js"></a>安裝最新版本Node.js</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br></pre></td></tr></table></figure>
+
+<p>安裝特定版本Node.js, 在後面輸入版本號, 這裡可以<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/releases/">查詢版本號碼</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看目前使用的Node-js版本"><a href="#查看目前使用的Node-js版本" class="headerlink" title="查看目前使用的Node.js版本"></a>查看目前使用的Node.js版本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br></pre></td></tr></table></figure>
+
+<img src="https://yanzzzzzzzzz.github.io/img/nvm_install_1.png"  width="400"/>
+
+<p>以*顯示當前使用的版本</p>
+<h3 id="切換Node-js版本"><a href="#切換Node-js版本" class="headerlink" title="切換Node.js版本"></a>切換Node.js版本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm use &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+<p>顯示<code>Now using node v&lt;version&gt; (64-bit)</code></p>
+<h3 id="移除Node-js版本"><a href="#移除Node-js版本" class="headerlink" title="移除Node.js版本"></a>移除Node.js版本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm uninstall &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/14/utterancesInHexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -182,7 +281,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 10:29:14" itemprop="dateModified" datetime="2022-11-21T10:29:14+08:00">2022-11-21</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
 
           
@@ -305,7 +404,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -403,7 +502,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -495,7 +594,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 16:19:44" itemprop="dateModified" datetime="2022-11-14T16:19:44+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -656,7 +755,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -786,7 +885,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -930,7 +1029,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:44:21" itemprop="dateModified" datetime="2022-11-14T10:44:21+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1053,7 +1152,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:43:52" itemprop="dateModified" datetime="2022-11-14T10:43:52+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1163,7 +1262,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:44:27" itemprop="dateModified" datetime="2022-11-14T10:44:27+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1252,173 +1351,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/" class="post-title-link" itemprop="url">cs131 lecture 11 Image Resizing-Seam Carving</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-10 18:23:00" itemprop="dateCreated datePublished" datetime="2021-04-10T18:23:00+08:00">2021-04-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊</p>
-<h2 id="Basie-Idea"><a href="#Basie-Idea" class="headerlink" title="Basie Idea"></a>Basie Idea</h2><p>不重要的資訊代表影像梯度變化小的地方，定義一個energy function&#x2F;</p>
-<img src='https://yanzzzzzzzzz.github.io/img/energy-function.png'  width='400'/>
-
-<p>使用梯度來作為energy function的原因：</p>
-<ul>
-<li>邊界代表紋理資訊</li>
-<li>人眼對edge比較敏感，平滑處就可以被視為不重要資訊</li>
-<li>概念很簡單</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/gradient-based-pixel-removal.png'  width='400'/>
-
-<p>左圖對整張影像濾除低能量pixel</p>
-<p>中間對每行方向濾除最低能量pixel</p>
-<p>右圖對每列方向濾除最低能量pixel，看起來結果較好一點，但仍看得出來階梯處有扭曲的感覺</p>
-<h2 id="Seam-Carving"><a href="#Seam-Carving" class="headerlink" title="Seam Carving"></a>Seam Carving</h2><blockquote>
-<p>接縫裁剪(Seam Carving)，是一個可以針對圖像內容做正確縮放的算法。概念上，算法會找出一系列的接縫（seam）（接縫是在圖像中最不重要的一連串像素），接著利用接縫對圖像做縮放。如果是要縮小圖像，則移除這些接縫，若是放大，則在這些接縫的位置上，插入一些像素。接縫裁剪可以人工定義一些不會被修改的像素區域，也可以從圖像中移除整個物體。by wiki</p>
-</blockquote>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
-<li>輸入要變化的影像與尺寸</li>
-<li>計算energy function</li>
-<li>從energy function計算seam cost $M$</li>
-<li>選出裁切方向最小的seam carving</li>
-<li>濾除足夠多的行列直到與輸入尺寸相同</li>
-</ol>
-<p>計算Seam cost的部分，主要使用動態規劃的方法來實作，因為每次計算seam cost時必須計算與鄰居周圍的相關資訊</p>
-<p>重新定義參數：</p>
-<ul>
-<li>$E$是前面提到的energy function，$E(i,j)是在影像上對應i,j的座標點能量值$</li>
-<li>$M$是seam cost，用來評估將該點作為seam carving時依據，$M$的計算公式：</li>
-</ul>
-<p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
-<ul>
-<li>可以從公式看到，seam cost所代表的意義就是由該點所對應的energy function，加上鄰近上方像素的最小點，就可以當作今天要把該點去除或展開時的一個成本，成本高低代表該點是重要資訊的指標</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp.png'  width='400'/>
-
-<h4 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h4><p>由於seam cost公式是計算矩陣$M$，其中又參考到自身周圍計算過的數值，因此需要用到動態規劃(Dynamic Programming, DP)</p>
-<p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
-<img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp_1.png'  width='400'/>
-
-
-<h4 id="Searching-for-Minimum"><a href="#Searching-for-Minimum" class="headerlink" title="Searching for Minimum"></a>Searching for Minimum</h4><p>得到seam cost矩陣後，從最下方開始尋找最小向上路徑</p>
-<p>搜尋方式是先選出下方最小起始點，向上沿著上方周圍三個鄰居來選擇最小數值，直到矩陣上方列</p>
-<img src='https://yanzzzzzzzzz.github.io/img/seam-carving-backtracking.png'  width='400'/>
-
-
-<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><img src='https://yanzzzzzzzzz.github.io/img/seam-carving-result.png'  width='400'/>
-
-<p> 一隻胖鳥經過Scaling瘦身成功，Retarget才能呈現他的身材!</p>
-<h3 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h3><h4 id="Imporve-the-running-time"><a href="#Imporve-the-running-time" class="headerlink" title="Imporve the running time"></a>Imporve the running time</h4><p>在流程中，我們只需更新被濾除掉的seam carving像素點集合周圍的energy funciton，而不必更新整張影像的energy function</p>
-<h4 id="Retargeting-in-Both-Dimensions"><a href="#Retargeting-in-Both-Dimensions" class="headerlink" title="Retargeting in Both Dimensions"></a>Retargeting in Both Dimensions</h4><p>在流程中，如果都需要調整寬高，那應該先調整哪個方向</p>
-<p>或著是透過一個方法同時調整寬高</p>
-<p>同時重新調整寬高的思路，同時考慮到x,y方向的seam cost</p>
-<p>並將他合成一個選擇公式：</p>
-<img src='https://yanzzzzzzzzz.github.io/img/retargeting-both-dim.png'  width='400'/>
-
-<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam </p>
-<h4 id="Multi-Size-Image-Representation"><a href="#Multi-Size-Image-Representation" class="headerlink" title="Multi-Size Image Representation"></a>Multi-Size Image Representation</h4><p>上述流程是在知道輸入調整尺寸的情況下做演算</p>
-<p>那假如在不確定輸入尺寸的情況下(ex:顯示的尺寸可能有各種不同的組合)</p>
-<p>要如何做到即時resizing的轉換</p>
-<img src='https://yanzzzzzzzzz.github.io/img/mulit-size-images.png'  width='400'/>
-
-<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam </p>
-<h4 id="Object-Removal"><a href="#Object-Removal" class="headerlink" title="Object Removal"></a>Object Removal</h4><p>設定mask來保護&#x2F;移除指定的區塊</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Object-Removal.png'  width='400'/>
-
-<h4 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h4><p>seam carving的侷限性，低能量區域</p>
-<ul>
-<li>低能量區域的移除造成影像細節的幾何變化</li>
-<li>低能量區域在某些情形下也可能是重要資訊，ex:人臉</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/seam-carving-limitations.png'  width='400'/>
-
-<p>改善方法：<br>使用自訂義限制，ex:人臉因為低能量區域被移除造成人臉扭曲，那就用人臉檢測保護臉部區塊+seam carving</p>
-<img src='https://yanzzzzzzzzz.github.io/img/face-detection_seam-carving.png'  width='400'/>
-
-<h4 id="Improvement-forward-energy"><a href="#Improvement-forward-energy" class="headerlink" title="Improvement: forward energy"></a>Improvement: forward energy</h4><p>seam carving導致平均能量不停上升，並且會有鋸齒狀的邊緣</p>
-<img src='https://yanzzzzzzzzz.github.io/img/preserved-energy.png'  width='400'/>
-改變移除策略：
-不移除最小能量的seam，而是移除插入能量最小的seam
-
-<img src='https://yanzzzzzzzzz.github.io/img/forward-energy.png'  width='400'/>
-
-<p>$C_L$是計算移除$𝑝_{𝑖,𝑗}$後左右,上下的能量,以此類推<br>得到每個移除接縫後的能量總和，用來評估哪個方向的像素被移除可以得到較小的能量</p>
-<p>小能量代表移除後得到平滑影像，大能量代表出現梯度變化大(扭曲、鋸齒狀)的結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/forward-energy-1.png'  width='400'/>
-
-
-<p>比較forward &amp; backward結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png'  width='400'/>
-
-<p><a target="_blank" rel="noopener" href="https://faculty.idc.ac.il/arik/SCWeb/vidret/results/image_results.html">更多差異圖</a></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://avikdas.com/2019/07/29/improved-seam-carving-with-forward-energy.html">Improved seam carving with forward energy</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1488,7 +1420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1497,7 +1429,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

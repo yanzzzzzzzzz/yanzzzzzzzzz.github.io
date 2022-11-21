@@ -151,6 +151,173 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/" class="post-title-link" itemprop="url">cs131 lecture 11 Image Resizing-Seam Carving</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-10 18:23:00" itemprop="dateCreated datePublished" datetime="2021-04-10T18:23:00+08:00">2021-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊</p>
+<h2 id="Basie-Idea"><a href="#Basie-Idea" class="headerlink" title="Basie Idea"></a>Basie Idea</h2><p>不重要的資訊代表影像梯度變化小的地方，定義一個energy function&#x2F;</p>
+<img src='https://yanzzzzzzzzz.github.io/img/energy-function.png'  width='400'/>
+
+<p>使用梯度來作為energy function的原因：</p>
+<ul>
+<li>邊界代表紋理資訊</li>
+<li>人眼對edge比較敏感，平滑處就可以被視為不重要資訊</li>
+<li>概念很簡單</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/gradient-based-pixel-removal.png'  width='400'/>
+
+<p>左圖對整張影像濾除低能量pixel</p>
+<p>中間對每行方向濾除最低能量pixel</p>
+<p>右圖對每列方向濾除最低能量pixel，看起來結果較好一點，但仍看得出來階梯處有扭曲的感覺</p>
+<h2 id="Seam-Carving"><a href="#Seam-Carving" class="headerlink" title="Seam Carving"></a>Seam Carving</h2><blockquote>
+<p>接縫裁剪(Seam Carving)，是一個可以針對圖像內容做正確縮放的算法。概念上，算法會找出一系列的接縫（seam）（接縫是在圖像中最不重要的一連串像素），接著利用接縫對圖像做縮放。如果是要縮小圖像，則移除這些接縫，若是放大，則在這些接縫的位置上，插入一些像素。接縫裁剪可以人工定義一些不會被修改的像素區域，也可以從圖像中移除整個物體。by wiki</p>
+</blockquote>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li>輸入要變化的影像與尺寸</li>
+<li>計算energy function</li>
+<li>從energy function計算seam cost $M$</li>
+<li>選出裁切方向最小的seam carving</li>
+<li>濾除足夠多的行列直到與輸入尺寸相同</li>
+</ol>
+<p>計算Seam cost的部分，主要使用動態規劃的方法來實作，因為每次計算seam cost時必須計算與鄰居周圍的相關資訊</p>
+<p>重新定義參數：</p>
+<ul>
+<li>$E$是前面提到的energy function，$E(i,j)是在影像上對應i,j的座標點能量值$</li>
+<li>$M$是seam cost，用來評估將該點作為seam carving時依據，$M$的計算公式：</li>
+</ul>
+<p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
+<ul>
+<li>可以從公式看到，seam cost所代表的意義就是由該點所對應的energy function，加上鄰近上方像素的最小點，就可以當作今天要把該點去除或展開時的一個成本，成本高低代表該點是重要資訊的指標</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp.png'  width='400'/>
+
+<h4 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h4><p>由於seam cost公式是計算矩陣$M$，其中又參考到自身周圍計算過的數值，因此需要用到動態規劃(Dynamic Programming, DP)</p>
+<p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp_1.png'  width='400'/>
+
+
+<h4 id="Searching-for-Minimum"><a href="#Searching-for-Minimum" class="headerlink" title="Searching for Minimum"></a>Searching for Minimum</h4><p>得到seam cost矩陣後，從最下方開始尋找最小向上路徑</p>
+<p>搜尋方式是先選出下方最小起始點，向上沿著上方周圍三個鄰居來選擇最小數值，直到矩陣上方列</p>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-carving-backtracking.png'  width='400'/>
+
+
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><img src='https://yanzzzzzzzzz.github.io/img/seam-carving-result.png'  width='400'/>
+
+<p> 一隻胖鳥經過Scaling瘦身成功，Retarget才能呈現他的身材!</p>
+<h3 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h3><h4 id="Imporve-the-running-time"><a href="#Imporve-the-running-time" class="headerlink" title="Imporve the running time"></a>Imporve the running time</h4><p>在流程中，我們只需更新被濾除掉的seam carving像素點集合周圍的energy funciton，而不必更新整張影像的energy function</p>
+<h4 id="Retargeting-in-Both-Dimensions"><a href="#Retargeting-in-Both-Dimensions" class="headerlink" title="Retargeting in Both Dimensions"></a>Retargeting in Both Dimensions</h4><p>在流程中，如果都需要調整寬高，那應該先調整哪個方向</p>
+<p>或著是透過一個方法同時調整寬高</p>
+<p>同時重新調整寬高的思路，同時考慮到x,y方向的seam cost</p>
+<p>並將他合成一個選擇公式：</p>
+<img src='https://yanzzzzzzzzz.github.io/img/retargeting-both-dim.png'  width='400'/>
+
+<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam </p>
+<h4 id="Multi-Size-Image-Representation"><a href="#Multi-Size-Image-Representation" class="headerlink" title="Multi-Size Image Representation"></a>Multi-Size Image Representation</h4><p>上述流程是在知道輸入調整尺寸的情況下做演算</p>
+<p>那假如在不確定輸入尺寸的情況下(ex:顯示的尺寸可能有各種不同的組合)</p>
+<p>要如何做到即時resizing的轉換</p>
+<img src='https://yanzzzzzzzzz.github.io/img/mulit-size-images.png'  width='400'/>
+
+<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam </p>
+<h4 id="Object-Removal"><a href="#Object-Removal" class="headerlink" title="Object Removal"></a>Object Removal</h4><p>設定mask來保護&#x2F;移除指定的區塊</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Object-Removal.png'  width='400'/>
+
+<h4 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h4><p>seam carving的侷限性，低能量區域</p>
+<ul>
+<li>低能量區域的移除造成影像細節的幾何變化</li>
+<li>低能量區域在某些情形下也可能是重要資訊，ex:人臉</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/seam-carving-limitations.png'  width='400'/>
+
+<p>改善方法：<br>使用自訂義限制，ex:人臉因為低能量區域被移除造成人臉扭曲，那就用人臉檢測保護臉部區塊+seam carving</p>
+<img src='https://yanzzzzzzzzz.github.io/img/face-detection_seam-carving.png'  width='400'/>
+
+<h4 id="Improvement-forward-energy"><a href="#Improvement-forward-energy" class="headerlink" title="Improvement: forward energy"></a>Improvement: forward energy</h4><p>seam carving導致平均能量不停上升，並且會有鋸齒狀的邊緣</p>
+<img src='https://yanzzzzzzzzz.github.io/img/preserved-energy.png'  width='400'/>
+改變移除策略：
+不移除最小能量的seam，而是移除插入能量最小的seam
+
+<img src='https://yanzzzzzzzzz.github.io/img/forward-energy.png'  width='400'/>
+
+<p>$C_L$是計算移除$𝑝_{𝑖,𝑗}$後左右,上下的能量,以此類推<br>得到每個移除接縫後的能量總和，用來評估哪個方向的像素被移除可以得到較小的能量</p>
+<p>小能量代表移除後得到平滑影像，大能量代表出現梯度變化大(扭曲、鋸齒狀)的結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/forward-energy-1.png'  width='400'/>
+
+
+<p>比較forward &amp; backward結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png'  width='400'/>
+
+<p><a target="_blank" rel="noopener" href="https://faculty.idc.ac.il/arik/SCWeb/vidret/results/image_results.html">更多差異圖</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://avikdas.com/2019/07/29/improved-seam-carving-with-forward-energy.html">Improved seam carving with forward energy</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -182,7 +349,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,7 +439,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -368,7 +535,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -498,7 +665,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -611,7 +778,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -734,7 +901,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -822,7 +989,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -926,7 +1093,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1016,7 +1183,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1120,140 +1287,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/" class="post-title-link" itemprop="url">cs131 lecture 5 Features And Fitting-RANSAC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-28 23:54:00" itemprop="dateCreated datePublished" datetime="2021-02-28T23:54:00+08:00">2021-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-14 10:32:40" itemprop="dateModified" datetime="2022-11-14T10:32:40+08:00">2022-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="線段檢測的難題"><a href="#線段檢測的難題" class="headerlink" title="線段檢測的難題"></a>線段檢測的難題</h2><ul>
-<li>會有雜訊干擾</li>
-<li>如何找到一條局部斷裂的線</li>
-<li>由 noise 干擾導致檢測方向偏移</li>
-</ul>
-<h2 id="回顧投票法"><a href="#回顧投票法" class="headerlink" title="回顧投票法"></a>回顧投票法</h2><ul>
-<li>蠻力投票法，時間複雜度$ O(N^2) $</li>
-<li>投票法可以讓所有模型通用<ul>
-<li>循環所有參數，取得投票結果</li>
-<li>選出高票參數結果</li>
-</ul>
-</li>
-<li>雜訊所產生的線段也會被納入投票的參數中，但通常結果會與我們想要的預期不符</li>
-</ul>
-<h2 id="RANSAC"><a href="#RANSAC" class="headerlink" title="RANSAC"></a>RANSAC</h2><p>RANdom SAmple Consensus，隨機抽樣一致<br>將資料分成 inliers(正常數據), outliers(異常數據)<br>RANSAC 目標：濾除異常數據，使用正常的數據進行檢測</p>
-<p>直覺來看，在線段檢測中，若選擇的 edge 是 outliers 進行擬合時，其他點應該不會在所擬合的線段上<br><img src="https://yanzzzzzzzzz.github.io/img/inliners-and-outliers.png"  width="400"/></p>
-<p>隨機選取兩點得到直線後，藍色點為靠近線段的 inliers，紫色點為遠離線段的 outliers</p>
-<h3 id="RANSAC-流程"><a href="#RANSAC-流程" class="headerlink" title="RANSAC 流程"></a>RANSAC 流程</h3><p>循環 k 次迭代：</p>
-<ol>
-<li>在一組資料集中(ex:edge 點座標)隨機選擇要執行模型評估的最小數據集(ex:直線偵測下是兩個點)</li>
-<li>代入選擇的數據集來計算數據模型</li>
-<li>尋找此模型內的 inliers 數量</li>
-<li>比較當前模型結果與目前最佳模型結果數量，紀錄最大 inliers 數量與對應模型結果</li>
-<li>重新估算迭代次數 k</li>
-</ol>
-<img src="https://yanzzzzzzzzz.github.io/img/ransac-flow.png"  width="400"/>
-
-<h3 id="如何設定參數-k"><a href="#如何設定參數-k" class="headerlink" title="如何設定參數 k"></a>如何設定參數 k</h3><p>參數符號定義：</p>
-<ul>
-<li>假設$n$是建立模型所需的點數量(已知，ex:直線擬合需要兩點)</li>
-<li>$w$ 是 inliers 的數量&#x2F;數據集的總數量(未知)</li>
-<li>$w^n$是所有$n$個點均為是 inliers 的機率</li>
-<li>$1-w^n$是所有$n$個點有一個是 outliers 的機率</li>
-<li>迭代$k$次都沒辦法找到所有點是 inliers 的機率$(1-w^n)^k$</li>
-<li>迭代$k$次所有點是 inliers 的機率$1-(1-w^n)^k$</li>
-</ul>
-<p>選擇較高的迭代次數$k$來讓找到 inliers 的機率提高</p>
-<p>假設演算法跑完$k$次成功機率為$p$</p>
-<p>$1-p &#x3D; (1-w^n)^k$</p>
-<p>$p &#x3D; 1-(1-w^n)^k$</p>
-<p>$當n不變時、k越大、p越大，其中p自行定義$</p>
-<p>更新迭代次數$k$公式：</p>
-<p>$k&#x3D;\frac{log(1-p)}{log(1-w^n)}$</p>
-<p>改善 RANSAC 效率方法：</p>
-<ul>
-<li>先對資料集進行最小二乘法得到不錯的模型(全局最佳化)，再進行 RANSAC(本地最佳化)</li>
-</ul>
-<p>RANSAC 優缺點：</p>
-<ul>
-<li>優點<ul>
-<li>通用方法適合各種擬合問題</li>
-<li>好實現</li>
-</ul>
-</li>
-<li>缺點<ul>
-<li>對於資料集中 outliers 數量變多時，時間成本會大幅提升，真實問題通常都有較大佔比的 outliers(可能的解決方法：隨機選擇資料集中的子集合)</li>
-<li>非確定性算法：每次跑完結果可能不一樣，但會在一定機率下跑出合理的結果</li>
-</ul>
-</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62238520">RANSAC 算法详解(附 Python 拟合直线模型代码)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/tangwei2014/article/details/38390463">随机抽样一致(Random Sample Consensus, RANSAC)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1323,7 +1356,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1332,7 +1365,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
