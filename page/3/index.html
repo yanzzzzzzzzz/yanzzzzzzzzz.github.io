@@ -166,6 +166,145 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/" class="post-title-link" itemprop="url">cs131 lecture 5 Features And Fitting-Local Invariant Features & Harris Corner</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-10 19:13:00" itemprop="dateCreated datePublished" datetime="2021-03-10T19:13:00+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用特徵點來尋找物件、定位、全景拼接</p>
+<h2 id="使用-Local-Invariant-Features-動機"><a href="#使用-Local-Invariant-Features-動機" class="headerlink" title="使用 Local Invariant Features 動機"></a>使用 Local Invariant Features 動機</h2><ul>
+<li>全局特徵有它的限制性</li>
+<li>增強對遮擋、角度變化的魯棒性</li>
+</ul>
+<h3 id="常見的方法"><a href="#常見的方法" class="headerlink" title="常見的方法"></a>常見的方法</h3><ol>
+<li>找到多個獨特的關鍵點</li>
+<li>定義一個 window 大小把 key points 的的周圍資訊取出來</li>
+<li>提取周圍資訊並做正規化</li>
+<li>計算正規化區域的局部描述子，例如使用區域色彩資訊</li>
+<li>匹配局部描述子</li>
+</ol>
+<h3 id="好的-Local-Features-特性"><a href="#好的-Local-Features-特性" class="headerlink" title="好的 Local Features 特性"></a>好的 Local Features 特性</h3><ul>
+<li>區塊特徵萃取要有重複性與準確性</li>
+<li>特徵是局部的獨特，對變形與雜亂背景有魯棒性</li>
+<li>要能萃取夠多的特徵進行比對</li>
+<li>計算方法越快越好</li>
+</ul>
+<h2 id="Harris-Corner"><a href="#Harris-Corner" class="headerlink" title="Harris Corner"></a>Harris Corner</h2><p>設計準則：可以很簡單的用一個小視窗當作視野範圍辨認出角點<br>如果在角點，往任意方向移動這個小視窗應該會有很大的亮度變化</p>
+<img src='https://yanzzzzzzzzz.github.io/img/harris-corner.png'  width='400'/>
+<img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/>
+
+<h3 id="Formulation"><a href="#Formulation" class="headerlink" title="Formulation"></a>Formulation</h3><p>移動小視窗的中心座標點$[x,y]到[x+u,y+v]$來計算移動後的亮度變化<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/><br><img src='https://yanzzzzzzzzz.github.io/img/harris-corner-explain.png'  width='400'/></p>
+<p>量測單點亮度變化公式：</p>
+<p>$ I(x+u,y+v) - I(x,y) $</p>
+<p>計算整個小視窗內的亮度變化公式：</p>
+<p>$\sum_{xy}w(x,y)[I(x+u,y+v)-I(x,y)]^2 $</p>
+<p>其中 window function 可以使用加權函數、高斯函數</p>
+<p>利用泰勒展開式對$I(x+u,y+v)$<br><img src="https://yanzzzzzzzzz.github.io/img/Taylor-expansion.png"  width="400"/></p>
+<p>其中一階近似為<br><img src="https://yanzzzzzzzzz.github.io/img/Taylor-expansion-first.png"  width="400"/></p>
+<p>將一階近似帶入 harris corner 公式<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula.png"  width="400"/></p>
+<p>最終<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-1.png"  width="400"/></p>
+<p>其中 M 是一個 2x2 的矩陣用來計算影像導數<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-2.png"  width="400"/></p>
+<p>M 是對稱矩陣，求其特徵值<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-3.png"  width="400"/></p>
+<p>可以把矩陣 M 想像成是一個橢圓型，其中它的軸長是$\lambda_1 , \lambda_2$，方向由 R 定義<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-explain-lambda.png"  width="400"/></p>
+<p>可以看到$\lambda_1 , \lambda_2$ 與影像的關係，而我們只關心 corner 的地方，試著將 corner 位置的值透過一個公式過濾出來</p>
+<p>設計邊緣響應函數：</p>
+<p>${\theta} &#x3D; det(M) - {\alpha}trace(M)^2 &#x3D; {\lambda_1}{\lambda_2}-{\alpha}({\lambda_1}+{\lambda_2})^2$</p>
+<p>快速逼近法：</p>
+<ul>
+<li>避免計算特徵值</li>
+<li>${\alpha}是常數，範圍可選在[0.04,0.06]之間$</li>
+</ul>
+<p>note</p>
+<ul>
+<li>det：Determinants，在矩陣上計算得到純量</li>
+<li>trace：trace，矩陣對角線上的總和</li>
+</ul>
+<h3 id="Harris-corner-特性"><a href="#Harris-corner-特性" class="headerlink" title="Harris corner 特性"></a>Harris corner 特性</h3><ol>
+<li>參數$\alpha$對角點檢測的影響：加大$\alpha$值，減少角點檢測數量；降低$\alpha$值，增加角點數量</li>
+<li>具有旋轉不變性，但沒有尺度不變性，視野範圍內看到的角點，放大視野範圍後會變成 edge<img src="https://yanzzzzzzzzz.github.io/img/harris-corner-invariant.png"  width="400"/></li>
+</ol>
+<h2 id="特徵檢測器相關論文"><a href="#特徵檢測器相關論文" class="headerlink" title="特徵檢測器相關論文"></a>特徵檢測器相關論文</h2><ul>
+<li>Hessian &amp; Harris [Beaudet ‘78], [Harris ‘88]</li>
+<li>Laplacian, DoG [Lindeberg ‘98], [Lowe ‘99]</li>
+<li>Harris-&#x2F;Hessian-Laplace [Mikolajczyk &amp; Schmid ‘01]</li>
+<li>Harris-&#x2F;Hessian-Affine [Mikolajczyk &amp; Schmid ‘04]</li>
+<li>EBR and IBR [Tuytelaars &amp; Van Gool ‘04]</li>
+<li>MSER [Matas ‘02]</li>
+<li>Salient Regions [Kadir &amp; Brady ‘01]</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011534057/article/details/77775974">Harris Corner Detector 公式推導以及具體含義</a></li>
+<li><a target="_blank" rel="noopener" href="https://senitco.github.io/2017/06/18/image-feature-harris/">图像特征之 Harris 角点检测</a></li>
+<li><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection">why eigenvalues concerned in Harris corner detection?</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1003,7 +1142,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

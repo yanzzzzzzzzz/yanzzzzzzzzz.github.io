@@ -21,24 +21,19 @@
     var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="簡介光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：  運動方向檢測 物件分割 立體視差測量等等  如何得到影像中的光流舉例來說一個影片由多個連續影像組成，我們追蹤不同影像同一點P，第t個frame時位置是P(x1, y1)，在t+1時位置是P(x2, y2)，透過這兩點座標就可以算出運動方向與運動速度   要算出這兩點光">
+  <meta name="description" content="LINQ介紹語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用 LINQ 語法Where1234&#x2F;&#x2F; filter odd numberint[] numbers &#x3D; &amp;#123; 5, 10, 8, 3, 6, 12&amp;#125;;IEnumerable&lt;int&gt; numQuery2 &#x3D;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs131 lecture 15 Optical flow">
-<meta property="og:url" content="https://yanzzzzzzzzz.github.io/2021/11/08/2021-11-08-Optical%20Flow/index.html">
+<meta property="og:title" content="LINQ查詢語法攻略">
+<meta property="og:url" content="https://yanzzzzzzzzz.github.io/2022/11/21/linq_intro/index.html">
 <meta property="og:site_name" content="yanzzzz blog">
-<meta property="og:description" content="簡介光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：  運動方向檢測 物件分割 立體視差測量等等  如何得到影像中的光流舉例來說一個影片由多個連續影像組成，我們追蹤不同影像同一點P，第t個frame時位置是P(x1, y1)，在t+1時位置是P(x2, y2)，透過這兩點座標就可以算出運動方向與運動速度   要算出這兩點光">
+<meta property="og:description" content="LINQ介紹語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用 LINQ 語法Where1234&#x2F;&#x2F; filter odd numberint[] numbers &#x3D; &amp;#123; 5, 10, 8, 3, 6, 12&amp;#125;;IEnumerable&lt;int&gt; numQuery2 &#x3D;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/optical_flow_example.png">
-<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/optical_flow_brightness_constancy.png">
-<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/optical_flow_small_motion.png">
-<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/optical_flow.png">
-<meta property="article:published_time" content="2021-11-08T12:20:00.000Z">
-<meta property="article:modified_time" content="2022-11-21T06:10:07.429Z">
+<meta property="article:published_time" content="2022-11-21T09:23:09.000Z">
+<meta property="article:modified_time" content="2022-11-22T01:19:26.502Z">
 <meta property="article:author" content="yanzzzz">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/optical_flow_example.png">
 
-<link rel="canonical" href="https://yanzzzzzzzzz.github.io/2021/11/08/2021-11-08-Optical%20Flow/">
+<link rel="canonical" href="https://yanzzzzzzzzz.github.io/2022/11/21/linq_intro/">
 
 
 <script id="page-configurations">
@@ -51,7 +46,7 @@
   };
 </script>
 
-  <title>cs131 lecture 15 Optical flow | yanzzzz blog</title>
+  <title>LINQ查詢語法攻略 | yanzzzz blog</title>
   
 
 
@@ -174,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/11/08/2021-11-08-Optical%20Flow/">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/21/linq_intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          cs131 lecture 15 Optical flow
+          LINQ查詢語法攻略
         </h1>
 
         <div class="post-meta">
@@ -197,24 +192,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-11-08 20:20:00" itemprop="dateCreated datePublished" datetime="2021-11-08T20:20:00+08:00">2021-11-08</time>
+              <time title="Created: 2022-11-21 17:23:09" itemprop="dateCreated datePublished" datetime="2022-11-21T17:23:09+08:00">2022-11-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+                <time title="Modified: 2022-11-22 09:19:26" itemprop="dateModified" datetime="2022-11-22T09:19:26+08:00">2022-11-22</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
 
           
 
@@ -227,31 +213,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：</p>
-<ul>
-<li>運動方向檢測</li>
-<li>物件分割</li>
-<li>立體視差測量等等</li>
-</ul>
-<h2 id="如何得到影像中的光流"><a href="#如何得到影像中的光流" class="headerlink" title="如何得到影像中的光流"></a>如何得到影像中的光流</h2><p>舉例來說一個影片由多個連續影像組成，我們追蹤不同影像同一點P，第t個frame時位置是P(x1, y1)，在t+1時位置是P(x2, y2)，透過這兩點座標就可以算出運動方向與運動速度</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_example.png'  width='400'/>
+        <h2 id="LINQ介紹"><a href="#LINQ介紹" class="headerlink" title="LINQ介紹"></a>LINQ介紹</h2><p>語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用</p>
+<h2 id="LINQ-語法"><a href="#LINQ-語法" class="headerlink" title="LINQ 語法"></a>LINQ 語法</h2><h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line"><span class="comment">// Output: 10 8 6 12</span></span><br></pre></td></tr></table></figure>
 
-<p>要算出這兩點光流的前提：</p>
-<h3 id="亮度恆定"><a href="#亮度恆定" class="headerlink" title="亮度恆定"></a>亮度恆定</h3><p>移動前後兩點的亮度應該是相等的</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_brightness_constancy.png'  width='400'/>
+<h3 id="OrderBy"><a href="#OrderBy" class="headerlink" title="OrderBy"></a>OrderBy</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>).OrderBy(n =&gt; n);</span><br><span class="line"><span class="comment">// Output:6 8 10 12</span></span><br></pre></td></tr></table></figure>
 
-<p>$ I(x, y, t) &#x3D; I(x + u, y + v, t+1) $</p>
-<h3 id="微小的移動"><a href="#微小的移動" class="headerlink" title="微小的移動"></a>微小的移動</h3><img src='https://yanzzzzzzzzz.github.io/img/optical_flow_small_motion.png'  width='400'/>
-
-<p>在以上條件約束的前提下，亮度恆定與微小移動下</p>
-<p>$ I(x, y, t) &#x3D; I(x + u{\delta}t, y + v{\delta}t, {\delta}t) $</p>
-<p>對等號右邊的式子進行泰勒展開式,保留一階項</p>
-<p>$ I(x + u, y + v, t+1) \approx I(x,y,t)+I_x∙u+I_y∙v+I_t$</p>
-<p>假設亮度不變，下個時間同個點的亮度相等</p>
-<p>$ I_x∙u+I_y∙v+I_t \approx 0$</p>
-<p>$ \nabla I∙[u,v]^T + I_t &#x3D; 0 $<br>不能透過等式 $ \nabla I∙[u,v]^T + I_t &#x3D; 0 $ 解出u,v，因為只有一個等式內含有兩個未知數u,v</p>
-<h2 id="應用"><a href="#應用" class="headerlink" title="應用"></a>應用</h2><p>用來預估車流移動方向的光流法:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow.png'  width='400'/>
+<h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>[] fruits = &#123; <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;mango&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;passionfruit&quot;</span>, <span class="string">&quot;grape&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> fruit = <span class="string">&quot;mango&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> hasMango = fruits.Contains(fruit);</span><br><span class="line"><span class="comment">// hasMango=true</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -267,13 +234,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/11/2021-10-11-Machine%20learning%20Roadmap%202021%20%E4%BB%8B%E7%B4%B9/" rel="prev" title="Machine learning Roadmap 2021 介紹">
-      <i class="fa fa-chevron-left"></i> Machine learning Roadmap 2021 介紹
+    <a href="/2022/11/21/nvm-install/" rel="prev" title="Node Version Manager (NVM):安裝、切換Node.js版本的管理器">
+      <i class="fa fa-chevron-left"></i> Node Version Manager (NVM):安裝、切換Node.js版本的管理器
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/11/14/utterancesInHexo/" rel="next" title="在hexo新增留言板功能(utterances)">
-      在hexo新增留言板功能(utterances) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -339,7 +303,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BE%97%E5%88%B0%E5%BD%B1%E5%83%8F%E4%B8%AD%E7%9A%84%E5%85%89%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">如何得到影像中的光流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%AE%E5%BA%A6%E6%81%86%E5%AE%9A"><span class="nav-number">2.1.</span> <span class="nav-text">亮度恆定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%B0%8F%E7%9A%84%E7%A7%BB%E5%8B%95"><span class="nav-number">2.2.</span> <span class="nav-text">微小的移動</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%87%89%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">應用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LINQ%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">LINQ介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LINQ-%E8%AA%9E%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">LINQ 語法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Where"><span class="nav-number">2.1.</span> <span class="nav-text">Where</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OrderBy"><span class="nav-number">2.2.</span> <span class="nav-text">OrderBy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contains"><span class="nav-number">2.3.</span> <span class="nav-text">Contains</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -456,81 +420,9 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src=""></script>
-
 </body>
 </html>

@@ -166,6 +166,130 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/" class="post-title-link" itemprop="url">K-nearest-neighbor-algorithm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-17 15:23:00" itemprop="dateCreated datePublished" datetime="2021-04-17T15:23:00+08:00">2021-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="機器學習架構"><a href="#機器學習架構" class="headerlink" title="機器學習架構"></a>機器學習架構</h2><img src='https://yanzzzzzzzzz.github.io/img/ml-framework.png'  width='400'/>
+
+<ul>
+<li>分成training與Testing階段</li>
+<li>Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差</li>
+<li>Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果</li>
+</ul>
+<h2 id="K-nearest-neighbor-classifier"><a href="#K-nearest-neighbor-classifier" class="headerlink" title="K-nearest neighbor classifier"></a>K-nearest neighbor classifier</h2><p>KNN的概念是由nearest neighbor algorithm衍伸出來，NN是透過一群已經存在的訓練資料與標籤當作基底，來對測試資料進行比對，輸出與訓練資料相似度高的類別當作結果</p>
+<p>而KNN與NN不同的則是取出前K個相近的資料做參考，來決定最終輸出的類別結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/knn-example.png'  width='400'/>
+
+<h3 id="KNN演算法流程"><a href="#KNN演算法流程" class="headerlink" title="KNN演算法流程"></a>KNN演算法流程</h3><p>訓練階段：存取所有訓練資料$x_i$與其對應的類別結果$y_i$</p>
+<p>測試階段：</p>
+<ol>
+<li>輸入$x$，計算與所有訓練資料點的距離</li>
+<li>選擇前$k$個鄰近$x$的訓練資料</li>
+<li>統計鄰近訓練資料最高的對應類別結果</li>
+</ol>
+<p>距離量測方法：可使用歐式距離</p>
+<h3 id="KNN-細節整理"><a href="#KNN-細節整理" class="headerlink" title="KNN 細節整理"></a>KNN 細節整理</h3><ul>
+<li>如何決定參數k</li>
+<li>相似度比對</li>
+</ul>
+<h3 id="如何決定參數k"><a href="#如何決定參數k" class="headerlink" title="如何決定參數k"></a>如何決定參數k</h3><p>參數$k$的不同會影響輸出結果</p>
+<ul>
+<li>k太小，對雜訊敏感，容易overfitting</li>
+<li>k太大，容易underfitting</li>
+</ul>
+<p>選擇參數k的方法：cross validate</p>
+<h4 id="cross-validate"><a href="#cross-validate" class="headerlink" title="cross validate"></a>cross validate</h4><p>把資料分成多個子資料，測試參數在小樣本中的表現結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/cross-validation.png'  width='400'/>
+
+<p>測試流程：</p>
+<ol>
+<li>輸入訓練資料，從訓練資料分割成多組不同的訓練&#x2F;測試資料</li>
+<li>選擇在平均效能中最好的參數$k$</li>
+</ol>
+<h3 id="相似度比對"><a href="#相似度比對" class="headerlink" title="相似度比對"></a>相似度比對</h3><ul>
+<li>相似度比對：<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB">歐式距離(Euclidean distance)</a>，最常用   </li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2">曼哈頓距離(Manhattan distance)</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB">切比雪夫距離(Chebyshev distance)</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%93%88%E6%8B%89%E8%AF%BA%E6%AF%94%E6%96%AF%E8%B7%9D%E7%A6%BB">馬氏距離(Mahalanobis Distance)</a></li>
+</ul>
+</li>
+<li>相似度比對前都須對資料進行正規化，才能保證每個<br>維度的特徵具有相同的影響力，除了馬氏距離已將不同尺度的問題做處理</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/ssuserf88631/knn-51511604">沒有想像中簡單的簡單分類器 Knn</a></li>
+<li><a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/287425/why-do-you-need-to-scale-data-in-knn">Why do you need to scale data in KNN</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -197,7 +321,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+                <time title="Modified: 2022-11-21 17:34:53" itemprop="dateModified" datetime="2022-11-21T17:34:53+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,11 +385,9 @@
 <p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
 <img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp_1.png'  width='400'/>
 
-
 <h4 id="Searching-for-Minimum"><a href="#Searching-for-Minimum" class="headerlink" title="Searching for Minimum"></a>Searching for Minimum</h4><p>得到seam cost矩陣後，從最下方開始尋找最小向上路徑</p>
 <p>搜尋方式是先選出下方最小起始點，向上沿著上方周圍三個鄰居來選擇最小數值，直到矩陣上方列</p>
 <img src='https://yanzzzzzzzzz.github.io/img/seam-carving-backtracking.png'  width='400'/>
-
 
 <h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><img src='https://yanzzzzzzzzz.github.io/img/seam-carving-result.png'  width='400'/>
 
@@ -277,13 +399,13 @@
 <p>並將他合成一個選擇公式：</p>
 <img src='https://yanzzzzzzzzz.github.io/img/retargeting-both-dim.png'  width='400'/>
 
-<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam </p>
+<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam</p>
 <h4 id="Multi-Size-Image-Representation"><a href="#Multi-Size-Image-Representation" class="headerlink" title="Multi-Size Image Representation"></a>Multi-Size Image Representation</h4><p>上述流程是在知道輸入調整尺寸的情況下做演算</p>
 <p>那假如在不確定輸入尺寸的情況下(ex:顯示的尺寸可能有各種不同的組合)</p>
 <p>要如何做到即時resizing的轉換</p>
 <img src='https://yanzzzzzzzzz.github.io/img/mulit-size-images.png'  width='400'/>
 
-<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam </p>
+<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam</p>
 <h4 id="Object-Removal"><a href="#Object-Removal" class="headerlink" title="Object Removal"></a>Object Removal</h4><p>設定mask來保護&#x2F;移除指定的區塊</p>
 <img src='https://yanzzzzzzzzz.github.io/img/Object-Removal.png'  width='400'/>
 
@@ -307,7 +429,6 @@
 <p>$C_L$是計算移除$𝑝_{𝑖,𝑗}$後左右,上下的能量,以此類推<br>得到每個移除接縫後的能量總和，用來評估哪個方向的像素被移除可以得到較小的能量</p>
 <p>小能量代表移除後得到平滑影像，大能量代表出現梯度變化大(扭曲、鋸齒狀)的結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/forward-energy-1.png'  width='400'/>
-
 
 <p>比較forward &amp; backward結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png'  width='400'/>
@@ -1163,145 +1284,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/2021-03-10-cs131-lecture-5-Features-and-fitting-Local-invariant-features%20&%20Harris%20corner/" class="post-title-link" itemprop="url">cs131 lecture 5 Features And Fitting-Local Invariant Features & Harris Corner</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-10 19:13:00" itemprop="dateCreated datePublished" datetime="2021-03-10T19:13:00+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>使用特徵點來尋找物件、定位、全景拼接</p>
-<h2 id="使用-Local-Invariant-Features-動機"><a href="#使用-Local-Invariant-Features-動機" class="headerlink" title="使用 Local Invariant Features 動機"></a>使用 Local Invariant Features 動機</h2><ul>
-<li>全局特徵有它的限制性</li>
-<li>增強對遮擋、角度變化的魯棒性</li>
-</ul>
-<h3 id="常見的方法"><a href="#常見的方法" class="headerlink" title="常見的方法"></a>常見的方法</h3><ol>
-<li>找到多個獨特的關鍵點</li>
-<li>定義一個 window 大小把 key points 的的周圍資訊取出來</li>
-<li>提取周圍資訊並做正規化</li>
-<li>計算正規化區域的局部描述子，例如使用區域色彩資訊</li>
-<li>匹配局部描述子</li>
-</ol>
-<h3 id="好的-Local-Features-特性"><a href="#好的-Local-Features-特性" class="headerlink" title="好的 Local Features 特性"></a>好的 Local Features 特性</h3><ul>
-<li>區塊特徵萃取要有重複性與準確性</li>
-<li>特徵是局部的獨特，對變形與雜亂背景有魯棒性</li>
-<li>要能萃取夠多的特徵進行比對</li>
-<li>計算方法越快越好</li>
-</ul>
-<h2 id="Harris-Corner"><a href="#Harris-Corner" class="headerlink" title="Harris Corner"></a>Harris Corner</h2><p>設計準則：可以很簡單的用一個小視窗當作視野範圍辨認出角點<br>如果在角點，往任意方向移動這個小視窗應該會有很大的亮度變化</p>
-<img src='https://yanzzzzzzzzz.github.io/img/harris-corner.png'  width='400'/>
-<img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/>
-
-<h3 id="Formulation"><a href="#Formulation" class="headerlink" title="Formulation"></a>Formulation</h3><p>移動小視窗的中心座標點$[x,y]到[x+u,y+v]$來計算移動後的亮度變化<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/><br><img src='https://yanzzzzzzzzz.github.io/img/harris-corner-explain.png'  width='400'/></p>
-<p>量測單點亮度變化公式：</p>
-<p>$ I(x+u,y+v) - I(x,y) $</p>
-<p>計算整個小視窗內的亮度變化公式：</p>
-<p>$\sum_{xy}w(x,y)[I(x+u,y+v)-I(x,y)]^2 $</p>
-<p>其中 window function 可以使用加權函數、高斯函數</p>
-<p>利用泰勒展開式對$I(x+u,y+v)$<br><img src="https://yanzzzzzzzzz.github.io/img/Taylor-expansion.png"  width="400"/></p>
-<p>其中一階近似為<br><img src="https://yanzzzzzzzzz.github.io/img/Taylor-expansion-first.png"  width="400"/></p>
-<p>將一階近似帶入 harris corner 公式<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula.png"  width="400"/></p>
-<p>最終<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-1.png"  width="400"/></p>
-<p>其中 M 是一個 2x2 的矩陣用來計算影像導數<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-2.png"  width="400"/></p>
-<p>M 是對稱矩陣，求其特徵值<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-formula-3.png"  width="400"/></p>
-<p>可以把矩陣 M 想像成是一個橢圓型，其中它的軸長是$\lambda_1 , \lambda_2$，方向由 R 定義<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-explain-lambda.png"  width="400"/></p>
-<p>可以看到$\lambda_1 , \lambda_2$ 與影像的關係，而我們只關心 corner 的地方，試著將 corner 位置的值透過一個公式過濾出來</p>
-<p>設計邊緣響應函數：</p>
-<p>${\theta} &#x3D; det(M) - {\alpha}trace(M)^2 &#x3D; {\lambda_1}{\lambda_2}-{\alpha}({\lambda_1}+{\lambda_2})^2$</p>
-<p>快速逼近法：</p>
-<ul>
-<li>避免計算特徵值</li>
-<li>${\alpha}是常數，範圍可選在[0.04,0.06]之間$</li>
-</ul>
-<p>note</p>
-<ul>
-<li>det：Determinants，在矩陣上計算得到純量</li>
-<li>trace：trace，矩陣對角線上的總和</li>
-</ul>
-<h3 id="Harris-corner-特性"><a href="#Harris-corner-特性" class="headerlink" title="Harris corner 特性"></a>Harris corner 特性</h3><ol>
-<li>參數$\alpha$對角點檢測的影響：加大$\alpha$值，減少角點檢測數量；降低$\alpha$值，增加角點數量</li>
-<li>具有旋轉不變性，但沒有尺度不變性，視野範圍內看到的角點，放大視野範圍後會變成 edge<img src="https://yanzzzzzzzzz.github.io/img/harris-corner-invariant.png"  width="400"/></li>
-</ol>
-<h2 id="特徵檢測器相關論文"><a href="#特徵檢測器相關論文" class="headerlink" title="特徵檢測器相關論文"></a>特徵檢測器相關論文</h2><ul>
-<li>Hessian &amp; Harris [Beaudet ‘78], [Harris ‘88]</li>
-<li>Laplacian, DoG [Lindeberg ‘98], [Lowe ‘99]</li>
-<li>Harris-&#x2F;Hessian-Laplace [Mikolajczyk &amp; Schmid ‘01]</li>
-<li>Harris-&#x2F;Hessian-Affine [Mikolajczyk &amp; Schmid ‘04]</li>
-<li>EBR and IBR [Tuytelaars &amp; Van Gool ‘04]</li>
-<li>MSER [Matas ‘02]</li>
-<li>Salient Regions [Kadir &amp; Brady ‘01]</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011534057/article/details/77775974">Harris Corner Detector 公式推導以及具體含義</a></li>
-<li><a target="_blank" rel="noopener" href="https://senitco.github.io/2017/06/18/image-feature-harris/">图像特征之 Harris 角点检测</a></li>
-<li><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection">why eigenvalues concerned in Harris corner detection?</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1371,7 +1353,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

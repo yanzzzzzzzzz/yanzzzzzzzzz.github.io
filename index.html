@@ -166,6 +166,76 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/21/linq_intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/21/linq_intro/" class="post-title-link" itemprop="url">LINQ查詢語法攻略</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-21 17:23:09" itemprop="dateCreated datePublished" datetime="2022-11-21T17:23:09+08:00">2022-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-22 09:19:26" itemprop="dateModified" datetime="2022-11-22T09:19:26+08:00">2022-11-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="LINQ介紹"><a href="#LINQ介紹" class="headerlink" title="LINQ介紹"></a>LINQ介紹</h2><p>語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用</p>
+<h2 id="LINQ-語法"><a href="#LINQ-語法" class="headerlink" title="LINQ 語法"></a>LINQ 語法</h2><h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line"><span class="comment">// Output: 10 8 6 12</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="OrderBy"><a href="#OrderBy" class="headerlink" title="OrderBy"></a>OrderBy</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>).OrderBy(n =&gt; n);</span><br><span class="line"><span class="comment">// Output:6 8 10 12</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>[] fruits = &#123; <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;mango&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;passionfruit&quot;</span>, <span class="string">&quot;grape&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> fruit = <span class="string">&quot;mango&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> hasMango = fruits.Contains(fruit);</span><br><span class="line"><span class="comment">// hasMango=true</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/21/nvm-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1242,130 +1312,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/" class="post-title-link" itemprop="url">K-nearest-neighbor-algorithm</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-17 15:23:00" itemprop="dateCreated datePublished" datetime="2021-04-17T15:23:00+08:00">2021-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="機器學習架構"><a href="#機器學習架構" class="headerlink" title="機器學習架構"></a>機器學習架構</h2><img src='https://yanzzzzzzzzz.github.io/img/ml-framework.png'  width='400'/>
-
-<ul>
-<li>分成training與Testing階段</li>
-<li>Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差</li>
-<li>Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果</li>
-</ul>
-<h2 id="K-nearest-neighbor-classifier"><a href="#K-nearest-neighbor-classifier" class="headerlink" title="K-nearest neighbor classifier"></a>K-nearest neighbor classifier</h2><p>KNN的概念是由nearest neighbor algorithm衍伸出來，NN是透過一群已經存在的訓練資料與標籤當作基底，來對測試資料進行比對，輸出與訓練資料相似度高的類別當作結果</p>
-<p>而KNN與NN不同的則是取出前K個相近的資料做參考，來決定最終輸出的類別結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/knn-example.png'  width='400'/>
-
-<h3 id="KNN演算法流程"><a href="#KNN演算法流程" class="headerlink" title="KNN演算法流程"></a>KNN演算法流程</h3><p>訓練階段：存取所有訓練資料$x_i$與其對應的類別結果$y_i$</p>
-<p>測試階段：</p>
-<ol>
-<li>輸入$x$，計算與所有訓練資料點的距離</li>
-<li>選擇前$k$個鄰近$x$的訓練資料</li>
-<li>統計鄰近訓練資料最高的對應類別結果</li>
-</ol>
-<p>距離量測方法：可使用歐式距離</p>
-<h3 id="KNN-細節整理"><a href="#KNN-細節整理" class="headerlink" title="KNN 細節整理"></a>KNN 細節整理</h3><ul>
-<li>如何決定參數k</li>
-<li>相似度比對</li>
-</ul>
-<h3 id="如何決定參數k"><a href="#如何決定參數k" class="headerlink" title="如何決定參數k"></a>如何決定參數k</h3><p>參數$k$的不同會影響輸出結果</p>
-<ul>
-<li>k太小，對雜訊敏感，容易overfitting</li>
-<li>k太大，容易underfitting</li>
-</ul>
-<p>選擇參數k的方法：cross validate</p>
-<h4 id="cross-validate"><a href="#cross-validate" class="headerlink" title="cross validate"></a>cross validate</h4><p>把資料分成多個子資料，測試參數在小樣本中的表現結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/cross-validation.png'  width='400'/>
-
-<p>測試流程：</p>
-<ol>
-<li>輸入訓練資料，從訓練資料分割成多組不同的訓練&#x2F;測試資料</li>
-<li>選擇在平均效能中最好的參數$k$</li>
-</ol>
-<h3 id="相似度比對"><a href="#相似度比對" class="headerlink" title="相似度比對"></a>相似度比對</h3><ul>
-<li>相似度比對：<ul>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB">歐式距離(Euclidean distance)</a>，最常用   </li>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2">曼哈頓距離(Manhattan distance)</a></li>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB">切比雪夫距離(Chebyshev distance)</a></li>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%93%88%E6%8B%89%E8%AF%BA%E6%AF%94%E6%96%AF%E8%B7%9D%E7%A6%BB">馬氏距離(Mahalanobis Distance)</a></li>
-</ul>
-</li>
-<li>相似度比對前都須對資料進行正規化，才能保證每個<br>維度的特徵具有相同的影響力，除了馬氏距離已將不同尺度的問題做處理</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/ssuserf88631/knn-51511604">沒有想像中簡單的簡單分類器 Knn</a></li>
-<li><a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/287425/why-do-you-need-to-scale-data-in-knn">Why do you need to scale data in KNN</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1435,7 +1381,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/forward-energy-1.png">
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png">
 <meta property="article:published_time" content="2021-04-10T10:23:00.000Z">
-<meta property="article:modified_time" content="2022-11-21T06:10:07.350Z">
+<meta property="article:modified_time" content="2022-11-21T09:34:53.083Z">
 <meta property="article:author" content="yanzzzz">
 <meta property="article:tag" content="cs131">
 <meta name="twitter:card" content="summary">
@@ -216,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+                <time title="Modified: 2022-11-21 17:34:53" itemprop="dateModified" datetime="2022-11-21T17:34:53+08:00">2022-11-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,11 +280,9 @@
 <p>$M(i,j) &#x3D; E(i,j) + min(M(i-1, j-1), M(i-1,j), M(i-1, j+1))$</p>
 <img src='https://yanzzzzzzzzz.github.io/img/seam-cost-dp_1.png'  width='400'/>
 
-
 <h4 id="Searching-for-Minimum"><a href="#Searching-for-Minimum" class="headerlink" title="Searching for Minimum"></a>Searching for Minimum</h4><p>得到seam cost矩陣後，從最下方開始尋找最小向上路徑</p>
 <p>搜尋方式是先選出下方最小起始點，向上沿著上方周圍三個鄰居來選擇最小數值，直到矩陣上方列</p>
 <img src='https://yanzzzzzzzzz.github.io/img/seam-carving-backtracking.png'  width='400'/>
-
 
 <h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><img src='https://yanzzzzzzzzz.github.io/img/seam-carving-result.png'  width='400'/>
 
@@ -296,13 +294,13 @@
 <p>並將他合成一個選擇公式：</p>
 <img src='https://yanzzzzzzzzz.github.io/img/retargeting-both-dim.png'  width='400'/>
 
-<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam </p>
+<p>$c,r$ 是行與列，考慮到x,y方向的seam cost，個別移除水平與垂直方向的結果<br>找出最小化的seam</p>
 <h4 id="Multi-Size-Image-Representation"><a href="#Multi-Size-Image-Representation" class="headerlink" title="Multi-Size Image Representation"></a>Multi-Size Image Representation</h4><p>上述流程是在知道輸入調整尺寸的情況下做演算</p>
 <p>那假如在不確定輸入尺寸的情況下(ex:顯示的尺寸可能有各種不同的組合)</p>
 <p>要如何做到即時resizing的轉換</p>
 <img src='https://yanzzzzzzzzz.github.io/img/mulit-size-images.png'  width='400'/>
 
-<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam </p>
+<p>那就先把整張影像上x,y索引的seam 的計算完排序並存起來，當今天要縮剪k個長度，就刪去前k個seam</p>
 <h4 id="Object-Removal"><a href="#Object-Removal" class="headerlink" title="Object Removal"></a>Object Removal</h4><p>設定mask來保護&#x2F;移除指定的區塊</p>
 <img src='https://yanzzzzzzzzz.github.io/img/Object-Removal.png'  width='400'/>
 
@@ -326,7 +324,6 @@
 <p>$C_L$是計算移除$𝑝_{𝑖,𝑗}$後左右,上下的能量,以此類推<br>得到每個移除接縫後的能量總和，用來評估哪個方向的像素被移除可以得到較小的能量</p>
 <p>小能量代表移除後得到平滑影像，大能量代表出現梯度變化大(扭曲、鋸齒狀)的結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/forward-energy-1.png'  width='400'/>
-
 
 <p>比較forward &amp; backward結果</p>
 <img src='https://yanzzzzzzzzz.github.io/img/compare-forward-backward-seam-carving.png'  width='400'/>
@@ -437,7 +434,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
