@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="分層架構大多為以下四層:  Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像 Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能 Persistence Layer 持久層: 資料存取 Database Layer 資料層: 資料來源 ex:本地DB，雲端DB  層與層之前的關係Pr">
+  <meta name="description" content="分層架構大多為以下四層:  Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像 Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能 Persistence Layer 持久層: 資料存取 Database Layer 資料層: 資料來源 ex:本地DB，雲端DB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分層架構模式">
 <meta property="og:url" content="https://yanzzzzzzzzz.github.io/2022/11/28/software-layer/index.html">
 <meta property="og:site_name" content="yanzzzz blog">
-<meta property="og:description" content="分層架構大多為以下四層:  Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像 Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能 Persistence Layer 持久層: 資料存取 Database Layer 資料層: 資料來源 ex:本地DB，雲端DB  層與層之前的關係Pr">
+<meta property="og:description" content="分層架構大多為以下四層:  Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像 Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能 Persistence Layer 持久層: 資料存取 Database Layer 資料層: 資料來源 ex:本地DB，雲端DB">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-28T08:49:39.000Z">
-<meta property="article:modified_time" content="2022-11-29T09:53:57.231Z">
+<meta property="article:modified_time" content="2022-12-01T04:10:53.097Z">
 <meta property="article:author" content="yanzzzz">
 <meta name="twitter:card" content="summary">
 
@@ -199,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-29 17:53:57" itemprop="dateModified" datetime="2022-11-29T17:53:57+08:00">2022-11-29</time>
+                <time title="Modified: 2022-12-01 12:10:53" itemprop="dateModified" datetime="2022-12-01T12:10:53+08:00">2022-12-01</time>
               </span>
 
           
@@ -218,9 +218,9 @@
 <li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
 <li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
 <li>Persistence Layer 持久層: 資料存取</li>
-<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB</li>
+<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB<span id="more"></span>
+層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</li>
 </ul>
-<p>層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</p>
 <p>為何不能直接從表現層訪問資料存取層?</p>
 <p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
 <p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
