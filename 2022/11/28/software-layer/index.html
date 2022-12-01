@@ -21,22 +21,19 @@
     var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Canny edge檢測流程 使用高斯濾波器 使用Sobel濾波器取出x,y方向梯度 對梯度進行非極大值抑制 使用滯後閾值  高斯濾波平滑影像，濾除雜訊 滯後閾值設定高閾值與低閾值 低於低閾值的不是edge，如線段(D)高於高閾值的是強edge，如線段(A)、(B)介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接若有連接到，如線段(C)，就視為edge，沒連接到的就非edge(E)">
+  <meta name="description" content="分層架構大多為以下四層:  Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像 Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能 Persistence Layer 持久層: 資料存取 Database Layer 資料層: 資料來源 ex:本地DB，雲端DB  層與層之前的關係Pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Canny Edge Detector">
-<meta property="og:url" content="https://yanzzzzzzzzz.github.io/2020/12/15/2020-12-15-canny-edge-detector/index.html">
+<meta property="og:title" content="分層架構模式">
+<meta property="og:url" content="https://yanzzzzzzzzz.github.io/2022/11/28/software-layer/index.html">
 <meta property="og:site_name" content="yanzzzz blog">
-<meta property="og:description" content="Canny edge檢測流程 使用高斯濾波器 使用Sobel濾波器取出x,y方向梯度 對梯度進行非極大值抑制 使用滯後閾值  高斯濾波平滑影像，濾除雜訊 滯後閾值設定高閾值與低閾值 低於低閾值的不是edge，如線段(D)高於高閾值的是強edge，如線段(A)、(B)介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接若有連接到，如線段(C)，就視為edge，沒連接到的就非edge(E)">
+<meta property="og:description" content="分層架構大多為以下四層:  Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像 Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能 Persistence Layer 持久層: 資料存取 Database Layer 資料層: 資料來源 ex:本地DB，雲端DB  層與層之前的關係Pr">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/Hysteresis-2.png">
-<meta property="article:published_time" content="2020-12-15T13:33:00.000Z">
-<meta property="article:modified_time" content="2022-11-21T06:10:07.220Z">
+<meta property="article:published_time" content="2022-11-28T08:49:39.000Z">
+<meta property="article:modified_time" content="2022-11-29T09:53:57.231Z">
 <meta property="article:author" content="yanzzzz">
-<meta property="article:tag" content="edge">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yanzzzzzzzzz.github.io/img/Hysteresis-2.png">
 
-<link rel="canonical" href="https://yanzzzzzzzzz.github.io/2020/12/15/2020-12-15-canny-edge-detector/">
+<link rel="canonical" href="https://yanzzzzzzzzz.github.io/2022/11/28/software-layer/">
 
 
 <script id="page-configurations">
@@ -49,7 +46,7 @@
   };
 </script>
 
-  <title>Canny Edge Detector | yanzzzz blog</title>
+  <title>分層架構模式 | yanzzzz blog</title>
   
 
 
@@ -172,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2020/12/15/2020-12-15-canny-edge-detector/">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/28/software-layer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Canny Edge Detector
+          分層架構模式
         </h1>
 
         <div class="post-meta">
@@ -195,14 +192,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-12-15 21:33:00" itemprop="dateCreated datePublished" datetime="2020-12-15T21:33:00+08:00">2020-12-15</time>
+              <time title="Created: 2022-11-28 16:49:39" itemprop="dateCreated datePublished" datetime="2022-11-28T16:49:39+08:00">2022-11-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+                <time title="Modified: 2022-11-29 17:53:57" itemprop="dateModified" datetime="2022-11-29T17:53:57+08:00">2022-11-29</time>
               </span>
 
           
@@ -216,15 +213,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Canny-edge檢測流程"><a href="#Canny-edge檢測流程" class="headerlink" title="Canny edge檢測流程"></a>Canny edge檢測流程</h2><ol>
-<li>使用高斯濾波器</li>
-<li>使用Sobel濾波器取出x,y方向梯度</li>
-<li>對梯度進行非極大值抑制</li>
-<li>使用滯後閾值</li>
-</ol>
-<h2 id="高斯濾波"><a href="#高斯濾波" class="headerlink" title="高斯濾波"></a>高斯濾波</h2><p>平滑影像，濾除雜訊</p>
-<h2 id="滯後閾值"><a href="#滯後閾值" class="headerlink" title="滯後閾值"></a>滯後閾值</h2><p>設定高閾值與低閾值<br><img src="https://yanzzzzzzzzz.github.io/img/Hysteresis-2.png"  width="400"/></p>
-<p>低於低閾值的不是edge，如線段(D)<br>高於高閾值的是強edge，如線段(A)、(B)<br>介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接<br>若有連接到，如線段(C)，就視為edge，沒連接到的就非edge(E)</p>
+        <h2 id="分層架構"><a href="#分層架構" class="headerlink" title="分層架構"></a>分層架構</h2><p>大多為以下四層:</p>
+<ul>
+<li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
+<li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
+<li>Persistence Layer 持久層: 資料存取</li>
+<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB</li>
+</ul>
+<p>層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</p>
+<p>為何不能直接從表現層訪問資料存取層?</p>
+<p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
+<p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
+<p>雖然隔離層之間的訪問可以降低耦合性，但在某些常用功能(log紀錄，數學運算..)下可以新增一個共用層並調整層的封閉性。</p>
+<h2 id="軟體分層設計優缺點"><a href="#軟體分層設計優缺點" class="headerlink" title="軟體分層設計優缺點"></a>軟體分層設計優缺點</h2><h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3><ul>
+<li>框架簡單好學，跟MVC的概念雷同</li>
+<li>減少了依賴性</li>
+<li>好測試</li>
+</ul>
+<h3 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h3><ul>
+<li>可擴展性低</li>
+<li>層越多trace code越麻煩</li>
+</ul>
 
     </div>
 
@@ -233,9 +242,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/edge/" rel="tag"># edge</a>
-          </div>
 
         
 
@@ -243,13 +249,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/15/cs231n-Image-Classification/" rel="prev" title="Image Classification">
-      <i class="fa fa-chevron-left"></i> Image Classification
+    <a href="/2022/11/28/Repository-pattern/" rel="prev" title="設計模式:Repository Pattern">
+      <i class="fa fa-chevron-left"></i> 設計模式:Repository Pattern
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/08/2021-02-08-cs131-lecture-1-introduction/" rel="next" title="cs131 lecture 1 Introduction">
-      cs131 lecture 1 Introduction <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -315,7 +318,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Canny-edge%E6%AA%A2%E6%B8%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">Canny edge檢測流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E6%BF%BE%E6%B3%A2"><span class="nav-number">2.</span> <span class="nav-text">高斯濾波</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%AF%E5%BE%8C%E9%96%BE%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">滯後閾值</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">分層架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BB%9F%E9%AB%94%E5%88%86%E5%B1%A4%E8%A8%AD%E8%A8%88%E5%84%AA%E7%BC%BA%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">軟體分層設計優缺點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%84%AA%E9%BB%9E"><span class="nav-number">2.1.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E9%BB%9E"><span class="nav-number">2.2.</span> <span class="nav-text">缺點</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -432,81 +435,9 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src=""></script>
-
 </body>
 </html>

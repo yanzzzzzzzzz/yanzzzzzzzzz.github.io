@@ -166,6 +166,239 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/06/11/2021-06-11-Visual-bag-of-words/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/11/2021-06-11-Visual-bag-of-words/" class="post-title-link" itemprop="url">cs131 lecture 13 Visual bag of words</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-11 23:06:00" itemprop="dateCreated datePublished" datetime="2021-06-11T23:06:00+08:00">2021-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>Visual bag of words視覺詞袋模型概念：將影像取出具有特徵的地方，存在待比對區域中，新影像進來時，逐一比對影像符合詞袋中哪個的特徵比較多，就跟詞袋中的影像越相似，常用來進行影像分類或影像檢索</p>
+<p>新影像進來時，逐一比對影像符合詞袋中哪個的特徵比較多，就跟詞袋中的影像越相似，就可以將它分為詞袋中相近的那一類</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Visual-bag-of-words.png'  width='400'/>
+上圖可以看到在影像中，先取出各自的特徵，將這些特徵統一對各自影像進行評分，可以看到從原影像取出的特徵分數是比較高的
+
+<h2 id="實作流程-amp-方法"><a href="#實作流程-amp-方法" class="headerlink" title="實作流程 &amp; 方法"></a>實作流程 &amp; 方法</h2><ol>
+<li>取出特徵</li>
+<li>學習出專屬於每張影像的”視覺詞彙”，建立視覺字典</li>
+<li>量化特徵</li>
+<li>通過“視覺詞”的頻率表示圖像</li>
+</ol>
+<h3 id="特徵提取"><a href="#特徵提取" class="headerlink" title="特徵提取"></a>特徵提取</h3><p>特徵取得方式參考文本分析方法，文本分析中由單詞出現的頻率來去做分析，圖片則是由紋理特徵出現的頻率高低作分析</p>
+<p>而課程中提到的方法的關鍵字：</p>
+<ul>
+<li>Regular grid <ul>
+<li><a target="_blank" rel="noopener" href="http://www.vision.caltech.edu/VisionWiki/images/0/0f/FeiFeiPerona-CVPR05.pdf">Fei-Fei &amp; Perona, 2005</a></li>
+</ul>
+</li>
+<li>Interest point detector <ul>
+<li><a target="_blank" rel="noopener" href="https://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/csurka-eccv-04.pdf">Csurka et al. 2004</a></li>
+</ul>
+</li>
+<li>Ramdom sampling 隨機採樣<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cs.princeton.edu/courses/archive/spr08/cos598B/Readings/UllmanVidalNaquetSali_NN2002.pdf">Vidal-Naquet&amp; Ullman, 2002</a></li>
+</ul>
+</li>
+<li>Segmentation-based patches <ul>
+<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Kobus-Barnard/publication/232650255_The_Effects_of_Segmentation_and_Feature_Choice_in_a_Translation_Model_of_Object_Recognition/links/00b7d51ed4acd0435f000000/The-Effects-of-Segmentation-and-Feature-Choice-in-a-Translation-Model-of-Object-Recognition.pdf">Barnard et al. 2003</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="學習視覺詞彙"><a href="#學習視覺詞彙" class="headerlink" title="學習視覺詞彙"></a>學習視覺詞彙</h2><p>假設資料集中有狗、貓、飛機、山丘<br>透過剛剛的特徵提取可能會找到狗尾巴、貓耳朵、飛機的機翼、山丘上的樹等特徵<br>這些特徵之間會因為他們影像所呈現的方式而有相似性<br>我們在透過一個歸納個方法來將一群相似的特徵聚集再一起<br>使用k-means分群法來將相似的特徵組成一群<br>再取出各群之間的群心代表該群的特徵向量</p>
+<ul>
+<li>問題:如何選擇視覺詞彙的大小<ul>
+<li>太小，此特徵向量不能表示所有群內的特徵性</li>
+<li>太大，量化失真，overfitting</li>
+</ul>
+</li>
+</ul>
+<h2 id="Vector-quantization-向量量化"><a href="#Vector-quantization-向量量化" class="headerlink" title="Vector quantization 向量量化"></a>Vector quantization 向量量化</h2><h3 id="介紹codebook"><a href="#介紹codebook" class="headerlink" title="介紹codebook"></a>介紹codebook</h3><p>codebook概念：codebook是由一群codevector或codeword組合而成，最終目標是以這些編碼向量來代表空間中全部的資料向量(ex:k means各群心的結果)</p>
+<p>簡單來說，一組大資料用codebook內的codeword組合而成，用來降維，降低資料量</p>
+<h2 id="通過視覺詞彙的頻率來代表影像"><a href="#通過視覺詞彙的頻率來代表影像" class="headerlink" title="通過視覺詞彙的頻率來代表影像"></a>通過視覺詞彙的頻率來代表影像</h2><img src='https://yanzzzzzzzzz.github.io/img/Visual-bag-of-words-Frequency.png'  width='400'/>
+
+<p>上圖可以看到當輸入的影像進來時，可以透過各個不同的特徵來評估他屬於哪一類，達到影像分類的效果</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>可參考<a target="_blank" rel="noopener" href="https://github.com/ymdatta/BagOfVisualWords">BagOfVisualWords</a></p>
+<p>作者使用11個類別，每類影像數不同</p>
+<p>輸入影像後，取SIFT descriptor</p>
+<p>再透過k-means分群法將特徵分成1000群</p>
+<p>訓練一個SVM mdoel，輸入資料為k-means的群心與對應的類別標籤</p>
+<p>輸入測試資料進行分類評估model準確度</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/17/2021-04-17-visual-recognition-task/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/17/2021-04-17-visual-recognition-task/" class="post-title-link" itemprop="url">cs131 lecture 12 visual recognition</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-17 17:35:00" itemprop="dateCreated datePublished" datetime="2021-04-17T17:35:00+08:00">2021-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
+<li>Objection Detection</li>
+<li>Objection localization</li>
+<li>VQA(Visual Question Answering)</li>
+</ul>
+<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
+<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a target="_blank" rel="noopener" href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
+<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
+
+<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
+
+<p>訓練階段重點：</p>
+<ul>
+<li>訓練資料：輸入的訓練影像與標記類別</li>
+<li>定義要擷取的影像特徵</li>
+<li>訓練方法</li>
+</ul>
+<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a target="_blank" rel="noopener" href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
+<ul>
+<li>共有八類，每類41張影像，共有3280張影像</li>
+<li>解析度1024 * 768</li>
+<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
+
+<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
+
+<p>提到了幾個特徵提取方法</p>
+<ul>
+<li>Global RGB histogram</li>
+<li>整體形狀分析：PCA-based methods</li>
+<li>局部形狀特徵：<a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
+<li>紋理：Filter banks</li>
+</ul>
+<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
+<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1090,200 +1323,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/" class="post-title-link" itemprop="url">cs131 lecture 6 Feature Descriptors-SIFT</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-15 22:30:00" itemprop="dateCreated datePublished" datetime="2021-03-15T22:30:00+08:00">2021-03-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
-<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
-<ul>
-<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
-<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
-</ul>
-<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
-
-<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
-<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
-<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
-<ul>
-<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
-<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
-<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
-<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
-</ul>
-<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
-
-<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
-<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
-<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
-<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
-<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
-<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
-<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/" class="post-title-link" itemprop="url">cs131 lecture 6 Feature Descriptors-Laplacian & DoG</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-10 20:55:00" itemprop="dateCreated datePublished" datetime="2021-03-10T20:55:00+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
-<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
-<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
-
-<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
-<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
-<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
-<p>其中 G 是高斯函數</p>
-<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
-<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
-<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
-<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
-
-<ul>
-<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
-<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1353,7 +1392,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1366,7 +1405,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

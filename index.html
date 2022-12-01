@@ -166,6 +166,213 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/28/software-layer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/28/software-layer/" class="post-title-link" itemprop="url">分層架構模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-28 16:49:39" itemprop="dateCreated datePublished" datetime="2022-11-28T16:49:39+08:00">2022-11-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-29 17:53:57" itemprop="dateModified" datetime="2022-11-29T17:53:57+08:00">2022-11-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="分層架構"><a href="#分層架構" class="headerlink" title="分層架構"></a>分層架構</h2><p>大多為以下四層:</p>
+<ul>
+<li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
+<li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
+<li>Persistence Layer 持久層: 資料存取</li>
+<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB</li>
+</ul>
+<p>層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</p>
+<p>為何不能直接從表現層訪問資料存取層?</p>
+<p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
+<p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
+<p>雖然隔離層之間的訪問可以降低耦合性，但在某些常用功能(log紀錄，數學運算..)下可以新增一個共用層並調整層的封閉性。</p>
+<h2 id="軟體分層設計優缺點"><a href="#軟體分層設計優缺點" class="headerlink" title="軟體分層設計優缺點"></a>軟體分層設計優缺點</h2><h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3><ul>
+<li>框架簡單好學，跟MVC的概念雷同</li>
+<li>減少了依賴性</li>
+<li>好測試</li>
+</ul>
+<h3 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h3><ul>
+<li>可擴展性低</li>
+<li>層越多trace code越麻煩</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/28/Repository-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/28/Repository-pattern/" class="post-title-link" itemprop="url">設計模式:Repository Pattern</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-28 11:03:36" itemprop="dateCreated datePublished" datetime="2022-11-28T11:03:36+08:00">2022-11-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-12-01 10:18:53" itemprop="dateModified" datetime="2022-12-01T10:18:53+08:00">2022-12-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><ul>
+<li>應用程式都有資料存取需求，大多使用關聯式資料庫，使用如ADO.NET, OLE DB…介面，再搭配SQL指令來操作資料</li>
+<li>過往小型應用程式資料來源通常來自資料庫, 但現在提倡分散式, 雲端化的情況下, 資料來源具有多樣性</li>
+<li>傳統做法:應用程式邏輯與資料存取介面緊密結合, 會提高整合資料的難度</li>
+</ul>
+<h2 id="使用時機"><a href="#使用時機" class="headerlink" title="使用時機"></a>使用時機</h2><ul>
+<li>資料來源需要有任意抽換的功能</li>
+<li>抽離對DB操作的功能到Repository</li>
+</ul>
+<h2 id="Repository-模式"><a href="#Repository-模式" class="headerlink" title="Repository 模式"></a>Repository 模式</h2><p>Layered Architecture:<br>View ⇆ Controller ⇆ Service ⇆ Repository ⇆ Model</p>
+<ul>
+<li>View:資料呈現頁面</li>
+<li>Controller:API的接口</li>
+<li>Service:處裡商業邏輯, 電商有購物、付款邏輯;金融有存錢、轉帳邏輯</li>
+<li>Repository:資料庫操作&amp;資料處理</li>
+<li>Model:資料與DAO的Mapping</li>
+<li>DAO（data access object):為資料庫提供一個抽象介面的物件</li>
+</ul>
+<p>為了達到抽換的功能, 使用Interface來達到這個特性, 可以分成泛型跟客製化介面</p>
+<h2 id="泛型與客製化Interface"><a href="#泛型與客製化Interface" class="headerlink" title="泛型與客製化Interface"></a>泛型與客製化Interface</h2><ul>
+<li>泛型IRepository:<br>所有Repository使用同一個Interface, 僅實作<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">CRUD</a>, 如果資料庫操作不複雜,　使用泛型方式有效減少重複撰寫的程式碼</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IGenericRepository</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">Create</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    Task&lt;List&lt;T&gt;&gt; GetAll();</span><br><span class="line">    <span class="function">Task <span class="title">Update</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    <span class="function">Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>客製化IRepository:<br>針對特定資料Mapping並封裝這些過程, 提高彈性</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// define interface</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// implement interfaces</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICommentRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// define interface</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CommentRepository</span> : <span class="title">ICommentRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// implement interfaces</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="實快速切換Dapper與EF操作"><a href="#實快速切換Dapper與EF操作" class="headerlink" title="實快速切換Dapper與EF操作"></a>實快速切換Dapper與EF操作</h2><p>建立通用interface</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IGenericRepository</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">Create</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    Task&lt;List&lt;T&gt;&gt; GetAll();</span><br><span class="line">    <span class="function">Task <span class="title">Update</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    <span class="function">Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>對通用interface繼承後新增一個初始化DB function 的接口</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBlogRepository</span>:<span class="title">IGenericRepository</span>&lt;<span class="title">BlogModel</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dapper-Repository-實作"><a href="#Dapper-Repository-實作" class="headerlink" title="Dapper Repository 實作"></a>Dapper Repository 實作</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DapperBlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> ConnectionStringProvider connectionStringProvider;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> isInit = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DapperBlogRepository</span>(<span class="params">ConnectionStringProvider connectionStringProvider</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.connectionStringProvider = connectionStringProvider;</span><br><span class="line">        InitBlogTable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        connection.Execute(<span class="string">@&quot;</span></span><br><span class="line"><span class="string">                    Create table if not exists Blog (</span></span><br><span class="line"><span class="string">                        Id INTEGER PRIMARY KEY AUTOINCREMENT,</span></span><br><span class="line"><span class="string">                        Title VARCHAR(50),</span></span><br><span class="line"><span class="string">                        Content VARCHAR(50)</span></span><br><span class="line"><span class="string">                    )&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!isInit)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> data = connection.Query&lt;BlogModel&gt;(<span class="string">&quot;select * from Blog&quot;</span>).ToList();</span><br><span class="line">            <span class="keyword">if</span> (!data.Any())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">foreach</span> (<span class="keyword">var</span> blog <span class="keyword">in</span> Util.generatorData())</span><br><span class="line">                &#123;</span><br><span class="line">                    connection.Execute(<span class="string">&quot;Insert into Blog(Title, Content) values (@Title, @Content)&quot;</span>, blog);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            isInit = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Create</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;Insert into Blog(Title, Content) values (@Title, @Content)&quot;</span>, entity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;DELETE FROM Blog WHERE Id=@id&quot;</span>, <span class="keyword">new</span> &#123; Id = id &#125;);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">async</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">await</span> connection.QueryAsync&lt;BlogModel&gt;(<span class="string">&quot;select * from Blog&quot;</span>)).ToList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Update</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;UPDATE Blog SET Title = @Title, Content = @Content WHERE Id=@Id&quot;</span>, entity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller實作"><a href="#Controller實作" class="headerlink" title="Controller實作"></a>Controller實作</h3><p>Controller端建構子注入Repository 使用function</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Route(<span class="string">&quot;api/[controller]&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">ApiController</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BlogController</span> : <span class="title">ControllerBase</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> IBlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BlogController</span>(<span class="params">IBlogRepository blogRepository</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.blogRepository = blogRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">HttpGet</span>]</span><br><span class="line">    <span class="keyword">public</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.GetAll();</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpPost</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Create</span>(<span class="params">BlogModel blogModel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Create(blogModel);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpPut</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Update</span>(<span class="params">BlogModel blogModel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Update(blogModel);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpDelete(<span class="string">&quot;&#123;id&#125;&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Delete(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="依賴注入"><a href="#依賴注入" class="headerlink" title="依賴注入"></a>依賴注入</h3><p>在Program.cs啟動Web前依賴注入IBlogRepository</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> builder = WebApplication.CreateBuilder(args);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">builder.Services.AddScoped&lt;IBlogRepository, DapperBlogRepository&gt;()</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> app = builder.Build();</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.Run();</span><br></pre></td></tr></table></figure>
+
+<p>到這裡完成使用Dapper操作DB的api實作</p>
+<p>再來加入EntityFramework的Repository實作</p>
+<h3 id="EF-Repository-實作"><a href="#EF-Repository-實作" class="headerlink" title="EF Repository 實作"></a>EF Repository 實作</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EFBlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> EFDbContext _context;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">EFBlogRepository</span>(<span class="params">EFDbContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _context = context;</span><br><span class="line">            InitBlogTable();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> isInit = <span class="literal">false</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Create</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> _context.AddAsync(entity);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> blog = <span class="keyword">await</span> _context.Blog.SingleOrDefaultAsync(e =&gt; e.Id == id);</span><br><span class="line">            <span class="keyword">if</span> (blog == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            _context.Blog.Remove(blog);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> _context.Blog.ToListAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isInit)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!_context.Blog.Any())</span><br><span class="line">                &#123;</span><br><span class="line">                    _context.Blog.AddRange(Common.Common.generatorData());</span><br><span class="line">                    _context.SaveChanges();</span><br><span class="line">                &#125;</span><br><span class="line">                isInit = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Update</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> blog = <span class="keyword">await</span> _context.Blog.SingleOrDefaultAsync(e =&gt; e.Id == entity.Id);</span><br><span class="line">            <span class="keyword">if</span> (blog == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            blog.Title = entity.Title;</span><br><span class="line">            blog.Content = entity.Content;</span><br><span class="line">            _context.Blog.Update(blog);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="決定注入哪個實作"><a href="#決定注入哪個實作" class="headerlink" title="決定注入哪個實作"></a>決定注入哪個實作</h3><p>appsettings.json新增參數</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...,</span></span><br><span class="line">  <span class="string">&quot;DataAccessLibrary&quot;</span>: <span class="string">&quot;Dapper&quot;</span> <span class="comment">//Dapper or EF</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Program.cs 讀取appsettings的參數來決定注入哪個Repository</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">var</span> dataAccessLibrary = configuration.GetSection(<span class="string">&quot;DataAccessLibrary&quot;</span>).Get&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="keyword">if</span> (dataAccessLibrary == <span class="string">&quot;Dapper&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Use Dapper&quot;</span>);</span><br><span class="line">    builder.Services.AddScoped&lt;IBlogRepository, DapperBlogRepository&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Use EF&quot;</span>);</span><br><span class="line">    builder.Services.AddScoped&lt;IBlogRepository, EFBlogRepository&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成使用外部參數的方式來快速切換資料庫實作的功能</p>
+<h2 id="解決了甚麼"><a href="#解決了甚麼" class="headerlink" title="解決了甚麼"></a>解決了甚麼</h2><ul>
+<li>上層的服務 (Service) 只要關心 Repository 的抽象化 API, 並且當資料來源變更時, 使用DI抽換掉Repository API 的實作就好</li>
+<li>減少重複撰寫查詢邏輯</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/21/linq_intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1085,239 +1292,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/06/11/2021-06-11-Visual-bag-of-words/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/11/2021-06-11-Visual-bag-of-words/" class="post-title-link" itemprop="url">cs131 lecture 13 Visual bag of words</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-11 23:06:00" itemprop="dateCreated datePublished" datetime="2021-06-11T23:06:00+08:00">2021-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>Visual bag of words視覺詞袋模型概念：將影像取出具有特徵的地方，存在待比對區域中，新影像進來時，逐一比對影像符合詞袋中哪個的特徵比較多，就跟詞袋中的影像越相似，常用來進行影像分類或影像檢索</p>
-<p>新影像進來時，逐一比對影像符合詞袋中哪個的特徵比較多，就跟詞袋中的影像越相似，就可以將它分為詞袋中相近的那一類</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Visual-bag-of-words.png'  width='400'/>
-上圖可以看到在影像中，先取出各自的特徵，將這些特徵統一對各自影像進行評分，可以看到從原影像取出的特徵分數是比較高的
-
-<h2 id="實作流程-amp-方法"><a href="#實作流程-amp-方法" class="headerlink" title="實作流程 &amp; 方法"></a>實作流程 &amp; 方法</h2><ol>
-<li>取出特徵</li>
-<li>學習出專屬於每張影像的”視覺詞彙”，建立視覺字典</li>
-<li>量化特徵</li>
-<li>通過“視覺詞”的頻率表示圖像</li>
-</ol>
-<h3 id="特徵提取"><a href="#特徵提取" class="headerlink" title="特徵提取"></a>特徵提取</h3><p>特徵取得方式參考文本分析方法，文本分析中由單詞出現的頻率來去做分析，圖片則是由紋理特徵出現的頻率高低作分析</p>
-<p>而課程中提到的方法的關鍵字：</p>
-<ul>
-<li>Regular grid <ul>
-<li><a target="_blank" rel="noopener" href="http://www.vision.caltech.edu/VisionWiki/images/0/0f/FeiFeiPerona-CVPR05.pdf">Fei-Fei &amp; Perona, 2005</a></li>
-</ul>
-</li>
-<li>Interest point detector <ul>
-<li><a target="_blank" rel="noopener" href="https://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/csurka-eccv-04.pdf">Csurka et al. 2004</a></li>
-</ul>
-</li>
-<li>Ramdom sampling 隨機採樣<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cs.princeton.edu/courses/archive/spr08/cos598B/Readings/UllmanVidalNaquetSali_NN2002.pdf">Vidal-Naquet&amp; Ullman, 2002</a></li>
-</ul>
-</li>
-<li>Segmentation-based patches <ul>
-<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Kobus-Barnard/publication/232650255_The_Effects_of_Segmentation_and_Feature_Choice_in_a_Translation_Model_of_Object_Recognition/links/00b7d51ed4acd0435f000000/The-Effects-of-Segmentation-and-Feature-Choice-in-a-Translation-Model-of-Object-Recognition.pdf">Barnard et al. 2003</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="學習視覺詞彙"><a href="#學習視覺詞彙" class="headerlink" title="學習視覺詞彙"></a>學習視覺詞彙</h2><p>假設資料集中有狗、貓、飛機、山丘<br>透過剛剛的特徵提取可能會找到狗尾巴、貓耳朵、飛機的機翼、山丘上的樹等特徵<br>這些特徵之間會因為他們影像所呈現的方式而有相似性<br>我們在透過一個歸納個方法來將一群相似的特徵聚集再一起<br>使用k-means分群法來將相似的特徵組成一群<br>再取出各群之間的群心代表該群的特徵向量</p>
-<ul>
-<li>問題:如何選擇視覺詞彙的大小<ul>
-<li>太小，此特徵向量不能表示所有群內的特徵性</li>
-<li>太大，量化失真，overfitting</li>
-</ul>
-</li>
-</ul>
-<h2 id="Vector-quantization-向量量化"><a href="#Vector-quantization-向量量化" class="headerlink" title="Vector quantization 向量量化"></a>Vector quantization 向量量化</h2><h3 id="介紹codebook"><a href="#介紹codebook" class="headerlink" title="介紹codebook"></a>介紹codebook</h3><p>codebook概念：codebook是由一群codevector或codeword組合而成，最終目標是以這些編碼向量來代表空間中全部的資料向量(ex:k means各群心的結果)</p>
-<p>簡單來說，一組大資料用codebook內的codeword組合而成，用來降維，降低資料量</p>
-<h2 id="通過視覺詞彙的頻率來代表影像"><a href="#通過視覺詞彙的頻率來代表影像" class="headerlink" title="通過視覺詞彙的頻率來代表影像"></a>通過視覺詞彙的頻率來代表影像</h2><img src='https://yanzzzzzzzzz.github.io/img/Visual-bag-of-words-Frequency.png'  width='400'/>
-
-<p>上圖可以看到當輸入的影像進來時，可以透過各個不同的特徵來評估他屬於哪一類，達到影像分類的效果</p>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>可參考<a target="_blank" rel="noopener" href="https://github.com/ymdatta/BagOfVisualWords">BagOfVisualWords</a></p>
-<p>作者使用11個類別，每類影像數不同</p>
-<p>輸入影像後，取SIFT descriptor</p>
-<p>再透過k-means分群法將特徵分成1000群</p>
-<p>訓練一個SVM mdoel，輸入資料為k-means的群心與對應的類別標籤</p>
-<p>輸入測試資料進行分類評估model準確度</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/04/17/2021-04-17-visual-recognition-task/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/17/2021-04-17-visual-recognition-task/" class="post-title-link" itemprop="url">cs131 lecture 12 visual recognition</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-17 17:35:00" itemprop="dateCreated datePublished" datetime="2021-04-17T17:35:00+08:00">2021-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
-<li>Objection Detection</li>
-<li>Objection localization</li>
-<li>VQA(Visual Question Answering)</li>
-</ul>
-<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
-<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a target="_blank" rel="noopener" href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
-<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
-
-<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
-
-<p>訓練階段重點：</p>
-<ul>
-<li>訓練資料：輸入的訓練影像與標記類別</li>
-<li>定義要擷取的影像特徵</li>
-<li>訓練方法</li>
-</ul>
-<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a target="_blank" rel="noopener" href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
-<ul>
-<li>共有八類，每類41張影像，共有3280張影像</li>
-<li>解析度1024 * 768</li>
-<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
-
-<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
-
-<p>提到了幾個特徵提取方法</p>
-<ul>
-<li>Global RGB histogram</li>
-<li>整體形狀分析：PCA-based methods</li>
-<li>局部形狀特徵：<a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
-<li>紋理：Filter banks</li>
-</ul>
-<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
-<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1387,7 +1361,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1400,7 +1374,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
