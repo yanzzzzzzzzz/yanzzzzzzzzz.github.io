@@ -166,6 +166,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/16/2021-03-16-cs131-lecture-6-Feature-Descriptors-HoG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/16/2021-03-16-cs131-lecture-6-Feature-Descriptors-HoG/" class="post-title-link" itemprop="url">cs131 lecture 6 Feature Descriptors-HoG</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-16 21:50:00" itemprop="dateCreated datePublished" datetime="2021-03-16T21:50:00+08:00">2021-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>另一種描述影像特徵的方法，HoG(Histogram of Oriented Gradients)，方向梯度直方圖<br>特徵描述子</p>
+<h2 id="HoG-簡介"><a href="#HoG-簡介" class="headerlink" title="HoG 簡介"></a>HoG 簡介</h2><p>局部的物件外觀與形狀經常由局部亮度梯度或邊緣方向顯現出來，因此透過局部梯度資訊建立一個梯度角度直方圖的特徵</p>
+<h2 id="HoG-流程"><a href="#HoG-流程" class="headerlink" title="HoG 流程"></a>HoG 流程</h2><p>把影像切分成多個小區塊(稱為 cells)，cells 的形狀可以是矩形或圓形，每個 cell 累加梯度方向的局部直方圖<br><img src="https://yanzzzzzzzzz.github.io/img/HoG-flow.png"  width="400"/></p>
+<img src="https://yanzzzzzzzzz.github.io/img/HoG-flow-1.png"  width="400"/>
+
+<p>把 cell 合成多個格子成為一個 block，對 block 內的亮度區域進行正規化</p>
+<p>結果：<br><img src="https://yanzzzzzzzzz.github.io/img/visualizing-HoG.png"  width="400"/></p>
+<h2 id="與-SIFT1-不同的地方"><a href="#與-SIFT1-不同的地方" class="headerlink" title="與 SIFT1 不同的地方"></a>與 SIFT1 不同的地方</h2><ul>
+<li>HoG 通常用來描述更大的影像區域，SIFT 用關鍵點來進行匹配</li>
+<li>SIFT 是對整體梯度進行正規化，HoG 是使用周圍的 cell 區塊</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/85829145">一文講解方向梯度直方圖（hog）</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/analytics-vidhya/a-gentle-introduction-into-the-histogram-of-oriented-gradients-fdee9ed8f2aa">A Gentle Introduction Into The Histogram Of Oriented Gradients</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1153,124 +1241,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2020/11/15/cs231n-Image-Classification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/15/cs231n-Image-Classification/" class="post-title-link" itemprop="url">Image Classification</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-15 23:33:00" itemprop="dateCreated datePublished" datetime="2020-11-15T23:33:00+08:00">2020-11-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>website:<a target="_blank" rel="noopener" href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
-<p>影像分類是電腦視覺的核心任務，但其中有許多障礙要克服</p>
-<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><h3 id="Semantic-Gap-語義鴻溝"><a href="#Semantic-Gap-語義鴻溝" class="headerlink" title="Semantic Gap 語義鴻溝"></a>Semantic Gap 語義鴻溝</h3><ul>
-<li>Semantic Gap指的是在不同系統中形成的結構造成差異</li>
-<li>人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程</li>
-<li>人眼看到的是物體是光線照射到物體，經過反射後部份光線射入我們的眼睛。人腦所想的通常是高階特徵ex:飛機、汽車、室內空間</li>
-<li>在電腦中看到的數位影像是個三維tensor(R, G, B channel)。電腦主要觀察低階特徵ex:顏色分布、紋理(texture)</li>
-</ul>
-<h3 id="Viewpoint-variation-視野角度變化"><a href="#Viewpoint-variation-視野角度變化" class="headerlink" title="Viewpoint variation 視野角度變化"></a>Viewpoint variation 視野角度變化</h3><ul>
-<li>攝影機視野改變造成觀測結果產生變化</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/d3418806.jpg"  width="400"/>
-
-<h3 id="Background-Clutter-非均值的背景"><a href="#Background-Clutter-非均值的背景" class="headerlink" title="Background Clutter 非均值的背景"></a>Background Clutter 非均值的背景</h3><ul>
-<li>背景可能非常雜亂</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg"  width="400"/>
-
-<h3 id="Illumination-亮度的變化"><a href="#Illumination-亮度的變化" class="headerlink" title="Illumination 亮度的變化"></a>Illumination 亮度的變化</h3><ul>
-<li>不同的燈源，打光方式造成同一個物體不同成像結果</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg"  width="400"/>
-
-<h3 id="Occlusion-被遮蔽的物體"><a href="#Occlusion-被遮蔽的物體" class="headerlink" title="Occlusion 被遮蔽的物體"></a>Occlusion 被遮蔽的物體</h3><ul>
-<li>物體被遮擋一部分，但還是可以透過特徵來辨認出來</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg"  width="400"/>
-
-<h3 id="Deformation-物體形狀的變化"><a href="#Deformation-物體形狀的變化" class="headerlink" title="Deformation 物體形狀的變化"></a>Deformation 物體形狀的變化</h3><img src="https://yanzzzzzzzzz.github.io/img/liquid-cat.png"  width="400"/>
-
-<img src="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png"  width="400"/>
-
-<h3 id="Intraclass-variation-同類型的不同變化"><a href="#Intraclass-variation-同類型的不同變化" class="headerlink" title="Intraclass variation 同類型的不同變化"></a>Intraclass variation 同類型的不同變化</h3><img src="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg"  width="400"/>
-
-<p>沒辦法透過<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB">硬編碼</a>的方式在這些問題下輕易的分類出貓咪</p>
-<h2 id="機器學習-數據驅動方法"><a href="#機器學習-數據驅動方法" class="headerlink" title="機器學習: 數據驅動方法"></a>機器學習: 數據驅動方法</h2><p>寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。<br>因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。<br>流程：</p>
-<ol>
-<li>收集數據集(影像與對應的類別標記)</li>
-<li>機器學習演算法訓練分類器</li>
-<li>使用分類器預測新讀進來的影像</li>
-</ol>
-<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><h3 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h3><ul>
-<li>比較兩影像之間的距離<br>L1距離公式:$d_1(I_1, I_2) &#x3D; \sum_{p} |I^P_1 - I^P_2|$</li>
-</ul>
-<p>$其中I_1, I_2 是影像,P是I_1, I_2像素點的索引$</p>
-<p>這個距離公式就是<code>逐點計算兩影像像素值差異的總和</code>，加絕對值是為了避免正負號誤差加總後造成抵銷</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/yanzzzzzzzzz/K-Nearest-Neighbor-Classifier">實作KNN測試cifar10 in github</a></p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51979923">跟着cs231n学英语（Module 1)</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1336,7 +1310,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1376,7 +1350,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
