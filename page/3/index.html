@@ -166,6 +166,242 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/25/2021-03-25-Efficient%20Graph-Based%20Image%20Segmentation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/25/2021-03-25-Efficient%20Graph-Based%20Image%20Segmentation/" class="post-title-link" itemprop="url">Efficient Graph-Based Image Segmentation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-25 23:50:00" itemprop="dateCreated datePublished" datetime="2021-03-25T23:50:00+08:00">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper-reading/" itemprop="url" rel="index"><span itemprop="name">paper reading</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在stanford中的cs131課程提到的Graph-based segmentation，剛好介紹到這篇論文，就來研讀一下。</p>
+<p>論文網址：<a target="_blank" rel="noopener" href="http://cs.brown.edu/people/pfelzens/papers/seg-ijcv.pdf">Felzenszwalb, Pedro F., and Daniel P. Huttenlocher. “Efficient graph-based image segmentation.” International journal of computer vision 59.2 (2004): 167-181.</a></p>
+<p>本篇論文是基於圖的(Graph-Based)影像分割演算法，提出一個有效率的影像分割方式，並且影像分群的的結果是有意義的。</p>
+<h2 id="主要動機"><a href="#主要動機" class="headerlink" title="主要動機"></a>主要動機</h2><p>過往的某些方法並沒有考慮到漸變的影像，使得分割結果不符合預期</p>
+<img src='https://yanzzzzzzzzz.github.io/img/invariance-img.png'  width='400'/>
+
+<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><p>影像 $G$ 是由像素集合V與無向邊 $E$ 連接一組點對$(v_i, v_j)$，並且具有權重 $w(v_i, v_j)$，權重是由兩像素點之間的差異來產生</p>
+<p>S是在影像G分割出來的一個區塊，並以 $G’&#x3D;(V,E’)$ 表示， 其中$ E’\in E$</p>
+<h2 id="斷定為分割公式定義"><a href="#斷定為分割公式定義" class="headerlink" title="斷定為分割公式定義"></a>斷定為分割公式定義</h2><p>斷定兩區域$C_1,C2$是否存在邊界分割，是基於量測兩個區域$C_1,C2$之間的相異性，以及評估區塊內部各自元素的相異性程度</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-formula-1.png'  width='400'/>
+
+<p>$Dif(C_1, C_2)是兩區域之間的差異，差異是指將組件C_1中的節點v_i連接到C_2中的節點v_j的最小權重邊$</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-dif.png'  width='400'/>
+
+
+<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-mint.png'  width='400'/>
+
+<p>$Int(C)$是計算同一區域內兩兩像素點之間的最大權重</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-int.png'  width='400'/>
+
+<p>$MInt(C_1, C_2)$是個別區域內的內部差異</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-mint_formula.png'  width='400'/>
+
+<p>$\tau(C)是一個閾值，由設定參數k來控制最後產生的群集大小$<br><img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-prarm-k.png'  width='400'/></p>
+<h2 id="演算法流程"><a href="#演算法流程" class="headerlink" title="演算法流程"></a>演算法流程</h2><ol>
+<li>計算每個像素8相連或4相連的不相似度</li>
+<li>將edge E按照不相似度non-decreasing排序edge權重得到$o_1,o_2,…,o_m$</li>
+<li>開始分割動作，初始分割區域為$S^0$, 其中每個像素點$v_i$是獨立的一個區域</li>
+<li>重複步驟並定義$q&#x3D;1,…m$</li>
+<li>$S^q$的初始區域是由$S^{q-1}$組成, 定義$v_i, v_j$ 是一組前q小的edge權重對應的點對$o_q &#x3D; (v_i, v_j) $<br>檢查點對合成條件是否符合, 合成條件參考$D(C1, C2)$, 符合則合併, 否則維持分割結果S並繼續執行到結束</li>
+</ol>
+<img src='https://yanzzzzzzzzz.github.io/img/egbis-flow.png'  width='400'/>
+
+<h2 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h2><p>使用的測試資料是<a target="_blank" rel="noopener" href="https://www.cs.columbia.edu/CAVE/software/softlib/coil-20.php">COIL database</a>，<br>對不同的影像大小使用不同的參數k</p>
+<p>結果圖：<br><img src='https://yanzzzzzzzzz.github.io/img/egbis-result.png'  width='400'/></p>
+<p>除了上述的流程與演算法外，由於目前提到的演算方法只考慮到空間位置，及鄰近像素來建構圖的連接關係，假使色彩相同但距離有些許差異，也不會合併成相同區域。為了考慮更大範圍的鄰近空間，又不能考慮到過大的範圍，否則搜索範圍所消耗的時間會過大，論文作者使用一個歐式距離的範圍來取代前面提到的四相連\八相連，擴大搜索範圍。</p>
+<img src='https://yanzzzzzzzzz.github.io/img/egbis-result-ANN.png){: width="881" height="342"'  width='400'/>
+
+<p>經過擴大鄰近範圍的ANN，降低的分割結果的零散程度。</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="http://vision.stanford.edu/teaching/cs231b_spring1415/slides/ranjay_pres.pdf">cs231b_spring ranjay Student presentation</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/24/2021-03-24-cs131-lecture-9-Segmentation-and-Clustering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/24/2021-03-24-cs131-lecture-9-Segmentation-and-Clustering/" class="post-title-link" itemprop="url">cs131 lecture 9 Segmentation and Clustering-Agglomerative Clustering</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-24 21:50:00" itemprop="dateCreated datePublished" datetime="2021-03-24T21:50:00+08:00">2021-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="影像分割目的"><a href="#影像分割目的" class="headerlink" title="影像分割目的"></a>影像分割目的</h2><ul>
+<li>把屬於同一群的像素集合在一起</li>
+<li>將想要做進一步分析的物件與背景分割出來，概念跟框選 ROI 相似，但是更精細的 ROI，把非物件的不相干雜訊濾除</li>
+</ul>
+<h1 id="視覺上分群的範例"><a href="#視覺上分群的範例" class="headerlink" title="視覺上分群的範例"></a>視覺上分群的範例</h1><p>依照格式塔原則進行分類，以 Gestalt 為名的完形心理學，概念#是人類對於任何視覺圖像的認知，是一種經過知覺系統組織後的形態與輪廓，而並非所有各自獨立部份的集合。<br>其中格式塔原則的一些特點：</p>
+<ul>
+<li>Similarity 相似性</li>
+<li>Symmetry 對稱性</li>
+<li>Common Fate 共同命運，同群在影像中表現出相同的移動方向性、趨勢</li>
+<li>Proximity 相近性，物體距離相近時視為一群</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/Gestalt-Factors.png"  width="400"/>
+
+<h2 id="clustering-method"><a href="#clustering-method" class="headerlink" title="clustering method"></a>clustering method</h2><p>分群的概念是把一組資料依照距離或相似程度分成不同的群集<br>分群法是一種非監督式分群方法</p>
+<h3 id="相似度比對"><a href="#相似度比對" class="headerlink" title="相似度比對"></a>相似度比對</h3><p>常見的相似度比對方法有：</p>
+<ul>
+<li>Euclidean distance</li>
+<li>Cosine similarity</li>
+</ul>
+<p>歐式距離：<br><img src="https://yanzzzzzzzzz.github.io/img/Euclidean-distance.png"  width="400"/></p>
+<p>餘弦相似性，概念是比對兩向量的夾角角度：<br><img src="https://yanzzzzzzzzz.github.io/img/cosin-similarity.png"  width="400"/></p>
+<h3 id="分群演算法理想特性"><a href="#分群演算法理想特性" class="headerlink" title="分群演算法理想特性"></a>分群演算法理想特性</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7">可擴縮性（Scalability）</a></li>
+<li>可以處理不同的資料型態</li>
+<li>簡單的參數調整與設定</li>
+<li>可說明性，呈現的結果是可解釋的</li>
+<li>約束性，演算法可由使用者預先設定的限制下動作</li>
+</ul>
+<h2 id="Agglomerative-clustering"><a href="#Agglomerative-clustering" class="headerlink" title="Agglomerative clustering"></a>Agglomerative clustering</h2><ol>
+<li>將每個資料點都視為一獨立的群</li>
+<li>找出最相近的群集點對</li>
+<li>將點對合併成一群</li>
+<li>重複上述步驟直到合併結束</li>
+</ol>
+<h3 id="定義群集之間的相似性"><a href="#定義群集之間的相似性" class="headerlink" title="定義群集之間的相似性"></a>定義群集之間的相似性</h3><ul>
+<li>點到點之間的平均距離</li>
+<li>最小點距離</li>
+<li>最大點距離<img src="https://yanzzzzzzzzz.github.io/img/clustering-simmilarity.png"  width="400"/></li>
+</ul>
+<h2 id="優缺點"><a href="#優缺點" class="headerlink" title="優缺點"></a>優缺點</h2><ul>
+<li>好實現且應用廣泛</li>
+<li>集群具有自適應形狀</li>
+<li>提供階層式的集群</li>
+<li>不需預設群數</li>
+<li>可能會出現不均勻的群集結果</li>
+<li>還是需要定義群集相似度閾值</li>
+<li>時間複雜度 $O(n^3)$</li>
+<li>可能陷入局部最佳解</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://uiclub.tw/2015/09/05/visual-principles-gestalt-principles/">視覺法則 – 格式塔原則</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/16/2021-03-16-cs131-lecture-6-Feature-Descriptors-HoG/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1071,176 +1307,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/08/2021-02-08-cs131-lecture-1-introduction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/08/2021-02-08-cs131-lecture-1-introduction/" class="post-title-link" itemprop="url">cs131 lecture 1 Introduction</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-08 23:06:00" itemprop="dateCreated datePublished" datetime="2021-02-08T23:06:00+08:00">2021-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="課程介紹"><a href="#課程介紹" class="headerlink" title="課程介紹"></a>課程介紹</h2><p>CS131 是史丹佛大學所開設的電腦視覺課程<br>主要預備技能與知識有</p>
-<ul>
-<li>Python 應用</li>
-<li>線性代數</li>
-<li>微積分</li>
-<li>機率與統計</li>
-</ul>
-<p>有了以上的基礎知識，在接下來的課程會比較得心應手</p>
-<p>而除了 CS131 在史丹佛有電腦視覺課程外，另外還有進階課程 CS231a、到 DNN 領域的 CS231n<br>讓想更進一步學習的人有更多選擇</p>
-<h2 id="Introduction-to-Computer-Vision"><a href="#Introduction-to-Computer-Vision" class="headerlink" title="Introduction to Computer Vision"></a>Introduction to Computer Vision</h2><p>人之所以看得到影像，是由於光線照到物體，經由眼睛接收到影像，再傳送到大腦做對應的舉動<br>ex:騎車看到紅燈會停車、看到貓咪會想用手去摸…<br>而電腦視覺所做的事也是如此，用一個攝影機接收影像資訊，傳送到電腦，經過計算後進行相應的舉動</p>
-<p><code>電腦視覺與人眼的動作流程差異：</code><br><code>打光到物體成像 -&gt; 接受影像(人眼\sensor) -&gt; 理解(大腦\電腦) 並做出動作</code></p>
-<p>而人眼的視覺感知是非常強的，對物體分析、幾何認知能力在電腦視覺上都很難去做<br>但偶爾也有出錯(被騙)的時候，人眼視覺錯覺：<br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A3%8B%E7%9B%A4%E9%99%B0%E5%BD%B1%E9%8C%AF%E8%A6%BA">棋盤陰影錯覺</a></p>
-<p>電腦視覺的挑戰：將數位影像像素值轉換成有用的訊息<br>人眼看到的與電腦視覺看到的東西是截然不同的<br>如何建構一個方法(演算法)可以像人眼一樣識別幾何、分析物體、由影像取出我們想知道的資訊。</p>
-<img src="https://yanzzzzzzzzz.github.io/img/computer-see.png"  width="400"/>
-
-<h2 id="電腦視覺應用"><a href="#電腦視覺應用" class="headerlink" title="電腦視覺應用"></a>電腦視覺應用</h2><ul>
-<li>3D 建模</li>
-<li>臉部辨識：臉部偵測、笑臉檢測</li>
-<li>生物辨識：指紋辨識、虹膜辨識、人臉解鎖</li>
-<li>文字辨識 OCR</li>
-<li>影像分類：<a target="_blank" rel="noopener" href="https://www.wordstream.com/google-goggles-app-for-mobile">手機上執行物品搜尋器-Google Googles</a>、<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=5f_eSU9UYHA&ab_channel=SnazzyLabs">商品搜尋功能 app-snapTell</a></li>
-<li>自駕車</li>
-<li>智慧超市</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2020/12/15/2020-12-15-canny-edge-detector/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/15/2020-12-15-canny-edge-detector/" class="post-title-link" itemprop="url">Canny Edge Detector</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-15 21:33:00" itemprop="dateCreated datePublished" datetime="2020-12-15T21:33:00+08:00">2020-12-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Canny-edge檢測流程"><a href="#Canny-edge檢測流程" class="headerlink" title="Canny edge檢測流程"></a>Canny edge檢測流程</h2><ol>
-<li>使用高斯濾波器</li>
-<li>使用Sobel濾波器取出x,y方向梯度</li>
-<li>對梯度進行非極大值抑制</li>
-<li>使用滯後閾值</li>
-</ol>
-<h2 id="高斯濾波"><a href="#高斯濾波" class="headerlink" title="高斯濾波"></a>高斯濾波</h2><p>平滑影像，濾除雜訊</p>
-<h2 id="滯後閾值"><a href="#滯後閾值" class="headerlink" title="滯後閾值"></a>滯後閾值</h2><p>設定高閾值與低閾值<br><img src="https://yanzzzzzzzzz.github.io/img/Hysteresis-2.png"  width="400"/></p>
-<p>低於低閾值的不是edge，如線段(D)<br>高於高閾值的是強edge，如線段(A)、(B)<br>介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接<br>若有連接到，如線段(C)，就視為edge，沒連接到的就非edge(E)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1310,7 +1376,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

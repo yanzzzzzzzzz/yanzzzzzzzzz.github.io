@@ -166,6 +166,297 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/10/09/2021-10-09-Fast%20Branch%20Convolutional%20Neural%20Network%20for%20Traffic%20Sign%20Recognition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/09/2021-10-09-Fast%20Branch%20Convolutional%20Neural%20Network%20for%20Traffic%20Sign%20Recognition/" class="post-title-link" itemprop="url">論文閱讀:Fast Branch Convolutional Neural Network for Traffic Sign Recognition</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-09 20:01:00" itemprop="dateCreated datePublished" datetime="2021-10-09T20:01:00+08:00">2021-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper-reading/" itemprop="url" rel="index"><span itemprop="name">paper reading</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>論文連結:<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/7990644">Fast Branch Convolutional Neural Network for Traffic Sign Recognition</a></p>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>論文使用深度學習架構來辨識交通號誌，辨識交通號誌是高級駕駛輔助系統的重要部分，像是方向號誌、限速號誌、各種警示號誌等等</p>
+<p>論文遇到的挑戰是影像成像受到室外環境的複雜變化，如失真、惡劣天氣、過度曝光、曝光不足、運動模糊、褪色、複雜背景，造成辨識方法更具挑戰性</p>
+<p>使用傳統的電腦視覺辨識方法在這多變的影像是很難以用單一個演算法流程得到穩健的辨識模型，因此使用CNN架構的模型來辨識</p>
+<p>CNN往往需要大量的參數處理來得到結果，因此要達到即時辨識模型會有一定的難度，但目前也有許多即時的CNN模型，例如:YOLO</p>
+<p>受生物機制的啟發，論文提出一個新的架構Branch Convolution Neural Network (BCNN)，在神經系統中，簡單、反射動作會在神經系統較低層次做快速反應，困難的動作會在高階的神經系統處裡後做反應，例如:在容易區分的交通號誌圖片，人眼只看一部份也可以很快的辨識出來，套用在CNN上，沒有必要通過所有CNN參數才得到結果</p>
+<h2 id="CNN模型對資料的處理"><a href="#CNN模型對資料的處理" class="headerlink" title="CNN模型對資料的處理"></a>CNN模型對資料的處理</h2><p>CNN模型在輸入交通標誌資料有以下特性</p>
+<ul>
+<li>CNN模型傾向於將原始混淆圖像空間轉換為線性可分離空間，並將同一類標籤的樣本聚集再一起</li>
+<li>越難辨識到的交通標誌是與相同類別標籤樣本距離越遠的，表示模型辨識不到特徵</li>
+<li>模型對形狀的辨識能力比辨識限速能力好，模型前期將三角形和菱形分隔開來，CNN模型參考圖形內標示較後期才分離不同數字</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/CNN_feature_extraction.png'  width='400'/>
+
+<h2 id="Branch-Convolution-Neural-Network"><a href="#Branch-Convolution-Neural-Network" class="headerlink" title="Branch Convolution Neural Network"></a>Branch Convolution Neural Network</h2><p>CNN和BCNN的差別在於，BCNN會在層與層之間分支輸出結果，如圖所示，傳統的CNN模型會在最後Softmax層輸出結果，BCNN模型會在其中一個分支進行預測，因此可以提高模型的預測時間</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN_model.png'  width='400'/>
+
+<p>所有的樣本都不需要經過整個CNN模型，參考前段介紹的生物學機制，簡單好辨識的影像在前期的layer預測，較難的影像在後期的layer輸出結果</p>
+<p>BCNN model訓練流程:</p>
+<ol>
+<li>訓練分支分類器</li>
+<li>評估和偏移分類器</li>
+<li>最佳化分支分類器</li>
+<li>fine-tune model</li>
+</ol>
+<h3 id="分支分類器-Branch-Classifier"><a href="#分支分類器-Branch-Classifier" class="headerlink" title="分支分類器 Branch Classifier"></a>分支分類器 Branch Classifier</h3><p>分支分類器是用來快速、高精度的輸出結果，因此false negatives是允許的，但false positives是不行的<br>因此簡單來說分支分類器:</p>
+<ul>
+<li>簡單且快速</li>
+<li>robust與高精度</li>
+<li>只輸出足夠置信度的樣本</li>
+</ul>
+<p>由於分支分類器是使用線性分類器，使用k-folder來訓線性分類器，但分類器分的精度太高，也是沒有意義的，例如:分類結果為一個空間只有一個正樣本，他的precision是1，但recall可能非常低，因此設定precision與recall的threshold是必要的</p>
+<p>再來就是要考慮到底要在哪幾層加入分類器，當遇到難以識別的樣本，並不會在分支分類器輸出結果，因此需要謹慎考慮分類器的插入位置與數量</p>
+<p>迭帶搜索最佳組合流程</p>
+<ol>
+<li>將分支分類器的組合編碼到[0,1]之間</li>
+<li>設定$T_{save} $為目標函數</li>
+<li>隨機產生不同種的分支分類器組合</li>
+<li>計算$ T_{save} $</li>
+<li>迭代到指定次數或找到$ T_{save} $符合閾值的組合</li>
+</ol>
+<p>其中$ T_{save} $表示的是節省的時間，因此要最大化目標函數</p>
+<p>$ T_{save} $公式:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-fomula.png'  width='400'/>
+
+<p>參數定義</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-para.png'  width='400'/>
+
+<p>$ l_i, i&#x3D;0,1,2…n+1, 表示CNN第i層, l_{n+1}是輸出的layer, l_0是輸入的layer $</p>
+<p>$ T_{l_i}是第l_i層到l_{n+1}層花費的時間 $</p>
+<p>$ C_i 表示第i層的branch classifier是否存在，當C_i&#x3D;1,存在分支分類器,C_i&#x3D;0則不存在 $</p>
+<p>$ t_i 是C_i分類器對sample處理所花費的時間 $</p>
+<p>$ S_i 是到C_i層還沒被分類的sample $</p>
+<p>$ C_iS_i第i層分離出來的sample數 $</p>
+<p>$ S_i^*是第i層還沒被分離出來的sample $</p>
+<p>$ N_i^* 是 S_i^* 的數量 $</p>
+<p>$ N_0是所有sample$</p>
+<p>$ N_i是到第i層的sample數量 $</p>
+<p>$ N_i^- 是第i層還沒被分類出來的數量 $</p>
+<p>$ T_i 是第i層的sample數量 - 第i層前節省的時間 - 未分類數量*分類器平均時間 $</p>
+<p>$ T_{save}是平均節省的時間 $</p>
+<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><h3 id="測試資料"><a href="#測試資料" class="headerlink" title="測試資料"></a>測試資料</h3><ul>
+<li>從10小時的影片取出來的交通號誌benchmark，<a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/gtsrb">benchmark資料來源</a></li>
+<li>共有43類的標誌</li>
+<li>訓練資料:39k影像</li>
+<li>測試資料:12k影像</li>
+<li>15x15~222x193的影像大小</li>
+<li>影像包含交通標誌本體再向外延伸 10%的長寬</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-data.png'  width='400'/>
+
+<h3 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h3><p>圖表顯示每個分支分類器分離輸入影像的百分比，將近30％輸入影像從第二層分離出來，並且將近75％從第五層分離出來。</p>
+<p>這意味著可以提前分離出大量sample。 所以，BCNN可以節省大量無意義的計算。</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-table2.png'  width='400'/>
+
+<p>儘管設置了一個高精度閾值，但不可避免地還是會有sample被錯誤分類。<br>就像訓練的準確性和測試準確性之間的關係一樣，原始模型和BCNN準確性之間存在較大差異。</p>
+<p>圖片內的(a)顯示是在第5層之前隨機分離出的符號，（b）是在最後12層中隨機分離出的符號。（b）中的符號顯然更扭曲，模糊和更暗。與（a）相比，（b）中的樣本難以區分和識別。</p>
+<p>我們將在前一層中分離出來的樣本命名為簡單樣本。更難識別的交通標誌被識別出來，後來被識別出來。</p>
+<p>它與生物學機制一致，即簡單的動作被整合到一個較短的感知，而復雜的序列則以更長的周期被整合。<br><img src='https://yanzzzzzzzzz.github.io/img/BCNN-fig8.png'  width='400'/></p>
+<p>可以看到在準確度與原始CNN差異不大情況下，速度提升了約兩倍</p>
+<p>在BCNN-FT，Fine tuned微調的情況下，更接近原始CNN的準確率</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-TABLE4.png'  width='400'/>
+
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ul>
+<li>受生物機制的啟發，提出了一種名為BCNN的交通標誌識別新框架</li>
+<li>在相同的條件下比一般的deep CNN更快</li>
+<li>在GTSRB的dataset下測試，大量的交通標誌可以在淺層分離出來</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/08/10/2021-08-10-dpm_detection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/10/2021-08-10-dpm_detection/" class="post-title-link" itemprop="url">cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-10 11:24:00" itemprop="dateCreated datePublished" datetime="2021-08-10T11:24:00+08:00">2021-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>物件檢測是視覺中常見的任務之一，在影像中透過各種演算法來偵測到物件位置，常見的檢測如找到物件位置，並用矩形框標註，更精細一點的可以分割出物件的輪廓，其中會遇到的挑戰:</p>
+<ul>
+<li>物件亮度不同</li>
+<li>影像角度不同</li>
+<li>物件的形狀變化</li>
+<li>同類型不同型態的變化，例如顏色</li>
+</ul>
+<p>因此為了測試演算法在不同類別上都能有強大的適應性，網路上有多種不同的大型影像資料庫，並附上物件的位置、類別資訊來進行驗證，以下介紹常見的影像資料庫PASCAL VOC、ImageNet、COCO</p>
+<h2 id="Benchmarks"><a href="#Benchmarks" class="headerlink" title="Benchmarks"></a>Benchmarks</h2><h3 id="PASCAL-VOC-Challenge"><a href="#PASCAL-VOC-Challenge" class="headerlink" title="PASCAL VOC Challenge"></a>PASCAL VOC Challenge</h3><h4 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h4><p>網頁上有每一年的資料更動，起初只有四個類別，1578張影像，比賽方式為檢測與分類</p>
+<p>經過多年的資料量擴增，變為20個類別，含有11530張影像，並且有27450個ROI影像與6929個更精細的分割影像區域，並加入影像分割挑戰<br>競賽從2005年到2012年停止<br><img src='https://yanzzzzzzzzz.github.io/img/PACAL-VOC.png'  width='400'/></p>
+<h4 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h4><p><a target="_blank" rel="noopener" href="http://host.robots.ox.ac.uk/pascal/VOC/">PASCAL Visual Object Classes Homepage</a></p>
+<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/sota/semantic-segmentation-on-pascal-voc-2012">paperswithcode PASCAL VOC Semantic Segmentation</a></p>
+<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="介紹-1"><a href="#介紹-1" class="headerlink" title="介紹"></a>介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
+<p>其中ImageNet的標記類別是根據WordNet的結構，WordNet可以想成是一個辭典，這個辭典把相近意義的同義詞連結再一起，成為一個網路架構</p>
+<img src='https://yanzzzzzzzzz.github.io/img/word_tree.png'  width='400'/>
+引用YOLO9000的圖來說明，WordNet結構是一個樹狀結構，一個節點下有多個子節點，例如飛機節點，下面有雙翼飛機、噴射機、空中巴士、隱形戰鬥機，因此在ImageNet中看到這些標記類別，都可以視為飛機類別
+#### 相關連結
+[ImageNet Home](https://www.image-net.org/challenges/LSVRC/)
+
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">Download ImageNet Data on Kaggle</a></p>
+<img src='https://yanzzzzzzzzz.github.io/img/paperswithcode-imagenet.png'  width='400'/>
+[paperswithcode ImageNet object detection](https://paperswithcode.com/sota/image-classification-on-imagenet)的數據可以看到歷年來ImageNet影像分類比賽準確率的模型
+
+<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="介紹-2"><a href="#介紹-2" class="headerlink" title="介紹"></a>介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
+<ul>
+<li>具有物件分割區塊</li>
+<li>330K的影像數，有200K已經標記</li>
+<li>包含1.5M個物件</li>
+<li>物件類別有80類</li>
+<li>場景分類有91類</li>
+<li>每張圖片都有五個人工書寫的英文註釋</li>
+<li>250000個person類別針對肢體做標記</li>
+</ul>
+<h4 id="相關連結-1"><a href="#相關連結-1" class="headerlink" title="相關連結"></a>相關連結</h4><p><a target="_blank" rel="noopener" href="https://cocodataset.org/#home">cocodataset home</a></p>
+<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/sota/object-detection-on-coco">paperswithcode coco object detection</a></p>
+<h2 id="評估模型方法"><a href="#評估模型方法" class="headerlink" title="評估模型方法"></a>評估模型方法</h2><p>在物件檢測中，常使用precision, recall來評估模型<br>講到precision, recall前先介紹混淆矩陣與真陽TP、真陰TN、偽陽FP、偽陰FN</p>
+<ul>
+<li>真陽(True Positive, TP):預測為真而實際為真</li>
+<li>真陰(True Negative, TN):預測為假而實際為假</li>
+<li>偽陽(Flase Positive, FP):預測為真而實際為假</li>
+<li>偽陰(Flase Negative, FN):預測為假而實際為真</li>
+</ul>
+<p>precision, recall公式:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/precision-and-recall.png'  width='400'/>
+
+<p>precision公式意義:預測的為正樣本的結果中，預測正確的比率，稱為準確率</p>
+<p>recll公式意義:取出所有正樣本結果，實際預測多少正樣本的比例，稱為召回率</p>
+<p>以垃圾郵件分類器來舉例precision, recall數值高低的關係</p>
+<p>垃圾郵件資料為正樣本, 不是垃圾郵件的資料為負樣本</p>
+<p>分類器的precision高, recall高, 代表這模型非常棒, 具有濾除垃圾郵件的能力</p>
+<p>precision高, recall低, 代表這模型預估是垃圾郵件的正確率很高, 但實際抓到垃圾郵件的數量少, 是謹慎的模型</p>
+<p>precision低, recall高, 代表這模型垃圾郵件幾乎都有抓到, 但誤判率高, 是寬鬆的模型</p>
+<p>precision低, recall低, 這模型沒用了</p>
+<p>好的模型是具有高準確率，又有高召回率，因此可以使用我兩個都要的F-score指標</p>
+<img src='https://yanzzzzzzzzz.github.io/img/F-score.png'  width='400'/>
+
+<p>$\beta$ 值用來控制precision與recall之間的權重， $\beta$ 值越高，precision的結果就比較重要</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/06/14/2021-06-14-spatial-pyramid-matching/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1143,242 +1434,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/25/2021-03-25-Efficient%20Graph-Based%20Image%20Segmentation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/25/2021-03-25-Efficient%20Graph-Based%20Image%20Segmentation/" class="post-title-link" itemprop="url">Efficient Graph-Based Image Segmentation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-25 23:50:00" itemprop="dateCreated datePublished" datetime="2021-03-25T23:50:00+08:00">2021-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper-reading/" itemprop="url" rel="index"><span itemprop="name">paper reading</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在stanford中的cs131課程提到的Graph-based segmentation，剛好介紹到這篇論文，就來研讀一下。</p>
-<p>論文網址：<a target="_blank" rel="noopener" href="http://cs.brown.edu/people/pfelzens/papers/seg-ijcv.pdf">Felzenszwalb, Pedro F., and Daniel P. Huttenlocher. “Efficient graph-based image segmentation.” International journal of computer vision 59.2 (2004): 167-181.</a></p>
-<p>本篇論文是基於圖的(Graph-Based)影像分割演算法，提出一個有效率的影像分割方式，並且影像分群的的結果是有意義的。</p>
-<h2 id="主要動機"><a href="#主要動機" class="headerlink" title="主要動機"></a>主要動機</h2><p>過往的某些方法並沒有考慮到漸變的影像，使得分割結果不符合預期</p>
-<img src='https://yanzzzzzzzzz.github.io/img/invariance-img.png'  width='400'/>
-
-<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><p>影像 $G$ 是由像素集合V與無向邊 $E$ 連接一組點對$(v_i, v_j)$，並且具有權重 $w(v_i, v_j)$，權重是由兩像素點之間的差異來產生</p>
-<p>S是在影像G分割出來的一個區塊，並以 $G’&#x3D;(V,E’)$ 表示， 其中$ E’\in E$</p>
-<h2 id="斷定為分割公式定義"><a href="#斷定為分割公式定義" class="headerlink" title="斷定為分割公式定義"></a>斷定為分割公式定義</h2><p>斷定兩區域$C_1,C2$是否存在邊界分割，是基於量測兩個區域$C_1,C2$之間的相異性，以及評估區塊內部各自元素的相異性程度</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-formula-1.png'  width='400'/>
-
-<p>$Dif(C_1, C_2)是兩區域之間的差異，差異是指將組件C_1中的節點v_i連接到C_2中的節點v_j的最小權重邊$</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-dif.png'  width='400'/>
-
-
-<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-mint.png'  width='400'/>
-
-<p>$Int(C)$是計算同一區域內兩兩像素點之間的最大權重</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-int.png'  width='400'/>
-
-<p>$MInt(C_1, C_2)$是個別區域內的內部差異</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-mint_formula.png'  width='400'/>
-
-<p>$\tau(C)是一個閾值，由設定參數k來控制最後產生的群集大小$<br><img src='https://yanzzzzzzzzz.github.io/img/Predicate-for-Segmentation-prarm-k.png'  width='400'/></p>
-<h2 id="演算法流程"><a href="#演算法流程" class="headerlink" title="演算法流程"></a>演算法流程</h2><ol>
-<li>計算每個像素8相連或4相連的不相似度</li>
-<li>將edge E按照不相似度non-decreasing排序edge權重得到$o_1,o_2,…,o_m$</li>
-<li>開始分割動作，初始分割區域為$S^0$, 其中每個像素點$v_i$是獨立的一個區域</li>
-<li>重複步驟並定義$q&#x3D;1,…m$</li>
-<li>$S^q$的初始區域是由$S^{q-1}$組成, 定義$v_i, v_j$ 是一組前q小的edge權重對應的點對$o_q &#x3D; (v_i, v_j) $<br>檢查點對合成條件是否符合, 合成條件參考$D(C1, C2)$, 符合則合併, 否則維持分割結果S並繼續執行到結束</li>
-</ol>
-<img src='https://yanzzzzzzzzz.github.io/img/egbis-flow.png'  width='400'/>
-
-<h2 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h2><p>使用的測試資料是<a target="_blank" rel="noopener" href="https://www.cs.columbia.edu/CAVE/software/softlib/coil-20.php">COIL database</a>，<br>對不同的影像大小使用不同的參數k</p>
-<p>結果圖：<br><img src='https://yanzzzzzzzzz.github.io/img/egbis-result.png'  width='400'/></p>
-<p>除了上述的流程與演算法外，由於目前提到的演算方法只考慮到空間位置，及鄰近像素來建構圖的連接關係，假使色彩相同但距離有些許差異，也不會合併成相同區域。為了考慮更大範圍的鄰近空間，又不能考慮到過大的範圍，否則搜索範圍所消耗的時間會過大，論文作者使用一個歐式距離的範圍來取代前面提到的四相連\八相連，擴大搜索範圍。</p>
-<img src='https://yanzzzzzzzzz.github.io/img/egbis-result-ANN.png){: width="881" height="342"'  width='400'/>
-
-<p>經過擴大鄰近範圍的ANN，降低的分割結果的零散程度。</p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="http://vision.stanford.edu/teaching/cs231b_spring1415/slides/ranjay_pres.pdf">cs231b_spring ranjay Student presentation</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/24/2021-03-24-cs131-lecture-9-Segmentation-and-Clustering/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/24/2021-03-24-cs131-lecture-9-Segmentation-and-Clustering/" class="post-title-link" itemprop="url">cs131 lecture 9 Segmentation and Clustering-Agglomerative Clustering</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-24 21:50:00" itemprop="dateCreated datePublished" datetime="2021-03-24T21:50:00+08:00">2021-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="影像分割目的"><a href="#影像分割目的" class="headerlink" title="影像分割目的"></a>影像分割目的</h2><ul>
-<li>把屬於同一群的像素集合在一起</li>
-<li>將想要做進一步分析的物件與背景分割出來，概念跟框選 ROI 相似，但是更精細的 ROI，把非物件的不相干雜訊濾除</li>
-</ul>
-<h1 id="視覺上分群的範例"><a href="#視覺上分群的範例" class="headerlink" title="視覺上分群的範例"></a>視覺上分群的範例</h1><p>依照格式塔原則進行分類，以 Gestalt 為名的完形心理學，概念#是人類對於任何視覺圖像的認知，是一種經過知覺系統組織後的形態與輪廓，而並非所有各自獨立部份的集合。<br>其中格式塔原則的一些特點：</p>
-<ul>
-<li>Similarity 相似性</li>
-<li>Symmetry 對稱性</li>
-<li>Common Fate 共同命運，同群在影像中表現出相同的移動方向性、趨勢</li>
-<li>Proximity 相近性，物體距離相近時視為一群</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/Gestalt-Factors.png"  width="400"/>
-
-<h2 id="clustering-method"><a href="#clustering-method" class="headerlink" title="clustering method"></a>clustering method</h2><p>分群的概念是把一組資料依照距離或相似程度分成不同的群集<br>分群法是一種非監督式分群方法</p>
-<h3 id="相似度比對"><a href="#相似度比對" class="headerlink" title="相似度比對"></a>相似度比對</h3><p>常見的相似度比對方法有：</p>
-<ul>
-<li>Euclidean distance</li>
-<li>Cosine similarity</li>
-</ul>
-<p>歐式距離：<br><img src="https://yanzzzzzzzzz.github.io/img/Euclidean-distance.png"  width="400"/></p>
-<p>餘弦相似性，概念是比對兩向量的夾角角度：<br><img src="https://yanzzzzzzzzz.github.io/img/cosin-similarity.png"  width="400"/></p>
-<h3 id="分群演算法理想特性"><a href="#分群演算法理想特性" class="headerlink" title="分群演算法理想特性"></a>分群演算法理想特性</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7">可擴縮性（Scalability）</a></li>
-<li>可以處理不同的資料型態</li>
-<li>簡單的參數調整與設定</li>
-<li>可說明性，呈現的結果是可解釋的</li>
-<li>約束性，演算法可由使用者預先設定的限制下動作</li>
-</ul>
-<h2 id="Agglomerative-clustering"><a href="#Agglomerative-clustering" class="headerlink" title="Agglomerative clustering"></a>Agglomerative clustering</h2><ol>
-<li>將每個資料點都視為一獨立的群</li>
-<li>找出最相近的群集點對</li>
-<li>將點對合併成一群</li>
-<li>重複上述步驟直到合併結束</li>
-</ol>
-<h3 id="定義群集之間的相似性"><a href="#定義群集之間的相似性" class="headerlink" title="定義群集之間的相似性"></a>定義群集之間的相似性</h3><ul>
-<li>點到點之間的平均距離</li>
-<li>最小點距離</li>
-<li>最大點距離<img src="https://yanzzzzzzzzz.github.io/img/clustering-simmilarity.png"  width="400"/></li>
-</ul>
-<h2 id="優缺點"><a href="#優缺點" class="headerlink" title="優缺點"></a>優缺點</h2><ul>
-<li>好實現且應用廣泛</li>
-<li>集群具有自適應形狀</li>
-<li>提供階層式的集群</li>
-<li>不需預設群數</li>
-<li>可能會出現不均勻的群集結果</li>
-<li>還是需要定義群集相似度閾值</li>
-<li>時間複雜度 $O(n^3)$</li>
-<li>可能陷入局部最佳解</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://uiclub.tw/2015/09/05/visual-principles-gestalt-principles/">視覺法則 – 格式塔原則</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1448,7 +1503,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
