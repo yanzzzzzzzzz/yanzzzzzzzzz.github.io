@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"yanzzzzzzzzz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Traditional web applications 傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。  Example page Example page 解析demo 的 UI畫面:  可以在textbox輸入值並按">
+  <meta name="description" content="Traditional web applications 傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。  Example page">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FullStack part0 筆記 - Traditional web applications vs Single-page application">
 <meta property="og:url" content="https://yanzzzzzzzzz.github.io/2023/05/02/FullStack-part0-2/index.html">
 <meta property="og:site_name" content="yanzzzz blog">
-<meta property="og:description" content="Traditional web applications 傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。  Example page Example page 解析demo 的 UI畫面:  可以在textbox輸入值並按">
+<meta property="og:description" content="Traditional web applications 傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。  Example page">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.imgur.com/4yQzkQO.png">
 <meta property="og:image" content="https://i.imgur.com/ntdQHsx.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png">
 <meta property="og:image" content="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png">
 <meta property="article:published_time" content="2023-05-02T09:50:23.000Z">
-<meta property="article:modified_time" content="2023-05-02T09:50:23.477Z">
+<meta property="article:modified_time" content="2023-05-03T01:40:05.184Z">
 <meta property="article:author" content="yanzzzz">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/4yQzkQO.png">
@@ -201,6 +201,13 @@
 
               <time title="Created: 2023-05-02 17:50:23" itemprop="dateCreated datePublished" datetime="2023-05-02T17:50:23+08:00">2023-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-03 09:40:05" itemprop="dateModified" datetime="2023-05-03T09:40:05+08:00">2023-05-03</time>
+              </span>
 
           
 
@@ -217,23 +224,24 @@
 <p>傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://studies.cs.helsinki.fi/exampleapp/notes">Example page</a></p>
+<span id="more"></span>
 <h3 id="Example-page-解析"><a href="#Example-page-解析" class="headerlink" title="Example page 解析"></a>Example page 解析</h3><p>demo 的 UI畫面:</p>
-<p><img src="https://i.imgur.com/4yQzkQO.png" alt="UIPage"></p>
+<p><img src="https://i.imgur.com/4yQzkQO.png" alt="UI 畫面"></p>
 <p>可以在textbox輸入值並按下button把他更新到list中</p>
-<p><img src="https://i.imgur.com/ntdQHsx.png" alt="F12Page"></p>
+<p><img src="https://i.imgur.com/ntdQHsx.png" alt="前端程式碼"></p>
 <p>以上是前端的程式碼, 更新的方式是當按下button時, 透過POST請求的方式將資料傳送到後端</p>
-<p><img src="https://i.imgur.com/obrapUa.png" alt="F12Page"></p>
+<p><img src="https://i.imgur.com/obrapUa.png" alt="onreadystatechange事件"></p>
 <p>以上的程式碼管理當網頁伺服器回應請求，在這段程式碼中，先定義onreadystatechange事件的event handler，當 readyState狀態發生變化時就會觸發</p>
 <p>readyState的值為 4 且 status 的值為 200 時，表示請求已經成功完成，並且伺服器已經正常地回應了所需的資料。這時，程式才會繼續執行，並把回應的資料轉換成JSON格式，使用list的顯示方式在網頁上</p>
 <h2 id="Single-page-application"><a href="#Single-page-application" class="headerlink" title="Single-page application"></a>Single-page application</h2><blockquote>
 <p>最近幾年，出現了單頁應用（Single Page Application，SPA）的開發風格，這種風格的網路應用不像傳統應用那樣從伺服器上單獨獲取所有的頁面，而是由一個從伺服器上獲取的HTML頁面和在瀏覽器中執行的JavaScript構成。使用者在使用SPA網站時，只需要從伺服器端載入一次HTML頁面，之後的所有操作都是通過JavaScript與API接口進行交互，動態更新當前頁面的內容，並實現快速響應和更流暢的用戶體驗。SPA應用程序可以實現許多不同的功能，例如社交媒體、電子商務平台和在線文檔編輯器等。</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://studies.cs.helsinki.fi/exampleapp/spa">Example page in SPA</a></p>
-<h3 id="SPA-example-page-解析"><a href="#SPA-example-page-解析" class="headerlink" title="SPA example page 解析"></a>SPA example page 解析</h3><p><img src="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png" alt="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png"></p>
+<h3 id="SPA-example-page-解析"><a href="#SPA-example-page-解析" class="headerlink" title="SPA example page 解析"></a>SPA example page 解析</h3><p><img src="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png" alt="SPA frontend"></p>
 <p>前端程式中沒有使用action或method屬性來定義怎麼傳送資料</p>
-<p><img src="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png" alt="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png"></p>
+<p><img src="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png" alt="Network"></p>
 <p>在網頁上創建新的筆記時，會發現瀏覽器向伺服器端發送一個new_mote&#x2F;spa POST的請求，並帶有新筆記的JSON資料</p>
-<p><img src="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png" alt="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png"></p>
+<p><img src="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png" alt="Network"></p>
 <p>伺服器以狀態代碼201創建進行響應。這一次伺服器沒有要求重定向，瀏覽器停留在同一個頁面上，並且沒有再發送HTTP請求</p>
 <p>接下來看怎麼把前端的資料傳送到後端</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;notes_form&quot;</span>)</span><br><span class="line">  form.<span class="property">onsubmit</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> note = &#123;</span><br><span class="line">      <span class="attr">content</span>: e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span>,</span><br><span class="line">      <span class="attr">date</span>: <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    notes.<span class="title function_">push</span>(note)</span><br><span class="line">    e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="title function_">redrawNotes</span>()</span><br><span class="line">    <span class="title function_">sendToServer</span>(note)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -252,6 +260,7 @@
 
 <p>以HTTP POST請求發送資料型態為JSON, 設定請求的標頭”Content-type”, 表示要傳送的內容是 JSON 格式的資料</p>
 <p>最後，函式呼叫 xhttpForPost.send() 方法，該方法將以字串形式傳送序列化後的note到伺服器</p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a target="_blank" rel="noopener" href="https://fullstackopen.com/en/">Deep Dive Into Modern Web Development</a></p>
 
     </div>
 
@@ -336,7 +345,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Traditional-web-applications"><span class="nav-number">1.</span> <span class="nav-text">Traditional web applications</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-page-%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">Example page 解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-page-application"><span class="nav-number">2.</span> <span class="nav-text">Single-page application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPA-example-page-%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">SPA example page 解析</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Traditional-web-applications"><span class="nav-number">1.</span> <span class="nav-text">Traditional web applications</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-page-%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">Example page 解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-page-application"><span class="nav-number">2.</span> <span class="nav-text">Single-page application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPA-example-page-%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">SPA example page 解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">3.</span> <span class="nav-text">Ref</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -368,6 +377,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yanzzzzzzzzz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yanzzzzzzzzz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%97%BB%E8%AB%BA-%E8%94%A1-1033721a5/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%97%BB%E8%AB%BA-%E8%94%A1-1033721a5&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+  </div>
 
 
 

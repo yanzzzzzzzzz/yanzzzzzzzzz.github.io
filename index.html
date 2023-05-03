@@ -192,6 +192,13 @@
 
               <time title="Created: 2023-05-02 17:50:23" itemprop="dateCreated datePublished" datetime="2023-05-02T17:50:23+08:00">2023-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-03 09:40:05" itemprop="dateModified" datetime="2023-05-03T09:40:05+08:00">2023-05-03</time>
+              </span>
 
           
 
@@ -208,42 +215,14 @@
 <p>傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://studies.cs.helsinki.fi/exampleapp/notes">Example page</a></p>
-<h3 id="Example-page-解析"><a href="#Example-page-解析" class="headerlink" title="Example page 解析"></a>Example page 解析</h3><p>demo 的 UI畫面:</p>
-<p><img src="https://i.imgur.com/4yQzkQO.png" alt="UIPage"></p>
-<p>可以在textbox輸入值並按下button把他更新到list中</p>
-<p><img src="https://i.imgur.com/ntdQHsx.png" alt="F12Page"></p>
-<p>以上是前端的程式碼, 更新的方式是當按下button時, 透過POST請求的方式將資料傳送到後端</p>
-<p><img src="https://i.imgur.com/obrapUa.png" alt="F12Page"></p>
-<p>以上的程式碼管理當網頁伺服器回應請求，在這段程式碼中，先定義onreadystatechange事件的event handler，當 readyState狀態發生變化時就會觸發</p>
-<p>readyState的值為 4 且 status 的值為 200 時，表示請求已經成功完成，並且伺服器已經正常地回應了所需的資料。這時，程式才會繼續執行，並把回應的資料轉換成JSON格式，使用list的顯示方式在網頁上</p>
-<h2 id="Single-page-application"><a href="#Single-page-application" class="headerlink" title="Single-page application"></a>Single-page application</h2><blockquote>
-<p>最近幾年，出現了單頁應用（Single Page Application，SPA）的開發風格，這種風格的網路應用不像傳統應用那樣從伺服器上單獨獲取所有的頁面，而是由一個從伺服器上獲取的HTML頁面和在瀏覽器中執行的JavaScript構成。使用者在使用SPA網站時，只需要從伺服器端載入一次HTML頁面，之後的所有操作都是通過JavaScript與API接口進行交互，動態更新當前頁面的內容，並實現快速響應和更流暢的用戶體驗。SPA應用程序可以實現許多不同的功能，例如社交媒體、電子商務平台和在線文檔編輯器等。</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://studies.cs.helsinki.fi/exampleapp/spa">Example page in SPA</a></p>
-<h3 id="SPA-example-page-解析"><a href="#SPA-example-page-解析" class="headerlink" title="SPA example page 解析"></a>SPA example page 解析</h3><p><img src="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png" alt="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png"></p>
-<p>前端程式中沒有使用action或method屬性來定義怎麼傳送資料</p>
-<p><img src="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png" alt="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png"></p>
-<p>在網頁上創建新的筆記時，會發現瀏覽器向伺服器端發送一個new_mote&#x2F;spa POST的請求，並帶有新筆記的JSON資料</p>
-<p><img src="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png" alt="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png"></p>
-<p>伺服器以狀態代碼201創建進行響應。這一次伺服器沒有要求重定向，瀏覽器停留在同一個頁面上，並且沒有再發送HTTP請求</p>
-<p>接下來看怎麼把前端的資料傳送到後端</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;notes_form&quot;</span>)</span><br><span class="line">  form.<span class="property">onsubmit</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> note = &#123;</span><br><span class="line">      <span class="attr">content</span>: e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span>,</span><br><span class="line">      <span class="attr">date</span>: <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    notes.<span class="title function_">push</span>(note)</span><br><span class="line">    e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="title function_">redrawNotes</span>()</span><br><span class="line">    <span class="title function_">sendToServer</span>(note)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在頁面載入後, 對form元件新增submit時的動作:</p>
-<ol>
-<li>preventDefault, 停止事件的默認動作, 默認方法會將數據送到伺服器並造成頁面更新</li>
-<li>新建一個note object, 把填寫的資料放入object中</li>
-<li>新增到notes array中</li>
-<li>清除填寫的欄位資料</li>
-<li>更新note list</li>
-<li>傳送新的note到server</li>
-</ol>
-<p>傳送到server的function</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sendToServer = <span class="keyword">function</span> (<span class="params">note</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> xhttpForPost = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line">  xhttpForPost.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">readyState</span> == <span class="number">4</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">status</span> == <span class="number">201</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">responseText</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  xhttpForPost.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&#x27;/exampleapp/new_note_spa&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">  xhttpForPost.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">  xhttpForPost.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(note));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以HTTP POST請求發送資料型態為JSON, 設定請求的標頭”Content-type”, 表示要傳送的內容是 JSON 格式的資料</p>
-<p>最後，函式呼叫 xhttpForPost.send() 方法，該方法將以字串形式傳送序列化後的note到伺服器</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/02/FullStack-part0-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -285,10 +264,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-05-02 17:49:53 / Modified: 17:56:17" itemprop="dateCreated datePublished" datetime="2023-05-02T17:49:53+08:00">2023-05-02</time>
+              <time title="Created: 2023-05-02 17:49:53" itemprop="dateCreated datePublished" datetime="2023-05-02T17:49:53+08:00">2023-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-03 09:39:58" itemprop="dateModified" datetime="2023-05-03T09:39:58+08:00">2023-05-03</time>
+              </span>
 
           
 
@@ -301,48 +286,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="了解Web-開發原則"><a href="#了解Web-開發原則" class="headerlink" title="了解Web 開發原則"></a>了解Web 開發原則</h2><p>Web 開發的第一原則: 第一步就是在瀏覽器上使用<code>F12</code>開啟開發者控制台，Network標籤可以看到Web與伺服器使用HTTP的所有通信</p>
+          <h2 id="了解Web-開發原則"><a href="#了解Web-開發原則" class="headerlink" title="了解Web 開發原則"></a>了解Web 開發原則</h2><p>Web 開發的第一原則: 第一步就是在瀏覽器上使用<code>F12</code>開啟開發者控制台，Network標籤可以看到Web與伺服器使用HTTP的所有通信, Console標籤可以看到所有在程式內Deubug用的訊息</p>
 <h2 id="HTTP-GET"><a href="#HTTP-GET" class="headerlink" title="HTTP GET"></a>HTTP GET</h2><blockquote>
 <p>HTTP GET 是一種 HTTP 請求方法，通常用於獲取網頁上的資源。在進行網路傳輸時，HTTP GET 方法可以向伺服器發送請求，以獲取伺服器上的資源。這些資源可以是網頁、影像、檔案等，而 HTTP GET 方法獲取資源的方式是透過 URL（Uniform Resource Locator，統一資源定位符）進行定位。<br>HTTP GET 方法是一種安全且幾乎無副作用的請求方法。使用 HTTP GET 方法，客戶端可以向伺服器發送請求，要求伺服器回應一個資源。當伺服器接收到 HTTP GET 請求後，會查找對應的資源，然後將其返回給客戶端。<br>HTTP GET 方法的請求是無副作用的，即不會對伺服器上的資源進行任何更改。這意味著使用 HTTP GET 方法，客戶端只能獲取伺服器上的資源，而不能修改或刪除它們。</p>
 </blockquote>
 <p>HTTP GET 特色</p>
-<ul>
-<li>透過URL進行定位</li>
-<li>可以傳輸網頁、影像、檔案</li>
-<li>對伺服器上資源不會做更改</li>
-</ul>
-<h3 id="HTTP-GET-Example"><a href="#HTTP-GET-Example" class="headerlink" title="HTTP GET Example"></a>HTTP GET Example</h3><p>網址輸入<a target="_blank" rel="noopener" href="https://www.google.com/">Google首頁</a>後開啟開發者控制台</p>
-<p><img src="https://i.imgur.com/6NuSBMg.png" alt="googleF12"></p>
-<p>可以看到從伺服器取得:</p>
-<ul>
-<li>前端的內容</li>
-<li>個人帳戶的頭貼</li>
-<li>歷史搜尋紀錄</li>
-<li>…</li>
-</ul>
-<p>每一個GET到的東西可以分成:</p>
-<p><img src="https://i.imgur.com/1NPK1cq.png" alt="httpHeader"></p>
-<h3 id="HTTP-Headers"><a href="#HTTP-Headers" class="headerlink" title="HTTP Headers"></a>HTTP Headers</h3><p>每一個請求都有<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Headers">Headers</a>，分為:</p>
-<ul>
-<li>通用標頭（General header）：這些標頭包含與請求和回應有關的元資訊，如 Cache-Control、Connection、Date、Pragma 等。這些標頭對於整個消息的控制和定義是通用的。</li>
-<li>請求標頭（Request header）：這些標頭包含有關請求的詳細資訊，如 Accept、Accept-Encoding、Authorization、Cookie、User-Agent 等。這些標頭允許客戶端提供關於請求的額外資訊，從而影響伺服器的回應。</li>
-<li>響應標頭（Response header）：這些標頭包含有關回應的詳細資訊，如 Cache-Control、Content-Encoding、Content-Length、Content-Type、Server 等。這些標頭允許伺服器提供關於回應的額外資訊，從而影響客戶端的處理和呈現。</li>
-<li>實體標頭（Entity header）：這些標頭包含有關 HTTP 實體主體的詳細資訊，如 Content-Encoding、Content-Language、Content-Length、Content-Type 等。這些標頭允許用戶端和伺服器提供有關實體主體的額外資訊，從而影響消息的處理和解析</li>
-</ul>
-<h3 id="HTTP-Body"><a href="#HTTP-Body" class="headerlink" title="HTTP Body"></a>HTTP Body</h3><ul>
-<li>HTTP Body用於傳輸實際的資料內容</li>
-<li>HTTP Body 的內容可以是各種不同的格式，例如:<ul>
-<li>純文本</li>
-<li>HTML</li>
-<li>JSON</li>
-<li>XML</li>
-<li>二進位數據</li>
-</ul>
-</li>
-<li>HTTP 協定本身不關心 HTTP Body 的格式，因此可以使用不同的編碼方式來將資料傳輸到伺服器或從伺服器接收資料。</li>
-<li>HTTP Header的資訊會協助接收方了解HTTP Body的內容是甚麼類型</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/02/FullStack-part0-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -608,7 +564,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/11/21/linq_intro/" class="post-title-link" itemprop="url">LINQ查詢語法攻略</a>
+            <a href="/2022/11/21/linq_intro/" class="post-title-link" itemprop="url">LINQ查詢語法</a>
         </h2>
 
         <div class="post-meta">
@@ -625,7 +581,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-12-01 12:10:47" itemprop="dateModified" datetime="2022-12-01T12:10:47+08:00">2022-12-01</time>
+                <time title="Modified: 2023-05-03 09:39:09" itemprop="dateModified" datetime="2023-05-03T09:39:09+08:00">2023-05-03</time>
               </span>
 
           
@@ -1139,6 +1095,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yanzzzzzzzzz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yanzzzzzzzzz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%97%BB%E8%AB%BA-%E8%94%A1-1033721a5/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%97%BB%E8%AB%BA-%E8%94%A1-1033721a5&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+  </div>
 
 
 
