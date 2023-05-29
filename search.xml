@@ -1405,7 +1405,7 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">titleClass</span>: <span class="string">&#x27;title&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">:class</span>=<span class="string">titleClass</span>&gt;</span>Make me red<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-class">.title</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">color</span>: red;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <h2 id="事件監聽器-Event-Listeners"><a href="#事件監聽器-Event-Listeners" class="headerlink" title="事件監聽器 Event Listeners"></a>事件監聽器 Event Listeners</h2><p>事件監聽綁定用<code>v-on</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button v-<span class="attr">on</span>:click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button v-<span class="attr">on</span>:click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
 
 <p>簡寫用<code>@</code>代替<code>v-on</code></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button @click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
@@ -1761,6 +1761,61 @@
 <li>可擴展性低</li>
 <li>層越多trace code越麻煩</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>31. Next Permutation</title>
+    <url>/2023/05/29/NextPermutation/</url>
+    <content><![CDATA[<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><a href="https://leetcode.com/problems/next-permutation/description/">https://leetcode.com/problems/next-permutation/description/</a></p>
+<p>A <code>permutation</code> of an array of integers is an arrangement of its members into a sequence or linear order.</p>
+<ul>
+<li>For example, for arr &#x3D; [1,2,3], the following are all the permutations of arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].</li>
+</ul>
+<p>The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).</p>
+<ul>
+<li>For example, the next permutation of arr &#x3D; [1,2,3] is [1,3,2].</li>
+<li>Similarly, the next permutation of arr &#x3D; [2,3,1] is [3,1,2].</li>
+<li>While the next permutation of arr &#x3D; [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.</li>
+</ul>
+<p>Given an array of integers nums, find the next permutation of nums.</p>
+<p>The replacement must be in place and use only constant extra memory.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="400"/>
+
+<ol>
+<li>從數列尾端開始向前檢查，直到找到不符合由小到大排列的數字，記錄該數字的索引。在這個例子中，找到數字1，位於第2個索引位置。</li>
+<li>如果都符合由小到大, 直接反轉</li>
+<li>從數列尾端中找到比1大的最小數字，這裡是5。</li>
+<li>將數字1與5交換位置。</li>
+<li>對於索引位置由小到大排列的數字(第3個索引位置開始)進行反轉，710反轉為017。最終得到的排列是245017。</li>
+</ol>
+<pre><code class="C++">class Solution &#123;
+public:
+    void nextPermutation(vector&lt;int&gt;&amp; nums) &#123;
+        int n = nums.size(), k, l;
+        for (k = n - 2; k &gt;= 0; k--)
+        &#123;
+            if (nums[k] &lt; nums[k + 1])
+            &#123;
+                break;
+            &#125;
+        &#125;
+        if (k == -1)&#123;
+            reverse(nums.begin(), nums.end());
+            return;
+        &#125;
+        reverse(nums.begin() + k + 1, nums.end());
+        for (l = k + 1; l &lt; n; l++)
+        &#123;
+            if (nums[l] &gt; nums[k])
+            &#123;
+                break;
+            &#125;
+        &#125;
+        swap(nums[k], nums[l]);
+    &#125;
+&#125;;
+</code></pre>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">Next Permutation</a></p>
 ]]></content>
   </entry>
 </search>

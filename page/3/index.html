@@ -194,6 +194,136 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/28/2021-03-28-k-means-clustering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/28/2021-03-28-k-means-clustering/" class="post-title-link" itemprop="url">cs131 lecture 10 Clustering-K-means clustering</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-28 21:30:00" itemprop="dateCreated datePublished" datetime="2021-03-28T21:30:00+08:00">2021-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/paper-reading/" itemprop="url" rel="index"><span itemprop="name">paper reading</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="k-means-clustering-流程"><a href="#k-means-clustering-流程" class="headerlink" title="k means clustering 流程"></a>k means clustering 流程</h2><ol>
+<li>隨機初始化群心$c_1,…,c_K$與迭代次數$t$</li>
+<li>計算隸屬矩陣$\delta^t$，得到新的分群結果</li>
+<li>由分群結果更新群心</li>
+<li>增加迭代次數$t$，重複步驟2~4，直到到達設定停止條件(到達迭代次數上限或群心不在大幅變動)</li>
+</ol>
+<img src='https://yanzzzzzzzzz.github.io/img/k-means-formula-1.png'  width='400'/>
+
+<img src='https://yanzzzzzzzzz.github.io/img/k-means-formula-2.png'  width='400'/>
+
+<p>參數定義：</p>
+<ul>
+<li>$t$：迭代次數</li>
+<li>$K$：群數</li>
+<li>$N$：輸入的資料數量</li>
+<li>$x_j$：輸入的第$j$筆資料</li>
+<li>$c^t_i$：第$t$次第$k$群的群心</li>
+<li>$\delta^t$：第$t$次的隸屬矩陣，定義第$j$個資料對應第$c$個群心的距離，矩陣大小為K*N</li>
+</ul>
+<p>流程：<br><img src='https://yanzzzzzzzzz.github.io/img/k-means-flow.png'  width='400'/></p>
+<h2 id="k-means-clustering特性"><a href="#k-means-clustering特性" class="headerlink" title="k means clustering特性"></a>k means clustering特性</h2><ul>
+<li>不同的初始化群心位置會有不同結果</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/different-init-center.png'  width='400'/>
+
+<ul>
+<li>對球形的數據有較好的fit結果</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/fit-in-different-data.png'  width='400'/>
+* 需要決定參數k
+
+<h2 id="選擇參數k的方法"><a href="#選擇參數k的方法" class="headerlink" title="選擇參數k的方法"></a>選擇參數k的方法</h2><p>不同的群數使得結果不同，決定群數變成非常重要的問題</p>
+<p>以分群的角度來看，分群的目的為，群內的變異性越小越好，群跟群之間的變異性越大越好</p>
+<p>翻成白話來說就是：同一群內的資料越聚集越好，群跟群之間的資料離越遠越好</p>
+<p>這裡介紹一個常用來自動選擇群數k的方法：Elbow method</p>
+<h3 id="Elbow-Method"><a href="#Elbow-Method" class="headerlink" title="Elbow Method"></a>Elbow Method</h3><p>Elbow method的核心思想是，運用前面所說分群的特性來定義一個objective function來找到輸入資料對應最好的分群結果，通常使用群內樣本的距離和來量測</p>
+<p>如下圖所示，選擇的k值隨著群數分越多，數值越小，但可以發現前期變化很大，到後面逐漸變小</p>
+<p>而群數設定為2時的轉折最大，像是手肘彎曲的地方，這時elbow method就選擇該輸入的資料分為2群最適合</p>
+<img src='https://yanzzzzzzzzz.github.io/img/elbow_method.png'  width='400'/>
+
+<h2 id="k-means-優缺點"><a href="#k-means-優缺點" class="headerlink" title="k-means 優缺點"></a>k-means 優缺點</h2><ul>
+<li>Unsupervised learning</li>
+<li>原理簡單好實現</li>
+<li>可擴展至大型的數據集，適應不同的dataset</li>
+<li>保證收斂</li>
+<li>可以預先初始化群心中心</li>
+<li>需先設定參數k(使用elbow method可以解決這問題)</li>
+<li>輸入資料需標準化到同一尺度空間</li>
+<li>初始化群中心影響分群結果</li>
+<li>群心容易被異常資料(outliers)影響，造成群心偏移</li>
+<li>容易陷入局部最佳解<img src='https://yanzzzzzzzzz.github.io/img/sensitive-outliers.png'  width='400'/></li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://developers.google.com/machine-learning/clustering/algorithm/advantages-disadvantages">k-Means Advantages and Disadvantages</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/03/25/2021-03-25-Efficient%20Graph-Based%20Image%20Segmentation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1220,121 +1350,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/" class="post-title-link" itemprop="url">cs131 lecture 2 Images And Transformations</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-10 21:10:00" itemprop="dateCreated datePublished" datetime="2021-02-10T21:10:00+08:00">2021-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-21 14:10:07" itemprop="dateModified" datetime="2022-11-21T14:10:07+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="數位影像的類別"><a href="#數位影像的類別" class="headerlink" title="數位影像的類別"></a>數位影像的類別</h2><img src="https://yanzzzzzzzzz.github.io/img/image-type.jpg"  width="400"/>
-
-<ul>
-<li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
-<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越</li>
-<li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
-</ul>
-<h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
-<li>dpi：Dots Per Inch，每英寸點數，dpi 的數值越高，所輸出的解析度就越高，常用在印表機上的設定<img src="https://yanzzzzzzzzz.github.io/img/resolution.jpg"  width="400"/></li>
-</ul>
-<h2 id="影像轉換"><a href="#影像轉換" class="headerlink" title="影像轉換"></a>影像轉換</h2><h3 id="變換矩陣-transformation-matrix"><a href="#變換矩陣-transformation-matrix" class="headerlink" title="變換矩陣 transformation matrix"></a>變換矩陣 transformation matrix</h3><ul>
-<li><p>對原 x,y 座標進行縮放</p>
-<img src="https://yanzzzzzzzzz.github.io/img/transformation-matrices.png"  width="400"/>
-</li>
-<li><p>角度轉換</p>
-<img src="https://yanzzzzzzzzz.github.io/img/rotate-matrix.png"  width="400"/></li>
-</ul>
-<p>矩陣可以做多重轉換：</p>
-<p>$ p’&#x3D;R_2R_1Sp $</p>
-<p>其中 p 是座標點，$R_1 R_2 是角度轉換矩陣，S是縮放矩陣，p’是轉換後的座標點$</p>
-<p>多重轉換的細節：</p>
-<ul>
-<li>矩陣變換是由右到左做變換</li>
-<li>上列式子與 $ p’&#x3D;R_2(R_1(Sp)) $ 相等</li>
-<li>也與$ p’&#x3D;(R_2R_1S)p $ ，先做矩陣變換運算，再與座標變換</li>
-</ul>
-<h3 id="齊次坐標-Homogeneous-coordinates"><a href="#齊次坐標-Homogeneous-coordinates" class="headerlink" title="齊次坐標 Homogeneous coordinates"></a>齊次坐標 Homogeneous coordinates</h3><ul>
-<li>變換矩陣可以做縮放、旋轉，但卻不能加上常量進行平移</li>
-<li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
-</ul>
-<p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
-<p>齊次坐標上的除法</p>
-<ul>
-<li>我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算<br>因此將他轉換為齊次座標，再進行除法運算</li>
-</ul>
-<p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
-<p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
-<p>因此座標位置也跟著等比例縮小了</p>
-<h4 id="2D-座標平移、縮放、旋轉"><a href="#2D-座標平移、縮放、旋轉" class="headerlink" title="2D 座標平移、縮放、旋轉"></a>2D 座標平移、縮放、旋轉</h4><img src="https://yanzzzzzzzzz.github.io/img/shift-roate-scaling.png"  width="400"/>
-
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="http://vision.stanford.edu/teaching/cs131_fall2021/index.html">CS131 Computer Vision: Foundations and Applications</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7e701d7bfd79">写给大家看的“透视除法” —— 齐次坐标和投影</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1404,7 +1419,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
