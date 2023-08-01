@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Canny Edge Detector</title>
+    <url>/2020/12/15/2020-12-15-canny-edge-detector/</url>
+    <content><![CDATA[<h2 id="Canny-edge檢測流程"><a href="#Canny-edge檢測流程" class="headerlink" title="Canny edge檢測流程"></a>Canny edge檢測流程</h2><ol>
+<li>使用高斯濾波器</li>
+<li>使用Sobel濾波器取出x,y方向梯度</li>
+<li>對梯度進行非極大值抑制</li>
+<li>使用滯後閾值</li>
+</ol>
+<h2 id="高斯濾波"><a href="#高斯濾波" class="headerlink" title="高斯濾波"></a>高斯濾波</h2><p>平滑影像，濾除雜訊</p>
+<h2 id="滯後閾值"><a href="#滯後閾值" class="headerlink" title="滯後閾值"></a>滯後閾值</h2><p>設定高閾值與低閾值<br><img src="https://yanzzzzzzzzz.github.io/img/Hysteresis-2.png"  width="400"/></p>
+<p>低於低閾值的不是edge，如線段(D)<br>高於高閾值的是強edge，如線段(A)、(B)<br>介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接<br>若有連接到，如線段(C)，就視為edge，沒連接到的就非edge(E)</p>
+]]></content>
+      <tags>
+        <tag>edge</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs131 lecture 1 Introduction</title>
     <url>/2021/02/08/2021-02-08-cs131-lecture-1-introduction/</url>
     <content><![CDATA[<h2 id="課程介紹"><a href="#課程介紹" class="headerlink" title="課程介紹"></a>課程介紹</h2><p>CS131 是史丹佛大學所開設的電腦視覺課程<br>主要預備技能與知識有</p>
@@ -36,20 +53,31 @@
       </tags>
   </entry>
   <entry>
-    <title>Canny Edge Detector</title>
-    <url>/2020/12/15/2020-12-15-canny-edge-detector/</url>
-    <content><![CDATA[<h2 id="Canny-edge檢測流程"><a href="#Canny-edge檢測流程" class="headerlink" title="Canny edge檢測流程"></a>Canny edge檢測流程</h2><ol>
-<li>使用高斯濾波器</li>
-<li>使用Sobel濾波器取出x,y方向梯度</li>
-<li>對梯度進行非極大值抑制</li>
-<li>使用滯後閾值</li>
-</ol>
-<h2 id="高斯濾波"><a href="#高斯濾波" class="headerlink" title="高斯濾波"></a>高斯濾波</h2><p>平滑影像，濾除雜訊</p>
-<h2 id="滯後閾值"><a href="#滯後閾值" class="headerlink" title="滯後閾值"></a>滯後閾值</h2><p>設定高閾值與低閾值<br><img src="https://yanzzzzzzzzz.github.io/img/Hysteresis-2.png"  width="400"/></p>
-<p>低於低閾值的不是edge，如線段(D)<br>高於高閾值的是強edge，如線段(A)、(B)<br>介於高低閾值之間的edge，需檢查他的線段是否有與強edge連接<br>若有連接到，如線段(C)，就視為edge，沒連接到的就非edge(E)</p>
+    <title>cs131 lecture 3 Filters And Convolutions</title>
+    <url>/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
+</blockquote>
+<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
+<li>從影像中取出有用的訊息或轉換影像屬性<ul>
+<li>擷取特徵：edge, corners, blobs detection…</li>
+<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
+<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
+</ul>
+</li>
+</ul>
+<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
+<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
+<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
+<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
 ]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
       <tags>
-        <tag>edge</tag>
+        <tag>cs131</tag>
       </tags>
   </entry>
   <entry>
@@ -256,34 +284,6 @@
 </li>
 </ul>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://zhuanlan.zhihu.com/p/62238520">RANSAC 算法详解(附 Python 拟合直线模型代码)</a><br><a href="https://blog.csdn.net/tangwei2014/article/details/38390463">随机抽样一致(Random Sample Consensus, RANSAC)</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 3 Filters And Convolutions</title>
-    <url>/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
-</blockquote>
-<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
-<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
-<li>從影像中取出有用的訊息或轉換影像屬性<ul>
-<li>擷取特徵：edge, corners, blobs detection…</li>
-<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
-<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
-</ul>
-</li>
-</ul>
-<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
-<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
-<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
-<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
 ]]></content>
       <categories>
         <category>course</category>
@@ -710,68 +710,6 @@
       </tags>
   </entry>
   <entry>
-    <title>K-nearest-neighbor-algorithm</title>
-    <url>/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/</url>
-    <content><![CDATA[<h2 id="機器學習架構"><a href="#機器學習架構" class="headerlink" title="機器學習架構"></a>機器學習架構</h2><img src='https://yanzzzzzzzzz.github.io/img/ml-framework.png'  width='400'/>
-
-<ul>
-<li>分成training與Testing階段</li>
-<li>Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差</li>
-<li>Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果</li>
-</ul>
-<h2 id="K-nearest-neighbor-classifier"><a href="#K-nearest-neighbor-classifier" class="headerlink" title="K-nearest neighbor classifier"></a>K-nearest neighbor classifier</h2><p>KNN的概念是由nearest neighbor algorithm衍伸出來，NN是透過一群已經存在的訓練資料與標籤當作基底，來對測試資料進行比對，輸出與訓練資料相似度高的類別當作結果</p>
-<p>而KNN與NN不同的則是取出前K個相近的資料做參考，來決定最終輸出的類別結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/knn-example.png'  width='400'/>
-
-<h3 id="KNN演算法流程"><a href="#KNN演算法流程" class="headerlink" title="KNN演算法流程"></a>KNN演算法流程</h3><p>訓練階段：存取所有訓練資料$x_i$與其對應的類別結果$y_i$</p>
-<p>測試階段：</p>
-<ol>
-<li>輸入$x$，計算與所有訓練資料點的距離</li>
-<li>選擇前$k$個鄰近$x$的訓練資料</li>
-<li>統計鄰近訓練資料最高的對應類別結果</li>
-</ol>
-<p>距離量測方法：可使用歐式距離</p>
-<h3 id="KNN-細節整理"><a href="#KNN-細節整理" class="headerlink" title="KNN 細節整理"></a>KNN 細節整理</h3><ul>
-<li>如何決定參數k</li>
-<li>相似度比對</li>
-</ul>
-<h3 id="如何決定參數k"><a href="#如何決定參數k" class="headerlink" title="如何決定參數k"></a>如何決定參數k</h3><p>參數$k$的不同會影響輸出結果</p>
-<ul>
-<li>k太小，對雜訊敏感，容易overfitting</li>
-<li>k太大，容易underfitting</li>
-</ul>
-<p>選擇參數k的方法：cross validate</p>
-<h4 id="cross-validate"><a href="#cross-validate" class="headerlink" title="cross validate"></a>cross validate</h4><p>把資料分成多個子資料，測試參數在小樣本中的表現結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/cross-validation.png'  width='400'/>
-
-<p>測試流程：</p>
-<ol>
-<li>輸入訓練資料，從訓練資料分割成多組不同的訓練&#x2F;測試資料</li>
-<li>選擇在平均效能中最好的參數$k$</li>
-</ol>
-<h3 id="相似度比對"><a href="#相似度比對" class="headerlink" title="相似度比對"></a>相似度比對</h3><ul>
-<li>相似度比對：<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB">歐式距離(Euclidean distance)</a>，最常用   </li>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2">曼哈頓距離(Manhattan distance)</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB">切比雪夫距離(Chebyshev distance)</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%93%88%E6%8B%89%E8%AF%BA%E6%AF%94%E6%96%AF%E8%B7%9D%E7%A6%BB">馬氏距離(Mahalanobis Distance)</a></li>
-</ul>
-</li>
-<li>相似度比對前都須對資料進行正規化，才能保證每個<br>維度的特徵具有相同的影響力，除了馬氏距離已將不同尺度的問題做處理</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://www.slideshare.net/ssuserf88631/knn-51511604">沒有想像中簡單的簡單分類器 Knn</a></li>
-<li><a href="https://stats.stackexchange.com/questions/287425/why-do-you-need-to-scale-data-in-knn">Why do you need to scale data in KNN</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 11 Image Resizing-Seam Carving</title>
     <url>/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/</url>
     <content><![CDATA[<p>如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊</p>
@@ -865,6 +803,68 @@
 
 <p><a href="https://faculty.idc.ac.il/arik/SCWeb/vidret/results/image_results.html">更多差異圖</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://avikdas.com/2019/07/29/improved-seam-carving-with-forward-energy.html">Improved seam carving with forward energy</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>K-nearest-neighbor-algorithm</title>
+    <url>/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/</url>
+    <content><![CDATA[<h2 id="機器學習架構"><a href="#機器學習架構" class="headerlink" title="機器學習架構"></a>機器學習架構</h2><img src='https://yanzzzzzzzzz.github.io/img/ml-framework.png'  width='400'/>
+
+<ul>
+<li>分成training與Testing階段</li>
+<li>Training：準備訓練資料與對應的類別${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，評估預測函數$f$並最小化在訓練資料上的誤差</li>
+<li>Testing：輸入不在訓練資料內的未知資料，應用訓練好的fuction $f$來預測類別結果</li>
+</ul>
+<h2 id="K-nearest-neighbor-classifier"><a href="#K-nearest-neighbor-classifier" class="headerlink" title="K-nearest neighbor classifier"></a>K-nearest neighbor classifier</h2><p>KNN的概念是由nearest neighbor algorithm衍伸出來，NN是透過一群已經存在的訓練資料與標籤當作基底，來對測試資料進行比對，輸出與訓練資料相似度高的類別當作結果</p>
+<p>而KNN與NN不同的則是取出前K個相近的資料做參考，來決定最終輸出的類別結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/knn-example.png'  width='400'/>
+
+<h3 id="KNN演算法流程"><a href="#KNN演算法流程" class="headerlink" title="KNN演算法流程"></a>KNN演算法流程</h3><p>訓練階段：存取所有訓練資料$x_i$與其對應的類別結果$y_i$</p>
+<p>測試階段：</p>
+<ol>
+<li>輸入$x$，計算與所有訓練資料點的距離</li>
+<li>選擇前$k$個鄰近$x$的訓練資料</li>
+<li>統計鄰近訓練資料最高的對應類別結果</li>
+</ol>
+<p>距離量測方法：可使用歐式距離</p>
+<h3 id="KNN-細節整理"><a href="#KNN-細節整理" class="headerlink" title="KNN 細節整理"></a>KNN 細節整理</h3><ul>
+<li>如何決定參數k</li>
+<li>相似度比對</li>
+</ul>
+<h3 id="如何決定參數k"><a href="#如何決定參數k" class="headerlink" title="如何決定參數k"></a>如何決定參數k</h3><p>參數$k$的不同會影響輸出結果</p>
+<ul>
+<li>k太小，對雜訊敏感，容易overfitting</li>
+<li>k太大，容易underfitting</li>
+</ul>
+<p>選擇參數k的方法：cross validate</p>
+<h4 id="cross-validate"><a href="#cross-validate" class="headerlink" title="cross validate"></a>cross validate</h4><p>把資料分成多個子資料，測試參數在小樣本中的表現結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/cross-validation.png'  width='400'/>
+
+<p>測試流程：</p>
+<ol>
+<li>輸入訓練資料，從訓練資料分割成多組不同的訓練&#x2F;測試資料</li>
+<li>選擇在平均效能中最好的參數$k$</li>
+</ol>
+<h3 id="相似度比對"><a href="#相似度比對" class="headerlink" title="相似度比對"></a>相似度比對</h3><ul>
+<li>相似度比對：<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB">歐式距離(Euclidean distance)</a>，最常用   </li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2">曼哈頓距離(Manhattan distance)</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB">切比雪夫距離(Chebyshev distance)</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%93%88%E6%8B%89%E8%AF%BA%E6%AF%94%E6%96%AF%E8%B7%9D%E7%A6%BB">馬氏距離(Mahalanobis Distance)</a></li>
+</ul>
+</li>
+<li>相似度比對前都須對資料進行正規化，才能保證每個<br>維度的特徵具有相同的影響力，除了馬氏距離已將不同尺度的問題做處理</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://www.slideshare.net/ssuserf88631/knn-51511604">沒有想像中簡單的簡單分類器 Knn</a></li>
+<li><a href="https://stats.stackexchange.com/questions/287425/why-do-you-need-to-scale-data-in-knn">Why do you need to scale data in KNN</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>course</category>
@@ -980,105 +980,6 @@
       </categories>
       <tags>
         <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>論文閱讀:Fast Branch Convolutional Neural Network for Traffic Sign Recognition</title>
-    <url>/2021/10/09/2021-10-09-Fast%20Branch%20Convolutional%20Neural%20Network%20for%20Traffic%20Sign%20Recognition/</url>
-    <content><![CDATA[<p>論文連結:<a href="https://ieeexplore.ieee.org/abstract/document/7990644">Fast Branch Convolutional Neural Network for Traffic Sign Recognition</a></p>
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>論文使用深度學習架構來辨識交通號誌，辨識交通號誌是高級駕駛輔助系統的重要部分，像是方向號誌、限速號誌、各種警示號誌等等</p>
-<p>論文遇到的挑戰是影像成像受到室外環境的複雜變化，如失真、惡劣天氣、過度曝光、曝光不足、運動模糊、褪色、複雜背景，造成辨識方法更具挑戰性</p>
-<p>使用傳統的電腦視覺辨識方法在這多變的影像是很難以用單一個演算法流程得到穩健的辨識模型，因此使用CNN架構的模型來辨識</p>
-<p>CNN往往需要大量的參數處理來得到結果，因此要達到即時辨識模型會有一定的難度，但目前也有許多即時的CNN模型，例如:YOLO</p>
-<p>受生物機制的啟發，論文提出一個新的架構Branch Convolution Neural Network (BCNN)，在神經系統中，簡單、反射動作會在神經系統較低層次做快速反應，困難的動作會在高階的神經系統處裡後做反應，例如:在容易區分的交通號誌圖片，人眼只看一部份也可以很快的辨識出來，套用在CNN上，沒有必要通過所有CNN參數才得到結果</p>
-<h2 id="CNN模型對資料的處理"><a href="#CNN模型對資料的處理" class="headerlink" title="CNN模型對資料的處理"></a>CNN模型對資料的處理</h2><p>CNN模型在輸入交通標誌資料有以下特性</p>
-<ul>
-<li>CNN模型傾向於將原始混淆圖像空間轉換為線性可分離空間，並將同一類標籤的樣本聚集再一起</li>
-<li>越難辨識到的交通標誌是與相同類別標籤樣本距離越遠的，表示模型辨識不到特徵</li>
-<li>模型對形狀的辨識能力比辨識限速能力好，模型前期將三角形和菱形分隔開來，CNN模型參考圖形內標示較後期才分離不同數字</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/CNN_feature_extraction.png'  width='400'/>
-
-<h2 id="Branch-Convolution-Neural-Network"><a href="#Branch-Convolution-Neural-Network" class="headerlink" title="Branch Convolution Neural Network"></a>Branch Convolution Neural Network</h2><p>CNN和BCNN的差別在於，BCNN會在層與層之間分支輸出結果，如圖所示，傳統的CNN模型會在最後Softmax層輸出結果，BCNN模型會在其中一個分支進行預測，因此可以提高模型的預測時間</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN_model.png'  width='400'/>
-
-<p>所有的樣本都不需要經過整個CNN模型，參考前段介紹的生物學機制，簡單好辨識的影像在前期的layer預測，較難的影像在後期的layer輸出結果</p>
-<p>BCNN model訓練流程:</p>
-<ol>
-<li>訓練分支分類器</li>
-<li>評估和偏移分類器</li>
-<li>最佳化分支分類器</li>
-<li>fine-tune model</li>
-</ol>
-<h3 id="分支分類器-Branch-Classifier"><a href="#分支分類器-Branch-Classifier" class="headerlink" title="分支分類器 Branch Classifier"></a>分支分類器 Branch Classifier</h3><p>分支分類器是用來快速、高精度的輸出結果，因此false negatives是允許的，但false positives是不行的<br>因此簡單來說分支分類器:</p>
-<ul>
-<li>簡單且快速</li>
-<li>robust與高精度</li>
-<li>只輸出足夠置信度的樣本</li>
-</ul>
-<p>由於分支分類器是使用線性分類器，使用k-folder來訓線性分類器，但分類器分的精度太高，也是沒有意義的，例如:分類結果為一個空間只有一個正樣本，他的precision是1，但recall可能非常低，因此設定precision與recall的threshold是必要的</p>
-<p>再來就是要考慮到底要在哪幾層加入分類器，當遇到難以識別的樣本，並不會在分支分類器輸出結果，因此需要謹慎考慮分類器的插入位置與數量</p>
-<p>迭帶搜索最佳組合流程</p>
-<ol>
-<li>將分支分類器的組合編碼到[0,1]之間</li>
-<li>設定$T_{save} $為目標函數</li>
-<li>隨機產生不同種的分支分類器組合</li>
-<li>計算$ T_{save} $</li>
-<li>迭代到指定次數或找到$ T_{save} $符合閾值的組合</li>
-</ol>
-<p>其中$ T_{save} $表示的是節省的時間，因此要最大化目標函數</p>
-<p>$ T_{save} $公式:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-fomula.png'  width='400'/>
-
-<p>參數定義</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-para.png'  width='400'/>
-
-<p>$ l_i, i&#x3D;0,1,2…n+1, 表示CNN第i層, l_{n+1}是輸出的layer, l_0是輸入的layer $</p>
-<p>$ T_{l_i}是第l_i層到l_{n+1}層花費的時間 $</p>
-<p>$ C_i 表示第i層的branch classifier是否存在，當C_i&#x3D;1,存在分支分類器,C_i&#x3D;0則不存在 $</p>
-<p>$ t_i 是C_i分類器對sample處理所花費的時間 $</p>
-<p>$ S_i 是到C_i層還沒被分類的sample $</p>
-<p>$ C_iS_i第i層分離出來的sample數 $</p>
-<p>$ S_i^*是第i層還沒被分離出來的sample $</p>
-<p>$ N_i^* 是 S_i^* 的數量 $</p>
-<p>$ N_0是所有sample$</p>
-<p>$ N_i是到第i層的sample數量 $</p>
-<p>$ N_i^- 是第i層還沒被分類出來的數量 $</p>
-<p>$ T_i 是第i層的sample數量 - 第i層前節省的時間 - 未分類數量*分類器平均時間 $</p>
-<p>$ T_{save}是平均節省的時間 $</p>
-<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><h3 id="測試資料"><a href="#測試資料" class="headerlink" title="測試資料"></a>測試資料</h3><ul>
-<li>從10小時的影片取出來的交通號誌benchmark，<a href="https://paperswithcode.com/dataset/gtsrb">benchmark資料來源</a></li>
-<li>共有43類的標誌</li>
-<li>訓練資料:39k影像</li>
-<li>測試資料:12k影像</li>
-<li>15x15~222x193的影像大小</li>
-<li>影像包含交通標誌本體再向外延伸 10%的長寬</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-data.png'  width='400'/>
-
-<h3 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h3><p>圖表顯示每個分支分類器分離輸入影像的百分比，將近30％輸入影像從第二層分離出來，並且將近75％從第五層分離出來。</p>
-<p>這意味著可以提前分離出大量sample。 所以，BCNN可以節省大量無意義的計算。</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-table2.png'  width='400'/>
-
-<p>儘管設置了一個高精度閾值，但不可避免地還是會有sample被錯誤分類。<br>就像訓練的準確性和測試準確性之間的關係一樣，原始模型和BCNN準確性之間存在較大差異。</p>
-<p>圖片內的(a)顯示是在第5層之前隨機分離出的符號，（b）是在最後12層中隨機分離出的符號。（b）中的符號顯然更扭曲，模糊和更暗。與（a）相比，（b）中的樣本難以區分和識別。</p>
-<p>我們將在前一層中分離出來的樣本命名為簡單樣本。更難識別的交通標誌被識別出來，後來被識別出來。</p>
-<p>它與生物學機制一致，即簡單的動作被整合到一個較短的感知，而復雜的序列則以更長的周期被整合。<br><img src='https://yanzzzzzzzzz.github.io/img/BCNN-fig8.png'  width='400'/></p>
-<p>可以看到在準確度與原始CNN差異不大情況下，速度提升了約兩倍</p>
-<p>在BCNN-FT，Fine tuned微調的情況下，更接近原始CNN的準確率</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-TABLE4.png'  width='400'/>
-
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ul>
-<li>受生物機制的啟發，提出了一種名為BCNN的交通標誌識別新框架</li>
-<li>在相同的條件下比一般的deep CNN更快</li>
-<li>在GTSRB的dataset下測試，大量的交通標誌可以在淺層分離出來</li>
-</ul>
-]]></content>
-      <categories>
-        <category>paper reading</category>
-      </categories>
-      <tags>
-        <tag>Image Classification</tag>
       </tags>
   </entry>
   <entry>
@@ -1232,6 +1133,132 @@
       </tags>
   </entry>
   <entry>
+    <title>論文閱讀:Fast Branch Convolutional Neural Network for Traffic Sign Recognition</title>
+    <url>/2021/10/09/2021-10-09-Fast%20Branch%20Convolutional%20Neural%20Network%20for%20Traffic%20Sign%20Recognition/</url>
+    <content><![CDATA[<p>論文連結:<a href="https://ieeexplore.ieee.org/abstract/document/7990644">Fast Branch Convolutional Neural Network for Traffic Sign Recognition</a></p>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>論文使用深度學習架構來辨識交通號誌，辨識交通號誌是高級駕駛輔助系統的重要部分，像是方向號誌、限速號誌、各種警示號誌等等</p>
+<p>論文遇到的挑戰是影像成像受到室外環境的複雜變化，如失真、惡劣天氣、過度曝光、曝光不足、運動模糊、褪色、複雜背景，造成辨識方法更具挑戰性</p>
+<p>使用傳統的電腦視覺辨識方法在這多變的影像是很難以用單一個演算法流程得到穩健的辨識模型，因此使用CNN架構的模型來辨識</p>
+<p>CNN往往需要大量的參數處理來得到結果，因此要達到即時辨識模型會有一定的難度，但目前也有許多即時的CNN模型，例如:YOLO</p>
+<p>受生物機制的啟發，論文提出一個新的架構Branch Convolution Neural Network (BCNN)，在神經系統中，簡單、反射動作會在神經系統較低層次做快速反應，困難的動作會在高階的神經系統處裡後做反應，例如:在容易區分的交通號誌圖片，人眼只看一部份也可以很快的辨識出來，套用在CNN上，沒有必要通過所有CNN參數才得到結果</p>
+<h2 id="CNN模型對資料的處理"><a href="#CNN模型對資料的處理" class="headerlink" title="CNN模型對資料的處理"></a>CNN模型對資料的處理</h2><p>CNN模型在輸入交通標誌資料有以下特性</p>
+<ul>
+<li>CNN模型傾向於將原始混淆圖像空間轉換為線性可分離空間，並將同一類標籤的樣本聚集再一起</li>
+<li>越難辨識到的交通標誌是與相同類別標籤樣本距離越遠的，表示模型辨識不到特徵</li>
+<li>模型對形狀的辨識能力比辨識限速能力好，模型前期將三角形和菱形分隔開來，CNN模型參考圖形內標示較後期才分離不同數字</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/CNN_feature_extraction.png'  width='400'/>
+
+<h2 id="Branch-Convolution-Neural-Network"><a href="#Branch-Convolution-Neural-Network" class="headerlink" title="Branch Convolution Neural Network"></a>Branch Convolution Neural Network</h2><p>CNN和BCNN的差別在於，BCNN會在層與層之間分支輸出結果，如圖所示，傳統的CNN模型會在最後Softmax層輸出結果，BCNN模型會在其中一個分支進行預測，因此可以提高模型的預測時間</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN_model.png'  width='400'/>
+
+<p>所有的樣本都不需要經過整個CNN模型，參考前段介紹的生物學機制，簡單好辨識的影像在前期的layer預測，較難的影像在後期的layer輸出結果</p>
+<p>BCNN model訓練流程:</p>
+<ol>
+<li>訓練分支分類器</li>
+<li>評估和偏移分類器</li>
+<li>最佳化分支分類器</li>
+<li>fine-tune model</li>
+</ol>
+<h3 id="分支分類器-Branch-Classifier"><a href="#分支分類器-Branch-Classifier" class="headerlink" title="分支分類器 Branch Classifier"></a>分支分類器 Branch Classifier</h3><p>分支分類器是用來快速、高精度的輸出結果，因此false negatives是允許的，但false positives是不行的<br>因此簡單來說分支分類器:</p>
+<ul>
+<li>簡單且快速</li>
+<li>robust與高精度</li>
+<li>只輸出足夠置信度的樣本</li>
+</ul>
+<p>由於分支分類器是使用線性分類器，使用k-folder來訓線性分類器，但分類器分的精度太高，也是沒有意義的，例如:分類結果為一個空間只有一個正樣本，他的precision是1，但recall可能非常低，因此設定precision與recall的threshold是必要的</p>
+<p>再來就是要考慮到底要在哪幾層加入分類器，當遇到難以識別的樣本，並不會在分支分類器輸出結果，因此需要謹慎考慮分類器的插入位置與數量</p>
+<p>迭帶搜索最佳組合流程</p>
+<ol>
+<li>將分支分類器的組合編碼到[0,1]之間</li>
+<li>設定$T_{save} $為目標函數</li>
+<li>隨機產生不同種的分支分類器組合</li>
+<li>計算$ T_{save} $</li>
+<li>迭代到指定次數或找到$ T_{save} $符合閾值的組合</li>
+</ol>
+<p>其中$ T_{save} $表示的是節省的時間，因此要最大化目標函數</p>
+<p>$ T_{save} $公式:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-fomula.png'  width='400'/>
+
+<p>參數定義</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-para.png'  width='400'/>
+
+<p>$ l_i, i&#x3D;0,1,2…n+1, 表示CNN第i層, l_{n+1}是輸出的layer, l_0是輸入的layer $</p>
+<p>$ T_{l_i}是第l_i層到l_{n+1}層花費的時間 $</p>
+<p>$ C_i 表示第i層的branch classifier是否存在，當C_i&#x3D;1,存在分支分類器,C_i&#x3D;0則不存在 $</p>
+<p>$ t_i 是C_i分類器對sample處理所花費的時間 $</p>
+<p>$ S_i 是到C_i層還沒被分類的sample $</p>
+<p>$ C_iS_i第i層分離出來的sample數 $</p>
+<p>$ S_i^*是第i層還沒被分離出來的sample $</p>
+<p>$ N_i^* 是 S_i^* 的數量 $</p>
+<p>$ N_0是所有sample$</p>
+<p>$ N_i是到第i層的sample數量 $</p>
+<p>$ N_i^- 是第i層還沒被分類出來的數量 $</p>
+<p>$ T_i 是第i層的sample數量 - 第i層前節省的時間 - 未分類數量*分類器平均時間 $</p>
+<p>$ T_{save}是平均節省的時間 $</p>
+<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><h3 id="測試資料"><a href="#測試資料" class="headerlink" title="測試資料"></a>測試資料</h3><ul>
+<li>從10小時的影片取出來的交通號誌benchmark，<a href="https://paperswithcode.com/dataset/gtsrb">benchmark資料來源</a></li>
+<li>共有43類的標誌</li>
+<li>訓練資料:39k影像</li>
+<li>測試資料:12k影像</li>
+<li>15x15~222x193的影像大小</li>
+<li>影像包含交通標誌本體再向外延伸 10%的長寬</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-data.png'  width='400'/>
+
+<h3 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h3><p>圖表顯示每個分支分類器分離輸入影像的百分比，將近30％輸入影像從第二層分離出來，並且將近75％從第五層分離出來。</p>
+<p>這意味著可以提前分離出大量sample。 所以，BCNN可以節省大量無意義的計算。</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-table2.png'  width='400'/>
+
+<p>儘管設置了一個高精度閾值，但不可避免地還是會有sample被錯誤分類。<br>就像訓練的準確性和測試準確性之間的關係一樣，原始模型和BCNN準確性之間存在較大差異。</p>
+<p>圖片內的(a)顯示是在第5層之前隨機分離出的符號，（b）是在最後12層中隨機分離出的符號。（b）中的符號顯然更扭曲，模糊和更暗。與（a）相比，（b）中的樣本難以區分和識別。</p>
+<p>我們將在前一層中分離出來的樣本命名為簡單樣本。更難識別的交通標誌被識別出來，後來被識別出來。</p>
+<p>它與生物學機制一致，即簡單的動作被整合到一個較短的感知，而復雜的序列則以更長的周期被整合。<br><img src='https://yanzzzzzzzzz.github.io/img/BCNN-fig8.png'  width='400'/></p>
+<p>可以看到在準確度與原始CNN差異不大情況下，速度提升了約兩倍</p>
+<p>在BCNN-FT，Fine tuned微調的情況下，更接近原始CNN的準確率</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-TABLE4.png'  width='400'/>
+
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ul>
+<li>受生物機制的啟發，提出了一種名為BCNN的交通標誌識別新框架</li>
+<li>在相同的條件下比一般的deep CNN更快</li>
+<li>在GTSRB的dataset下測試，大量的交通標誌可以在淺層分離出來</li>
+</ul>
+]]></content>
+      <categories>
+        <category>paper reading</category>
+      </categories>
+      <tags>
+        <tag>Image Classification</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Machine learning Roadmap 2021 介紹</title>
+    <url>/2021/10/11/2021-10-11-Machine%20learning%20Roadmap%202021%20%E4%BB%8B%E7%B4%B9/</url>
+    <content><![CDATA[<h1 id="Machine-learning-Roadmap-2021-介紹"><a href="#Machine-learning-Roadmap-2021-介紹" class="headerlink" title="Machine learning Roadmap 2021 介紹"></a>Machine learning Roadmap 2021 介紹</h1><p>現在最紅的AI，也就是以深度學習，資料驅動的模型來預測、評估得到結果</p>
+<p>為了加強對於Machine learning的廣度與深度理解，在網路上看到一個Machine learning roadmap的圖，整理得滿不錯的</p>
+<p>Roadmap:<a href="https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy">https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy</a></p>
+<p>Roadmap提供所有想了解機器學習的人一個整理：</p>
+<ol>
+<li>機器學習問題</li>
+<li>機器學習的過程</li>
+<li>機器學習的工具</li>
+<li>機器學習的相關資源</li>
+<li>機器學習的模型派系(ex:監督,非監督…)</li>
+<li>機器學習的模型訓練、最佳化</li>
+<li>機器學習的IDE、常用的第三方套件</li>
+<li>機器學習使用的數學</li>
+<li>機器學習的相關應用、部屬</li>
+</ol>
+<p>他其實已經很完整，廣度及深度都已經有了，剩下的是如何從整理好的關鍵字向下研究，提高深度</p>
+<p>例如:github上的<a href="https://github.com/floodsung/Deep-Learning-Papers-Reading-Roadmap">Deep-Learning-Papers-Reading-Roadmap</a>，它提供了學習方面的整理，有序的讓你了解到Deep learning這方面的經典模型</p>
+<p>如果從Road map了解後對某一部份更有興趣，可以學習並尋找更多資源，然後填上認為缺少的重要訊息</p>
+<p>接下來我想從這個Roadmap上的關鍵字進行相關的整理，再次對機器學習&#x2F;深度學習上做一個複習</p>
+]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+  </entry>
+  <entry>
     <title>cs131 lecture 15 Optical flow</title>
     <url>/2021/11/08/2021-11-08-Optical%20Flow/</url>
     <content><![CDATA[<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：</p>
@@ -1262,33 +1289,6 @@
 ]]></content>
       <categories>
         <category>course</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Machine learning Roadmap 2021 介紹</title>
-    <url>/2021/10/11/2021-10-11-Machine%20learning%20Roadmap%202021%20%E4%BB%8B%E7%B4%B9/</url>
-    <content><![CDATA[<h1 id="Machine-learning-Roadmap-2021-介紹"><a href="#Machine-learning-Roadmap-2021-介紹" class="headerlink" title="Machine learning Roadmap 2021 介紹"></a>Machine learning Roadmap 2021 介紹</h1><p>現在最紅的AI，也就是以深度學習，資料驅動的模型來預測、評估得到結果</p>
-<p>為了加強對於Machine learning的廣度與深度理解，在網路上看到一個Machine learning roadmap的圖，整理得滿不錯的</p>
-<p>Roadmap:<a href="https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy">https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy</a></p>
-<p>Roadmap提供所有想了解機器學習的人一個整理：</p>
-<ol>
-<li>機器學習問題</li>
-<li>機器學習的過程</li>
-<li>機器學習的工具</li>
-<li>機器學習的相關資源</li>
-<li>機器學習的模型派系(ex:監督,非監督…)</li>
-<li>機器學習的模型訓練、最佳化</li>
-<li>機器學習的IDE、常用的第三方套件</li>
-<li>機器學習使用的數學</li>
-<li>機器學習的相關應用、部屬</li>
-</ol>
-<p>他其實已經很完整，廣度及深度都已經有了，剩下的是如何從整理好的關鍵字向下研究，提高深度</p>
-<p>例如:github上的<a href="https://github.com/floodsung/Deep-Learning-Papers-Reading-Roadmap">Deep-Learning-Papers-Reading-Roadmap</a>，它提供了學習方面的整理，有序的讓你了解到Deep learning這方面的經典模型</p>
-<p>如果從Road map了解後對某一部份更有興趣，可以學習並尋找更多資源，然後填上認為缺少的重要訊息</p>
-<p>接下來我想從這個Roadmap上的關鍵字進行相關的整理，再次對機器學習&#x2F;深度學習上做一個複習</p>
-]]></content>
-      <categories>
-        <category>Machine Learning</category>
       </categories>
   </entry>
   <entry>
@@ -1386,115 +1386,58 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Vue.js 學習筆記</title>
-    <url>/2023/01/19/Vue%E7%AD%86%E8%A8%98/</url>
-    <content><![CDATA[<h2 id="聲明式渲染-Declarative-Rendering"><a href="#聲明式渲染-Declarative-Rendering" class="headerlink" title="聲明式渲染 Declarative Rendering"></a>聲明式渲染 Declarative Rendering</h2><p>vue核心功能是聲明式渲染:不用關心渲染過程怎麼樣，只要告訴機器最終結果是甚麼就好</p>
-<p>在template標籤內的語法用<code>&#123;&#123; &#125;&#125;</code>渲染動態文字, 可以根據js當前狀態去改變現在HTML的樣子</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+    <title>31. Next Permutation</title>
+    <url>/2023/05/29/NextPermutation/</url>
+    <content><![CDATA[<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><a href="https://leetcode.com/problems/next-permutation/description/">https://leetcode.com/problems/next-permutation/description/</a></p>
+<p>A <code>permutation</code> of an array of integers is an arrangement of its members into a sequence or linear order.</p>
+<ul>
+<li>For example, for arr &#x3D; [1,2,3], the following are all the permutations of arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].</li>
+</ul>
+<p>The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).</p>
+<ul>
+<li>For example, the next permutation of arr &#x3D; [1,2,3] is [1,3,2].</li>
+<li>Similarly, the next permutation of arr &#x3D; [2,3,1] is [3,1,2].</li>
+<li>While the next permutation of arr &#x3D; [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.</li>
+</ul>
+<p>Given an array of integers nums, find the next permutation of nums.</p>
+<p>The replacement must be in place and use only constant extra memory.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="800"/>
 
-<p><code>&#123;&#123; &#125;&#125;</code>內可以執行任何js表達式, ex:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;h1&gt;&#123;&#123; message.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>) &#125;&#125;&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="屬性綁定-Attribute-Bindings"><a href="#屬性綁定-Attribute-Bindings" class="headerlink" title="屬性綁定 Attribute Bindings"></a>屬性綁定 Attribute Bindings</h2><p>屬性綁定要用<code>v-bind</code>指令</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;div v-<span class="attr">bind</span>:id=<span class="string">&quot;dynamicId&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>簡寫用<code>:</code> 代替 <code>v-bind</code></p>
-<p>用屬性綁定html標籤class類別名稱, 名稱在data元件控制</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">titleClass</span>: <span class="string">&#x27;title&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">:class</span>=<span class="string">titleClass</span>&gt;</span>Make me red<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-class">.title</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">color</span>: red;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="事件監聽器-Event-Listeners"><a href="#事件監聽器-Event-Listeners" class="headerlink" title="事件監聽器 Event Listeners"></a>事件監聽器 Event Listeners</h2><p>事件監聽綁定用<code>v-on</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button v-<span class="attr">on</span>:click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
-
-<p>簡寫用<code>@</code>代替<code>v-on</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button @click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
-
-<p>新增按鈕綁定累加功能, 顯示在畫面</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>:&#123;</span><br><span class="line">    <span class="title function_">increment</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">count</span>++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;increment&quot;</span>&gt;</span>count is: &#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表單綁定-Form-Bindings"><a href="#表單綁定-Form-Bindings" class="headerlink" title="表單綁定 Form Bindings"></a>表單綁定 Form Bindings</h2><p>延續事件監聽方式,可以實作出表單填入後即時顯示輸入文字功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="title function_">onInput</span>(<span class="params">e</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">text</span> = e.<span class="property">target</span>.<span class="property">value</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">&quot;text&quot;</span> @<span class="attr">input</span>=<span class="string">&quot;onInput&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Type here&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; text &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>簡化<code>v-bind</code>與<code>v-on</code>的雙向綁定方法是<code>v-model</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;input v-model=<span class="string">&quot;text&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<p>雙向綁定:與text參數自動同步不需額外寫事件</p>
-<p>元件適用於text inputs、checkboxes, radio buttons, select dropdowns<br><a href="https://vuejs.org/guide/essentials/forms.html">更多範例</a></p>
-<h2 id="條件渲染-Conditional-Rendering"><a href="#條件渲染-Conditional-Rendering" class="headerlink" title="條件渲染 Conditional Rendering"></a>條件渲染 Conditional Rendering</h2><p>使用<code>v-if</code>來渲染一個元素</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;h1 v-<span class="keyword">if</span>=<span class="string">&quot;awesome&quot;</span>&gt;<span class="title class_">Vue</span> is awesome!&lt;/h1&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>Oh no 😢<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表單渲染-List-Rendering"><a href="#表單渲染-List-Rendering" class="headerlink" title="表單渲染 List Rendering"></a>表單渲染 List Rendering</h2><p>使用<code>v-for</code>指令來依序渲染儲存在陣列中的元素</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//todos: [</span></span><br><span class="line"><span class="comment">//        &#123; id: 1, text: &#x27;Learn HTML&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//        &#123; id: 2, text: &#x27;Learn JavaScript&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//        &#123; id: 3, text: &#x27;Learn Vue&#x27; &#125;</span></span><br><span class="line"><span class="comment">//      ]</span></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;todo in todos&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;todo.id&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    &#123;&#123; todo.text &#125;&#125;</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="計算屬性-Computed-Property"><a href="#計算屬性-Computed-Property" class="headerlink" title="計算屬性 Computed Property"></a>計算屬性 Computed Property</h2><p>在Vue中寫聲明式渲染</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;<span class="title class_">Has</span> published <span class="attr">books</span>:&lt;/p&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; author.books.length &gt; 0 ? &#x27;Yes&#x27; : &#x27;No&#x27; &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>把上述的判斷式移到computed Property, 以function化的方式呼叫</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">author</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;John Doe&#x27;</span>,</span><br><span class="line">        <span class="attr">books</span>: [</span><br><span class="line">          <span class="string">&#x27;Vue 2 - Advanced Guide&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;Vue 3 - Basic Guide&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;Vue 4 - The Mystery&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">computed</span>: &#123;</span><br><span class="line">    <span class="comment">// a computed getter</span></span><br><span class="line">    <span class="title function_">publishedBooksMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// `this` points to the component instance</span></span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">author</span>.<span class="property">books</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? <span class="string">&#x27;Yes&#x27;</span> : <span class="string">&#x27;No&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;<span class="title class_">Has</span> published <span class="attr">books</span>:&lt;/p&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; publishedBooksMessage  &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Computed-Caching-vs-Methods"><a href="#Computed-Caching-vs-Methods" class="headerlink" title="Computed Caching vs. Methods"></a>Computed Caching vs. Methods</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in component</span></span><br><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">calculateBooksMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">author</span>.<span class="property">books</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? <span class="string">&#x27;Yes&#x27;</span> : <span class="string">&#x27;No&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">    <span class="comment">// a computed getter</span></span><br><span class="line">    <span class="title function_">publishedBooksMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// `this` points to the component instance</span></span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">author</span>.<span class="property">books</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? <span class="string">&#x27;Yes&#x27;</span> : <span class="string">&#x27;No&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上兩個function輸出結果一模一樣, 差異在於computed內的function有快取的機制</p>
-<p>當computed內使用的原始資料沒有更動時, 會回傳前一次計算好的結果,但Method每次都會計算一次</p>
-<h2 id="Lifecycle-and-Template-Refs-生命週期與模板引用"><a href="#Lifecycle-and-Template-Refs-生命週期與模板引用" class="headerlink" title="Lifecycle and Template Refs 生命週期與模板引用"></a>Lifecycle and Template Refs 生命週期與模板引用</h2><p>要對DOM元素的操作,使用模板引用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;p ref=<span class="string">&quot;p&quot;</span>&gt;hello&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在生命週期初始化Vue元件之後會到<code>mounted</code>狀態<br><code>this.$refs</code>中的<code>this.$refs.p</code>就會等同於<code>&lt;p&gt;</code>標籤的元素</p>
-<p>在掛載後可以在<code>mounted</code>改變<code>&lt;p&gt;</code>標籤的元素的值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">mounted</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">p</span>.<span class="property">textContent</span> = <span class="string">&quot;123&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">ref</span>=<span class="string">&quot;p&quot;</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>這稱為生命週期掛鉤，它允許我們註冊一個callback，以便在組件生命週期的特定時間調用</p>
-<h2 id="Watchers-監聽器"><a href="#Watchers-監聽器" class="headerlink" title="Watchers 監聽器"></a>Watchers 監聽器</h2><p>監聽參數的數值變化, 當數值變化時進行額外操作</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">todoId</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">todoData</span>: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">fetchData</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">todoData</span> = <span class="literal">null</span></span><br><span class="line">      <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(</span><br><span class="line">        <span class="string">`https://jsonplaceholder.typicode.com/todos/<span class="subst">$&#123;<span class="variable language_">this</span>.todoId&#125;</span>`</span></span><br><span class="line">      )</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">todoData</span> = <span class="keyword">await</span> res.<span class="title function_">json</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">fetchData</span>()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">watch</span>: &#123;</span><br><span class="line">    <span class="title function_">todoId</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">fetchData</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Todo id: &#123;&#123; todoId &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;todoId++&quot;</span>&gt;</span>Fetch next todo<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">&quot;!todoData&quot;</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">pre</span> <span class="attr">v-else</span>&gt;</span>&#123;&#123; todoData &#125;&#125;<span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Components-元件"><a href="#Components-元件" class="headerlink" title="Components 元件"></a>Components 元件</h2><p>把模組化的元件引用近來</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ChildComp</span> <span class="keyword">from</span> <span class="string">&#x27;./ChildComp.vue&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    <span class="title class_">ChildComp</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// register child component</span></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">ChildComp</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Props-傳參數"><a href="#Props-傳參數" class="headerlink" title="Props 傳參數"></a>Props 傳參數</h2><p>父元件可以透過props來傳遞參數到子元件中</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in child component</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">msg</span>: <span class="title class_">String</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">ChildComp</span> :msg=<span class="string">&quot;greeting&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
-
-<p>傳遞動態參數用<code>v-bind</code></p>
-<h2 id="Emits-發出事件"><a href="#Emits-發出事件" class="headerlink" title="Emits 發出事件"></a>Emits 發出事件</h2><p>子元件觸發父元件事件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-element&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;button @click=&quot;$emit(\&#x27;my-event\&#x27;)&quot;&gt;Click me&lt;/button&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;my-element v-<span class="attr">on</span>:my-event=<span class="string">&quot;doSomething&quot;</span>&gt;&lt;/my-element&gt;</span><br></pre></td></tr></table></figure>
-
-<p>傳遞function用<code>v-on</code></p>
-<h2 id="Slots-插槽"><a href="#Slots-插槽" class="headerlink" title="Slots 插槽"></a>Slots 插槽</h2><p>父元件傳Content給子元件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ChildComp</span> <span class="keyword">from</span> <span class="string">&#x27;./ChildComp.vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    <span class="title class_">ChildComp</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;from parent&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">ChildComp</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">ChildComp</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>child.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-
-<p>可以用v-slot傳遞多個slot</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;my-component&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;header&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;footer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;my-component&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>My Component<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is the default slot<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is the footer slot<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">&lt;/my-component&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://vuejs.org/tutorial">vuejs.org tutorial</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>LINQ查詢語法</title>
-    <url>/2022/11/21/linq_intro/</url>
-    <content><![CDATA[<h2 id="LINQ介紹"><a href="#LINQ介紹" class="headerlink" title="LINQ介紹"></a>LINQ介紹</h2><p>語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用</p>
-<h2 id="LINQ-語法"><a href="#LINQ-語法" class="headerlink" title="LINQ 語法"></a>LINQ 語法</h2><h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line"><span class="comment">// Output: 10 8 6 12</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h3 id="OrderBy"><a href="#OrderBy" class="headerlink" title="OrderBy"></a>OrderBy</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>).OrderBy(n =&gt; n);</span><br><span class="line"><span class="comment">// Output:6 8 10 12</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span>[] fruits = &#123; <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;mango&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;passionfruit&quot;</span>, <span class="string">&quot;grape&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> fruit = <span class="string">&quot;mango&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> hasMango = fruits.Contains(fruit);</span><br><span class="line"><span class="comment">// hasMango=true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Product</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> CategoryID &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Category</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> ID &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">ProductWithCategoryName</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> ProductName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> CategoryName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    List&lt;Category&gt; categories = <span class="keyword">new</span> List&lt;Category&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Beverages&quot;</span>, ID=<span class="number">001</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Condiments&quot;</span>, ID=<span class="number">002</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Vegetables&quot;</span>, ID=<span class="number">003</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Grains&quot;</span>, ID=<span class="number">004</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Fruit&quot;</span>, ID=<span class="number">005</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Specify the second data source.</span></span><br><span class="line">    List&lt;Product&gt; products = <span class="keyword">new</span> List&lt;Product&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Cola&quot;</span>,  CategoryID=<span class="number">001</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Tea&quot;</span>,  CategoryID=<span class="number">001</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Mustard&quot;</span>, CategoryID=<span class="number">002</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Pickles&quot;</span>, CategoryID=<span class="number">002</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Carrots&quot;</span>, CategoryID=<span class="number">003</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Bok Choy&quot;</span>, CategoryID=<span class="number">003</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Peaches&quot;</span>, CategoryID=<span class="number">005</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Melons&quot;</span>, CategoryID=<span class="number">005</span>&#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> productWithCategoryNameList = products.Join(categories,</span><br><span class="line">                              p =&gt; p.CategoryID,</span><br><span class="line">                              c =&gt; c.ID,</span><br><span class="line">                              (p, c) =&gt; <span class="keyword">new</span> ProductWithCategoryName</span><br><span class="line">                              &#123;</span><br><span class="line">                                  ProductName = p.Name,</span><br><span class="line">                                  CategoryName = c.Name,</span><br><span class="line">                              &#125;.ToList());</span><br><span class="line"><span class="comment">// productWithCategoryNameList=</span></span><br><span class="line"><span class="comment">// ProductName:Cola        ,CategoryName:Beverages</span></span><br><span class="line"><span class="comment">// ProductName:Tea         ,CategoryName:Beverages</span></span><br><span class="line"><span class="comment">// ProductName:Mustard     ,CategoryName:Condiments</span></span><br><span class="line"><span class="comment">// ProductName:Pickles     ,CategoryName:Condiments</span></span><br><span class="line"><span class="comment">// ProductName:Carrots     ,CategoryName:Vegetables</span></span><br><span class="line"><span class="comment">// ProductName:Bok Choy    ,CategoryName:Vegetables</span></span><br><span class="line"><span class="comment">// ProductName:Peaches     ,CategoryName:Fruit</span></span><br><span class="line"><span class="comment">// ProductName:Melons      ,CategoryName:Fruit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>語法等同於:SELECT * FROM Product JOIN Category ON Product.CategoryID&#x3D;Category.ID</p>
-<p>也可以在LINQ語法中寫入function</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ProductAndCategoryName</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ConcatNameList = products.Join(categories,</span><br><span class="line">                            p =&gt; p.CategoryID,</span><br><span class="line">                            c =&gt; c.ID,</span><br><span class="line">                            (p, c) =&gt;</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="built_in">string</span> str = p.Name + <span class="string">&quot;_&quot;</span> + c.Name;</span><br><span class="line">                                <span class="keyword">return</span> <span class="keyword">new</span> ProductAndCategoryName</span><br><span class="line">                                &#123;</span><br><span class="line">                                    Name = str,</span><br><span class="line">                                &#125;;</span><br><span class="line">                            &#125;);</span><br><span class="line"><span class="comment">// ConcatNameList:                            </span></span><br><span class="line"><span class="comment">// Name:Cola_Beverages</span></span><br><span class="line"><span class="comment">// Name:Tea_Beverages</span></span><br><span class="line"><span class="comment">// Name:Mustard_Condiments</span></span><br><span class="line"><span class="comment">// Name:Pickles_Condiments</span></span><br><span class="line"><span class="comment">// Name:Carrots_Vegetables</span></span><br><span class="line"><span class="comment">// Name:Bok Choy_Vegetables</span></span><br><span class="line"><span class="comment">// Name:Peaches_Fruit</span></span><br><span class="line"><span class="comment">// Name:Melons_Fruit</span></span><br></pre></td></tr></table></figure>
-
-<p>第一個資料來源.Join(第二個資料來源,<br>                    one &#x3D;&gt; 要比較欄位,<br>                    two &#x3D;&gt; 要比較欄位,<br>                    (one, two) &#x3D;&gt; {function})</p>
-<h2 id="ForEach"><a href="#ForEach" class="headerlink" title="ForEach"></a>ForEach</h2><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">List&lt;Category&gt; categories = <span class="keyword">new</span> List&lt;Category&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Beverages&quot;</span>, ID=<span class="number">001</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Condiments&quot;</span>, ID=<span class="number">002</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Vegetables&quot;</span>, ID=<span class="number">003</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Grains&quot;</span>, ID=<span class="number">004</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Fruit&quot;</span>, ID=<span class="number">005</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">categories.ForEach(e =&gt; Console.WriteLine(e.Name));</span><br><span class="line"><span class="comment">// Beverages</span></span><br><span class="line"><span class="comment">// Condiments</span></span><br><span class="line"><span class="comment">// Vegetables</span></span><br><span class="line"><span class="comment">// Grains</span></span><br><span class="line"><span class="comment">// Fruit</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>從數列尾端開始向前檢查，直到找到不符合由小到大排列的數字，記錄該數字的索引。在這個例子中，找到數字1，位於第2個索引位置。</li>
+<li>如果都符合由小到大, 直接反轉</li>
+<li>從數列尾端中找到比1大的最小數字，這裡是5。</li>
+<li>將數字1與5交換位置。</li>
+<li>對於索引位置由小到大排列的數字(第3個索引位置開始)進行反轉，710反轉為017。最終得到的排列是245017。</li>
+</ol>
+<pre><code class="cpp">class Solution &#123;
+public:
+    void nextPermutation(vector&lt;int&gt;&amp; nums) &#123;
+        int n = nums.size(), k, l;
+        for (k = n - 2; k &gt;= 0; k--)
+        &#123;
+            if (nums[k] &lt; nums[k + 1])
+            &#123;
+                break;
+            &#125;
+        &#125;
+        if (k == -1)&#123;
+            reverse(nums.begin(), nums.end());
+            return;
+        &#125;
+        reverse(nums.begin() + k + 1, nums.end());
+        for (l = k + 1; l &lt; n; l++)
+        &#123;
+            if (nums[l] &gt; nums[k])
+            &#123;
+                break;
+            &#125;
+        &#125;
+        swap(nums[k], nums[l]);
+    &#125;
+&#125;;
+</code></pre>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1564,6 +1507,135 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue.js 學習筆記</title>
+    <url>/2023/01/19/Vue%E7%AD%86%E8%A8%98/</url>
+    <content><![CDATA[<h2 id="聲明式渲染-Declarative-Rendering"><a href="#聲明式渲染-Declarative-Rendering" class="headerlink" title="聲明式渲染 Declarative Rendering"></a>聲明式渲染 Declarative Rendering</h2><p>vue核心功能是聲明式渲染:不用關心渲染過程怎麼樣，只要告訴機器最終結果是甚麼就好</p>
+<p>在template標籤內的語法用<code>&#123;&#123; &#125;&#125;</code>渲染動態文字, 可以根據js當前狀態去改變現在HTML的樣子</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>&#123;&#123; &#125;&#125;</code>內可以執行任何js表達式, ex:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;h1&gt;&#123;&#123; message.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>) &#125;&#125;&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="屬性綁定-Attribute-Bindings"><a href="#屬性綁定-Attribute-Bindings" class="headerlink" title="屬性綁定 Attribute Bindings"></a>屬性綁定 Attribute Bindings</h2><p>屬性綁定要用<code>v-bind</code>指令</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;div v-<span class="attr">bind</span>:id=<span class="string">&quot;dynamicId&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>簡寫用<code>:</code> 代替 <code>v-bind</code></p>
+<p>用屬性綁定html標籤class類別名稱, 名稱在data元件控制</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">titleClass</span>: <span class="string">&#x27;title&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">:class</span>=<span class="string">titleClass</span>&gt;</span>Make me red<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-class">.title</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">color</span>: red;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事件監聽器-Event-Listeners"><a href="#事件監聽器-Event-Listeners" class="headerlink" title="事件監聽器 Event Listeners"></a>事件監聽器 Event Listeners</h2><p>事件監聽綁定用<code>v-on</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button v-<span class="attr">on</span>:click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>簡寫用<code>@</code>代替<code>v-on</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;button @click=<span class="string">&quot;increment&quot;</span>&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>新增按鈕綁定累加功能, 顯示在畫面</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>:&#123;</span><br><span class="line">    <span class="title function_">increment</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">count</span>++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;increment&quot;</span>&gt;</span>count is: &#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="表單綁定-Form-Bindings"><a href="#表單綁定-Form-Bindings" class="headerlink" title="表單綁定 Form Bindings"></a>表單綁定 Form Bindings</h2><p>延續事件監聽方式,可以實作出表單填入後即時顯示輸入文字功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="title function_">onInput</span>(<span class="params">e</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">text</span> = e.<span class="property">target</span>.<span class="property">value</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">&quot;text&quot;</span> @<span class="attr">input</span>=<span class="string">&quot;onInput&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Type here&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; text &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>簡化<code>v-bind</code>與<code>v-on</code>的雙向綁定方法是<code>v-model</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;input v-model=<span class="string">&quot;text&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>雙向綁定:與text參數自動同步不需額外寫事件</p>
+<p>元件適用於text inputs、checkboxes, radio buttons, select dropdowns<br><a href="https://vuejs.org/guide/essentials/forms.html">更多範例</a></p>
+<h2 id="條件渲染-Conditional-Rendering"><a href="#條件渲染-Conditional-Rendering" class="headerlink" title="條件渲染 Conditional Rendering"></a>條件渲染 Conditional Rendering</h2><p>使用<code>v-if</code>來渲染一個元素</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;h1 v-<span class="keyword">if</span>=<span class="string">&quot;awesome&quot;</span>&gt;<span class="title class_">Vue</span> is awesome!&lt;/h1&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>Oh no 😢<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="表單渲染-List-Rendering"><a href="#表單渲染-List-Rendering" class="headerlink" title="表單渲染 List Rendering"></a>表單渲染 List Rendering</h2><p>使用<code>v-for</code>指令來依序渲染儲存在陣列中的元素</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//todos: [</span></span><br><span class="line"><span class="comment">//        &#123; id: 1, text: &#x27;Learn HTML&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//        &#123; id: 2, text: &#x27;Learn JavaScript&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//        &#123; id: 3, text: &#x27;Learn Vue&#x27; &#125;</span></span><br><span class="line"><span class="comment">//      ]</span></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;todo in todos&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;todo.id&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    &#123;&#123; todo.text &#125;&#125;</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="計算屬性-Computed-Property"><a href="#計算屬性-Computed-Property" class="headerlink" title="計算屬性 Computed Property"></a>計算屬性 Computed Property</h2><p>在Vue中寫聲明式渲染</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;<span class="title class_">Has</span> published <span class="attr">books</span>:&lt;/p&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; author.books.length &gt; 0 ? &#x27;Yes&#x27; : &#x27;No&#x27; &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>把上述的判斷式移到computed Property, 以function化的方式呼叫</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">author</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;John Doe&#x27;</span>,</span><br><span class="line">        <span class="attr">books</span>: [</span><br><span class="line">          <span class="string">&#x27;Vue 2 - Advanced Guide&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;Vue 3 - Basic Guide&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;Vue 4 - The Mystery&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">computed</span>: &#123;</span><br><span class="line">    <span class="comment">// a computed getter</span></span><br><span class="line">    <span class="title function_">publishedBooksMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// `this` points to the component instance</span></span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">author</span>.<span class="property">books</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? <span class="string">&#x27;Yes&#x27;</span> : <span class="string">&#x27;No&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;<span class="title class_">Has</span> published <span class="attr">books</span>:&lt;/p&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; publishedBooksMessage  &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Computed-Caching-vs-Methods"><a href="#Computed-Caching-vs-Methods" class="headerlink" title="Computed Caching vs. Methods"></a>Computed Caching vs. Methods</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in component</span></span><br><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">calculateBooksMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">author</span>.<span class="property">books</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? <span class="string">&#x27;Yes&#x27;</span> : <span class="string">&#x27;No&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">    <span class="comment">// a computed getter</span></span><br><span class="line">    <span class="title function_">publishedBooksMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// `this` points to the component instance</span></span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">author</span>.<span class="property">books</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? <span class="string">&#x27;Yes&#x27;</span> : <span class="string">&#x27;No&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上兩個function輸出結果一模一樣, 差異在於computed內的function有快取的機制</p>
+<p>當computed內使用的原始資料沒有更動時, 會回傳前一次計算好的結果,但Method每次都會計算一次</p>
+<h2 id="Lifecycle-and-Template-Refs-生命週期與模板引用"><a href="#Lifecycle-and-Template-Refs-生命週期與模板引用" class="headerlink" title="Lifecycle and Template Refs 生命週期與模板引用"></a>Lifecycle and Template Refs 生命週期與模板引用</h2><p>要對DOM元素的操作,使用模板引用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;p ref=<span class="string">&quot;p&quot;</span>&gt;hello&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在生命週期初始化Vue元件之後會到<code>mounted</code>狀態<br><code>this.$refs</code>中的<code>this.$refs.p</code>就會等同於<code>&lt;p&gt;</code>標籤的元素</p>
+<p>在掛載後可以在<code>mounted</code>改變<code>&lt;p&gt;</code>標籤的元素的值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">mounted</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">p</span>.<span class="property">textContent</span> = <span class="string">&quot;123&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">ref</span>=<span class="string">&quot;p&quot;</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>這稱為生命週期掛鉤，它允許我們註冊一個callback，以便在組件生命週期的特定時間調用</p>
+<h2 id="Watchers-監聽器"><a href="#Watchers-監聽器" class="headerlink" title="Watchers 監聽器"></a>Watchers 監聽器</h2><p>監聽參數的數值變化, 當數值變化時進行額外操作</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">todoId</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">todoData</span>: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">fetchData</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">todoData</span> = <span class="literal">null</span></span><br><span class="line">      <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(</span><br><span class="line">        <span class="string">`https://jsonplaceholder.typicode.com/todos/<span class="subst">$&#123;<span class="variable language_">this</span>.todoId&#125;</span>`</span></span><br><span class="line">      )</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">todoData</span> = <span class="keyword">await</span> res.<span class="title function_">json</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">fetchData</span>()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">watch</span>: &#123;</span><br><span class="line">    <span class="title function_">todoId</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">fetchData</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Todo id: &#123;&#123; todoId &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;todoId++&quot;</span>&gt;</span>Fetch next todo<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">&quot;!todoData&quot;</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">pre</span> <span class="attr">v-else</span>&gt;</span>&#123;&#123; todoData &#125;&#125;<span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Computed-vs-Watch"><a href="#Computed-vs-Watch" class="headerlink" title="Computed  vs. Watch"></a>Computed  vs. Watch</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">data</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">  <span class="attr">blogPosts</span>: [<span class="string">&quot;123&quot;</span>, <span class="string">&quot;456&quot;</span>, <span class="string">&quot;214&quot;</span>],</span><br><span class="line">  <span class="attr">count</span>: <span class="number">3</span>,</span><br><span class="line">&#125;),</span><br><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">   <span class="title function_">count</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">blogPosts</span>.<span class="property">length</span>;</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">  <span class="attr">blogPosts</span>: &#123;</span><br><span class="line">    <span class="title function_">handler</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">count</span> = newVal.<span class="property">length</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>computed與watch都可以實現顯示當前部落格數量的功能, computed很簡單的可以完成, 但watch需要監聽<code>blogPosts</code>, 還要手動修改另一個參數的值</p>
+<h2 id="Components-元件"><a href="#Components-元件" class="headerlink" title="Components 元件"></a>Components 元件</h2><p>把模組化的元件引用近來</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ChildComp</span> <span class="keyword">from</span> <span class="string">&#x27;./ChildComp.vue&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    <span class="title class_">ChildComp</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// register child component</span></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">ChildComp</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Props-傳參數"><a href="#Props-傳參數" class="headerlink" title="Props 傳參數"></a>Props 傳參數</h2><p>父元件可以透過props來傳遞參數到子元件中</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in child component</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">msg</span>: <span class="title class_">String</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">ChildComp</span> :msg=<span class="string">&quot;greeting&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>傳遞動態參數用<code>v-bind</code></p>
+<h2 id="Emits-發出事件"><a href="#Emits-發出事件" class="headerlink" title="Emits 發出事件"></a>Emits 發出事件</h2><p>子元件觸發父元件事件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-element&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;button @click=&quot;$emit(\&#x27;my-event\&#x27;)&quot;&gt;Click me&lt;/button&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;my-element v-<span class="attr">on</span>:my-event=<span class="string">&quot;doSomething&quot;</span>&gt;&lt;/my-element&gt;</span><br></pre></td></tr></table></figure>
+
+<p>傳遞function用<code>v-on</code></p>
+<h2 id="Slots-插槽"><a href="#Slots-插槽" class="headerlink" title="Slots 插槽"></a>Slots 插槽</h2><p>父元件傳Content給子元件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ChildComp</span> <span class="keyword">from</span> <span class="string">&#x27;./ChildComp.vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    <span class="title class_">ChildComp</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;from parent&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">ChildComp</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">ChildComp</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>child.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以用v-slot傳遞多個slot</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;my-component&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;header&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;footer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;my-component&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>My Component<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is the default slot<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is the footer slot<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line">&lt;/my-component&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Computed-vs-Watch-vs-Methods比較"><a href="#Computed-vs-Watch-vs-Methods比較" class="headerlink" title="Computed vs Watch vs Methods比較"></a>Computed vs Watch vs Methods比較</h2><table>
+<thead>
+<tr>
+<th align="center">Computed</th>
+<th align="center">Watch</th>
+<th align="center">Methods</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">簡單的業務邏輯計算</td>
+<td align="center">耗時的操作和API執行</td>
+<td align="center">可以在Watch, Computed中使用</td>
+</tr>
+<tr>
+<td align="center">可以直接在HTML中使用</td>
+<td align="center">不可以直接在HTML中使用</td>
+<td align="center">可以直接在HTML中使用</td>
+</tr>
+<tr>
+<td align="center">根據依賴的數據計算得出新的數據</td>
+<td align="center">監聽數據的變化,並在數據變化時執行相應的操作</td>
+<td align="center">定義可調用的方法,通常用於執行交互性操作或計算響應data數據變化</td>
+</tr>
+<tr>
+<td align="center">有返回值&#x2F;getter</td>
+<td align="center">沒有返回值</td>
+<td align="center">可以有返回值</td>
+</tr>
+<tr>
+<td align="center">可以使用setter修改data中的參數值</td>
+<td align="center">可以修改data中的參數值</td>
+<td align="center">可以修改data中的參數值</td>
+</tr>
+</tbody></table>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://vuejs.org/tutorial">vuejs.org tutorial</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Image Classification</title>
     <url>/2020/11/15/cs231n-Image-Classification/</url>
     <content><![CDATA[<p>website:<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
@@ -1622,6 +1694,26 @@
       </tags>
   </entry>
   <entry>
+    <title>LINQ查詢語法</title>
+    <url>/2022/11/21/linq_intro/</url>
+    <content><![CDATA[<h2 id="LINQ介紹"><a href="#LINQ介紹" class="headerlink" title="LINQ介紹"></a>LINQ介紹</h2><p>語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用</p>
+<h2 id="LINQ-語法"><a href="#LINQ-語法" class="headerlink" title="LINQ 語法"></a>LINQ 語法</h2><h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line"><span class="comment">// Output: 10 8 6 12</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h3 id="OrderBy"><a href="#OrderBy" class="headerlink" title="OrderBy"></a>OrderBy</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// filter odd number</span></span><br><span class="line"><span class="built_in">int</span>[] numbers = &#123; <span class="number">5</span>, <span class="number">10</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">12</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; numQuery2 = numbers.Where(num =&gt; num % <span class="number">2</span> == <span class="number">0</span>).OrderBy(n =&gt; n);</span><br><span class="line"><span class="comment">// Output:6 8 10 12</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span>[] fruits = &#123; <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;mango&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;passionfruit&quot;</span>, <span class="string">&quot;grape&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> fruit = <span class="string">&quot;mango&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> hasMango = fruits.Contains(fruit);</span><br><span class="line"><span class="comment">// hasMango=true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Product</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> CategoryID &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Category</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> ID &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">ProductWithCategoryName</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> ProductName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> CategoryName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    List&lt;Category&gt; categories = <span class="keyword">new</span> List&lt;Category&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Beverages&quot;</span>, ID=<span class="number">001</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Condiments&quot;</span>, ID=<span class="number">002</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Vegetables&quot;</span>, ID=<span class="number">003</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Grains&quot;</span>, ID=<span class="number">004</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Fruit&quot;</span>, ID=<span class="number">005</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Specify the second data source.</span></span><br><span class="line">    List&lt;Product&gt; products = <span class="keyword">new</span> List&lt;Product&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Cola&quot;</span>,  CategoryID=<span class="number">001</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Tea&quot;</span>,  CategoryID=<span class="number">001</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Mustard&quot;</span>, CategoryID=<span class="number">002</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Pickles&quot;</span>, CategoryID=<span class="number">002</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Carrots&quot;</span>, CategoryID=<span class="number">003</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Bok Choy&quot;</span>, CategoryID=<span class="number">003</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Peaches&quot;</span>, CategoryID=<span class="number">005</span>&#125;,</span><br><span class="line">      <span class="keyword">new</span> Product &#123;Name=<span class="string">&quot;Melons&quot;</span>, CategoryID=<span class="number">005</span>&#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> productWithCategoryNameList = products.Join(categories,</span><br><span class="line">                              p =&gt; p.CategoryID,</span><br><span class="line">                              c =&gt; c.ID,</span><br><span class="line">                              (p, c) =&gt; <span class="keyword">new</span> ProductWithCategoryName</span><br><span class="line">                              &#123;</span><br><span class="line">                                  ProductName = p.Name,</span><br><span class="line">                                  CategoryName = c.Name,</span><br><span class="line">                              &#125;.ToList());</span><br><span class="line"><span class="comment">// productWithCategoryNameList=</span></span><br><span class="line"><span class="comment">// ProductName:Cola        ,CategoryName:Beverages</span></span><br><span class="line"><span class="comment">// ProductName:Tea         ,CategoryName:Beverages</span></span><br><span class="line"><span class="comment">// ProductName:Mustard     ,CategoryName:Condiments</span></span><br><span class="line"><span class="comment">// ProductName:Pickles     ,CategoryName:Condiments</span></span><br><span class="line"><span class="comment">// ProductName:Carrots     ,CategoryName:Vegetables</span></span><br><span class="line"><span class="comment">// ProductName:Bok Choy    ,CategoryName:Vegetables</span></span><br><span class="line"><span class="comment">// ProductName:Peaches     ,CategoryName:Fruit</span></span><br><span class="line"><span class="comment">// ProductName:Melons      ,CategoryName:Fruit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>語法等同於:SELECT * FROM Product JOIN Category ON Product.CategoryID&#x3D;Category.ID</p>
+<p>也可以在LINQ語法中寫入function</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ProductAndCategoryName</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ConcatNameList = products.Join(categories,</span><br><span class="line">                            p =&gt; p.CategoryID,</span><br><span class="line">                            c =&gt; c.ID,</span><br><span class="line">                            (p, c) =&gt;</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="built_in">string</span> str = p.Name + <span class="string">&quot;_&quot;</span> + c.Name;</span><br><span class="line">                                <span class="keyword">return</span> <span class="keyword">new</span> ProductAndCategoryName</span><br><span class="line">                                &#123;</span><br><span class="line">                                    Name = str,</span><br><span class="line">                                &#125;;</span><br><span class="line">                            &#125;);</span><br><span class="line"><span class="comment">// ConcatNameList:                            </span></span><br><span class="line"><span class="comment">// Name:Cola_Beverages</span></span><br><span class="line"><span class="comment">// Name:Tea_Beverages</span></span><br><span class="line"><span class="comment">// Name:Mustard_Condiments</span></span><br><span class="line"><span class="comment">// Name:Pickles_Condiments</span></span><br><span class="line"><span class="comment">// Name:Carrots_Vegetables</span></span><br><span class="line"><span class="comment">// Name:Bok Choy_Vegetables</span></span><br><span class="line"><span class="comment">// Name:Peaches_Fruit</span></span><br><span class="line"><span class="comment">// Name:Melons_Fruit</span></span><br></pre></td></tr></table></figure>
+
+<p>第一個資料來源.Join(第二個資料來源,<br>                    one &#x3D;&gt; 要比較欄位,<br>                    two &#x3D;&gt; 要比較欄位,<br>                    (one, two) &#x3D;&gt; {function})</p>
+<h2 id="ForEach"><a href="#ForEach" class="headerlink" title="ForEach"></a>ForEach</h2><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">List&lt;Category&gt; categories = <span class="keyword">new</span> List&lt;Category&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Beverages&quot;</span>, ID=<span class="number">001</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Condiments&quot;</span>, ID=<span class="number">002</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Vegetables&quot;</span>, ID=<span class="number">003</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Grains&quot;</span>, ID=<span class="number">004</span>&#125;,</span><br><span class="line">        <span class="keyword">new</span> Category &#123;Name=<span class="string">&quot;Fruit&quot;</span>, ID=<span class="number">005</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">categories.ForEach(e =&gt; Console.WriteLine(e.Name));</span><br><span class="line"><span class="comment">// Beverages</span></span><br><span class="line"><span class="comment">// Condiments</span></span><br><span class="line"><span class="comment">// Vegetables</span></span><br><span class="line"><span class="comment">// Grains</span></span><br><span class="line"><span class="comment">// Fruit</span></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>Node Version Manager (NVM):安裝、切換Node.js版本的管理器</title>
     <url>/2022/11/21/nvm-install/</url>
     <content><![CDATA[<h2 id="nvm介紹"><a href="#nvm介紹" class="headerlink" title="nvm介紹"></a>nvm介紹</h2><p>Node Version Manager (NVM) 是用來管理Node.js版本，可以同時安裝多個不同版本，因應不同專案環境去快速做切換</p>
@@ -1669,6 +1761,32 @@
       <tags>
         <tag>node</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>分層架構模式</title>
+    <url>/2022/11/28/software-layer/</url>
+    <content><![CDATA[<h2 id="分層架構"><a href="#分層架構" class="headerlink" title="分層架構"></a>分層架構</h2><p>大多為以下四層:</p>
+<ul>
+<li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
+<li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
+<li>Persistence Layer 持久層: 資料存取</li>
+<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB<span id="more"></span>
+層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</li>
+</ul>
+<p>為何不能直接從表現層訪問資料存取層?</p>
+<p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
+<p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
+<p>雖然隔離層之間的訪問可以降低耦合性，但在某些常用功能(log紀錄，數學運算..)下可以新增一個共用層並調整層的封閉性。</p>
+<h2 id="軟體分層設計優缺點"><a href="#軟體分層設計優缺點" class="headerlink" title="軟體分層設計優缺點"></a>軟體分層設計優缺點</h2><h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3><ul>
+<li>框架簡單好學，跟MVC的概念雷同</li>
+<li>減少了依賴性</li>
+<li>好測試</li>
+</ul>
+<h3 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h3><ul>
+<li>可擴展性低</li>
+<li>層越多trace code越麻煩</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>在hexo新增留言板功能(utterances)</title>
@@ -1736,86 +1854,5 @@
       <tags>
         <tag>blog</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>分層架構模式</title>
-    <url>/2022/11/28/software-layer/</url>
-    <content><![CDATA[<h2 id="分層架構"><a href="#分層架構" class="headerlink" title="分層架構"></a>分層架構</h2><p>大多為以下四層:</p>
-<ul>
-<li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
-<li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
-<li>Persistence Layer 持久層: 資料存取</li>
-<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB<span id="more"></span>
-層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</li>
-</ul>
-<p>為何不能直接從表現層訪問資料存取層?</p>
-<p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
-<p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
-<p>雖然隔離層之間的訪問可以降低耦合性，但在某些常用功能(log紀錄，數學運算..)下可以新增一個共用層並調整層的封閉性。</p>
-<h2 id="軟體分層設計優缺點"><a href="#軟體分層設計優缺點" class="headerlink" title="軟體分層設計優缺點"></a>軟體分層設計優缺點</h2><h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3><ul>
-<li>框架簡單好學，跟MVC的概念雷同</li>
-<li>減少了依賴性</li>
-<li>好測試</li>
-</ul>
-<h3 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h3><ul>
-<li>可擴展性低</li>
-<li>層越多trace code越麻煩</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>31. Next Permutation</title>
-    <url>/2023/05/29/NextPermutation/</url>
-    <content><![CDATA[<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><a href="https://leetcode.com/problems/next-permutation/description/">https://leetcode.com/problems/next-permutation/description/</a></p>
-<p>A <code>permutation</code> of an array of integers is an arrangement of its members into a sequence or linear order.</p>
-<ul>
-<li>For example, for arr &#x3D; [1,2,3], the following are all the permutations of arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].</li>
-</ul>
-<p>The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).</p>
-<ul>
-<li>For example, the next permutation of arr &#x3D; [1,2,3] is [1,3,2].</li>
-<li>Similarly, the next permutation of arr &#x3D; [2,3,1] is [3,1,2].</li>
-<li>While the next permutation of arr &#x3D; [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.</li>
-</ul>
-<p>Given an array of integers nums, find the next permutation of nums.</p>
-<p>The replacement must be in place and use only constant extra memory.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="800"/>
-
-<ol>
-<li>從數列尾端開始向前檢查，直到找到不符合由小到大排列的數字，記錄該數字的索引。在這個例子中，找到數字1，位於第2個索引位置。</li>
-<li>如果都符合由小到大, 直接反轉</li>
-<li>從數列尾端中找到比1大的最小數字，這裡是5。</li>
-<li>將數字1與5交換位置。</li>
-<li>對於索引位置由小到大排列的數字(第3個索引位置開始)進行反轉，710反轉為017。最終得到的排列是245017。</li>
-</ol>
-<pre><code class="cpp">class Solution &#123;
-public:
-    void nextPermutation(vector&lt;int&gt;&amp; nums) &#123;
-        int n = nums.size(), k, l;
-        for (k = n - 2; k &gt;= 0; k--)
-        &#123;
-            if (nums[k] &lt; nums[k + 1])
-            &#123;
-                break;
-            &#125;
-        &#125;
-        if (k == -1)&#123;
-            reverse(nums.begin(), nums.end());
-            return;
-        &#125;
-        reverse(nums.begin() + k + 1, nums.end());
-        for (l = k + 1; l &lt; n; l++)
-        &#123;
-            if (nums[l] &gt; nums[k])
-            &#123;
-                break;
-            &#125;
-        &#125;
-        swap(nums[k], nums[l]);
-    &#125;
-&#125;;
-</code></pre>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
-]]></content>
   </entry>
 </search>
