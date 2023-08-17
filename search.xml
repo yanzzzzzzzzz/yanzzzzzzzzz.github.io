@@ -1401,6 +1401,7 @@
 </ul>
 <p>Given an array of integers nums, find the next permutation of nums.</p>
 <p>The replacement must be in place and use only constant extra memory.</p>
+<span id="more"></span>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="800"/>
 
 <ol>
@@ -1605,8 +1606,6 @@ public:
 
 <p>對數字進行驗證, 如果驗證沒有通過, 會跳出<code>[Vue warn]: Invalid prop: custom validator check failed for prop XXX</code>的警告, 不會影響程式執行</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in child component</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">age</span>: &#123;</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">Number</span>,</span><br><span class="line">      <span class="title function_">validator</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> value &gt; <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
 
 <h3 id="傳遞未定義參數"><a href="#傳遞未定義參數" class="headerlink" title="傳遞未定義參數"></a>傳遞未定義參數</h3><p>如果傳遞未定義在props內的參數到子元件, 會把參數加在<code>&lt;template&gt;</code>內第一層元素上</p>
 <p>通常用來直接定義樣式, 或是用來參數到傳遞到子子子元件, 增加方便性</p>

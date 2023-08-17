@@ -217,10 +217,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-05-29 12:36:57 / Modified: 12:46:51" itemprop="dateCreated datePublished" datetime="2023-05-29T12:36:57+08:00">2023-05-29</time>
+              <time title="Created: 2023-05-29 12:36:57" itemprop="dateCreated datePublished" datetime="2023-05-29T12:36:57+08:00">2023-05-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-08-17 15:19:10" itemprop="dateModified" datetime="2023-08-17T15:19:10+08:00">2023-08-17</time>
+              </span>
 
           
 
@@ -246,44 +252,14 @@
 </ul>
 <p>Given an array of integers nums, find the next permutation of nums.</p>
 <p>The replacement must be in place and use only constant extra memory.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="800"/>
-
-<ol>
-<li>從數列尾端開始向前檢查，直到找到不符合由小到大排列的數字，記錄該數字的索引。在這個例子中，找到數字1，位於第2個索引位置。</li>
-<li>如果都符合由小到大, 直接反轉</li>
-<li>從數列尾端中找到比1大的最小數字，這裡是5。</li>
-<li>將數字1與5交換位置。</li>
-<li>對於索引位置由小到大排列的數字(第3個索引位置開始)進行反轉，710反轉為017。最終得到的排列是245017。</li>
-</ol>
-<pre><code class="cpp">class Solution &#123;
-public:
-    void nextPermutation(vector&lt;int&gt;&amp; nums) &#123;
-        int n = nums.size(), k, l;
-        for (k = n - 2; k &gt;= 0; k--)
-        &#123;
-            if (nums[k] &lt; nums[k + 1])
-            &#123;
-                break;
-            &#125;
-        &#125;
-        if (k == -1)&#123;
-            reverse(nums.begin(), nums.end());
-            return;
-        &#125;
-        reverse(nums.begin() + k + 1, nums.end());
-        for (l = k + 1; l &lt; n; l++)
-        &#123;
-            if (nums[l] &gt; nums[k])
-            &#123;
-                break;
-            &#125;
-        &#125;
-        swap(nums[k], nums[l]);
-    &#125;
-&#125;;
-</code></pre>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/29/NextPermutation/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -484,7 +460,7 @@ public:
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-16 18:01:34" itemprop="dateModified" datetime="2023-08-16T18:01:34+08:00">2023-08-16</time>
+                <time title="Modified: 2023-08-16 18:02:18" itemprop="dateModified" datetime="2023-08-16T18:02:18+08:00">2023-08-16</time>
               </span>
 
           
