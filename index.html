@@ -194,6 +194,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2023/08/23/Vue-alert-box/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/23/Vue-alert-box/" class="post-title-link" itemprop="url">使用vue teleport實作提示框功能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-08-23 17:35:04 / Modified: 17:56:35" itemprop="dateCreated datePublished" datetime="2023-08-23T17:35:04+08:00">2023-08-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>實作顯示在右下角的提示框功能</p>
+<p>修改index.html部分, 在body區域新增一個<code>messages</code>用來放置提示框的位置</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//index.html</span><br><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line">//...</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;messages&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">//...</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/23/Vue-alert-box/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2023/05/29/NextPermutation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -309,7 +377,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-08-23 17:56:27" itemprop="dateModified" datetime="2023-08-23T17:56:27+08:00">2023-08-23</time>
               </span>
 
           
@@ -460,7 +528,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-16 18:02:18" itemprop="dateModified" datetime="2023-08-16T18:02:18+08:00">2023-08-16</time>
+                <time title="Modified: 2023-08-23 17:56:04" itemprop="dateModified" datetime="2023-08-23T17:56:04+08:00">2023-08-23</time>
               </span>
 
           
@@ -930,104 +998,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/11/08/2021-11-08-Optical%20Flow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/08/2021-11-08-Optical%20Flow/" class="post-title-link" itemprop="url">cs131 lecture 15 Optical flow</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-08 20:20:00" itemprop="dateCreated datePublished" datetime="2021-11-08T20:20:00+08:00">2021-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：</p>
-<ul>
-<li>運動方向檢測</li>
-<li>物件分割</li>
-<li>立體視差測量等等</li>
-</ul>
-<h2 id="如何得到影像中的光流"><a href="#如何得到影像中的光流" class="headerlink" title="如何得到影像中的光流"></a>如何得到影像中的光流</h2><p>舉例來說一個影片由多個連續影像組成，我們追蹤不同影像同一點P，第t個frame時位置是P(x1, y1)，在t+1時位置是P(x2, y2)，透過這兩點座標就可以算出運動方向與運動速度</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_example.png'  width='400'/>
-
-<p>要算出這兩點光流的前提：</p>
-<h3 id="亮度恆定"><a href="#亮度恆定" class="headerlink" title="亮度恆定"></a>亮度恆定</h3><p>移動前後兩點的亮度應該是相等的</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_brightness_constancy.png'  width='400'/>
-
-<p>$ I(x, y, t) &#x3D; I(x + u, y + v, t+1) $</p>
-<h3 id="微小的移動"><a href="#微小的移動" class="headerlink" title="微小的移動"></a>微小的移動</h3><img src='https://yanzzzzzzzzz.github.io/img/optical_flow_small_motion.png'  width='400'/>
-
-<p>在以上條件約束的前提下，亮度恆定與微小移動下</p>
-<p>$ I(x, y, t) &#x3D; I(x + u{\delta}t, y + v{\delta}t, {\delta}t) $</p>
-<p>對等號右邊的式子進行泰勒展開式,保留一階項</p>
-<p>$ I(x + u, y + v, t+1) \approx I(x,y,t)+I_x∙u+I_y∙v+I_t$</p>
-<p>假設亮度不變，下個時間同個點的亮度相等</p>
-<p>$ I_x∙u+I_y∙v+I_t \approx 0$</p>
-<p>$ \nabla I∙[u,v]^T + I_t &#x3D; 0 $<br>不能透過等式 $ \nabla I∙[u,v]^T + I_t &#x3D; 0 $ 解出u,v，因為只有一個等式內含有兩個未知數u,v</p>
-<h2 id="應用"><a href="#應用" class="headerlink" title="應用"></a>應用</h2><p>用來預估車流移動方向的光流法:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow.png'  width='400'/>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1097,7 +1067,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1212,59 +1182,6 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 

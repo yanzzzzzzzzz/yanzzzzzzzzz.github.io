@@ -194,6 +194,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/" class="post-title-link" itemprop="url">cs131 lecture 3 Filters And Convolutions</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-18 20:32:00" itemprop="dateCreated datePublished" datetime="2021-02-18T20:32:00+08:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
+</blockquote>
+<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
+<li>從影像中取出有用的訊息或轉換影像屬性<ul>
+<li>擷取特徵：edge, corners, blobs detection…</li>
+<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
+<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
+</ul>
+</li>
+</ul>
+<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
+<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
+<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
+<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -658,7 +748,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
