@@ -1956,8 +1956,8 @@ public:
       </tags>
   </entry>
   <entry>
-    <title>使用vue teleport實作提示框功能</title>
-    <url>/2023/08/23/Vue-alert-box/</url>
+    <title>使用Vue Teleport實作提示框功能</title>
+    <url>/2023/08/23/Vue-teleport-alert-box/</url>
     <content><![CDATA[<p>實作顯示在右下角的提示框功能</p>
 <p>修改index.html部分, 在body區域新增一個<code>messages</code>用來放置提示框的位置</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">//index.html</span><br><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line">//...</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;messages&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">//...</span><br></pre></td></tr></table></figure>
