@@ -194,6 +194,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2023/09/01/mssql-login-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/01/mssql-login-problem/" class="post-title-link" itemprop="url">MSSQL 無法連線至XXX 問題</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-01 10:57:00 / Modified: 11:35:51" itemprop="dateCreated datePublished" datetime="2023-09-01T10:57:00+08:00">2023-09-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="https://yanzzzzzzzzz.github.io/img/mssql-login-fail.png" />
+
+<p>以下可能原因:</p>
+<h2 id="伺服器僅設定為Windows驗證模式"><a href="#伺服器僅設定為Windows驗證模式" class="headerlink" title="伺服器僅設定為Windows驗證模式"></a>伺服器僅設定為Windows驗證模式</h2><p>物件總管-&gt;伺服器右鍵選擇屬性-&gt;安全性-&gt;變更伺服器驗證為SQL Server及Windows驗證模式</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-setting-login-mode.png" />
+
+<p>需要重新啟動SQL SERVER</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-reboot.png" />
+
+<h2 id="不存在的user"><a href="#不存在的user" class="headerlink" title="不存在的user"></a>不存在的user</h2><p>新建一個跟登入名稱相同的user</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-create-new-user.png" />
+
+<p>設定讀取資料庫權限</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-user-db-permit-setting.png" />
+
+<h2 id="未啟用的user"><a href="#未啟用的user" class="headerlink" title="未啟用的user"></a>未啟用的user</h2><p>如果是已經創建的user, 檢查是否被設置為停用user</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-type-enable.png" />
+
+<p>物件總管-&gt;伺服器-&gt;安全性-&gt;登入-&gt;找到指定user名稱右鍵-&gt;屬性-&gt;狀態</p>
+<p>登入的地方把<code>已停用</code>改為<code>已啟用</code></p>
+<h2 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h2><p><a target="_blank" rel="noopener" href="https://shaurong.blogspot.com/2021/06/sql-server-2019.html">[研究] SQL Server 2019 - 與伺服器的連線已建立成功，但在登入程序時發生錯誤。</a></p>
+<p><a target="_blank" rel="noopener" href="https://dog0416.blogspot.com/2015/04/databasesql-server-microsoft-sql-server.html">[Database][SQL Server] 使用者 的登入失敗。 Microsoft SQL Server, 錯誤: 18456</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2023/08/23/Vue-teleport-alert-box/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -225,7 +305,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-24 09:18:23" itemprop="dateModified" datetime="2023-08-24T09:18:23+08:00">2023-08-24</time>
+                <time title="Modified: 2023-09-01 11:36:24" itemprop="dateModified" datetime="2023-09-01T11:36:24+08:00">2023-09-01</time>
               </span>
 
           
@@ -239,7 +319,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>實作顯示在右下角的提示框功能</p>
+          <p>實作在右下角顯示多個提示框功能</p>
 <p>修改index.html部分, 在body區域新增一個<code>messages</code>用來放置提示框的位置</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//index.html</span><br><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line">//...</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;messages&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">//...</span><br></pre></td></tr></table></figure>
           <!--noindex-->
@@ -299,7 +379,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-17 15:19:10" itemprop="dateModified" datetime="2023-08-17T15:19:10+08:00">2023-08-17</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -383,7 +463,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-23 17:56:27" itemprop="dateModified" datetime="2023-08-23T17:56:27+08:00">2023-08-23</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -458,7 +538,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -534,7 +614,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-23 17:56:04" itemprop="dateModified" datetime="2023-08-23T17:56:04+08:00">2023-08-23</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -611,7 +691,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -688,7 +768,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -767,7 +847,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -840,7 +920,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
 
           
@@ -867,129 +947,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2022/11/14/utterancesInHexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yanzzzz">
-      <meta itemprop="description" content="yanzzzz blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanzzzz blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/14/utterancesInHexo/" class="post-title-link" itemprop="url">在hexo新增留言板功能(utterances)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-14 22:58:51" itemprop="dateCreated datePublished" datetime="2022-11-14T22:58:51+08:00">2022-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>過去對 blog 的留言板功能用過 <a target="_blank" rel="noopener" href="https://disqus.com/">Disqus</a>，用了之後會在留言處自動插入廣告<br>看到 utterances 使用 github issue 當作留言板的儲存位置覺得滿酷的，就來研究一下</p>
-<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><ul>
-<li>hexo 6.3.0</li>
-<li>Next theme</li>
-<li>npm 8.5.5</li>
-<li>Windows 10</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
-<li><p>到 GitHub 創建一個公開的儲存庫</p>
-</li>
-<li><p>到<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">utterances app</a>並在 GitHub 上啟用，選擇剛剛新增的儲存庫</p>
-<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_1.png"  width="400"/>
-</li>
-<li><p>到<a target="_blank" rel="noopener" href="https://utteranc.es/">utterances</a>官網進行參數設定，下拉到 Repository 處 repo:填入留言板綁定的專案名，圖片中有提到要注意的事項:專案要是公開的、有授權<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">utterances app</a></p>
-<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration.png"  width="400"/>
-</li>
-<li><p>設定 issue 標題取名方式，有以下幾種:</p>
-<ul>
-<li>Issue title contains page pathname</li>
-<li>Issue title contains page URL</li>
-<li>Issue title contains page title</li>
-<li>Issue title contains page og:title</li>
-<li>Specific issue number</li>
-<li>Issue title contains specific term</li>
-</ul>
-</li>
-<li><p>設定 issue 標記名稱(選填)</p>
-</li>
-<li><p>設定留言板主題配色</p>
-<ul>
-<li>GitHub Light</li>
-<li>GitHub Dark</li>
-<li>Preferred Color Scheme</li>
-<li>GitHub Dark Orange</li>
-<li>Icy Dark</li>
-<li>Dark Blue</li>
-<li>Photon Dark</li>
-<li>Boxy Light</li>
-<li>Gruvbox Dark</li>
-</ul>
-</li>
-<li><p>建立好的儲存庫透過 hexo 建置好一個 blog，並修改成 Next 樣式</p>
-</li>
-<li><p>複製自動產生的程式碼到 themes\next\layout_partials\comments.swig</p>
-<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_2.png"  width="400"/>
-<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_3.png"  width="400"/>
-</li>
-<li><p>在 theme\next_config.yml 最下面加入啟用 utterances 語法</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">utterances</span>: <span class="attr">enable</span>: <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="我碰到的-bug"><a href="#我碰到的-bug" class="headerlink" title="我碰到的 bug"></a>我碰到的 bug</h2><p>官方教學跟各種線上教學都非常多也非常詳細，但我竟然 Debug 了一小時…<br>在做完以上流程後出現了留言功能，但在按下登入時…</p>
-<img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_4.png"  width="400"/>
-
-<p>網址觀察後發現是config的url + 當下文章的path</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/2022/11/14/post/?utterances=2ea222cae0003a078fc8aa047N244Fhi3TkHCsP8Hl%2F9pfC29qC7R2n1HjJm3apPbnWhu6UcHQz8c0ueHm%2FWRMWuA7WS2%2FFH1ykmbf2OxNakOqPEWQR4krMr7rU6vwG7gyd0lpDR1hf4r%2FuNirY%3D</span><br></pre></td></tr></table></figure>
-
-<p>因此將_config.yml url，改成設定的 repo 位置就可以了<br><img src="https://yanzzzzzzzzz.github.io/img/utterances_configuration_5.png"  width="400"/></p>
-
       
     </div>
 
@@ -1073,7 +1030,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1188,6 +1145,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

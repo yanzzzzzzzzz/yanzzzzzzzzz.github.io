@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/precision-and-recall.png">
 <meta property="og:image" content="https://yanzzzzzzzzz.github.io/img/F-score.png">
 <meta property="article:published_time" content="2021-08-10T03:24:00.000Z">
-<meta property="article:modified_time" content="2023-05-29T04:37:01.833Z">
+<meta property="article:modified_time" content="2023-09-01T03:35:51.693Z">
 <meta property="article:author" content="yanzzzz">
 <meta property="article:tag" content="cs131">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-29 12:37:01" itemprop="dateModified" datetime="2023-05-29T12:37:01+08:00">2023-05-29</time>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,18 +269,17 @@
 <p>經過多年的資料量擴增，變為20個類別，含有11530張影像，並且有27450個ROI影像與6929個更精細的分割影像區域，並加入影像分割挑戰<br>競賽從2005年到2012年停止<br><img src='https://yanzzzzzzzzz.github.io/img/PACAL-VOC.png'  width='400'/></p>
 <h4 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h4><p><a target="_blank" rel="noopener" href="http://host.robots.ox.ac.uk/pascal/VOC/">PASCAL Visual Object Classes Homepage</a></p>
 <p><a target="_blank" rel="noopener" href="https://paperswithcode.com/sota/semantic-segmentation-on-pascal-voc-2012">paperswithcode PASCAL VOC Semantic Segmentation</a></p>
-<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="介紹-1"><a href="#介紹-1" class="headerlink" title="介紹"></a>介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
+<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="ILSVR介紹"><a href="#ILSVR介紹" class="headerlink" title="ILSVR介紹"></a>ILSVR介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
 <p>其中ImageNet的標記類別是根據WordNet的結構，WordNet可以想成是一個辭典，這個辭典把相近意義的同義詞連結再一起，成為一個網路架構</p>
 <img src='https://yanzzzzzzzzz.github.io/img/word_tree.png'  width='400'/>
 引用YOLO9000的圖來說明，WordNet結構是一個樹狀結構，一個節點下有多個子節點，例如飛機節點，下面有雙翼飛機、噴射機、空中巴士、隱形戰鬥機，因此在ImageNet中看到這些標記類別，都可以視為飛機類別
-#### 相關連結
-[ImageNet Home](https://www.image-net.org/challenges/LSVRC/)
 
+<h4 id="ILSVR相關連結"><a href="#ILSVR相關連結" class="headerlink" title="ILSVR相關連結"></a>ILSVR相關連結</h4><p><a target="_blank" rel="noopener" href="https://www.image-net.org/challenges/LSVRC/">ImageNet Home</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">Download ImageNet Data on Kaggle</a></p>
 <img src='https://yanzzzzzzzzz.github.io/img/paperswithcode-imagenet.png'  width='400'/>
-[paperswithcode ImageNet object detection](https://paperswithcode.com/sota/image-classification-on-imagenet)的數據可以看到歷年來ImageNet影像分類比賽準確率的模型
 
-<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="介紹-2"><a href="#介紹-2" class="headerlink" title="介紹"></a>介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
+<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/sota/image-classification-on-imagenet">paperswithcode ImageNet object detection</a><br>的數據可以看到歷年來ImageNet影像分類比賽準確率的模型</p>
+<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="COCO介紹"><a href="#COCO介紹" class="headerlink" title="COCO介紹"></a>COCO介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
 <ul>
 <li>具有物件分割區塊</li>
 <li>330K的影像數，有200K已經標記</li>
@@ -290,7 +289,7 @@
 <li>每張圖片都有五個人工書寫的英文註釋</li>
 <li>250000個person類別針對肢體做標記</li>
 </ul>
-<h4 id="相關連結-1"><a href="#相關連結-1" class="headerlink" title="相關連結"></a>相關連結</h4><p><a target="_blank" rel="noopener" href="https://cocodataset.org/#home">cocodataset home</a></p>
+<h4 id="COCO相關連結"><a href="#COCO相關連結" class="headerlink" title="COCO相關連結"></a>COCO相關連結</h4><p><a target="_blank" rel="noopener" href="https://cocodataset.org/#home">cocodataset home</a></p>
 <p><a target="_blank" rel="noopener" href="https://paperswithcode.com/sota/object-detection-on-coco">paperswithcode coco object detection</a></p>
 <h2 id="評估模型方法"><a href="#評估模型方法" class="headerlink" title="評估模型方法"></a>評估模型方法</h2><p>在物件檢測中，常使用precision, recall來評估模型<br>講到precision, recall前先介紹混淆矩陣與真陽TP、真陰TN、偽陽FP、偽陰FN</p>
 <ul>
@@ -404,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Benchmarks"><span class="nav-number">1.</span> <span class="nav-text">Benchmarks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PASCAL-VOC-Challenge"><span class="nav-number">1.1.</span> <span class="nav-text">PASCAL VOC Challenge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">介紹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">相關連結</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><span class="nav-number">1.2.</span> <span class="nav-text">ImageNet Large Scale Visual Recognition Challenge (ILSVR)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%B4%B9-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">介紹</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Objects-in-Context-COCO"><span class="nav-number">1.3.</span> <span class="nav-text">Common Objects in Context (COCO)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%B4%B9-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">介紹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">相關連結</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A9%95%E4%BC%B0%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">評估模型方法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Benchmarks"><span class="nav-number">1.</span> <span class="nav-text">Benchmarks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PASCAL-VOC-Challenge"><span class="nav-number">1.1.</span> <span class="nav-text">PASCAL VOC Challenge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">介紹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">相關連結</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><span class="nav-number">1.2.</span> <span class="nav-text">ImageNet Large Scale Visual Recognition Challenge (ILSVR)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ILSVR%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.2.1.</span> <span class="nav-text">ILSVR介紹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ILSVR%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">ILSVR相關連結</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Objects-in-Context-COCO"><span class="nav-number">1.3.</span> <span class="nav-text">Common Objects in Context (COCO)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#COCO%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.3.1.</span> <span class="nav-text">COCO介紹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COCO%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90"><span class="nav-number">1.3.2.</span> <span class="nav-text">COCO相關連結</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A9%95%E4%BC%B0%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">評估模型方法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -418,7 +417,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

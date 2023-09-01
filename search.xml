@@ -18,69 +18,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 1 Introduction</title>
-    <url>/2021/02/08/2021-02-08-cs131-lecture-1-introduction/</url>
-    <content><![CDATA[<h2 id="課程介紹"><a href="#課程介紹" class="headerlink" title="課程介紹"></a>課程介紹</h2><p>CS131 是史丹佛大學所開設的電腦視覺課程<br>主要預備技能與知識有</p>
-<ul>
-<li>Python 應用</li>
-<li>線性代數</li>
-<li>微積分</li>
-<li>機率與統計</li>
-</ul>
-<p>有了以上的基礎知識，在接下來的課程會比較得心應手</p>
-<p>而除了 CS131 在史丹佛有電腦視覺課程外，另外還有進階課程 CS231a、到 DNN 領域的 CS231n<br>讓想更進一步學習的人有更多選擇</p>
-<h2 id="Introduction-to-Computer-Vision"><a href="#Introduction-to-Computer-Vision" class="headerlink" title="Introduction to Computer Vision"></a>Introduction to Computer Vision</h2><p>人之所以看得到影像，是由於光線照到物體，經由眼睛接收到影像，再傳送到大腦做對應的舉動<br>ex:騎車看到紅燈會停車、看到貓咪會想用手去摸…<br>而電腦視覺所做的事也是如此，用一個攝影機接收影像資訊，傳送到電腦，經過計算後進行相應的舉動</p>
-<p><code>電腦視覺與人眼的動作流程差異：</code><br><code>打光到物體成像 -&gt; 接受影像(人眼\sensor) -&gt; 理解(大腦\電腦) 並做出動作</code></p>
-<p>而人眼的視覺感知是非常強的，對物體分析、幾何認知能力在電腦視覺上都很難去做<br>但偶爾也有出錯(被騙)的時候，人眼視覺錯覺：<br><a href="https://zh.wikipedia.org/wiki/%E6%A3%8B%E7%9B%A4%E9%99%B0%E5%BD%B1%E9%8C%AF%E8%A6%BA">棋盤陰影錯覺</a></p>
-<p>電腦視覺的挑戰：將數位影像像素值轉換成有用的訊息<br>人眼看到的與電腦視覺看到的東西是截然不同的<br>如何建構一個方法(演算法)可以像人眼一樣識別幾何、分析物體、由影像取出我們想知道的資訊。</p>
-<img src="https://yanzzzzzzzzz.github.io/img/computer-see.png"  width="400"/>
-
-<h2 id="電腦視覺應用"><a href="#電腦視覺應用" class="headerlink" title="電腦視覺應用"></a>電腦視覺應用</h2><ul>
-<li>3D 建模</li>
-<li>臉部辨識：臉部偵測、笑臉檢測</li>
-<li>生物辨識：指紋辨識、虹膜辨識、人臉解鎖</li>
-<li>文字辨識 OCR</li>
-<li>影像分類：<a href="https://www.wordstream.com/google-goggles-app-for-mobile">手機上執行物品搜尋器-Google Googles</a>、<a href="https://www.youtube.com/watch?v=5f_eSU9UYHA&ab_channel=SnazzyLabs">商品搜尋功能 app-snapTell</a></li>
-<li>自駕車</li>
-<li>智慧超市</li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 3 Filters And Convolutions</title>
-    <url>/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
-</blockquote>
-<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
-<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
-<li>從影像中取出有用的訊息或轉換影像屬性<ul>
-<li>擷取特徵：edge, corners, blobs detection…</li>
-<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
-<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
-</ul>
-</li>
-</ul>
-<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
-<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
-<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
-<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 2 Images And Transformations</title>
     <url>/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/</url>
     <content><![CDATA[<h2 id="數位影像的類別"><a href="#數位影像的類別" class="headerlink" title="數位影像的類別"></a>數位影像的類別</h2><img src="https://yanzzzzzzzzz.github.io/img/image-type.jpg"  width="400"/>
@@ -125,6 +62,41 @@
 
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="http://vision.stanford.edu/teaching/cs131_fall2021/index.html">CS131 Computer Vision: Foundations and Applications</a></p>
 <p><a href="https://www.jianshu.com/p/7e701d7bfd79">写给大家看的“透视除法” —— 齐次坐标和投影</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 1 Introduction</title>
+    <url>/2021/02/08/2021-02-08-cs131-lecture-1-introduction/</url>
+    <content><![CDATA[<h2 id="課程介紹"><a href="#課程介紹" class="headerlink" title="課程介紹"></a>課程介紹</h2><p>CS131 是史丹佛大學所開設的電腦視覺課程<br>主要預備技能與知識有</p>
+<ul>
+<li>Python 應用</li>
+<li>線性代數</li>
+<li>微積分</li>
+<li>機率與統計</li>
+</ul>
+<p>有了以上的基礎知識，在接下來的課程會比較得心應手</p>
+<p>而除了 CS131 在史丹佛有電腦視覺課程外，另外還有進階課程 CS231a、到 DNN 領域的 CS231n<br>讓想更進一步學習的人有更多選擇</p>
+<h2 id="Introduction-to-Computer-Vision"><a href="#Introduction-to-Computer-Vision" class="headerlink" title="Introduction to Computer Vision"></a>Introduction to Computer Vision</h2><p>人之所以看得到影像，是由於光線照到物體，經由眼睛接收到影像，再傳送到大腦做對應的舉動<br>ex:騎車看到紅燈會停車、看到貓咪會想用手去摸…<br>而電腦視覺所做的事也是如此，用一個攝影機接收影像資訊，傳送到電腦，經過計算後進行相應的舉動</p>
+<p><code>電腦視覺與人眼的動作流程差異：</code><br><code>打光到物體成像 -&gt; 接受影像(人眼\sensor) -&gt; 理解(大腦\電腦) 並做出動作</code></p>
+<p>而人眼的視覺感知是非常強的，對物體分析、幾何認知能力在電腦視覺上都很難去做<br>但偶爾也有出錯(被騙)的時候，人眼視覺錯覺：<br><a href="https://zh.wikipedia.org/wiki/%E6%A3%8B%E7%9B%A4%E9%99%B0%E5%BD%B1%E9%8C%AF%E8%A6%BA">棋盤陰影錯覺</a></p>
+<p>電腦視覺的挑戰：將數位影像像素值轉換成有用的訊息<br>人眼看到的與電腦視覺看到的東西是截然不同的<br>如何建構一個方法(演算法)可以像人眼一樣識別幾何、分析物體、由影像取出我們想知道的資訊。</p>
+<img src="https://yanzzzzzzzzz.github.io/img/computer-see.png"  width="400"/>
+
+<h2 id="電腦視覺應用"><a href="#電腦視覺應用" class="headerlink" title="電腦視覺應用"></a>電腦視覺應用</h2><ul>
+<li>3D 建模</li>
+<li>臉部辨識：臉部偵測、笑臉檢測</li>
+<li>生物辨識：指紋辨識、虹膜辨識、人臉解鎖</li>
+<li>文字辨識 OCR</li>
+<li>影像分類：<a href="https://www.wordstream.com/google-goggles-app-for-mobile">手機上執行物品搜尋器-Google Googles</a>、<a href="https://www.youtube.com/watch?v=5f_eSU9UYHA&ab_channel=SnazzyLabs">商品搜尋功能 app-snapTell</a></li>
+<li>自駕車</li>
+<li>智慧超市</li>
+</ul>
 ]]></content>
       <categories>
         <category>course</category>
@@ -221,6 +193,34 @@
       </tags>
   </entry>
   <entry>
+    <title>cs131 lecture 3 Filters And Convolutions</title>
+    <url>/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
+</blockquote>
+<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
+<li>從影像中取出有用的訊息或轉換影像屬性<ul>
+<li>擷取特徵：edge, corners, blobs detection…</li>
+<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
+<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
+</ul>
+</li>
+</ul>
+<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
+<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
+<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
+<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs131 lecture 5 Features And Fitting-RANSAC</title>
     <url>/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/</url>
     <content><![CDATA[<h2 id="線段檢測的難題"><a href="#線段檢測的難題" class="headerlink" title="線段檢測的難題"></a>線段檢測的難題</h2><ul>
@@ -284,6 +284,76 @@
 </li>
 </ul>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://zhuanlan.zhihu.com/p/62238520">RANSAC 算法详解(附 Python 拟合直线模型代码)</a><br><a href="https://blog.csdn.net/tangwei2014/article/details/38390463">随机抽样一致(Random Sample Consensus, RANSAC)</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-Laplacian &amp; DoG</title>
+    <url>/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/</url>
+    <content><![CDATA[<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
+<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
+<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
+
+<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
+<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
+<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
+<p>其中 G 是高斯函數</p>
+<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
+<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
+<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
+<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
+
+<ul>
+<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
+<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-SIFT</title>
+    <url>/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/</url>
+    <content><![CDATA[<p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
+<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
+<ul>
+<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
+<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
+</ul>
+<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
+
+<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
+<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
+<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
+<ul>
+<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
+<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
+<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
+<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
+</ul>
+<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
+
+<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
+<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
+<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
+<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
+<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
+<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
+<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>course</category>
@@ -360,76 +430,6 @@
 <li><a href="https://blog.csdn.net/u011534057/article/details/77775974">Harris Corner Detector 公式推導以及具體含義</a></li>
 <li><a href="https://senitco.github.io/2017/06/18/image-feature-harris/">图像特征之 Harris 角点检测</a></li>
 <li><a href="https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection">why eigenvalues concerned in Harris corner detection?</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 6 Feature Descriptors-Laplacian &amp; DoG</title>
-    <url>/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/</url>
-    <content><![CDATA[<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
-<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
-<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
-
-<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
-<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
-<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
-<p>其中 G 是高斯函數</p>
-<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
-<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
-<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
-<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
-
-<ul>
-<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
-<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 6 Feature Descriptors-SIFT</title>
-    <url>/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/</url>
-    <content><![CDATA[<p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
-<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
-<ul>
-<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
-<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
-</ul>
-<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
-
-<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
-<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
-<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
-<ul>
-<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
-<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
-<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
-<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
-</ul>
-<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
-
-<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
-<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
-<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
-<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
-<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
-<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
-<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -682,34 +682,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 11 Image Resizing-Image Retargeting Overview</title>
-    <url>/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/</url>
-    <content><![CDATA[<p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
-<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
-<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
-<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
-
-<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
-<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
-<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
-<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
-<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
-<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
-<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
-<p>重要指的可以是人眼經常會去特別關注的地方</p>
-<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
-
-<p><a href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
-<p><a href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 11 Image Resizing-Seam Carving</title>
     <url>/2021/04/10/2021-04-10-cs131-lecture-11-Seam-carving-algorithm/</url>
     <content><![CDATA[<p>如何保留重要的資訊又縮減尺寸，其中定義甚麼是重要，甚麼是不重要的影像資訊</p>
@@ -812,6 +784,82 @@
       </tags>
   </entry>
   <entry>
+    <title>cs131 lecture 11 Image Resizing-Image Retargeting Overview</title>
+    <url>/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/</url>
+    <content><![CDATA[<p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
+<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
+<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
+<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
+
+<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
+<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
+<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
+<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
+<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
+<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
+<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
+<p>重要指的可以是人眼經常會去特別關注的地方</p>
+<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
+
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
+<p><a href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 12 visual recognition</title>
+    <url>/2021/04/17/2021-04-17-visual-recognition-task/</url>
+    <content><![CDATA[<h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
+<li>Objection Detection</li>
+<li>Objection localization</li>
+<li>VQA(Visual Question Answering)</li>
+</ul>
+<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
+<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
+<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
+
+<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
+
+<p>訓練階段重點：</p>
+<ul>
+<li>訓練資料：輸入的訓練影像與標記類別</li>
+<li>定義要擷取的影像特徵</li>
+<li>訓練方法</li>
+</ul>
+<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
+<ul>
+<li>共有八類，每類41張影像，共有3280張影像</li>
+<li>解析度1024 * 768</li>
+<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
+
+<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
+
+<p>提到了幾個特徵提取方法</p>
+<ul>
+<li>Global RGB histogram</li>
+<li>整體形狀分析：PCA-based methods</li>
+<li>局部形狀特徵：<a href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
+<li>紋理：Filter banks</li>
+</ul>
+<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
+<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>K-nearest-neighbor-algorithm</title>
     <url>/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/</url>
     <content><![CDATA[<h2 id="機器學習架構"><a href="#機器學習架構" class="headerlink" title="機器學習架構"></a>機器學習架構</h2><img src='https://yanzzzzzzzzz.github.io/img/ml-framework.png'  width='400'/>
@@ -874,54 +922,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 12 visual recognition</title>
-    <url>/2021/04/17/2021-04-17-visual-recognition-task/</url>
-    <content><![CDATA[<h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
-<li>Objection Detection</li>
-<li>Objection localization</li>
-<li>VQA(Visual Question Answering)</li>
-</ul>
-<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
-<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
-<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
-
-<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
-
-<p>訓練階段重點：</p>
-<ul>
-<li>訓練資料：輸入的訓練影像與標記類別</li>
-<li>定義要擷取的影像特徵</li>
-<li>訓練方法</li>
-</ul>
-<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
-<ul>
-<li>共有八類，每類41張影像，共有3280張影像</li>
-<li>解析度1024 * 768</li>
-<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
-
-<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
-
-<p>提到了幾個特徵提取方法</p>
-<ul>
-<li>Global RGB histogram</li>
-<li>整體形狀分析：PCA-based methods</li>
-<li>局部形狀特徵：<a href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
-<li>紋理：Filter banks</li>
-</ul>
-<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
-<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 13 Visual bag of words</title>
     <url>/2021/06/11/2021-06-11-Visual-bag-of-words/</url>
     <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>Visual bag of words視覺詞袋模型概念：將影像取出具有特徵的地方，存在待比對區域中，新影像進來時，逐一比對影像符合詞袋中哪個的特徵比較多，就跟詞袋中的影像越相似，常用來進行影像分類或影像檢索</p>
@@ -974,6 +974,73 @@
 <p>再透過k-means分群法將特徵分成1000群</p>
 <p>訓練一個SVM mdoel，輸入資料為k-means的群心與對應的類別標籤</p>
 <p>輸入測試資料進行分類評估model準確度</p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation</title>
+    <url>/2021/08/10/2021-08-10-dpm_detection/</url>
+    <content><![CDATA[<p>物件檢測是視覺中常見的任務之一，在影像中透過各種演算法來偵測到物件位置，常見的檢測如找到物件位置，並用矩形框標註，更精細一點的可以分割出物件的輪廓，其中會遇到的挑戰:</p>
+<ul>
+<li>物件亮度不同</li>
+<li>影像角度不同</li>
+<li>物件的形狀變化</li>
+<li>同類型不同型態的變化，例如顏色</li>
+</ul>
+<p>因此為了測試演算法在不同類別上都能有強大的適應性，網路上有多種不同的大型影像資料庫，並附上物件的位置、類別資訊來進行驗證，以下介紹常見的影像資料庫PASCAL VOC、ImageNet、COCO</p>
+<h2 id="Benchmarks"><a href="#Benchmarks" class="headerlink" title="Benchmarks"></a>Benchmarks</h2><h3 id="PASCAL-VOC-Challenge"><a href="#PASCAL-VOC-Challenge" class="headerlink" title="PASCAL VOC Challenge"></a>PASCAL VOC Challenge</h3><h4 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h4><p>網頁上有每一年的資料更動，起初只有四個類別，1578張影像，比賽方式為檢測與分類</p>
+<p>經過多年的資料量擴增，變為20個類別，含有11530張影像，並且有27450個ROI影像與6929個更精細的分割影像區域，並加入影像分割挑戰<br>競賽從2005年到2012年停止<br><img src='https://yanzzzzzzzzz.github.io/img/PACAL-VOC.png'  width='400'/></p>
+<h4 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h4><p><a href="http://host.robots.ox.ac.uk/pascal/VOC/">PASCAL Visual Object Classes Homepage</a></p>
+<p><a href="https://paperswithcode.com/sota/semantic-segmentation-on-pascal-voc-2012">paperswithcode PASCAL VOC Semantic Segmentation</a></p>
+<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="ILSVR介紹"><a href="#ILSVR介紹" class="headerlink" title="ILSVR介紹"></a>ILSVR介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
+<p>其中ImageNet的標記類別是根據WordNet的結構，WordNet可以想成是一個辭典，這個辭典把相近意義的同義詞連結再一起，成為一個網路架構</p>
+<img src='https://yanzzzzzzzzz.github.io/img/word_tree.png'  width='400'/>
+引用YOLO9000的圖來說明，WordNet結構是一個樹狀結構，一個節點下有多個子節點，例如飛機節點，下面有雙翼飛機、噴射機、空中巴士、隱形戰鬥機，因此在ImageNet中看到這些標記類別，都可以視為飛機類別
+
+<h4 id="ILSVR相關連結"><a href="#ILSVR相關連結" class="headerlink" title="ILSVR相關連結"></a>ILSVR相關連結</h4><p><a href="https://www.image-net.org/challenges/LSVRC/">ImageNet Home</a></p>
+<p><a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">Download ImageNet Data on Kaggle</a></p>
+<img src='https://yanzzzzzzzzz.github.io/img/paperswithcode-imagenet.png'  width='400'/>
+
+<p><a href="https://paperswithcode.com/sota/image-classification-on-imagenet">paperswithcode ImageNet object detection</a><br>的數據可以看到歷年來ImageNet影像分類比賽準確率的模型</p>
+<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="COCO介紹"><a href="#COCO介紹" class="headerlink" title="COCO介紹"></a>COCO介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
+<ul>
+<li>具有物件分割區塊</li>
+<li>330K的影像數，有200K已經標記</li>
+<li>包含1.5M個物件</li>
+<li>物件類別有80類</li>
+<li>場景分類有91類</li>
+<li>每張圖片都有五個人工書寫的英文註釋</li>
+<li>250000個person類別針對肢體做標記</li>
+</ul>
+<h4 id="COCO相關連結"><a href="#COCO相關連結" class="headerlink" title="COCO相關連結"></a>COCO相關連結</h4><p><a href="https://cocodataset.org/#home">cocodataset home</a></p>
+<p><a href="https://paperswithcode.com/sota/object-detection-on-coco">paperswithcode coco object detection</a></p>
+<h2 id="評估模型方法"><a href="#評估模型方法" class="headerlink" title="評估模型方法"></a>評估模型方法</h2><p>在物件檢測中，常使用precision, recall來評估模型<br>講到precision, recall前先介紹混淆矩陣與真陽TP、真陰TN、偽陽FP、偽陰FN</p>
+<ul>
+<li>真陽(True Positive, TP):預測為真而實際為真</li>
+<li>真陰(True Negative, TN):預測為假而實際為假</li>
+<li>偽陽(Flase Positive, FP):預測為真而實際為假</li>
+<li>偽陰(Flase Negative, FN):預測為假而實際為真</li>
+</ul>
+<p>precision, recall公式:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/precision-and-recall.png'  width='400'/>
+
+<p>precision公式意義:預測的為正樣本的結果中，預測正確的比率，稱為準確率</p>
+<p>recll公式意義:取出所有正樣本結果，實際預測多少正樣本的比例，稱為召回率</p>
+<p>以垃圾郵件分類器來舉例precision, recall數值高低的關係</p>
+<p>垃圾郵件資料為正樣本, 不是垃圾郵件的資料為負樣本</p>
+<p>分類器的precision高, recall高, 代表這模型非常棒, 具有濾除垃圾郵件的能力</p>
+<p>precision高, recall低, 代表這模型預估是垃圾郵件的正確率很高, 但實際抓到垃圾郵件的數量少, 是謹慎的模型</p>
+<p>precision低, recall高, 代表這模型垃圾郵件幾乎都有抓到, 但誤判率高, 是寬鬆的模型</p>
+<p>precision低, recall低, 這模型沒用了</p>
+<p>好的模型是具有高準確率，又有高召回率，因此可以使用我兩個都要的F-score指標</p>
+<img src='https://yanzzzzzzzzz.github.io/img/F-score.png'  width='400'/>
+
+<p>$\beta$ 值用來控制precision與recall之間的權重， $\beta$ 值越高，precision的結果就比較重要</p>
 ]]></content>
       <categories>
         <category>course</category>
@@ -1065,72 +1132,31 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation</title>
-    <url>/2021/08/10/2021-08-10-dpm_detection/</url>
-    <content><![CDATA[<p>物件檢測是視覺中常見的任務之一，在影像中透過各種演算法來偵測到物件位置，常見的檢測如找到物件位置，並用矩形框標註，更精細一點的可以分割出物件的輪廓，其中會遇到的挑戰:</p>
-<ul>
-<li>物件亮度不同</li>
-<li>影像角度不同</li>
-<li>物件的形狀變化</li>
-<li>同類型不同型態的變化，例如顏色</li>
-</ul>
-<p>因此為了測試演算法在不同類別上都能有強大的適應性，網路上有多種不同的大型影像資料庫，並附上物件的位置、類別資訊來進行驗證，以下介紹常見的影像資料庫PASCAL VOC、ImageNet、COCO</p>
-<h2 id="Benchmarks"><a href="#Benchmarks" class="headerlink" title="Benchmarks"></a>Benchmarks</h2><h3 id="PASCAL-VOC-Challenge"><a href="#PASCAL-VOC-Challenge" class="headerlink" title="PASCAL VOC Challenge"></a>PASCAL VOC Challenge</h3><h4 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h4><p>網頁上有每一年的資料更動，起初只有四個類別，1578張影像，比賽方式為檢測與分類</p>
-<p>經過多年的資料量擴增，變為20個類別，含有11530張影像，並且有27450個ROI影像與6929個更精細的分割影像區域，並加入影像分割挑戰<br>競賽從2005年到2012年停止<br><img src='https://yanzzzzzzzzz.github.io/img/PACAL-VOC.png'  width='400'/></p>
-<h4 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h4><p><a href="http://host.robots.ox.ac.uk/pascal/VOC/">PASCAL Visual Object Classes Homepage</a></p>
-<p><a href="https://paperswithcode.com/sota/semantic-segmentation-on-pascal-voc-2012">paperswithcode PASCAL VOC Semantic Segmentation</a></p>
-<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="介紹-1"><a href="#介紹-1" class="headerlink" title="介紹"></a>介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
-<p>其中ImageNet的標記類別是根據WordNet的結構，WordNet可以想成是一個辭典，這個辭典把相近意義的同義詞連結再一起，成為一個網路架構</p>
-<img src='https://yanzzzzzzzzz.github.io/img/word_tree.png'  width='400'/>
-引用YOLO9000的圖來說明，WordNet結構是一個樹狀結構，一個節點下有多個子節點，例如飛機節點，下面有雙翼飛機、噴射機、空中巴士、隱形戰鬥機，因此在ImageNet中看到這些標記類別，都可以視為飛機類別
-#### 相關連結
-[ImageNet Home](https://www.image-net.org/challenges/LSVRC/)
-
-<p><a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">Download ImageNet Data on Kaggle</a></p>
-<img src='https://yanzzzzzzzzz.github.io/img/paperswithcode-imagenet.png'  width='400'/>
-[paperswithcode ImageNet object detection](https://paperswithcode.com/sota/image-classification-on-imagenet)的數據可以看到歷年來ImageNet影像分類比賽準確率的模型
-
-<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="介紹-2"><a href="#介紹-2" class="headerlink" title="介紹"></a>介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
-<ul>
-<li>具有物件分割區塊</li>
-<li>330K的影像數，有200K已經標記</li>
-<li>包含1.5M個物件</li>
-<li>物件類別有80類</li>
-<li>場景分類有91類</li>
-<li>每張圖片都有五個人工書寫的英文註釋</li>
-<li>250000個person類別針對肢體做標記</li>
-</ul>
-<h4 id="相關連結-1"><a href="#相關連結-1" class="headerlink" title="相關連結"></a>相關連結</h4><p><a href="https://cocodataset.org/#home">cocodataset home</a></p>
-<p><a href="https://paperswithcode.com/sota/object-detection-on-coco">paperswithcode coco object detection</a></p>
-<h2 id="評估模型方法"><a href="#評估模型方法" class="headerlink" title="評估模型方法"></a>評估模型方法</h2><p>在物件檢測中，常使用precision, recall來評估模型<br>講到precision, recall前先介紹混淆矩陣與真陽TP、真陰TN、偽陽FP、偽陰FN</p>
-<ul>
-<li>真陽(True Positive, TP):預測為真而實際為真</li>
-<li>真陰(True Negative, TN):預測為假而實際為假</li>
-<li>偽陽(Flase Positive, FP):預測為真而實際為假</li>
-<li>偽陰(Flase Negative, FN):預測為假而實際為真</li>
-</ul>
-<p>precision, recall公式:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/precision-and-recall.png'  width='400'/>
-
-<p>precision公式意義:預測的為正樣本的結果中，預測正確的比率，稱為準確率</p>
-<p>recll公式意義:取出所有正樣本結果，實際預測多少正樣本的比例，稱為召回率</p>
-<p>以垃圾郵件分類器來舉例precision, recall數值高低的關係</p>
-<p>垃圾郵件資料為正樣本, 不是垃圾郵件的資料為負樣本</p>
-<p>分類器的precision高, recall高, 代表這模型非常棒, 具有濾除垃圾郵件的能力</p>
-<p>precision高, recall低, 代表這模型預估是垃圾郵件的正確率很高, 但實際抓到垃圾郵件的數量少, 是謹慎的模型</p>
-<p>precision低, recall高, 代表這模型垃圾郵件幾乎都有抓到, 但誤判率高, 是寬鬆的模型</p>
-<p>precision低, recall低, 這模型沒用了</p>
-<p>好的模型是具有高準確率，又有高召回率，因此可以使用我兩個都要的F-score指標</p>
-<img src='https://yanzzzzzzzzz.github.io/img/F-score.png'  width='400'/>
-
-<p>$\beta$ 值用來控制precision與recall之間的權重， $\beta$ 值越高，precision的結果就比較重要</p>
+    <title>Machine learning Roadmap 2021 介紹</title>
+    <url>/2021/10/11/2021-10-11-Machine%20learning%20Roadmap%202021%20%E4%BB%8B%E7%B4%B9/</url>
+    <content><![CDATA[<h1 id="Machine-learning-Roadmap-2021-介紹"><a href="#Machine-learning-Roadmap-2021-介紹" class="headerlink" title="Machine learning Roadmap 2021 介紹"></a>Machine learning Roadmap 2021 介紹</h1><p>現在最紅的AI，也就是以深度學習，資料驅動的模型來預測、評估得到結果</p>
+<p>為了加強對於Machine learning的廣度與深度理解，在網路上看到一個Machine learning roadmap的圖，整理得滿不錯的</p>
+<p>Roadmap:<a href="https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy">https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy</a></p>
+<p>Roadmap提供所有想了解機器學習的人一個整理：</p>
+<ol>
+<li>機器學習問題</li>
+<li>機器學習的過程</li>
+<li>機器學習的工具</li>
+<li>機器學習的相關資源</li>
+<li>機器學習的模型派系(ex:監督,非監督…)</li>
+<li>機器學習的模型訓練、最佳化</li>
+<li>機器學習的IDE、常用的第三方套件</li>
+<li>機器學習使用的數學</li>
+<li>機器學習的相關應用、部屬</li>
+</ol>
+<p>他其實已經很完整，廣度及深度都已經有了，剩下的是如何從整理好的關鍵字向下研究，提高深度</p>
+<p>例如:github上的<a href="https://github.com/floodsung/Deep-Learning-Papers-Reading-Roadmap">Deep-Learning-Papers-Reading-Roadmap</a>，它提供了學習方面的整理，有序的讓你了解到Deep learning這方面的經典模型</p>
+<p>如果從Road map了解後對某一部份更有興趣，可以學習並尋找更多資源，然後填上認為缺少的重要訊息</p>
+<p>接下來我想從這個Roadmap上的關鍵字進行相關的整理，再次對機器學習&#x2F;深度學習上做一個複習</p>
 ]]></content>
       <categories>
-        <category>course</category>
+        <category>Machine Learning</category>
       </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
   </entry>
   <entry>
     <title>論文閱讀:Fast Branch Convolutional Neural Network for Traffic Sign Recognition</title>
@@ -1232,33 +1258,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Machine learning Roadmap 2021 介紹</title>
-    <url>/2021/10/11/2021-10-11-Machine%20learning%20Roadmap%202021%20%E4%BB%8B%E7%B4%B9/</url>
-    <content><![CDATA[<h1 id="Machine-learning-Roadmap-2021-介紹"><a href="#Machine-learning-Roadmap-2021-介紹" class="headerlink" title="Machine learning Roadmap 2021 介紹"></a>Machine learning Roadmap 2021 介紹</h1><p>現在最紅的AI，也就是以深度學習，資料驅動的模型來預測、評估得到結果</p>
-<p>為了加強對於Machine learning的廣度與深度理解，在網路上看到一個Machine learning roadmap的圖，整理得滿不錯的</p>
-<p>Roadmap:<a href="https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy">https://whimsical.com/machine-learning-roadmap-2021-MJ9c7zUafrUKFzheRJ8jwy</a></p>
-<p>Roadmap提供所有想了解機器學習的人一個整理：</p>
-<ol>
-<li>機器學習問題</li>
-<li>機器學習的過程</li>
-<li>機器學習的工具</li>
-<li>機器學習的相關資源</li>
-<li>機器學習的模型派系(ex:監督,非監督…)</li>
-<li>機器學習的模型訓練、最佳化</li>
-<li>機器學習的IDE、常用的第三方套件</li>
-<li>機器學習使用的數學</li>
-<li>機器學習的相關應用、部屬</li>
-</ol>
-<p>他其實已經很完整，廣度及深度都已經有了，剩下的是如何從整理好的關鍵字向下研究，提高深度</p>
-<p>例如:github上的<a href="https://github.com/floodsung/Deep-Learning-Papers-Reading-Roadmap">Deep-Learning-Papers-Reading-Roadmap</a>，它提供了學習方面的整理，有序的讓你了解到Deep learning這方面的經典模型</p>
-<p>如果從Road map了解後對某一部份更有興趣，可以學習並尋找更多資源，然後填上認為缺少的重要訊息</p>
-<p>接下來我想從這個Roadmap上的關鍵字進行相關的整理，再次對機器學習&#x2F;深度學習上做一個複習</p>
-]]></content>
-      <categories>
-        <category>Machine Learning</category>
-      </categories>
-  </entry>
-  <entry>
     <title>cs131 lecture 15 Optical flow</title>
     <url>/2021/11/08/2021-11-08-Optical%20Flow/</url>
     <content><![CDATA[<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：</p>
@@ -1290,54 +1289,6 @@
       <categories>
         <category>course</category>
       </categories>
-  </entry>
-  <entry>
-    <title>FullStack part0 筆記 - Web基本觀念</title>
-    <url>/2023/05/02/FullStack-part0-1/</url>
-    <content><![CDATA[<h2 id="了解Web-開發原則"><a href="#了解Web-開發原則" class="headerlink" title="了解Web 開發原則"></a>了解Web 開發原則</h2><p>Web 開發的第一原則: 第一步就是在瀏覽器上使用<code>F12</code>開啟開發者控制台，Network標籤可以看到Web與伺服器使用HTTP的所有通信, Console標籤可以看到所有在程式內Deubug用的訊息</p>
-<h2 id="HTTP-GET"><a href="#HTTP-GET" class="headerlink" title="HTTP GET"></a>HTTP GET</h2><blockquote>
-<p>HTTP GET 是一種 HTTP 請求方法，通常用於獲取網頁上的資源。在進行網路傳輸時，HTTP GET 方法可以向伺服器發送請求，以獲取伺服器上的資源。這些資源可以是網頁、影像、檔案等，而 HTTP GET 方法獲取資源的方式是透過 URL（Uniform Resource Locator，統一資源定位符）進行定位。<br>HTTP GET 方法是一種安全且幾乎無副作用的請求方法。使用 HTTP GET 方法，客戶端可以向伺服器發送請求，要求伺服器回應一個資源。當伺服器接收到 HTTP GET 請求後，會查找對應的資源，然後將其返回給客戶端。<br>HTTP GET 方法的請求是無副作用的，即不會對伺服器上的資源進行任何更改。這意味著使用 HTTP GET 方法，客戶端只能獲取伺服器上的資源，而不能修改或刪除它們。</p>
-</blockquote>
-<p>HTTP GET 特色</p>
-<span id="more"></span>
-<ul>
-<li>透過URL進行定位</li>
-<li>可以傳輸網頁、影像、檔案</li>
-<li>對伺服器上資源不會做更改</li>
-</ul>
-<h3 id="HTTP-GET-Example"><a href="#HTTP-GET-Example" class="headerlink" title="HTTP GET Example"></a>HTTP GET Example</h3><p>網址輸入<a href="https://www.google.com/">Google首頁</a>後開啟開發者控制台</p>
-<p><img src="https://i.imgur.com/6NuSBMg.png" alt="google首頁 F12"></p>
-<p>可以看到使用多個HTTP GET方法從伺服器取得:</p>
-<ul>
-<li>前端的內容</li>
-<li>個人帳戶的頭貼</li>
-<li>歷史搜尋紀錄</li>
-<li>…</li>
-</ul>
-<p>每一個GET到的東西可以分成:</p>
-<p><img src="https://i.imgur.com/1NPK1cq.png" alt="httpHeader"></p>
-<h3 id="HTTP-Headers"><a href="#HTTP-Headers" class="headerlink" title="HTTP Headers"></a>HTTP Headers</h3><p>每一個請求都有<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Headers">Headers</a>，分為:</p>
-<ul>
-<li>通用標頭（General header）：這些標頭包含與請求和回應有關的元資訊，如 Cache-Control、Connection、Date、Pragma 等。這些標頭對於整個消息的控制和定義是通用的。</li>
-<li>請求標頭（Request header）：這些標頭包含有關請求的詳細資訊，如 Accept、Accept-Encoding、Authorization、Cookie、User-Agent 等。這些標頭允許客戶端提供關於請求的額外資訊，從而影響伺服器的回應。</li>
-<li>響應標頭（Response header）：這些標頭包含有關回應的詳細資訊，如 Cache-Control、Content-Encoding、Content-Length、Content-Type、Server 等。這些標頭允許伺服器提供關於回應的額外資訊，從而影響客戶端的處理和呈現。</li>
-<li>實體標頭（Entity header）：這些標頭包含有關 HTTP 實體主體的詳細資訊，如 Content-Encoding、Content-Language、Content-Length、Content-Type 等。這些標頭允許用戶端和伺服器提供有關實體主體的額外資訊，從而影響消息的處理和解析</li>
-</ul>
-<h3 id="HTTP-Body"><a href="#HTTP-Body" class="headerlink" title="HTTP Body"></a>HTTP Body</h3><ul>
-<li>HTTP Body用於傳輸實際的資料內容</li>
-<li>HTTP Body 的內容可以是各種不同的格式，例如:<ul>
-<li>純文本</li>
-<li>HTML</li>
-<li>JSON</li>
-<li>XML</li>
-<li>二進位數據</li>
-</ul>
-</li>
-<li>HTTP 協定本身不關心 HTTP Body 的格式，因此可以使用不同的編碼方式來將資料傳輸到伺服器或從伺服器接收資料。</li>
-<li>HTTP Header的資訊會協助接收方了解HTTP Body的內容是甚麼類型</li>
-</ul>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://fullstackopen.com/en/">Deep Dive Into Modern Web Development</a></p>
-]]></content>
   </entry>
   <entry>
     <title>FullStack part0 筆記 - Traditional web applications vs Single-page application</title>
@@ -1386,59 +1337,51 @@
 ]]></content>
   </entry>
   <entry>
-    <title>31. Next Permutation</title>
-    <url>/2023/05/29/NextPermutation/</url>
-    <content><![CDATA[<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><a href="https://leetcode.com/problems/next-permutation/description/">https://leetcode.com/problems/next-permutation/description/</a></p>
-<p>A <code>permutation</code> of an array of integers is an arrangement of its members into a sequence or linear order.</p>
-<ul>
-<li>For example, for arr &#x3D; [1,2,3], the following are all the permutations of arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].</li>
-</ul>
-<p>The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).</p>
-<ul>
-<li>For example, the next permutation of arr &#x3D; [1,2,3] is [1,3,2].</li>
-<li>Similarly, the next permutation of arr &#x3D; [2,3,1] is [3,1,2].</li>
-<li>While the next permutation of arr &#x3D; [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.</li>
-</ul>
-<p>Given an array of integers nums, find the next permutation of nums.</p>
-<p>The replacement must be in place and use only constant extra memory.</p>
+    <title>FullStack part0 筆記 - Web基本觀念</title>
+    <url>/2023/05/02/FullStack-part0-1/</url>
+    <content><![CDATA[<h2 id="了解Web-開發原則"><a href="#了解Web-開發原則" class="headerlink" title="了解Web 開發原則"></a>了解Web 開發原則</h2><p>Web 開發的第一原則: 第一步就是在瀏覽器上使用<code>F12</code>開啟開發者控制台，Network標籤可以看到Web與伺服器使用HTTP的所有通信, Console標籤可以看到所有在程式內Deubug用的訊息</p>
+<h2 id="HTTP-GET"><a href="#HTTP-GET" class="headerlink" title="HTTP GET"></a>HTTP GET</h2><blockquote>
+<p>HTTP GET 是一種 HTTP 請求方法，通常用於獲取網頁上的資源。在進行網路傳輸時，HTTP GET 方法可以向伺服器發送請求，以獲取伺服器上的資源。這些資源可以是網頁、影像、檔案等，而 HTTP GET 方法獲取資源的方式是透過 URL（Uniform Resource Locator，統一資源定位符）進行定位。<br>HTTP GET 方法是一種安全且幾乎無副作用的請求方法。使用 HTTP GET 方法，客戶端可以向伺服器發送請求，要求伺服器回應一個資源。當伺服器接收到 HTTP GET 請求後，會查找對應的資源，然後將其返回給客戶端。<br>HTTP GET 方法的請求是無副作用的，即不會對伺服器上的資源進行任何更改。這意味著使用 HTTP GET 方法，客戶端只能獲取伺服器上的資源，而不能修改或刪除它們。</p>
+</blockquote>
+<p>HTTP GET 特色</p>
 <span id="more"></span>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="800"/>
-
-<ol>
-<li>從數列尾端開始向前檢查，直到找到不符合由小到大排列的數字，記錄該數字的索引。在這個例子中，找到數字1，位於第2個索引位置。</li>
-<li>如果都符合由小到大, 直接反轉</li>
-<li>從數列尾端中找到比1大的最小數字，這裡是5。</li>
-<li>將數字1與5交換位置。</li>
-<li>對於索引位置由小到大排列的數字(第3個索引位置開始)進行反轉，710反轉為017。最終得到的排列是245017。</li>
-</ol>
-<pre><code class="cpp">class Solution &#123;
-public:
-    void nextPermutation(vector&lt;int&gt;&amp; nums) &#123;
-        int n = nums.size(), k, l;
-        for (k = n - 2; k &gt;= 0; k--)
-        &#123;
-            if (nums[k] &lt; nums[k + 1])
-            &#123;
-                break;
-            &#125;
-        &#125;
-        if (k == -1)&#123;
-            reverse(nums.begin(), nums.end());
-            return;
-        &#125;
-        reverse(nums.begin() + k + 1, nums.end());
-        for (l = k + 1; l &lt; n; l++)
-        &#123;
-            if (nums[l] &gt; nums[k])
-            &#123;
-                break;
-            &#125;
-        &#125;
-        swap(nums[k], nums[l]);
-    &#125;
-&#125;;
-</code></pre>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
+<ul>
+<li>透過URL進行定位</li>
+<li>可以傳輸網頁、影像、檔案</li>
+<li>對伺服器上資源不會做更改</li>
+</ul>
+<h3 id="HTTP-GET-Example"><a href="#HTTP-GET-Example" class="headerlink" title="HTTP GET Example"></a>HTTP GET Example</h3><p>網址輸入<a href="https://www.google.com/">Google首頁</a>後開啟開發者控制台</p>
+<p><img src="https://i.imgur.com/6NuSBMg.png" alt="google首頁 F12"></p>
+<p>可以看到使用多個HTTP GET方法從伺服器取得:</p>
+<ul>
+<li>前端的內容</li>
+<li>個人帳戶的頭貼</li>
+<li>歷史搜尋紀錄</li>
+<li>…</li>
+</ul>
+<p>每一個GET到的東西可以分成:</p>
+<p><img src="https://i.imgur.com/1NPK1cq.png" alt="httpHeader"></p>
+<h3 id="HTTP-Headers"><a href="#HTTP-Headers" class="headerlink" title="HTTP Headers"></a>HTTP Headers</h3><p>每一個請求都有<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Headers">Headers</a>，分為:</p>
+<ul>
+<li>通用標頭（General header）：這些標頭包含與請求和回應有關的元資訊，如 Cache-Control、Connection、Date、Pragma 等。這些標頭對於整個消息的控制和定義是通用的。</li>
+<li>請求標頭（Request header）：這些標頭包含有關請求的詳細資訊，如 Accept、Accept-Encoding、Authorization、Cookie、User-Agent 等。這些標頭允許客戶端提供關於請求的額外資訊，從而影響伺服器的回應。</li>
+<li>響應標頭（Response header）：這些標頭包含有關回應的詳細資訊，如 Cache-Control、Content-Encoding、Content-Length、Content-Type、Server 等。這些標頭允許伺服器提供關於回應的額外資訊，從而影響客戶端的處理和呈現。</li>
+<li>實體標頭（Entity header）：這些標頭包含有關 HTTP 實體主體的詳細資訊，如 Content-Encoding、Content-Language、Content-Length、Content-Type 等。這些標頭允許用戶端和伺服器提供有關實體主體的額外資訊，從而影響消息的處理和解析</li>
+</ul>
+<h3 id="HTTP-Body"><a href="#HTTP-Body" class="headerlink" title="HTTP Body"></a>HTTP Body</h3><ul>
+<li>HTTP Body用於傳輸實際的資料內容</li>
+<li>HTTP Body 的內容可以是各種不同的格式，例如:<ul>
+<li>純文本</li>
+<li>HTML</li>
+<li>JSON</li>
+<li>XML</li>
+<li>二進位數據</li>
+</ul>
+</li>
+<li>HTTP 協定本身不關心 HTTP Body 的格式，因此可以使用不同的編碼方式來將資料傳輸到伺服器或從伺服器接收資料。</li>
+<li>HTTP Header的資訊會協助接收方了解HTTP Body的內容是甚麼類型</li>
+</ul>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://fullstackopen.com/en/">Deep Dive Into Modern Web Development</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1506,6 +1449,89 @@ public:
       <tags>
         <tag>Design Patterns</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>使用Vue Teleport實作提示框功能</title>
+    <url>/2023/08/23/Vue-teleport-alert-box/</url>
+    <content><![CDATA[<p>實作在右下角顯示多個提示框功能</p>
+<p>修改index.html部分, 在body區域新增一個<code>messages</code>用來放置提示框的位置</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">//index.html</span><br><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line">//...</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;messages&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">//...</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>建立提示框組件:</p>
+<ul>
+<li>使用<code>Teleport</code>將組件傳送到原生DOM的<code>message</code>位置</li>
+<li>使用<code>show</code>參數決定是否顯示, button手動關閉提示框</li>
+<li>提供slot區塊讓父元件填入自定義訊息</li>
+<li><code>mounted</code>內設定自動關閉時間</li>
+<li>style區塊定義提示框長寬, 顏色, 預留間距</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//AlertBox.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Teleport</span> <span class="attr">to</span>=<span class="string">&quot;#messages&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span> <span class="attr">class</span>=<span class="string">&quot;alertBox&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;show = false&quot;</span>&gt;</span>X<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">Teleport</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">show</span>: <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">this</span>.<span class="property">show</span> = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;, <span class="number">3000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-class">.alertBox</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">width</span>: <span class="number">350px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">height</span>: <span class="number">80px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="built_in">hsl</span>(<span class="number">280</span>, <span class="number">100%</span>, <span class="number">50%</span>);</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">padding</span>: <span class="number">24px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">position</span>: relative;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>父元件定義message樣式:</p>
+<ul>
+<li><code>position: absolute</code>, <code>right: 12px</code>, <code>bottom: 12px</code> 將message起始位置定義在畫面右下角</li>
+<li><code>display: flex;</code>啟用Flexbox布局模式, <code>flex-direction: column-reverse;</code>指定主軸方向以及在主軸上的排列方式, 讓較晚加入的訊息依序向上顯示</li>
+<li><code>gap: 12px</code>設定訊息框與框之間的間隔</li>
+</ul>
+<p>父元件呼叫組件, 在按下button時加入提示框到陣列中, 使用陣列將現有提示框顯示出來, 生成後會自動顯示在畫面右下角</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;msgs.push(`test message$&#123;msgs.length + 1&#125;`)&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    Add message</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">AlertBox</span> <span class="attr">v-for</span>=<span class="string">&quot;msg in msgs&quot;</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">AlertBox</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">AlertBox</span> <span class="keyword">from</span> <span class="string">&#x27;./components/AlertBox.vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">components</span>: &#123; <span class="title class_">AlertBox</span> &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">msgs</span>: [],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-id">#messages</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">position</span>: absolute;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">right</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">bottom</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">display</span>: flex;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">flex-direction</span>: column-reverse;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">gap</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>31. Next Permutation</title>
+    <url>/2023/05/29/NextPermutation/</url>
+    <content><![CDATA[<h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><a href="https://leetcode.com/problems/next-permutation/description/">https://leetcode.com/problems/next-permutation/description/</a></p>
+<p>A <code>permutation</code> of an array of integers is an arrangement of its members into a sequence or linear order.</p>
+<ul>
+<li>For example, for arr &#x3D; [1,2,3], the following are all the permutations of arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].</li>
+</ul>
+<p>The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).</p>
+<ul>
+<li>For example, the next permutation of arr &#x3D; [1,2,3] is [1,3,2].</li>
+<li>Similarly, the next permutation of arr &#x3D; [2,3,1] is [3,1,2].</li>
+<li>While the next permutation of arr &#x3D; [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.</li>
+</ul>
+<p>Given an array of integers nums, find the next permutation of nums.</p>
+<p>The replacement must be in place and use only constant extra memory.</p>
+<span id="more"></span>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><img src="https://yanzzzzzzzzz.github.io/img//Nextpermutation.png"  width="800"/>
+
+<ol>
+<li>從數列尾端開始向前檢查，直到找到不符合由小到大排列的數字，記錄該數字的索引。在這個例子中，找到數字1，位於第2個索引位置。</li>
+<li>如果都符合由小到大, 直接反轉</li>
+<li>從數列尾端中找到比1大的最小數字，這裡是5。</li>
+<li>將數字1與5交換位置。</li>
+<li>對於索引位置由小到大排列的數字(第3個索引位置開始)進行反轉，710反轉為017。最終得到的排列是245017。</li>
+</ol>
+<pre><code class="cpp">class Solution &#123;
+public:
+    void nextPermutation(vector&lt;int&gt;&amp; nums) &#123;
+        int n = nums.size(), k, l;
+        for (k = n - 2; k &gt;= 0; k--)
+        &#123;
+            if (nums[k] &lt; nums[k + 1])
+            &#123;
+                break;
+            &#125;
+        &#125;
+        if (k == -1)&#123;
+            reverse(nums.begin(), nums.end());
+            return;
+        &#125;
+        reverse(nums.begin() + k + 1, nums.end());
+        for (l = k + 1; l &lt; n; l++)
+        &#123;
+            if (nums[l] &gt; nums[k])
+            &#123;
+                break;
+            &#125;
+        &#125;
+        swap(nums[k], nums[l]);
+    &#125;
+&#125;;
+</code></pre>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
+]]></content>
   </entry>
   <entry>
     <title>Vue.js 學習筆記</title>
@@ -1732,6 +1758,7 @@ public:
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//parent.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">AutoFocus</span> <span class="attr">ref</span>=<span class="string">&quot;autofocus&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">AutoFocus</span> <span class="keyword">from</span> <span class="string">&#x27;./components/AutoFocus.vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">components</span>: &#123; <span class="title class_">AutoFocus</span> &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">autofocus</span>.<span class="property">inputText</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">autofocus</span>.<span class="title function_">blur</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;, <span class="number">5000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//AutoFocus.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;inputText&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;inputControl&quot;</span> /&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">inputText</span>: <span class="string">&#x27;&#x27;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputControl</span>.<span class="title function_">focus</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">blur</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputControl</span>.<span class="title function_">blur</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://vuejs.org/tutorial">vuejs.org tutorial</a></p>
 ]]></content>
   </entry>
@@ -1814,6 +1841,59 @@ public:
 ]]></content>
   </entry>
   <entry>
+    <title>MSSQL 無法連線至XXX 問題</title>
+    <url>/2023/09/01/mssql-login-problem/</url>
+    <content><![CDATA[<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-fail.png" />
+
+<p>以下可能原因:</p>
+<h2 id="伺服器僅設定為Windows驗證模式"><a href="#伺服器僅設定為Windows驗證模式" class="headerlink" title="伺服器僅設定為Windows驗證模式"></a>伺服器僅設定為Windows驗證模式</h2><p>物件總管-&gt;伺服器右鍵選擇屬性-&gt;安全性-&gt;變更伺服器驗證為SQL Server及Windows驗證模式</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-setting-login-mode.png" />
+
+<p>需要重新啟動SQL SERVER</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-reboot.png" />
+
+<h2 id="不存在的user"><a href="#不存在的user" class="headerlink" title="不存在的user"></a>不存在的user</h2><p>新建一個跟登入名稱相同的user</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-create-new-user.png" />
+
+<p>設定讀取資料庫權限</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-user-db-permit-setting.png" />
+
+<h2 id="未啟用的user"><a href="#未啟用的user" class="headerlink" title="未啟用的user"></a>未啟用的user</h2><p>如果是已經創建的user, 檢查是否被設置為停用user</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-type-enable.png" />
+
+<p>物件總管-&gt;伺服器-&gt;安全性-&gt;登入-&gt;找到指定user名稱右鍵-&gt;屬性-&gt;狀態</p>
+<p>登入的地方把<code>已停用</code>改為<code>已啟用</code></p>
+<h2 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h2><p><a href="https://shaurong.blogspot.com/2021/06/sql-server-2019.html">[研究] SQL Server 2019 - 與伺服器的連線已建立成功，但在登入程序時發生錯誤。</a></p>
+<p><a href="https://dog0416.blogspot.com/2015/04/databasesql-server-microsoft-sql-server.html">[Database][SQL Server] 使用者 的登入失敗。 Microsoft SQL Server, 錯誤: 18456</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>分層架構模式</title>
+    <url>/2022/11/28/software-layer/</url>
+    <content><![CDATA[<h2 id="分層架構"><a href="#分層架構" class="headerlink" title="分層架構"></a>分層架構</h2><p>大多為以下四層:</p>
+<ul>
+<li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
+<li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
+<li>Persistence Layer 持久層: 資料存取</li>
+<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB<span id="more"></span>
+層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</li>
+</ul>
+<p>為何不能直接從表現層訪問資料存取層?</p>
+<p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
+<p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
+<p>雖然隔離層之間的訪問可以降低耦合性，但在某些常用功能(log紀錄，數學運算..)下可以新增一個共用層並調整層的封閉性。</p>
+<h2 id="軟體分層設計優缺點"><a href="#軟體分層設計優缺點" class="headerlink" title="軟體分層設計優缺點"></a>軟體分層設計優缺點</h2><h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3><ul>
+<li>框架簡單好學，跟MVC的概念雷同</li>
+<li>減少了依賴性</li>
+<li>好測試</li>
+</ul>
+<h3 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h3><ul>
+<li>可擴展性低</li>
+<li>層越多trace code越麻煩</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Node Version Manager (NVM):安裝、切換Node.js版本的管理器</title>
     <url>/2022/11/21/nvm-install/</url>
     <content><![CDATA[<h2 id="nvm介紹"><a href="#nvm介紹" class="headerlink" title="nvm介紹"></a>nvm介紹</h2><p>Node Version Manager (NVM) 是用來管理Node.js版本，可以同時安裝多個不同版本，因應不同專案環境去快速做切換</p>
@@ -1861,32 +1941,6 @@ public:
       <tags>
         <tag>node</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>分層架構模式</title>
-    <url>/2022/11/28/software-layer/</url>
-    <content><![CDATA[<h2 id="分層架構"><a href="#分層架構" class="headerlink" title="分層架構"></a>分層架構</h2><p>大多為以下四層:</p>
-<ul>
-<li>Presentation Layer 表現層: 該層關注的是用戶看到或可以互動的任何內容，包含UI、圖形、表單、影像</li>
-<li>Business Layer 業務層: 軟體本身特定的業務邏輯，blog網站會有發布文章、留言功能</li>
-<li>Persistence Layer 持久層: 資料存取</li>
-<li>Database Layer 資料層: 資料來源 ex:本地DB，雲端DB<span id="more"></span>
-層與層之前的關係<br>Presentation Layer⇆Business Layer⇆Persistence Layer⇆Database Layer</li>
-</ul>
-<p>為何不能直接從表現層訪問資料存取層?</p>
-<p>分層目的為了降低程式之間的依賴性，這架構提出一個層與層之間隔離的概念，如果允許表現層直接訪問持久層，那在持久層的改動會同時影響表現層與業務層。</p>
-<p>層與層之間使用interface定義接口，當需要重構某一層時也可以不用改動其他層。</p>
-<p>雖然隔離層之間的訪問可以降低耦合性，但在某些常用功能(log紀錄，數學運算..)下可以新增一個共用層並調整層的封閉性。</p>
-<h2 id="軟體分層設計優缺點"><a href="#軟體分層設計優缺點" class="headerlink" title="軟體分層設計優缺點"></a>軟體分層設計優缺點</h2><h3 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h3><ul>
-<li>框架簡單好學，跟MVC的概念雷同</li>
-<li>減少了依賴性</li>
-<li>好測試</li>
-</ul>
-<h3 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h3><ul>
-<li>可擴展性低</li>
-<li>層越多trace code越麻煩</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>在hexo新增留言板功能(utterances)</title>
@@ -1954,32 +2008,5 @@ public:
       <tags>
         <tag>blog</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>使用Vue Teleport實作提示框功能</title>
-    <url>/2023/08/23/Vue-teleport-alert-box/</url>
-    <content><![CDATA[<p>實作顯示在右下角的提示框功能</p>
-<p>修改index.html部分, 在body區域新增一個<code>messages</code>用來放置提示框的位置</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">//index.html</span><br><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line">//...</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;messages&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">//...</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>建立提示框組件:</p>
-<ul>
-<li>使用<code>Teleport</code>將組件傳送到原生DOM的<code>message</code>位置</li>
-<li>使用<code>show</code>參數決定是否顯示, button手動關閉提示框</li>
-<li>提供slot區塊讓父元件填入自定義訊息</li>
-<li><code>mounted</code>內設定自動關閉時間</li>
-<li>style區塊定義提示框長寬, 顏色, 預留間距</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//AlertBox.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Teleport</span> <span class="attr">to</span>=<span class="string">&quot;#messages&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span> <span class="attr">class</span>=<span class="string">&quot;alertBox&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;show = false&quot;</span>&gt;</span>X<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">Teleport</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">show</span>: <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">this</span>.<span class="property">show</span> = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;, <span class="number">3000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-class">.alertBox</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">width</span>: <span class="number">350px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">height</span>: <span class="number">80px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="built_in">hsl</span>(<span class="number">280</span>, <span class="number">100%</span>, <span class="number">50%</span>);</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">padding</span>: <span class="number">24px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">position</span>: relative;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>父元件定義message樣式:</p>
-<ul>
-<li><code>position: absolute</code>, <code>right: 12px</code>, <code>bottom: 12px</code> 將message起始位置定義在畫面右下角</li>
-<li><code>display: flex;</code>啟用Flexbox布局模式, <code>flex-direction: column-reverse;</code>指定主軸方向以及在主軸上的排列方式, 讓較晚加入的訊息依序向上顯示</li>
-<li><code>gap: 12px</code>設定訊息框與框之間的間隔</li>
-</ul>
-<p>父元件呼叫組件, 在按下button時加入提示框到陣列中, 使用陣列將現有提示框顯示出來, 生成後會自動顯示在畫面右下角</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;msgs.push(`test message$&#123;msgs.length + 1&#125;`)&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    Add message</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">AlertBox</span> <span class="attr">v-for</span>=<span class="string">&quot;msg in msgs&quot;</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">AlertBox</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">AlertBox</span> <span class="keyword">from</span> <span class="string">&#x27;./components/AlertBox.vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">components</span>: &#123; <span class="title class_">AlertBox</span> &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">msgs</span>: [],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-id">#messages</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">position</span>: absolute;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">right</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">bottom</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">display</span>: flex;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">flex-direction</span>: column-reverse;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">gap</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
   </entry>
 </search>
