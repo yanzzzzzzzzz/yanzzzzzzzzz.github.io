@@ -1780,6 +1780,7 @@ public:
     <content><![CDATA[<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-fail.png" />
 
 <p>以下可能原因:</p>
+<span id="more"></span>
 <h2 id="伺服器僅設定為Windows驗證模式"><a href="#伺服器僅設定為Windows驗證模式" class="headerlink" title="伺服器僅設定為Windows驗證模式"></a>伺服器僅設定為Windows驗證模式</h2><p>物件總管-&gt;伺服器右鍵選擇屬性-&gt;安全性-&gt;變更伺服器驗證為SQL Server及Windows驗證模式</p>
 <img src="https://yanzzzzzzzzz.github.io/img/mssql-setting-login-mode.png" />
 
