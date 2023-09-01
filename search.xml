@@ -18,59 +18,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 2 Images And Transformations</title>
-    <url>/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/</url>
-    <content><![CDATA[<h2 id="數位影像的類別"><a href="#數位影像的類別" class="headerlink" title="數位影像的類別"></a>數位影像的類別</h2><img src="https://yanzzzzzzzzz.github.io/img/image-type.jpg"  width="400"/>
-
-<ul>
-<li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
-<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越</li>
-<li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
-</ul>
-<h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
-<li>dpi：Dots Per Inch，每英寸點數，dpi 的數值越高，所輸出的解析度就越高，常用在印表機上的設定<img src="https://yanzzzzzzzzz.github.io/img/resolution.jpg"  width="400"/></li>
-</ul>
-<h2 id="影像轉換"><a href="#影像轉換" class="headerlink" title="影像轉換"></a>影像轉換</h2><h3 id="變換矩陣-transformation-matrix"><a href="#變換矩陣-transformation-matrix" class="headerlink" title="變換矩陣 transformation matrix"></a>變換矩陣 transformation matrix</h3><ul>
-<li><p>對原 x,y 座標進行縮放</p>
-<img src="https://yanzzzzzzzzz.github.io/img/transformation-matrices.png"  width="400"/>
-</li>
-<li><p>角度轉換</p>
-<img src="https://yanzzzzzzzzz.github.io/img/rotate-matrix.png"  width="400"/></li>
-</ul>
-<p>矩陣可以做多重轉換：</p>
-<p>$ p’&#x3D;R_2R_1Sp $</p>
-<p>其中 p 是座標點，$R_1 R_2 是角度轉換矩陣，S是縮放矩陣，p’是轉換後的座標點$</p>
-<p>多重轉換的細節：</p>
-<ul>
-<li>矩陣變換是由右到左做變換</li>
-<li>上列式子與 $ p’&#x3D;R_2(R_1(Sp)) $ 相等</li>
-<li>也與$ p’&#x3D;(R_2R_1S)p $ ，先做矩陣變換運算，再與座標變換</li>
-</ul>
-<h3 id="齊次坐標-Homogeneous-coordinates"><a href="#齊次坐標-Homogeneous-coordinates" class="headerlink" title="齊次坐標 Homogeneous coordinates"></a>齊次坐標 Homogeneous coordinates</h3><ul>
-<li>變換矩陣可以做縮放、旋轉，但卻不能加上常量進行平移</li>
-<li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
-</ul>
-<p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
-<p>齊次坐標上的除法</p>
-<ul>
-<li>我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算<br>因此將他轉換為齊次座標，再進行除法運算</li>
-</ul>
-<p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
-<p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
-<p>因此座標位置也跟著等比例縮小了</p>
-<h4 id="2D-座標平移、縮放、旋轉"><a href="#2D-座標平移、縮放、旋轉" class="headerlink" title="2D 座標平移、縮放、旋轉"></a>2D 座標平移、縮放、旋轉</h4><img src="https://yanzzzzzzzzz.github.io/img/shift-roate-scaling.png"  width="400"/>
-
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="http://vision.stanford.edu/teaching/cs131_fall2021/index.html">CS131 Computer Vision: Foundations and Applications</a></p>
-<p><a href="https://www.jianshu.com/p/7e701d7bfd79">写给大家看的“透视除法” —— 齐次坐标和投影</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 1 Introduction</title>
     <url>/2021/02/08/2021-02-08-cs131-lecture-1-introduction/</url>
     <content><![CDATA[<h2 id="課程介紹"><a href="#課程介紹" class="headerlink" title="課程介紹"></a>課程介紹</h2><p>CS131 是史丹佛大學所開設的電腦視覺課程<br>主要預備技能與知識有</p>
@@ -293,67 +240,50 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 6 Feature Descriptors-Laplacian &amp; DoG</title>
-    <url>/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/</url>
-    <content><![CDATA[<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
-<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
-<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
-
-<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
-<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
-<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
-<p>其中 G 是高斯函數</p>
-<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
-<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
-<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
-<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
+    <title>cs131 lecture 2 Images And Transformations</title>
+    <url>/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/</url>
+    <content><![CDATA[<h2 id="數位影像的類別"><a href="#數位影像的類別" class="headerlink" title="數位影像的類別"></a>數位影像的類別</h2><img src="https://yanzzzzzzzzz.github.io/img/image-type.jpg"  width="400"/>
 
 <ul>
-<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
-<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
+<li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
+<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越</li>
+<li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
 </ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 6 Feature Descriptors-SIFT</title>
-    <url>/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/</url>
-    <content><![CDATA[<p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
-<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
+<h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
+<li>dpi：Dots Per Inch，每英寸點數，dpi 的數值越高，所輸出的解析度就越高，常用在印表機上的設定<img src="https://yanzzzzzzzzz.github.io/img/resolution.jpg"  width="400"/></li>
+</ul>
+<h2 id="影像轉換"><a href="#影像轉換" class="headerlink" title="影像轉換"></a>影像轉換</h2><h3 id="變換矩陣-transformation-matrix"><a href="#變換矩陣-transformation-matrix" class="headerlink" title="變換矩陣 transformation matrix"></a>變換矩陣 transformation matrix</h3><ul>
+<li><p>對原 x,y 座標進行縮放</p>
+<img src="https://yanzzzzzzzzz.github.io/img/transformation-matrices.png"  width="400"/>
+</li>
+<li><p>角度轉換</p>
+<img src="https://yanzzzzzzzzz.github.io/img/rotate-matrix.png"  width="400"/></li>
+</ul>
+<p>矩陣可以做多重轉換：</p>
+<p>$ p’&#x3D;R_2R_1Sp $</p>
+<p>其中 p 是座標點，$R_1 R_2 是角度轉換矩陣，S是縮放矩陣，p’是轉換後的座標點$</p>
+<p>多重轉換的細節：</p>
 <ul>
-<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
-<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
+<li>矩陣變換是由右到左做變換</li>
+<li>上列式子與 $ p’&#x3D;R_2(R_1(Sp)) $ 相等</li>
+<li>也與$ p’&#x3D;(R_2R_1S)p $ ，先做矩陣變換運算，再與座標變換</li>
 </ul>
-<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
-
-<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
-<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
-<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
+<h3 id="齊次坐標-Homogeneous-coordinates"><a href="#齊次坐標-Homogeneous-coordinates" class="headerlink" title="齊次坐標 Homogeneous coordinates"></a>齊次坐標 Homogeneous coordinates</h3><ul>
+<li>變換矩陣可以做縮放、旋轉，但卻不能加上常量進行平移</li>
+<li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
+</ul>
+<p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
+<p>齊次坐標上的除法</p>
 <ul>
-<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
-<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
-<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
-<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
+<li>我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算<br>因此將他轉換為齊次座標，再進行除法運算</li>
 </ul>
-<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
+<p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
+<p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
+<p>因此座標位置也跟著等比例縮小了</p>
+<h4 id="2D-座標平移、縮放、旋轉"><a href="#2D-座標平移、縮放、旋轉" class="headerlink" title="2D 座標平移、縮放、旋轉"></a>2D 座標平移、縮放、旋轉</h4><img src="https://yanzzzzzzzzz.github.io/img/shift-roate-scaling.png"  width="400"/>
 
-<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
-<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
-<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
-<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
-<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
-<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
-<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
-</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="http://vision.stanford.edu/teaching/cs131_fall2021/index.html">CS131 Computer Vision: Foundations and Applications</a></p>
+<p><a href="https://www.jianshu.com/p/7e701d7bfd79">写给大家看的“透视除法” —— 齐次坐标和投影</a></p>
 ]]></content>
       <categories>
         <category>course</category>
@@ -430,6 +360,76 @@
 <li><a href="https://blog.csdn.net/u011534057/article/details/77775974">Harris Corner Detector 公式推導以及具體含義</a></li>
 <li><a href="https://senitco.github.io/2017/06/18/image-feature-harris/">图像特征之 Harris 角点检测</a></li>
 <li><a href="https://dsp.stackexchange.com/questions/10104/why-eigenvalues-concerned-in-harris-corner-detection">why eigenvalues concerned in Harris corner detection?</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-Laplacian &amp; DoG</title>
+    <url>/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/</url>
+    <content><![CDATA[<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
+<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
+<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
+
+<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
+<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
+<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
+<p>其中 G 是高斯函數</p>
+<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
+<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
+<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
+<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
+
+<ul>
+<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
+<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-SIFT</title>
+    <url>/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/</url>
+    <content><![CDATA[<p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
+<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
+<ul>
+<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
+<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
+</ul>
+<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
+
+<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
+<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
+<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
+<ul>
+<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
+<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
+<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
+<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
+</ul>
+<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
+
+<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
+<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
+<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
+<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
+<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
+<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
+<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -579,73 +579,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 10 Clustering-K-means clustering</title>
-    <url>/2021/03/28/2021-03-28-k-means-clustering/</url>
-    <content><![CDATA[<h2 id="k-means-clustering-流程"><a href="#k-means-clustering-流程" class="headerlink" title="k means clustering 流程"></a>k means clustering 流程</h2><ol>
-<li>隨機初始化群心$c_1,…,c_K$與迭代次數$t$</li>
-<li>計算隸屬矩陣$\delta^t$，得到新的分群結果</li>
-<li>由分群結果更新群心</li>
-<li>增加迭代次數$t$，重複步驟2~4，直到到達設定停止條件(到達迭代次數上限或群心不在大幅變動)</li>
-</ol>
-<img src='https://yanzzzzzzzzz.github.io/img/k-means-formula-1.png'  width='400'/>
-
-<img src='https://yanzzzzzzzzz.github.io/img/k-means-formula-2.png'  width='400'/>
-
-<p>參數定義：</p>
-<ul>
-<li>$t$：迭代次數</li>
-<li>$K$：群數</li>
-<li>$N$：輸入的資料數量</li>
-<li>$x_j$：輸入的第$j$筆資料</li>
-<li>$c^t_i$：第$t$次第$k$群的群心</li>
-<li>$\delta^t$：第$t$次的隸屬矩陣，定義第$j$個資料對應第$c$個群心的距離，矩陣大小為K*N</li>
-</ul>
-<p>流程：<br><img src='https://yanzzzzzzzzz.github.io/img/k-means-flow.png'  width='400'/></p>
-<h2 id="k-means-clustering特性"><a href="#k-means-clustering特性" class="headerlink" title="k means clustering特性"></a>k means clustering特性</h2><ul>
-<li>不同的初始化群心位置會有不同結果</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/different-init-center.png'  width='400'/>
-
-<ul>
-<li>對球形的數據有較好的fit結果</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/fit-in-different-data.png'  width='400'/>
-* 需要決定參數k
-
-<h2 id="選擇參數k的方法"><a href="#選擇參數k的方法" class="headerlink" title="選擇參數k的方法"></a>選擇參數k的方法</h2><p>不同的群數使得結果不同，決定群數變成非常重要的問題</p>
-<p>以分群的角度來看，分群的目的為，群內的變異性越小越好，群跟群之間的變異性越大越好</p>
-<p>翻成白話來說就是：同一群內的資料越聚集越好，群跟群之間的資料離越遠越好</p>
-<p>這裡介紹一個常用來自動選擇群數k的方法：Elbow method</p>
-<h3 id="Elbow-Method"><a href="#Elbow-Method" class="headerlink" title="Elbow Method"></a>Elbow Method</h3><p>Elbow method的核心思想是，運用前面所說分群的特性來定義一個objective function來找到輸入資料對應最好的分群結果，通常使用群內樣本的距離和來量測</p>
-<p>如下圖所示，選擇的k值隨著群數分越多，數值越小，但可以發現前期變化很大，到後面逐漸變小</p>
-<p>而群數設定為2時的轉折最大，像是手肘彎曲的地方，這時elbow method就選擇該輸入的資料分為2群最適合</p>
-<img src='https://yanzzzzzzzzz.github.io/img/elbow_method.png'  width='400'/>
-
-<h2 id="k-means-優缺點"><a href="#k-means-優缺點" class="headerlink" title="k-means 優缺點"></a>k-means 優缺點</h2><ul>
-<li>Unsupervised learning</li>
-<li>原理簡單好實現</li>
-<li>可擴展至大型的數據集，適應不同的dataset</li>
-<li>保證收斂</li>
-<li>可以預先初始化群心中心</li>
-<li>需先設定參數k(使用elbow method可以解決這問題)</li>
-<li>輸入資料需標準化到同一尺度空間</li>
-<li>初始化群中心影響分群結果</li>
-<li>群心容易被異常資料(outliers)影響，造成群心偏移</li>
-<li>容易陷入局部最佳解<img src='https://yanzzzzzzzzz.github.io/img/sensitive-outliers.png'  width='400'/></li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://developers.google.com/machine-learning/clustering/algorithm/advantages-disadvantages">k-Means Advantages and Disadvantages</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-        <category>paper reading</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-        <tag>clustering</tag>
-        <tag>Unsupervised learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 10 Clustering- mean-shift clustering</title>
     <url>/2021/04/05/2021-04-05-Mean-shift%20clustering/</url>
     <content><![CDATA[<p>論文名稱：<a href="http://home.ku.edu.tr/mehyilmaz/public_html/mean-shift/00400568.pdf">Mean Shift, Mode Seeking, and Clustering 
@@ -784,82 +717,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 11 Image Resizing-Image Retargeting Overview</title>
-    <url>/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/</url>
-    <content><![CDATA[<p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
-<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
-<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
-<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
-
-<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
-<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
-<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
-<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
-<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
-<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
-<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
-<p>重要指的可以是人眼經常會去特別關注的地方</p>
-<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
-
-<p><a href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
-<p><a href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 12 visual recognition</title>
-    <url>/2021/04/17/2021-04-17-visual-recognition-task/</url>
-    <content><![CDATA[<h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
-<li>Objection Detection</li>
-<li>Objection localization</li>
-<li>VQA(Visual Question Answering)</li>
-</ul>
-<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
-<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
-<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
-
-<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
-
-<p>訓練階段重點：</p>
-<ul>
-<li>訓練資料：輸入的訓練影像與標記類別</li>
-<li>定義要擷取的影像特徵</li>
-<li>訓練方法</li>
-</ul>
-<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
-<ul>
-<li>共有八類，每類41張影像，共有3280張影像</li>
-<li>解析度1024 * 768</li>
-<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
-
-<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
-
-<p>提到了幾個特徵提取方法</p>
-<ul>
-<li>Global RGB histogram</li>
-<li>整體形狀分析：PCA-based methods</li>
-<li>局部形狀特徵：<a href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
-<li>紋理：Filter banks</li>
-</ul>
-<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
-<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>K-nearest-neighbor-algorithm</title>
     <url>/2021/04/17/2021-04-17-k-nearest-neighbor-algorithm/</url>
     <content><![CDATA[<h2 id="機器學習架構"><a href="#機器學習架構" class="headerlink" title="機器學習架構"></a>機器學習架構</h2><img src='https://yanzzzzzzzzz.github.io/img/ml-framework.png'  width='400'/>
@@ -913,6 +770,101 @@
 <li><a href="https://www.slideshare.net/ssuserf88631/knn-51511604">沒有想像中簡單的簡單分類器 Knn</a></li>
 <li><a href="https://stats.stackexchange.com/questions/287425/why-do-you-need-to-scale-data-in-knn">Why do you need to scale data in KNN</a></li>
 </ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 10 Clustering-K-means clustering</title>
+    <url>/2021/03/28/2021-03-28-k-means-clustering/</url>
+    <content><![CDATA[<h2 id="k-means-clustering-流程"><a href="#k-means-clustering-流程" class="headerlink" title="k means clustering 流程"></a>k means clustering 流程</h2><ol>
+<li>隨機初始化群心$c_1,…,c_K$與迭代次數$t$</li>
+<li>計算隸屬矩陣$\delta^t$，得到新的分群結果</li>
+<li>由分群結果更新群心</li>
+<li>增加迭代次數$t$，重複步驟2~4，直到到達設定停止條件(到達迭代次數上限或群心不在大幅變動)</li>
+</ol>
+<img src='https://yanzzzzzzzzz.github.io/img/k-means-formula-1.png'  width='400'/>
+
+<img src='https://yanzzzzzzzzz.github.io/img/k-means-formula-2.png'  width='400'/>
+
+<p>參數定義：</p>
+<ul>
+<li>$t$：迭代次數</li>
+<li>$K$：群數</li>
+<li>$N$：輸入的資料數量</li>
+<li>$x_j$：輸入的第$j$筆資料</li>
+<li>$c^t_i$：第$t$次第$k$群的群心</li>
+<li>$\delta^t$：第$t$次的隸屬矩陣，定義第$j$個資料對應第$c$個群心的距離，矩陣大小為K*N</li>
+</ul>
+<p>流程：<br><img src='https://yanzzzzzzzzz.github.io/img/k-means-flow.png'  width='400'/></p>
+<h2 id="k-means-clustering特性"><a href="#k-means-clustering特性" class="headerlink" title="k means clustering特性"></a>k means clustering特性</h2><ul>
+<li>不同的初始化群心位置會有不同結果</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/different-init-center.png'  width='400'/>
+
+<ul>
+<li>對球形的數據有較好的fit結果</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/fit-in-different-data.png'  width='400'/>
+* 需要決定參數k
+
+<h2 id="選擇參數k的方法"><a href="#選擇參數k的方法" class="headerlink" title="選擇參數k的方法"></a>選擇參數k的方法</h2><p>不同的群數使得結果不同，決定群數變成非常重要的問題</p>
+<p>以分群的角度來看，分群的目的為，群內的變異性越小越好，群跟群之間的變異性越大越好</p>
+<p>翻成白話來說就是：同一群內的資料越聚集越好，群跟群之間的資料離越遠越好</p>
+<p>這裡介紹一個常用來自動選擇群數k的方法：Elbow method</p>
+<h3 id="Elbow-Method"><a href="#Elbow-Method" class="headerlink" title="Elbow Method"></a>Elbow Method</h3><p>Elbow method的核心思想是，運用前面所說分群的特性來定義一個objective function來找到輸入資料對應最好的分群結果，通常使用群內樣本的距離和來量測</p>
+<p>如下圖所示，選擇的k值隨著群數分越多，數值越小，但可以發現前期變化很大，到後面逐漸變小</p>
+<p>而群數設定為2時的轉折最大，像是手肘彎曲的地方，這時elbow method就選擇該輸入的資料分為2群最適合</p>
+<img src='https://yanzzzzzzzzz.github.io/img/elbow_method.png'  width='400'/>
+
+<h2 id="k-means-優缺點"><a href="#k-means-優缺點" class="headerlink" title="k-means 優缺點"></a>k-means 優缺點</h2><ul>
+<li>Unsupervised learning</li>
+<li>原理簡單好實現</li>
+<li>可擴展至大型的數據集，適應不同的dataset</li>
+<li>保證收斂</li>
+<li>可以預先初始化群心中心</li>
+<li>需先設定參數k(使用elbow method可以解決這問題)</li>
+<li>輸入資料需標準化到同一尺度空間</li>
+<li>初始化群中心影響分群結果</li>
+<li>群心容易被異常資料(outliers)影響，造成群心偏移</li>
+<li>容易陷入局部最佳解<img src='https://yanzzzzzzzzz.github.io/img/sensitive-outliers.png'  width='400'/></li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://developers.google.com/machine-learning/clustering/algorithm/advantages-disadvantages">k-Means Advantages and Disadvantages</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+        <category>paper reading</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+        <tag>clustering</tag>
+        <tag>Unsupervised learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 11 Image Resizing-Image Retargeting Overview</title>
+    <url>/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/</url>
+    <content><![CDATA[<p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
+<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
+<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
+<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
+
+<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
+<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
+<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
+<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
+<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
+<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
+<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
+<p>重要指的可以是人眼經常會去特別關注的地方</p>
+<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
+
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
+<p><a href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
 ]]></content>
       <categories>
         <category>course</category>
@@ -983,64 +935,144 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation</title>
-    <url>/2021/08/10/2021-08-10-dpm_detection/</url>
-    <content><![CDATA[<p>物件檢測是視覺中常見的任務之一，在影像中透過各種演算法來偵測到物件位置，常見的檢測如找到物件位置，並用矩形框標註，更精細一點的可以分割出物件的輪廓，其中會遇到的挑戰:</p>
+    <title>論文閱讀:Fast Branch Convolutional Neural Network for Traffic Sign Recognition</title>
+    <url>/2021/10/09/2021-10-09-Fast%20Branch%20Convolutional%20Neural%20Network%20for%20Traffic%20Sign%20Recognition/</url>
+    <content><![CDATA[<p>論文連結:<a href="https://ieeexplore.ieee.org/abstract/document/7990644">Fast Branch Convolutional Neural Network for Traffic Sign Recognition</a></p>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>論文使用深度學習架構來辨識交通號誌，辨識交通號誌是高級駕駛輔助系統的重要部分，像是方向號誌、限速號誌、各種警示號誌等等</p>
+<p>論文遇到的挑戰是影像成像受到室外環境的複雜變化，如失真、惡劣天氣、過度曝光、曝光不足、運動模糊、褪色、複雜背景，造成辨識方法更具挑戰性</p>
+<p>使用傳統的電腦視覺辨識方法在這多變的影像是很難以用單一個演算法流程得到穩健的辨識模型，因此使用CNN架構的模型來辨識</p>
+<p>CNN往往需要大量的參數處理來得到結果，因此要達到即時辨識模型會有一定的難度，但目前也有許多即時的CNN模型，例如:YOLO</p>
+<p>受生物機制的啟發，論文提出一個新的架構Branch Convolution Neural Network (BCNN)，在神經系統中，簡單、反射動作會在神經系統較低層次做快速反應，困難的動作會在高階的神經系統處裡後做反應，例如:在容易區分的交通號誌圖片，人眼只看一部份也可以很快的辨識出來，套用在CNN上，沒有必要通過所有CNN參數才得到結果</p>
+<h2 id="CNN模型對資料的處理"><a href="#CNN模型對資料的處理" class="headerlink" title="CNN模型對資料的處理"></a>CNN模型對資料的處理</h2><p>CNN模型在輸入交通標誌資料有以下特性</p>
 <ul>
-<li>物件亮度不同</li>
-<li>影像角度不同</li>
-<li>物件的形狀變化</li>
-<li>同類型不同型態的變化，例如顏色</li>
+<li>CNN模型傾向於將原始混淆圖像空間轉換為線性可分離空間，並將同一類標籤的樣本聚集再一起</li>
+<li>越難辨識到的交通標誌是與相同類別標籤樣本距離越遠的，表示模型辨識不到特徵</li>
+<li>模型對形狀的辨識能力比辨識限速能力好，模型前期將三角形和菱形分隔開來，CNN模型參考圖形內標示較後期才分離不同數字</li>
 </ul>
-<p>因此為了測試演算法在不同類別上都能有強大的適應性，網路上有多種不同的大型影像資料庫，並附上物件的位置、類別資訊來進行驗證，以下介紹常見的影像資料庫PASCAL VOC、ImageNet、COCO</p>
-<h2 id="Benchmarks"><a href="#Benchmarks" class="headerlink" title="Benchmarks"></a>Benchmarks</h2><h3 id="PASCAL-VOC-Challenge"><a href="#PASCAL-VOC-Challenge" class="headerlink" title="PASCAL VOC Challenge"></a>PASCAL VOC Challenge</h3><h4 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h4><p>網頁上有每一年的資料更動，起初只有四個類別，1578張影像，比賽方式為檢測與分類</p>
-<p>經過多年的資料量擴增，變為20個類別，含有11530張影像，並且有27450個ROI影像與6929個更精細的分割影像區域，並加入影像分割挑戰<br>競賽從2005年到2012年停止<br><img src='https://yanzzzzzzzzz.github.io/img/PACAL-VOC.png'  width='400'/></p>
-<h4 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h4><p><a href="http://host.robots.ox.ac.uk/pascal/VOC/">PASCAL Visual Object Classes Homepage</a></p>
-<p><a href="https://paperswithcode.com/sota/semantic-segmentation-on-pascal-voc-2012">paperswithcode PASCAL VOC Semantic Segmentation</a></p>
-<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="ILSVR介紹"><a href="#ILSVR介紹" class="headerlink" title="ILSVR介紹"></a>ILSVR介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
-<p>其中ImageNet的標記類別是根據WordNet的結構，WordNet可以想成是一個辭典，這個辭典把相近意義的同義詞連結再一起，成為一個網路架構</p>
-<img src='https://yanzzzzzzzzz.github.io/img/word_tree.png'  width='400'/>
-引用YOLO9000的圖來說明，WordNet結構是一個樹狀結構，一個節點下有多個子節點，例如飛機節點，下面有雙翼飛機、噴射機、空中巴士、隱形戰鬥機，因此在ImageNet中看到這些標記類別，都可以視為飛機類別
+<img src='https://yanzzzzzzzzz.github.io/img/CNN_feature_extraction.png'  width='400'/>
 
-<h4 id="ILSVR相關連結"><a href="#ILSVR相關連結" class="headerlink" title="ILSVR相關連結"></a>ILSVR相關連結</h4><p><a href="https://www.image-net.org/challenges/LSVRC/">ImageNet Home</a></p>
-<p><a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">Download ImageNet Data on Kaggle</a></p>
-<img src='https://yanzzzzzzzzz.github.io/img/paperswithcode-imagenet.png'  width='400'/>
+<h2 id="Branch-Convolution-Neural-Network"><a href="#Branch-Convolution-Neural-Network" class="headerlink" title="Branch Convolution Neural Network"></a>Branch Convolution Neural Network</h2><p>CNN和BCNN的差別在於，BCNN會在層與層之間分支輸出結果，如圖所示，傳統的CNN模型會在最後Softmax層輸出結果，BCNN模型會在其中一個分支進行預測，因此可以提高模型的預測時間</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN_model.png'  width='400'/>
 
-<p><a href="https://paperswithcode.com/sota/image-classification-on-imagenet">paperswithcode ImageNet object detection</a><br>的數據可以看到歷年來ImageNet影像分類比賽準確率的模型</p>
-<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="COCO介紹"><a href="#COCO介紹" class="headerlink" title="COCO介紹"></a>COCO介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
+<p>所有的樣本都不需要經過整個CNN模型，參考前段介紹的生物學機制，簡單好辨識的影像在前期的layer預測，較難的影像在後期的layer輸出結果</p>
+<p>BCNN model訓練流程:</p>
+<ol>
+<li>訓練分支分類器</li>
+<li>評估和偏移分類器</li>
+<li>最佳化分支分類器</li>
+<li>fine-tune model</li>
+</ol>
+<h3 id="分支分類器-Branch-Classifier"><a href="#分支分類器-Branch-Classifier" class="headerlink" title="分支分類器 Branch Classifier"></a>分支分類器 Branch Classifier</h3><p>分支分類器是用來快速、高精度的輸出結果，因此false negatives是允許的，但false positives是不行的<br>因此簡單來說分支分類器:</p>
 <ul>
-<li>具有物件分割區塊</li>
-<li>330K的影像數，有200K已經標記</li>
-<li>包含1.5M個物件</li>
-<li>物件類別有80類</li>
-<li>場景分類有91類</li>
-<li>每張圖片都有五個人工書寫的英文註釋</li>
-<li>250000個person類別針對肢體做標記</li>
+<li>簡單且快速</li>
+<li>robust與高精度</li>
+<li>只輸出足夠置信度的樣本</li>
 </ul>
-<h4 id="COCO相關連結"><a href="#COCO相關連結" class="headerlink" title="COCO相關連結"></a>COCO相關連結</h4><p><a href="https://cocodataset.org/#home">cocodataset home</a></p>
-<p><a href="https://paperswithcode.com/sota/object-detection-on-coco">paperswithcode coco object detection</a></p>
-<h2 id="評估模型方法"><a href="#評估模型方法" class="headerlink" title="評估模型方法"></a>評估模型方法</h2><p>在物件檢測中，常使用precision, recall來評估模型<br>講到precision, recall前先介紹混淆矩陣與真陽TP、真陰TN、偽陽FP、偽陰FN</p>
+<p>由於分支分類器是使用線性分類器，使用k-folder來訓線性分類器，但分類器分的精度太高，也是沒有意義的，例如:分類結果為一個空間只有一個正樣本，他的precision是1，但recall可能非常低，因此設定precision與recall的threshold是必要的</p>
+<p>再來就是要考慮到底要在哪幾層加入分類器，當遇到難以識別的樣本，並不會在分支分類器輸出結果，因此需要謹慎考慮分類器的插入位置與數量</p>
+<p>迭帶搜索最佳組合流程</p>
+<ol>
+<li>將分支分類器的組合編碼到[0,1]之間</li>
+<li>設定$T_{save} $為目標函數</li>
+<li>隨機產生不同種的分支分類器組合</li>
+<li>計算$ T_{save} $</li>
+<li>迭代到指定次數或找到$ T_{save} $符合閾值的組合</li>
+</ol>
+<p>其中$ T_{save} $表示的是節省的時間，因此要最大化目標函數</p>
+<p>$ T_{save} $公式:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-fomula.png'  width='400'/>
+
+<p>參數定義</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-para.png'  width='400'/>
+
+<p>$ l_i, i&#x3D;0,1,2…n+1, 表示CNN第i層, l_{n+1}是輸出的layer, l_0是輸入的layer $</p>
+<p>$ T_{l_i}是第l_i層到l_{n+1}層花費的時間 $</p>
+<p>$ C_i 表示第i層的branch classifier是否存在，當C_i&#x3D;1,存在分支分類器,C_i&#x3D;0則不存在 $</p>
+<p>$ t_i 是C_i分類器對sample處理所花費的時間 $</p>
+<p>$ S_i 是到C_i層還沒被分類的sample $</p>
+<p>$ C_iS_i第i層分離出來的sample數 $</p>
+<p>$ S_i^*是第i層還沒被分離出來的sample $</p>
+<p>$ N_i^* 是 S_i^* 的數量 $</p>
+<p>$ N_0是所有sample$</p>
+<p>$ N_i是到第i層的sample數量 $</p>
+<p>$ N_i^- 是第i層還沒被分類出來的數量 $</p>
+<p>$ T_i 是第i層的sample數量 - 第i層前節省的時間 - 未分類數量*分類器平均時間 $</p>
+<p>$ T_{save}是平均節省的時間 $</p>
+<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><h3 id="測試資料"><a href="#測試資料" class="headerlink" title="測試資料"></a>測試資料</h3><ul>
+<li>從10小時的影片取出來的交通號誌benchmark，<a href="https://paperswithcode.com/dataset/gtsrb">benchmark資料來源</a></li>
+<li>共有43類的標誌</li>
+<li>訓練資料:39k影像</li>
+<li>測試資料:12k影像</li>
+<li>15x15~222x193的影像大小</li>
+<li>影像包含交通標誌本體再向外延伸 10%的長寬</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-data.png'  width='400'/>
+
+<h3 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h3><p>圖表顯示每個分支分類器分離輸入影像的百分比，將近30％輸入影像從第二層分離出來，並且將近75％從第五層分離出來。</p>
+<p>這意味著可以提前分離出大量sample。 所以，BCNN可以節省大量無意義的計算。</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-table2.png'  width='400'/>
+
+<p>儘管設置了一個高精度閾值，但不可避免地還是會有sample被錯誤分類。<br>就像訓練的準確性和測試準確性之間的關係一樣，原始模型和BCNN準確性之間存在較大差異。</p>
+<p>圖片內的(a)顯示是在第5層之前隨機分離出的符號，（b）是在最後12層中隨機分離出的符號。（b）中的符號顯然更扭曲，模糊和更暗。與（a）相比，（b）中的樣本難以區分和識別。</p>
+<p>我們將在前一層中分離出來的樣本命名為簡單樣本。更難識別的交通標誌被識別出來，後來被識別出來。</p>
+<p>它與生物學機制一致，即簡單的動作被整合到一個較短的感知，而復雜的序列則以更長的周期被整合。<br><img src='https://yanzzzzzzzzz.github.io/img/BCNN-fig8.png'  width='400'/></p>
+<p>可以看到在準確度與原始CNN差異不大情況下，速度提升了約兩倍</p>
+<p>在BCNN-FT，Fine tuned微調的情況下，更接近原始CNN的準確率</p>
+<img src='https://yanzzzzzzzzz.github.io/img/BCNN-TABLE4.png'  width='400'/>
+
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ul>
+<li>受生物機制的啟發，提出了一種名為BCNN的交通標誌識別新框架</li>
+<li>在相同的條件下比一般的deep CNN更快</li>
+<li>在GTSRB的dataset下測試，大量的交通標誌可以在淺層分離出來</li>
+</ul>
+]]></content>
+      <categories>
+        <category>paper reading</category>
+      </categories>
+      <tags>
+        <tag>Image Classification</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 12 visual recognition</title>
+    <url>/2021/04/17/2021-04-17-visual-recognition-task/</url>
+    <content><![CDATA[<h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
+<li>Objection Detection</li>
+<li>Objection localization</li>
+<li>VQA(Visual Question Answering)</li>
+</ul>
+<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
+<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
+<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
+
+<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
+
+<p>訓練階段重點：</p>
 <ul>
-<li>真陽(True Positive, TP):預測為真而實際為真</li>
-<li>真陰(True Negative, TN):預測為假而實際為假</li>
-<li>偽陽(Flase Positive, FP):預測為真而實際為假</li>
-<li>偽陰(Flase Negative, FN):預測為假而實際為真</li>
+<li>訓練資料：輸入的訓練影像與標記類別</li>
+<li>定義要擷取的影像特徵</li>
+<li>訓練方法</li>
 </ul>
-<p>precision, recall公式:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/precision-and-recall.png'  width='400'/>
+<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
+<ul>
+<li>共有八類，每類41張影像，共有3280張影像</li>
+<li>解析度1024 * 768</li>
+<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
 
-<p>precision公式意義:預測的為正樣本的結果中，預測正確的比率，稱為準確率</p>
-<p>recll公式意義:取出所有正樣本結果，實際預測多少正樣本的比例，稱為召回率</p>
-<p>以垃圾郵件分類器來舉例precision, recall數值高低的關係</p>
-<p>垃圾郵件資料為正樣本, 不是垃圾郵件的資料為負樣本</p>
-<p>分類器的precision高, recall高, 代表這模型非常棒, 具有濾除垃圾郵件的能力</p>
-<p>precision高, recall低, 代表這模型預估是垃圾郵件的正確率很高, 但實際抓到垃圾郵件的數量少, 是謹慎的模型</p>
-<p>precision低, recall高, 代表這模型垃圾郵件幾乎都有抓到, 但誤判率高, 是寬鬆的模型</p>
-<p>precision低, recall低, 這模型沒用了</p>
-<p>好的模型是具有高準確率，又有高召回率，因此可以使用我兩個都要的F-score指標</p>
-<img src='https://yanzzzzzzzzz.github.io/img/F-score.png'  width='400'/>
+<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
 
-<p>$\beta$ 值用來控制precision與recall之間的權重， $\beta$ 值越高，precision的結果就比較重要</p>
+<p>提到了幾個特徵提取方法</p>
+<ul>
+<li>Global RGB histogram</li>
+<li>整體形狀分析：PCA-based methods</li>
+<li>局部形狀特徵：<a href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
+<li>紋理：Filter banks</li>
+</ul>
+<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
+<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
 ]]></content>
       <categories>
         <category>course</category>
@@ -1159,102 +1191,70 @@
       </categories>
   </entry>
   <entry>
-    <title>論文閱讀:Fast Branch Convolutional Neural Network for Traffic Sign Recognition</title>
-    <url>/2021/10/09/2021-10-09-Fast%20Branch%20Convolutional%20Neural%20Network%20for%20Traffic%20Sign%20Recognition/</url>
-    <content><![CDATA[<p>論文連結:<a href="https://ieeexplore.ieee.org/abstract/document/7990644">Fast Branch Convolutional Neural Network for Traffic Sign Recognition</a></p>
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>論文使用深度學習架構來辨識交通號誌，辨識交通號誌是高級駕駛輔助系統的重要部分，像是方向號誌、限速號誌、各種警示號誌等等</p>
-<p>論文遇到的挑戰是影像成像受到室外環境的複雜變化，如失真、惡劣天氣、過度曝光、曝光不足、運動模糊、褪色、複雜背景，造成辨識方法更具挑戰性</p>
-<p>使用傳統的電腦視覺辨識方法在這多變的影像是很難以用單一個演算法流程得到穩健的辨識模型，因此使用CNN架構的模型來辨識</p>
-<p>CNN往往需要大量的參數處理來得到結果，因此要達到即時辨識模型會有一定的難度，但目前也有許多即時的CNN模型，例如:YOLO</p>
-<p>受生物機制的啟發，論文提出一個新的架構Branch Convolution Neural Network (BCNN)，在神經系統中，簡單、反射動作會在神經系統較低層次做快速反應，困難的動作會在高階的神經系統處裡後做反應，例如:在容易區分的交通號誌圖片，人眼只看一部份也可以很快的辨識出來，套用在CNN上，沒有必要通過所有CNN參數才得到結果</p>
-<h2 id="CNN模型對資料的處理"><a href="#CNN模型對資料的處理" class="headerlink" title="CNN模型對資料的處理"></a>CNN模型對資料的處理</h2><p>CNN模型在輸入交通標誌資料有以下特性</p>
+    <title>cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation</title>
+    <url>/2021/08/10/2021-08-10-dpm_detection/</url>
+    <content><![CDATA[<p>物件檢測是視覺中常見的任務之一，在影像中透過各種演算法來偵測到物件位置，常見的檢測如找到物件位置，並用矩形框標註，更精細一點的可以分割出物件的輪廓，其中會遇到的挑戰:</p>
 <ul>
-<li>CNN模型傾向於將原始混淆圖像空間轉換為線性可分離空間，並將同一類標籤的樣本聚集再一起</li>
-<li>越難辨識到的交通標誌是與相同類別標籤樣本距離越遠的，表示模型辨識不到特徵</li>
-<li>模型對形狀的辨識能力比辨識限速能力好，模型前期將三角形和菱形分隔開來，CNN模型參考圖形內標示較後期才分離不同數字</li>
+<li>物件亮度不同</li>
+<li>影像角度不同</li>
+<li>物件的形狀變化</li>
+<li>同類型不同型態的變化，例如顏色</li>
 </ul>
-<img src='https://yanzzzzzzzzz.github.io/img/CNN_feature_extraction.png'  width='400'/>
+<p>因此為了測試演算法在不同類別上都能有強大的適應性，網路上有多種不同的大型影像資料庫，並附上物件的位置、類別資訊來進行驗證，以下介紹常見的影像資料庫PASCAL VOC、ImageNet、COCO</p>
+<h2 id="Benchmarks"><a href="#Benchmarks" class="headerlink" title="Benchmarks"></a>Benchmarks</h2><h3 id="PASCAL-VOC-Challenge"><a href="#PASCAL-VOC-Challenge" class="headerlink" title="PASCAL VOC Challenge"></a>PASCAL VOC Challenge</h3><h4 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h4><p>網頁上有每一年的資料更動，起初只有四個類別，1578張影像，比賽方式為檢測與分類</p>
+<p>經過多年的資料量擴增，變為20個類別，含有11530張影像，並且有27450個ROI影像與6929個更精細的分割影像區域，並加入影像分割挑戰<br>競賽從2005年到2012年停止<br><img src='https://yanzzzzzzzzz.github.io/img/PACAL-VOC.png'  width='400'/></p>
+<h4 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h4><p><a href="http://host.robots.ox.ac.uk/pascal/VOC/">PASCAL Visual Object Classes Homepage</a></p>
+<p><a href="https://paperswithcode.com/sota/semantic-segmentation-on-pascal-voc-2012">paperswithcode PASCAL VOC Semantic Segmentation</a></p>
+<h3 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR"><a href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-ILSVR" class="headerlink" title="ImageNet Large Scale Visual Recognition Challenge (ILSVR)"></a>ImageNet Large Scale Visual Recognition Challenge (ILSVR)</h3><h4 id="ILSVR介紹"><a href="#ILSVR介紹" class="headerlink" title="ILSVR介紹"></a>ILSVR介紹</h4><p>ImageNet是一個提供所有研究人員進行大規模影像辨識模型的資料庫，資料庫內以手動標註了1400多萬張影像，並包含2萬多個類別，實際進行挑戰時會整理出1000類來進行比賽</p>
+<p>其中ImageNet的標記類別是根據WordNet的結構，WordNet可以想成是一個辭典，這個辭典把相近意義的同義詞連結再一起，成為一個網路架構</p>
+<img src='https://yanzzzzzzzzz.github.io/img/word_tree.png'  width='400'/>
+引用YOLO9000的圖來說明，WordNet結構是一個樹狀結構，一個節點下有多個子節點，例如飛機節點，下面有雙翼飛機、噴射機、空中巴士、隱形戰鬥機，因此在ImageNet中看到這些標記類別，都可以視為飛機類別
 
-<h2 id="Branch-Convolution-Neural-Network"><a href="#Branch-Convolution-Neural-Network" class="headerlink" title="Branch Convolution Neural Network"></a>Branch Convolution Neural Network</h2><p>CNN和BCNN的差別在於，BCNN會在層與層之間分支輸出結果，如圖所示，傳統的CNN模型會在最後Softmax層輸出結果，BCNN模型會在其中一個分支進行預測，因此可以提高模型的預測時間</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN_model.png'  width='400'/>
+<h4 id="ILSVR相關連結"><a href="#ILSVR相關連結" class="headerlink" title="ILSVR相關連結"></a>ILSVR相關連結</h4><p><a href="https://www.image-net.org/challenges/LSVRC/">ImageNet Home</a></p>
+<p><a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">Download ImageNet Data on Kaggle</a></p>
+<img src='https://yanzzzzzzzzz.github.io/img/paperswithcode-imagenet.png'  width='400'/>
 
-<p>所有的樣本都不需要經過整個CNN模型，參考前段介紹的生物學機制，簡單好辨識的影像在前期的layer預測，較難的影像在後期的layer輸出結果</p>
-<p>BCNN model訓練流程:</p>
-<ol>
-<li>訓練分支分類器</li>
-<li>評估和偏移分類器</li>
-<li>最佳化分支分類器</li>
-<li>fine-tune model</li>
-</ol>
-<h3 id="分支分類器-Branch-Classifier"><a href="#分支分類器-Branch-Classifier" class="headerlink" title="分支分類器 Branch Classifier"></a>分支分類器 Branch Classifier</h3><p>分支分類器是用來快速、高精度的輸出結果，因此false negatives是允許的，但false positives是不行的<br>因此簡單來說分支分類器:</p>
+<p><a href="https://paperswithcode.com/sota/image-classification-on-imagenet">paperswithcode ImageNet object detection</a><br>的數據可以看到歷年來ImageNet影像分類比賽準確率的模型</p>
+<h3 id="Common-Objects-in-Context-COCO"><a href="#Common-Objects-in-Context-COCO" class="headerlink" title="Common Objects in Context (COCO)"></a>Common Objects in Context (COCO)</h3><h4 id="COCO介紹"><a href="#COCO介紹" class="headerlink" title="COCO介紹"></a>COCO介紹</h4><p>COCO dataset也是一個大型物件檢測、影像分割的一個資料集，他的特點參考官網介紹:</p>
 <ul>
-<li>簡單且快速</li>
-<li>robust與高精度</li>
-<li>只輸出足夠置信度的樣本</li>
+<li>具有物件分割區塊</li>
+<li>330K的影像數，有200K已經標記</li>
+<li>包含1.5M個物件</li>
+<li>物件類別有80類</li>
+<li>場景分類有91類</li>
+<li>每張圖片都有五個人工書寫的英文註釋</li>
+<li>250000個person類別針對肢體做標記</li>
 </ul>
-<p>由於分支分類器是使用線性分類器，使用k-folder來訓線性分類器，但分類器分的精度太高，也是沒有意義的，例如:分類結果為一個空間只有一個正樣本，他的precision是1，但recall可能非常低，因此設定precision與recall的threshold是必要的</p>
-<p>再來就是要考慮到底要在哪幾層加入分類器，當遇到難以識別的樣本，並不會在分支分類器輸出結果，因此需要謹慎考慮分類器的插入位置與數量</p>
-<p>迭帶搜索最佳組合流程</p>
-<ol>
-<li>將分支分類器的組合編碼到[0,1]之間</li>
-<li>設定$T_{save} $為目標函數</li>
-<li>隨機產生不同種的分支分類器組合</li>
-<li>計算$ T_{save} $</li>
-<li>迭代到指定次數或找到$ T_{save} $符合閾值的組合</li>
-</ol>
-<p>其中$ T_{save} $表示的是節省的時間，因此要最大化目標函數</p>
-<p>$ T_{save} $公式:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-fomula.png'  width='400'/>
-
-<p>參數定義</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-para.png'  width='400'/>
-
-<p>$ l_i, i&#x3D;0,1,2…n+1, 表示CNN第i層, l_{n+1}是輸出的layer, l_0是輸入的layer $</p>
-<p>$ T_{l_i}是第l_i層到l_{n+1}層花費的時間 $</p>
-<p>$ C_i 表示第i層的branch classifier是否存在，當C_i&#x3D;1,存在分支分類器,C_i&#x3D;0則不存在 $</p>
-<p>$ t_i 是C_i分類器對sample處理所花費的時間 $</p>
-<p>$ S_i 是到C_i層還沒被分類的sample $</p>
-<p>$ C_iS_i第i層分離出來的sample數 $</p>
-<p>$ S_i^*是第i層還沒被分離出來的sample $</p>
-<p>$ N_i^* 是 S_i^* 的數量 $</p>
-<p>$ N_0是所有sample$</p>
-<p>$ N_i是到第i層的sample數量 $</p>
-<p>$ N_i^- 是第i層還沒被分類出來的數量 $</p>
-<p>$ T_i 是第i層的sample數量 - 第i層前節省的時間 - 未分類數量*分類器平均時間 $</p>
-<p>$ T_{save}是平均節省的時間 $</p>
-<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><h3 id="測試資料"><a href="#測試資料" class="headerlink" title="測試資料"></a>測試資料</h3><ul>
-<li>從10小時的影片取出來的交通號誌benchmark，<a href="https://paperswithcode.com/dataset/gtsrb">benchmark資料來源</a></li>
-<li>共有43類的標誌</li>
-<li>訓練資料:39k影像</li>
-<li>測試資料:12k影像</li>
-<li>15x15~222x193的影像大小</li>
-<li>影像包含交通標誌本體再向外延伸 10%的長寬</li>
+<h4 id="COCO相關連結"><a href="#COCO相關連結" class="headerlink" title="COCO相關連結"></a>COCO相關連結</h4><p><a href="https://cocodataset.org/#home">cocodataset home</a></p>
+<p><a href="https://paperswithcode.com/sota/object-detection-on-coco">paperswithcode coco object detection</a></p>
+<h2 id="評估模型方法"><a href="#評估模型方法" class="headerlink" title="評估模型方法"></a>評估模型方法</h2><p>在物件檢測中，常使用precision, recall來評估模型<br>講到precision, recall前先介紹混淆矩陣與真陽TP、真陰TN、偽陽FP、偽陰FN</p>
+<ul>
+<li>真陽(True Positive, TP):預測為真而實際為真</li>
+<li>真陰(True Negative, TN):預測為假而實際為假</li>
+<li>偽陽(Flase Positive, FP):預測為真而實際為假</li>
+<li>偽陰(Flase Negative, FN):預測為假而實際為真</li>
 </ul>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-data.png'  width='400'/>
+<p>precision, recall公式:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/precision-and-recall.png'  width='400'/>
 
-<h3 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h3><p>圖表顯示每個分支分類器分離輸入影像的百分比，將近30％輸入影像從第二層分離出來，並且將近75％從第五層分離出來。</p>
-<p>這意味著可以提前分離出大量sample。 所以，BCNN可以節省大量無意義的計算。</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-table2.png'  width='400'/>
+<p>precision公式意義:預測的為正樣本的結果中，預測正確的比率，稱為準確率</p>
+<p>recll公式意義:取出所有正樣本結果，實際預測多少正樣本的比例，稱為召回率</p>
+<p>以垃圾郵件分類器來舉例precision, recall數值高低的關係</p>
+<p>垃圾郵件資料為正樣本, 不是垃圾郵件的資料為負樣本</p>
+<p>分類器的precision高, recall高, 代表這模型非常棒, 具有濾除垃圾郵件的能力</p>
+<p>precision高, recall低, 代表這模型預估是垃圾郵件的正確率很高, 但實際抓到垃圾郵件的數量少, 是謹慎的模型</p>
+<p>precision低, recall高, 代表這模型垃圾郵件幾乎都有抓到, 但誤判率高, 是寬鬆的模型</p>
+<p>precision低, recall低, 這模型沒用了</p>
+<p>好的模型是具有高準確率，又有高召回率，因此可以使用我兩個都要的F-score指標</p>
+<img src='https://yanzzzzzzzzz.github.io/img/F-score.png'  width='400'/>
 
-<p>儘管設置了一個高精度閾值，但不可避免地還是會有sample被錯誤分類。<br>就像訓練的準確性和測試準確性之間的關係一樣，原始模型和BCNN準確性之間存在較大差異。</p>
-<p>圖片內的(a)顯示是在第5層之前隨機分離出的符號，（b）是在最後12層中隨機分離出的符號。（b）中的符號顯然更扭曲，模糊和更暗。與（a）相比，（b）中的樣本難以區分和識別。</p>
-<p>我們將在前一層中分離出來的樣本命名為簡單樣本。更難識別的交通標誌被識別出來，後來被識別出來。</p>
-<p>它與生物學機制一致，即簡單的動作被整合到一個較短的感知，而復雜的序列則以更長的周期被整合。<br><img src='https://yanzzzzzzzzz.github.io/img/BCNN-fig8.png'  width='400'/></p>
-<p>可以看到在準確度與原始CNN差異不大情況下，速度提升了約兩倍</p>
-<p>在BCNN-FT，Fine tuned微調的情況下，更接近原始CNN的準確率</p>
-<img src='https://yanzzzzzzzzz.github.io/img/BCNN-TABLE4.png'  width='400'/>
-
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ul>
-<li>受生物機制的啟發，提出了一種名為BCNN的交通標誌識別新框架</li>
-<li>在相同的條件下比一般的deep CNN更快</li>
-<li>在GTSRB的dataset下測試，大量的交通標誌可以在淺層分離出來</li>
-</ul>
+<p>$\beta$ 值用來控制precision與recall之間的權重， $\beta$ 值越高，precision的結果就比較重要</p>
 ]]></content>
       <categories>
-        <category>paper reading</category>
+        <category>course</category>
       </categories>
       <tags>
-        <tag>Image Classification</tag>
+        <tag>cs131</tag>
       </tags>
   </entry>
   <entry>
@@ -1289,52 +1289,6 @@
       <categories>
         <category>course</category>
       </categories>
-  </entry>
-  <entry>
-    <title>FullStack part0 筆記 - Traditional web applications vs Single-page application</title>
-    <url>/2023/05/02/FullStack-part0-2/</url>
-    <content><![CDATA[<h2 id="Traditional-web-applications"><a href="#Traditional-web-applications" class="headerlink" title="Traditional web applications"></a>Traditional web applications</h2><blockquote>
-<p>傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。</p>
-</blockquote>
-<p><a href="https://studies.cs.helsinki.fi/exampleapp/notes">Example page</a></p>
-<span id="more"></span>
-<h3 id="Example-page-解析"><a href="#Example-page-解析" class="headerlink" title="Example page 解析"></a>Example page 解析</h3><p>demo 的 UI畫面:</p>
-<p><img src="https://i.imgur.com/4yQzkQO.png" alt="UI 畫面"></p>
-<p>可以在textbox輸入值並按下button把他更新到list中</p>
-<p><img src="https://i.imgur.com/ntdQHsx.png" alt="前端程式碼"></p>
-<p>以上是前端的程式碼, 更新的方式是當按下button時, 透過POST請求的方式將資料傳送到後端</p>
-<p><img src="https://i.imgur.com/obrapUa.png" alt="onreadystatechange事件"></p>
-<p>以上的程式碼管理當網頁伺服器回應請求，在這段程式碼中，先定義onreadystatechange事件的event handler，當 readyState狀態發生變化時就會觸發</p>
-<p>readyState的值為 4 且 status 的值為 200 時，表示請求已經成功完成，並且伺服器已經正常地回應了所需的資料。這時，程式才會繼續執行，並把回應的資料轉換成JSON格式，使用list的顯示方式在網頁上</p>
-<h2 id="Single-page-application"><a href="#Single-page-application" class="headerlink" title="Single-page application"></a>Single-page application</h2><blockquote>
-<p>最近幾年，出現了單頁應用（Single Page Application，SPA）的開發風格，這種風格的網路應用不像傳統應用那樣從伺服器上單獨獲取所有的頁面，而是由一個從伺服器上獲取的HTML頁面和在瀏覽器中執行的JavaScript構成。使用者在使用SPA網站時，只需要從伺服器端載入一次HTML頁面，之後的所有操作都是通過JavaScript與API接口進行交互，動態更新當前頁面的內容，並實現快速響應和更流暢的用戶體驗。SPA應用程序可以實現許多不同的功能，例如社交媒體、電子商務平台和在線文檔編輯器等。</p>
-</blockquote>
-<p><a href="https://studies.cs.helsinki.fi/exampleapp/spa">Example page in SPA</a></p>
-<h3 id="SPA-example-page-解析"><a href="#SPA-example-page-解析" class="headerlink" title="SPA example page 解析"></a>SPA example page 解析</h3><p><img src="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png" alt="SPA frontend"></p>
-<p>前端程式中沒有使用action或method屬性來定義怎麼傳送資料</p>
-<p><img src="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png" alt="Network"></p>
-<p>在網頁上創建新的筆記時，會發現瀏覽器向伺服器端發送一個new_mote&#x2F;spa POST的請求，並帶有新筆記的JSON資料</p>
-<p><img src="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png" alt="Network"></p>
-<p>伺服器以狀態代碼201創建進行響應。這一次伺服器沒有要求重定向，瀏覽器停留在同一個頁面上，並且沒有再發送HTTP請求</p>
-<p>接下來看怎麼把前端的資料傳送到後端</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;notes_form&quot;</span>)</span><br><span class="line">  form.<span class="property">onsubmit</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> note = &#123;</span><br><span class="line">      <span class="attr">content</span>: e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span>,</span><br><span class="line">      <span class="attr">date</span>: <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    notes.<span class="title function_">push</span>(note)</span><br><span class="line">    e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="title function_">redrawNotes</span>()</span><br><span class="line">    <span class="title function_">sendToServer</span>(note)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在頁面載入後, 對form元件新增submit時的動作:</p>
-<ol>
-<li>preventDefault, 停止事件的默認動作, 默認方法會將數據送到伺服器並造成頁面更新</li>
-<li>新建一個note object, 把填寫的資料放入object中</li>
-<li>新增到notes array中</li>
-<li>清除填寫的欄位資料</li>
-<li>更新note list</li>
-<li>傳送新的note到server</li>
-</ol>
-<p>傳送到server的function</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sendToServer = <span class="keyword">function</span> (<span class="params">note</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> xhttpForPost = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line">  xhttpForPost.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">readyState</span> == <span class="number">4</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">status</span> == <span class="number">201</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">responseText</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  xhttpForPost.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&#x27;/exampleapp/new_note_spa&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">  xhttpForPost.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">  xhttpForPost.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(note));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以HTTP POST請求發送資料型態為JSON, 設定請求的標頭”Content-type”, 表示要傳送的內容是 JSON 格式的資料</p>
-<p>最後，函式呼叫 xhttpForPost.send() 方法，該方法將以字串形式傳送序列化後的note到伺服器</p>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://fullstackopen.com/en/">Deep Dive Into Modern Web Development</a></p>
-]]></content>
   </entry>
   <entry>
     <title>FullStack part0 筆記 - Web基本觀念</title>
@@ -1385,72 +1339,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>設計模式:Repository Pattern</title>
-    <url>/2022/11/28/Repository-pattern/</url>
-    <content><![CDATA[<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><ul>
-<li>應用程式都有資料存取需求，大多使用關聯式資料庫，使用如ADO.NET, OLE DB…介面，再搭配SQL指令來操作資料</li>
-<li>過往小型應用程式資料來源通常來自資料庫, 但現在提倡分散式, 雲端化的情況下, 資料來源具有多樣性</li>
-<li>傳統做法:應用程式邏輯與資料存取介面緊密結合, 會提高整合資料的難度</li>
-</ul>
-<h2 id="使用時機"><a href="#使用時機" class="headerlink" title="使用時機"></a>使用時機</h2><ul>
-<li>資料來源需要有任意抽換的功能</li>
-<li>抽離對DB操作的功能到Repository<span id="more"></span></li>
-</ul>
-<h2 id="Repository-模式"><a href="#Repository-模式" class="headerlink" title="Repository 模式"></a>Repository 模式</h2><p>Layered Architecture:<br>View ⇆ Controller ⇆ Service ⇆ Repository ⇆ Model</p>
-<ul>
-<li>View:資料呈現頁面</li>
-<li>Controller:API的接口</li>
-<li>Service:處裡商業邏輯, 電商有購物、付款邏輯;金融有存錢、轉帳邏輯</li>
-<li>Repository:資料庫操作&amp;資料處理</li>
-<li>Model:資料與DAO的Mapping</li>
-</ul>
-<p>為了達到抽換的功能, 使用Interface來達到這個特性, 可以分成泛型跟客製化介面</p>
-<h2 id="泛型與客製化Interface"><a href="#泛型與客製化Interface" class="headerlink" title="泛型與客製化Interface"></a>泛型與客製化Interface</h2><ul>
-<li>泛型IRepository:<br>所有Repository使用同一個Interface, 僅實作<a href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">CRUD</a>, 如果資料庫操作不複雜,　使用泛型方式有效減少重複撰寫的程式碼</li>
-</ul>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IGenericRepository</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">Create</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    Task&lt;List&lt;T&gt;&gt; GetAll();</span><br><span class="line">    <span class="function">Task <span class="title">Update</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    <span class="function">Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>客製化IRepository:<br>針對特定資料Mapping並封裝這些過程, 提高彈性</li>
-</ul>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// define interface</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// implement interfaces</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICommentRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// define interface</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CommentRepository</span> : <span class="title">ICommentRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// implement interfaces</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="實快速切換Dapper與EF操作"><a href="#實快速切換Dapper與EF操作" class="headerlink" title="實快速切換Dapper與EF操作"></a>實快速切換Dapper與EF操作</h2><p><a href="https://github.com/yanzzzzzzzzz/RepositoryTest">完整code放在github</a></p>
-<p>建立通用interface</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IGenericRepository</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">Create</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    Task&lt;List&lt;T&gt;&gt; GetAll();</span><br><span class="line">    <span class="function">Task <span class="title">Update</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    <span class="function">Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>對通用interface繼承後新增一個初始化DB function 的接口</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBlogRepository</span>:<span class="title">IGenericRepository</span>&lt;<span class="title">BlogModel</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Dapper-Repository-實作"><a href="#Dapper-Repository-實作" class="headerlink" title="Dapper Repository 實作"></a>Dapper Repository 實作</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DapperBlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> ConnectionStringProvider connectionStringProvider;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> isInit = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DapperBlogRepository</span>(<span class="params">ConnectionStringProvider connectionStringProvider</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.connectionStringProvider = connectionStringProvider;</span><br><span class="line">        InitBlogTable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        connection.Execute(<span class="string">@&quot;</span></span><br><span class="line"><span class="string">                    Create table if not exists Blog (</span></span><br><span class="line"><span class="string">                        Id INTEGER PRIMARY KEY AUTOINCREMENT,</span></span><br><span class="line"><span class="string">                        Title VARCHAR(50),</span></span><br><span class="line"><span class="string">                        Content VARCHAR(50)</span></span><br><span class="line"><span class="string">                    )&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!isInit)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> data = connection.Query&lt;BlogModel&gt;(<span class="string">&quot;select * from Blog&quot;</span>).ToList();</span><br><span class="line">            <span class="keyword">if</span> (!data.Any())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">foreach</span> (<span class="keyword">var</span> blog <span class="keyword">in</span> Util.generatorData())</span><br><span class="line">                &#123;</span><br><span class="line">                    connection.Execute(<span class="string">&quot;Insert into Blog(Title, Content) values (@Title, @Content)&quot;</span>, blog);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            isInit = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Create</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;Insert into Blog(Title, Content) values (@Title, @Content)&quot;</span>, entity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;DELETE FROM Blog WHERE Id=@id&quot;</span>, <span class="keyword">new</span> &#123; Id = id &#125;);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">async</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">await</span> connection.QueryAsync&lt;BlogModel&gt;(<span class="string">&quot;select * from Blog&quot;</span>)).ToList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Update</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;UPDATE Blog SET Title = @Title, Content = @Content WHERE Id=@Id&quot;</span>, entity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Controller實作"><a href="#Controller實作" class="headerlink" title="Controller實作"></a>Controller實作</h3><p>Controller端建構子注入Repository 使用function</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Route(<span class="string">&quot;api/[controller]&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">ApiController</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BlogController</span> : <span class="title">ControllerBase</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> IBlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BlogController</span>(<span class="params">IBlogRepository blogRepository</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.blogRepository = blogRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">HttpGet</span>]</span><br><span class="line">    <span class="keyword">public</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.GetAll();</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpPost</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Create</span>(<span class="params">BlogModel blogModel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Create(blogModel);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpPut</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Update</span>(<span class="params">BlogModel blogModel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Update(blogModel);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpDelete(<span class="string">&quot;&#123;id&#125;&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Delete(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="依賴注入"><a href="#依賴注入" class="headerlink" title="依賴注入"></a>依賴注入</h3><p>在Program.cs啟動Web前依賴注入IBlogRepository</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> builder = WebApplication.CreateBuilder(args);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">builder.Services.AddScoped&lt;IBlogRepository, DapperBlogRepository&gt;()</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> app = builder.Build();</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.Run();</span><br></pre></td></tr></table></figure>
-
-<p>到這裡完成使用Dapper操作DB的api實作</p>
-<p>再來加入EntityFramework的Repository實作</p>
-<h3 id="EF-Repository-實作"><a href="#EF-Repository-實作" class="headerlink" title="EF Repository 實作"></a>EF Repository 實作</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EFBlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> EFDbContext _context;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">EFBlogRepository</span>(<span class="params">EFDbContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _context = context;</span><br><span class="line">            InitBlogTable();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> isInit = <span class="literal">false</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Create</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> _context.AddAsync(entity);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> blog = <span class="keyword">await</span> _context.Blog.SingleOrDefaultAsync(e =&gt; e.Id == id);</span><br><span class="line">            <span class="keyword">if</span> (blog == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            _context.Blog.Remove(blog);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> _context.Blog.ToListAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isInit)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!_context.Blog.Any())</span><br><span class="line">                &#123;</span><br><span class="line">                    _context.Blog.AddRange(Common.Common.generatorData());</span><br><span class="line">                    _context.SaveChanges();</span><br><span class="line">                &#125;</span><br><span class="line">                isInit = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Update</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> blog = <span class="keyword">await</span> _context.Blog.SingleOrDefaultAsync(e =&gt; e.Id == entity.Id);</span><br><span class="line">            <span class="keyword">if</span> (blog == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            blog.Title = entity.Title;</span><br><span class="line">            blog.Content = entity.Content;</span><br><span class="line">            _context.Blog.Update(blog);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="決定注入哪個實作"><a href="#決定注入哪個實作" class="headerlink" title="決定注入哪個實作"></a>決定注入哪個實作</h3><p>appsettings.json新增參數</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...,</span></span><br><span class="line">  <span class="string">&quot;DataAccessLibrary&quot;</span>: <span class="string">&quot;Dapper&quot;</span> <span class="comment">//Dapper or EF</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Program.cs 讀取appsettings的參數來決定注入哪個Repository</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">var</span> dataAccessLibrary = configuration.GetSection(<span class="string">&quot;DataAccessLibrary&quot;</span>).Get&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="keyword">if</span> (dataAccessLibrary == <span class="string">&quot;Dapper&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Use Dapper&quot;</span>);</span><br><span class="line">    builder.Services.AddScoped&lt;IBlogRepository, DapperBlogRepository&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Use EF&quot;</span>);</span><br><span class="line">    builder.Services.AddScoped&lt;IBlogRepository, EFBlogRepository&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-
-<p>這樣就完成使用外部參數的方式來快速切換資料庫實作的功能</p>
-<h2 id="解決了甚麼"><a href="#解決了甚麼" class="headerlink" title="解決了甚麼"></a>解決了甚麼</h2><ul>
-<li>上層的服務 (Service) 只要關心 Repository 的抽象化 API, 並且當資料來源變更時, 使用DI抽換掉Repository API 的實作就好</li>
-<li>減少重複撰寫查詢邏輯</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Design Patterns</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Vue Teleport實作提示框功能</title>
     <url>/2023/08/23/Vue-teleport-alert-box/</url>
     <content><![CDATA[<p>實作在右下角顯示多個提示框功能</p>
@@ -1475,6 +1363,52 @@
 </ul>
 <p>父元件呼叫組件, 在按下button時加入提示框到陣列中, 使用陣列將現有提示框顯示出來, 生成後會自動顯示在畫面右下角</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;msgs.push(`test message$&#123;msgs.length + 1&#125;`)&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    Add message</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">AlertBox</span> <span class="attr">v-for</span>=<span class="string">&quot;msg in msgs&quot;</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">AlertBox</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">AlertBox</span> <span class="keyword">from</span> <span class="string">&#x27;./components/AlertBox.vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">components</span>: &#123; <span class="title class_">AlertBox</span> &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">msgs</span>: [],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-id">#messages</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">position</span>: absolute;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">right</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">bottom</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">display</span>: flex;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">flex-direction</span>: column-reverse;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">gap</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>FullStack part0 筆記 - Traditional web applications vs Single-page application</title>
+    <url>/2023/05/02/FullStack-part0-2/</url>
+    <content><![CDATA[<h2 id="Traditional-web-applications"><a href="#Traditional-web-applications" class="headerlink" title="Traditional web applications"></a>Traditional web applications</h2><blockquote>
+<p>傳統的 Web 應用程式是指一個使用多個頁面的應用程式，每次使用者在網頁上進行操作時，都需要重新載入整個頁面或者轉到另一個頁面，從而刷新網頁的內容。每次發送請求時，伺服器都會重新生成一個 HTML 頁面，並將其傳送給客戶端。</p>
+</blockquote>
+<p><a href="https://studies.cs.helsinki.fi/exampleapp/notes">Example page</a></p>
+<span id="more"></span>
+<h3 id="Example-page-解析"><a href="#Example-page-解析" class="headerlink" title="Example page 解析"></a>Example page 解析</h3><p>demo 的 UI畫面:</p>
+<p><img src="https://i.imgur.com/4yQzkQO.png" alt="UI 畫面"></p>
+<p>可以在textbox輸入值並按下button把他更新到list中</p>
+<p><img src="https://i.imgur.com/ntdQHsx.png" alt="前端程式碼"></p>
+<p>以上是前端的程式碼, 更新的方式是當按下button時, 透過POST請求的方式將資料傳送到後端</p>
+<p><img src="https://i.imgur.com/obrapUa.png" alt="onreadystatechange事件"></p>
+<p>以上的程式碼管理當網頁伺服器回應請求，在這段程式碼中，先定義onreadystatechange事件的event handler，當 readyState狀態發生變化時就會觸發</p>
+<p>readyState的值為 4 且 status 的值為 200 時，表示請求已經成功完成，並且伺服器已經正常地回應了所需的資料。這時，程式才會繼續執行，並把回應的資料轉換成JSON格式，使用list的顯示方式在網頁上</p>
+<h2 id="Single-page-application"><a href="#Single-page-application" class="headerlink" title="Single-page application"></a>Single-page application</h2><blockquote>
+<p>最近幾年，出現了單頁應用（Single Page Application，SPA）的開發風格，這種風格的網路應用不像傳統應用那樣從伺服器上單獨獲取所有的頁面，而是由一個從伺服器上獲取的HTML頁面和在瀏覽器中執行的JavaScript構成。使用者在使用SPA網站時，只需要從伺服器端載入一次HTML頁面，之後的所有操作都是通過JavaScript與API接口進行交互，動態更新當前頁面的內容，並實現快速響應和更流暢的用戶體驗。SPA應用程序可以實現許多不同的功能，例如社交媒體、電子商務平台和在線文檔編輯器等。</p>
+</blockquote>
+<p><a href="https://studies.cs.helsinki.fi/exampleapp/spa">Example page in SPA</a></p>
+<h3 id="SPA-example-page-解析"><a href="#SPA-example-page-解析" class="headerlink" title="SPA example page 解析"></a>SPA example page 解析</h3><p><img src="https://fullstackopen.com/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png" alt="SPA frontend"></p>
+<p>前端程式中沒有使用action或method屬性來定義怎麼傳送資料</p>
+<p><img src="https://fullstackopen.com/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png" alt="Network"></p>
+<p>在網頁上創建新的筆記時，會發現瀏覽器向伺服器端發送一個new_mote&#x2F;spa POST的請求，並帶有新筆記的JSON資料</p>
+<p><img src="https://fullstackopen.com/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png" alt="Network"></p>
+<p>伺服器以狀態代碼201創建進行響應。這一次伺服器沒有要求重定向，瀏覽器停留在同一個頁面上，並且沒有再發送HTTP請求</p>
+<p>接下來看怎麼把前端的資料傳送到後端</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;notes_form&quot;</span>)</span><br><span class="line">  form.<span class="property">onsubmit</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> note = &#123;</span><br><span class="line">      <span class="attr">content</span>: e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span>,</span><br><span class="line">      <span class="attr">date</span>: <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    notes.<span class="title function_">push</span>(note)</span><br><span class="line">    e.<span class="property">target</span>.<span class="property">elements</span>[<span class="number">0</span>].<span class="property">value</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="title function_">redrawNotes</span>()</span><br><span class="line">    <span class="title function_">sendToServer</span>(note)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在頁面載入後, 對form元件新增submit時的動作:</p>
+<ol>
+<li>preventDefault, 停止事件的默認動作, 默認方法會將數據送到伺服器並造成頁面更新</li>
+<li>新建一個note object, 把填寫的資料放入object中</li>
+<li>新增到notes array中</li>
+<li>清除填寫的欄位資料</li>
+<li>更新note list</li>
+<li>傳送新的note到server</li>
+</ol>
+<p>傳送到server的function</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sendToServer = <span class="keyword">function</span> (<span class="params">note</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> xhttpForPost = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line">  xhttpForPost.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">readyState</span> == <span class="number">4</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">status</span> == <span class="number">201</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">responseText</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  xhttpForPost.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&#x27;/exampleapp/new_note_spa&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">  xhttpForPost.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">  xhttpForPost.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(note));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以HTTP POST請求發送資料型態為JSON, 設定請求的標頭”Content-type”, 表示要傳送的內容是 JSON 格式的資料</p>
+<p>最後，函式呼叫 xhttpForPost.send() 方法，該方法將以字串形式傳送序列化後的note到伺服器</p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://fullstackopen.com/en/">Deep Dive Into Modern Web Development</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1532,6 +1466,64 @@ public:
 </code></pre>
 <h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Image Classification</title>
+    <url>/2020/11/15/cs231n-Image-Classification/</url>
+    <content><![CDATA[<p>website:<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
+<p>影像分類是電腦視覺的核心任務，但其中有許多障礙要克服</p>
+<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><h3 id="Semantic-Gap-語義鴻溝"><a href="#Semantic-Gap-語義鴻溝" class="headerlink" title="Semantic Gap 語義鴻溝"></a>Semantic Gap 語義鴻溝</h3><ul>
+<li>Semantic Gap指的是在不同系統中形成的結構造成差異</li>
+<li>人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程</li>
+<li>人眼看到的是物體是光線照射到物體，經過反射後部份光線射入我們的眼睛。人腦所想的通常是高階特徵ex:飛機、汽車、室內空間</li>
+<li>在電腦中看到的數位影像是個三維tensor(R, G, B channel)。電腦主要觀察低階特徵ex:顏色分布、紋理(texture)</li>
+</ul>
+<h3 id="Viewpoint-variation-視野角度變化"><a href="#Viewpoint-variation-視野角度變化" class="headerlink" title="Viewpoint variation 視野角度變化"></a>Viewpoint variation 視野角度變化</h3><ul>
+<li>攝影機視野改變造成觀測結果產生變化</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/d3418806.jpg"  width="400"/>
+
+<h3 id="Background-Clutter-非均值的背景"><a href="#Background-Clutter-非均值的背景" class="headerlink" title="Background Clutter 非均值的背景"></a>Background Clutter 非均值的背景</h3><ul>
+<li>背景可能非常雜亂</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg"  width="400"/>
+
+<h3 id="Illumination-亮度的變化"><a href="#Illumination-亮度的變化" class="headerlink" title="Illumination 亮度的變化"></a>Illumination 亮度的變化</h3><ul>
+<li>不同的燈源，打光方式造成同一個物體不同成像結果</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg"  width="400"/>
+
+<h3 id="Occlusion-被遮蔽的物體"><a href="#Occlusion-被遮蔽的物體" class="headerlink" title="Occlusion 被遮蔽的物體"></a>Occlusion 被遮蔽的物體</h3><ul>
+<li>物體被遮擋一部分，但還是可以透過特徵來辨認出來</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg"  width="400"/>
+
+<h3 id="Deformation-物體形狀的變化"><a href="#Deformation-物體形狀的變化" class="headerlink" title="Deformation 物體形狀的變化"></a>Deformation 物體形狀的變化</h3><img src="https://yanzzzzzzzzz.github.io/img/liquid-cat.png"  width="400"/>
+
+<img src="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png"  width="400"/>
+
+<h3 id="Intraclass-variation-同類型的不同變化"><a href="#Intraclass-variation-同類型的不同變化" class="headerlink" title="Intraclass variation 同類型的不同變化"></a>Intraclass variation 同類型的不同變化</h3><img src="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg"  width="400"/>
+
+<p>沒辦法透過<a href="https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB">硬編碼</a>的方式在這些問題下輕易的分類出貓咪</p>
+<h2 id="機器學習-數據驅動方法"><a href="#機器學習-數據驅動方法" class="headerlink" title="機器學習: 數據驅動方法"></a>機器學習: 數據驅動方法</h2><p>寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。<br>因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。<br>流程：</p>
+<ol>
+<li>收集數據集(影像與對應的類別標記)</li>
+<li>機器學習演算法訓練分類器</li>
+<li>使用分類器預測新讀進來的影像</li>
+</ol>
+<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><h3 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h3><ul>
+<li>比較兩影像之間的距離<br>L1距離公式:$d_1(I_1, I_2) &#x3D; \sum_{p} |I^P_1 - I^P_2|$</li>
+</ul>
+<p>$其中I_1, I_2 是影像,P是I_1, I_2像素點的索引$</p>
+<p>這個距離公式就是<code>逐點計算兩影像像素值差異的總和</code>，加絕對值是為了避免正負號誤差加總後造成抵銷</p>
+<p><a href="https://github.com/yanzzzzzzzzz/K-Nearest-Neighbor-Classifier">實作KNN測試cifar10 in github</a></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/51979923">跟着cs231n学英语（Module 1)</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>cs231n</tag>
+      </tags>
   </entry>
   <entry>
     <title>Vue.js 學習筆記</title>
@@ -1763,64 +1755,6 @@ public:
 ]]></content>
   </entry>
   <entry>
-    <title>Image Classification</title>
-    <url>/2020/11/15/cs231n-Image-Classification/</url>
-    <content><![CDATA[<p>website:<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
-<p>影像分類是電腦視覺的核心任務，但其中有許多障礙要克服</p>
-<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><h3 id="Semantic-Gap-語義鴻溝"><a href="#Semantic-Gap-語義鴻溝" class="headerlink" title="Semantic Gap 語義鴻溝"></a>Semantic Gap 語義鴻溝</h3><ul>
-<li>Semantic Gap指的是在不同系統中形成的結構造成差異</li>
-<li>人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程</li>
-<li>人眼看到的是物體是光線照射到物體，經過反射後部份光線射入我們的眼睛。人腦所想的通常是高階特徵ex:飛機、汽車、室內空間</li>
-<li>在電腦中看到的數位影像是個三維tensor(R, G, B channel)。電腦主要觀察低階特徵ex:顏色分布、紋理(texture)</li>
-</ul>
-<h3 id="Viewpoint-variation-視野角度變化"><a href="#Viewpoint-variation-視野角度變化" class="headerlink" title="Viewpoint variation 視野角度變化"></a>Viewpoint variation 視野角度變化</h3><ul>
-<li>攝影機視野改變造成觀測結果產生變化</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/d3418806.jpg"  width="400"/>
-
-<h3 id="Background-Clutter-非均值的背景"><a href="#Background-Clutter-非均值的背景" class="headerlink" title="Background Clutter 非均值的背景"></a>Background Clutter 非均值的背景</h3><ul>
-<li>背景可能非常雜亂</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg"  width="400"/>
-
-<h3 id="Illumination-亮度的變化"><a href="#Illumination-亮度的變化" class="headerlink" title="Illumination 亮度的變化"></a>Illumination 亮度的變化</h3><ul>
-<li>不同的燈源，打光方式造成同一個物體不同成像結果</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg"  width="400"/>
-
-<h3 id="Occlusion-被遮蔽的物體"><a href="#Occlusion-被遮蔽的物體" class="headerlink" title="Occlusion 被遮蔽的物體"></a>Occlusion 被遮蔽的物體</h3><ul>
-<li>物體被遮擋一部分，但還是可以透過特徵來辨認出來</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg"  width="400"/>
-
-<h3 id="Deformation-物體形狀的變化"><a href="#Deformation-物體形狀的變化" class="headerlink" title="Deformation 物體形狀的變化"></a>Deformation 物體形狀的變化</h3><img src="https://yanzzzzzzzzz.github.io/img/liquid-cat.png"  width="400"/>
-
-<img src="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png"  width="400"/>
-
-<h3 id="Intraclass-variation-同類型的不同變化"><a href="#Intraclass-variation-同類型的不同變化" class="headerlink" title="Intraclass variation 同類型的不同變化"></a>Intraclass variation 同類型的不同變化</h3><img src="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg"  width="400"/>
-
-<p>沒辦法透過<a href="https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB">硬編碼</a>的方式在這些問題下輕易的分類出貓咪</p>
-<h2 id="機器學習-數據驅動方法"><a href="#機器學習-數據驅動方法" class="headerlink" title="機器學習: 數據驅動方法"></a>機器學習: 數據驅動方法</h2><p>寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。<br>因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。<br>流程：</p>
-<ol>
-<li>收集數據集(影像與對應的類別標記)</li>
-<li>機器學習演算法訓練分類器</li>
-<li>使用分類器預測新讀進來的影像</li>
-</ol>
-<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><h3 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h3><ul>
-<li>比較兩影像之間的距離<br>L1距離公式:$d_1(I_1, I_2) &#x3D; \sum_{p} |I^P_1 - I^P_2|$</li>
-</ul>
-<p>$其中I_1, I_2 是影像,P是I_1, I_2像素點的索引$</p>
-<p>這個距離公式就是<code>逐點計算兩影像像素值差異的總和</code>，加絕對值是為了避免正負號誤差加總後造成抵銷</p>
-<p><a href="https://github.com/yanzzzzzzzzz/K-Nearest-Neighbor-Classifier">實作KNN測試cifar10 in github</a></p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/51979923">跟着cs231n学英语（Module 1)</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>cs231n</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LINQ查詢語法</title>
     <url>/2022/11/21/linq_intro/</url>
     <content><![CDATA[<h2 id="LINQ介紹"><a href="#LINQ介紹" class="headerlink" title="LINQ介紹"></a>LINQ介紹</h2><p>語言整合查詢(英語：Language Integrated Query，縮寫：LINQ)是Microsoft的一種查詢語法技術，C#、VB都可以使用</p>
@@ -1866,6 +1800,72 @@ public:
 <h2 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h2><p><a href="https://shaurong.blogspot.com/2021/06/sql-server-2019.html">[研究] SQL Server 2019 - 與伺服器的連線已建立成功，但在登入程序時發生錯誤。</a></p>
 <p><a href="https://dog0416.blogspot.com/2015/04/databasesql-server-microsoft-sql-server.html">[Database][SQL Server] 使用者 的登入失敗。 Microsoft SQL Server, 錯誤: 18456</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>設計模式:Repository Pattern</title>
+    <url>/2022/11/28/Repository-pattern/</url>
+    <content><![CDATA[<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><ul>
+<li>應用程式都有資料存取需求，大多使用關聯式資料庫，使用如ADO.NET, OLE DB…介面，再搭配SQL指令來操作資料</li>
+<li>過往小型應用程式資料來源通常來自資料庫, 但現在提倡分散式, 雲端化的情況下, 資料來源具有多樣性</li>
+<li>傳統做法:應用程式邏輯與資料存取介面緊密結合, 會提高整合資料的難度</li>
+</ul>
+<h2 id="使用時機"><a href="#使用時機" class="headerlink" title="使用時機"></a>使用時機</h2><ul>
+<li>資料來源需要有任意抽換的功能</li>
+<li>抽離對DB操作的功能到Repository<span id="more"></span></li>
+</ul>
+<h2 id="Repository-模式"><a href="#Repository-模式" class="headerlink" title="Repository 模式"></a>Repository 模式</h2><p>Layered Architecture:<br>View ⇆ Controller ⇆ Service ⇆ Repository ⇆ Model</p>
+<ul>
+<li>View:資料呈現頁面</li>
+<li>Controller:API的接口</li>
+<li>Service:處裡商業邏輯, 電商有購物、付款邏輯;金融有存錢、轉帳邏輯</li>
+<li>Repository:資料庫操作&amp;資料處理</li>
+<li>Model:資料與DAO的Mapping</li>
+</ul>
+<p>為了達到抽換的功能, 使用Interface來達到這個特性, 可以分成泛型跟客製化介面</p>
+<h2 id="泛型與客製化Interface"><a href="#泛型與客製化Interface" class="headerlink" title="泛型與客製化Interface"></a>泛型與客製化Interface</h2><ul>
+<li>泛型IRepository:<br>所有Repository使用同一個Interface, 僅實作<a href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">CRUD</a>, 如果資料庫操作不複雜,　使用泛型方式有效減少重複撰寫的程式碼</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IGenericRepository</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">Create</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    Task&lt;List&lt;T&gt;&gt; GetAll();</span><br><span class="line">    <span class="function">Task <span class="title">Update</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    <span class="function">Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>客製化IRepository:<br>針對特定資料Mapping並封裝這些過程, 提高彈性</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// define interface</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// implement interfaces</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICommentRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// define interface</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CommentRepository</span> : <span class="title">ICommentRepository</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// implement interfaces</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="實快速切換Dapper與EF操作"><a href="#實快速切換Dapper與EF操作" class="headerlink" title="實快速切換Dapper與EF操作"></a>實快速切換Dapper與EF操作</h2><p><a href="https://github.com/yanzzzzzzzzz/RepositoryTest">完整code放在github</a></p>
+<p>建立通用interface</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IGenericRepository</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">Create</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    Task&lt;List&lt;T&gt;&gt; GetAll();</span><br><span class="line">    <span class="function">Task <span class="title">Update</span>(<span class="params">T entity</span>)</span>;</span><br><span class="line">    <span class="function">Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>對通用interface繼承後新增一個初始化DB function 的接口</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBlogRepository</span>:<span class="title">IGenericRepository</span>&lt;<span class="title">BlogModel</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dapper-Repository-實作"><a href="#Dapper-Repository-實作" class="headerlink" title="Dapper Repository 實作"></a>Dapper Repository 實作</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DapperBlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> ConnectionStringProvider connectionStringProvider;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> isInit = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DapperBlogRepository</span>(<span class="params">ConnectionStringProvider connectionStringProvider</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.connectionStringProvider = connectionStringProvider;</span><br><span class="line">        InitBlogTable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        connection.Execute(<span class="string">@&quot;</span></span><br><span class="line"><span class="string">                    Create table if not exists Blog (</span></span><br><span class="line"><span class="string">                        Id INTEGER PRIMARY KEY AUTOINCREMENT,</span></span><br><span class="line"><span class="string">                        Title VARCHAR(50),</span></span><br><span class="line"><span class="string">                        Content VARCHAR(50)</span></span><br><span class="line"><span class="string">                    )&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!isInit)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> data = connection.Query&lt;BlogModel&gt;(<span class="string">&quot;select * from Blog&quot;</span>).ToList();</span><br><span class="line">            <span class="keyword">if</span> (!data.Any())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">foreach</span> (<span class="keyword">var</span> blog <span class="keyword">in</span> Util.generatorData())</span><br><span class="line">                &#123;</span><br><span class="line">                    connection.Execute(<span class="string">&quot;Insert into Blog(Title, Content) values (@Title, @Content)&quot;</span>, blog);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            isInit = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Create</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;Insert into Blog(Title, Content) values (@Title, @Content)&quot;</span>, entity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;DELETE FROM Blog WHERE Id=@id&quot;</span>, <span class="keyword">new</span> &#123; Id = id &#125;);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">async</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">await</span> connection.QueryAsync&lt;BlogModel&gt;(<span class="string">&quot;select * from Blog&quot;</span>)).ToList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Update</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">var</span> connection = <span class="keyword">new</span> SQLiteConnection(connectionStringProvider.ConnectionString);</span><br><span class="line">        <span class="keyword">return</span> connection.ExecuteAsync(<span class="string">&quot;UPDATE Blog SET Title = @Title, Content = @Content WHERE Id=@Id&quot;</span>, entity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller實作"><a href="#Controller實作" class="headerlink" title="Controller實作"></a>Controller實作</h3><p>Controller端建構子注入Repository 使用function</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Route(<span class="string">&quot;api/[controller]&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">ApiController</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BlogController</span> : <span class="title">ControllerBase</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> IBlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BlogController</span>(<span class="params">IBlogRepository blogRepository</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.blogRepository = blogRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">HttpGet</span>]</span><br><span class="line">    <span class="keyword">public</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.GetAll();</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpPost</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Create</span>(<span class="params">BlogModel blogModel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Create(blogModel);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpPut</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Update</span>(<span class="params">BlogModel blogModel</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Update(blogModel);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">HttpDelete(<span class="string">&quot;&#123;id&#125;&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> blogRepository.Delete(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="依賴注入"><a href="#依賴注入" class="headerlink" title="依賴注入"></a>依賴注入</h3><p>在Program.cs啟動Web前依賴注入IBlogRepository</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> builder = WebApplication.CreateBuilder(args);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">builder.Services.AddScoped&lt;IBlogRepository, DapperBlogRepository&gt;()</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> app = builder.Build();</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.Run();</span><br></pre></td></tr></table></figure>
+
+<p>到這裡完成使用Dapper操作DB的api實作</p>
+<p>再來加入EntityFramework的Repository實作</p>
+<h3 id="EF-Repository-實作"><a href="#EF-Repository-實作" class="headerlink" title="EF Repository 實作"></a>EF Repository 實作</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EFBlogRepository</span> : <span class="title">IBlogRepository</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> EFDbContext _context;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">EFBlogRepository</span>(<span class="params">EFDbContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _context = context;</span><br><span class="line">            InitBlogTable();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> isInit = <span class="literal">false</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Create</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> _context.AddAsync(entity);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Delete</span>(<span class="params"><span class="built_in">int</span> id</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> blog = <span class="keyword">await</span> _context.Blog.SingleOrDefaultAsync(e =&gt; e.Id == id);</span><br><span class="line">            <span class="keyword">if</span> (blog == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            _context.Blog.Remove(blog);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Task&lt;List&lt;BlogModel&gt;&gt; GetAll()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> _context.Blog.ToListAsync();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InitBlogTable</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isInit)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!_context.Blog.Any())</span><br><span class="line">                &#123;</span><br><span class="line">                    _context.Blog.AddRange(Common.Common.generatorData());</span><br><span class="line">                    _context.SaveChanges();</span><br><span class="line">                &#125;</span><br><span class="line">                isInit = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Update</span>(<span class="params">BlogModel entity</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> blog = <span class="keyword">await</span> _context.Blog.SingleOrDefaultAsync(e =&gt; e.Id == entity.Id);</span><br><span class="line">            <span class="keyword">if</span> (blog == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            blog.Title = entity.Title;</span><br><span class="line">            blog.Content = entity.Content;</span><br><span class="line">            _context.Blog.Update(blog);</span><br><span class="line">            <span class="keyword">await</span> _context.SaveChangesAsync();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="決定注入哪個實作"><a href="#決定注入哪個實作" class="headerlink" title="決定注入哪個實作"></a>決定注入哪個實作</h3><p>appsettings.json新增參數</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...,</span></span><br><span class="line">  <span class="string">&quot;DataAccessLibrary&quot;</span>: <span class="string">&quot;Dapper&quot;</span> <span class="comment">//Dapper or EF</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Program.cs 讀取appsettings的參數來決定注入哪個Repository</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">var</span> dataAccessLibrary = configuration.GetSection(<span class="string">&quot;DataAccessLibrary&quot;</span>).Get&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="keyword">if</span> (dataAccessLibrary == <span class="string">&quot;Dapper&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Use Dapper&quot;</span>);</span><br><span class="line">    builder.Services.AddScoped&lt;IBlogRepository, DapperBlogRepository&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Use EF&quot;</span>);</span><br><span class="line">    builder.Services.AddScoped&lt;IBlogRepository, EFBlogRepository&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成使用外部參數的方式來快速切換資料庫實作的功能</p>
+<h2 id="解決了甚麼"><a href="#解決了甚麼" class="headerlink" title="解決了甚麼"></a>解決了甚麼</h2><ul>
+<li>上層的服務 (Service) 只要關心 Repository 的抽象化 API, 並且當資料來源變更時, 使用DI抽換掉Repository API 的實作就好</li>
+<li>減少重複撰寫查詢邏輯</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Design Patterns</tag>
+      </tags>
   </entry>
   <entry>
     <title>分層架構模式</title>
