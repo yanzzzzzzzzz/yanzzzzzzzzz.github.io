@@ -59,7 +59,7 @@
 
 <ul>
 <li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
-<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越</li>
+<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越大越接近白色</li>
 <li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
 </ul>
 <h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
@@ -86,10 +86,7 @@
 <li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
 </ul>
 <p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
-<p>齊次坐標上的除法</p>
-<ul>
-<li>我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算<br>因此將他轉換為齊次座標，再進行除法運算</li>
-</ul>
+<h4 id="齊次坐標上的影像縮放"><a href="#齊次坐標上的影像縮放" class="headerlink" title="齊次坐標上的影像縮放"></a>齊次坐標上的影像縮放</h4><p>為何在加上每個向量末端加上”1”就可以進行縮放?<br>原因是在：我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算，因此將他轉換為齊次座標，再進行除法運算</p>
 <p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
 <p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
 <p>因此座標位置也跟著等比例縮小了</p>
@@ -2009,5 +2006,22 @@ public:
       <tags>
         <tag>blog</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Vue3 Composition API</title>
+    <url>/2023/09/25/vue3-note/</url>
+    <content><![CDATA[<h2 id="setup"><a href="#setup" class="headerlink" title="setup"></a>setup</h2><p>Composition API 功能要寫在<code>setup</code>裡面</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> defalut &#123;</span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>也可以寫成</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><ul>
+<li>定義響應性數據</li>
+<li>參數名稱要+.value來修改資料</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt; </span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">const</span> title = <span class="title function_">ref</span>(<span class="string">&#x27;title&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">title.<span class="property">value</span> = <span class="string">&#x27;new title&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="reactive"><a href="#reactive" class="headerlink" title="reactive"></a>reactive</h2>]]></content>
   </entry>
 </search>

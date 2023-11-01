@@ -194,6 +194,147 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yanzzzz">
+      <meta itemprop="description" content="yanzzzz blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanzzzz blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/" class="post-title-link" itemprop="url">cs131 lecture 5 Features And Fitting-RANSAC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-28 23:54:00" itemprop="dateCreated datePublished" datetime="2021-02-28T23:54:00+08:00">2021-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/course/" itemprop="url" rel="index"><span itemprop="name">course</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="線段檢測的難題"><a href="#線段檢測的難題" class="headerlink" title="線段檢測的難題"></a>線段檢測的難題</h2><ul>
+<li>會有雜訊干擾</li>
+<li>如何找到一條局部斷裂的線</li>
+<li>由 noise 干擾導致檢測方向偏移</li>
+</ul>
+<h2 id="回顧投票法"><a href="#回顧投票法" class="headerlink" title="回顧投票法"></a>回顧投票法</h2><ul>
+<li>蠻力投票法，時間複雜度$ O(N^2) $</li>
+<li>投票法可以讓所有模型通用<ul>
+<li>循環所有參數，取得投票結果</li>
+<li>選出高票參數結果</li>
+</ul>
+</li>
+<li>雜訊所產生的線段也會被納入投票的參數中，但通常結果會與我們想要的預期不符</li>
+</ul>
+<h2 id="RANSAC"><a href="#RANSAC" class="headerlink" title="RANSAC"></a>RANSAC</h2><p>RANdom SAmple Consensus，隨機抽樣一致<br>將資料分成 inliers(正常數據), outliers(異常數據)<br>RANSAC 目標：濾除異常數據，使用正常的數據進行檢測</p>
+<p>直覺來看，在線段檢測中，若選擇的 edge 是 outliers 進行擬合時，其他點應該不會在所擬合的線段上<br><img src="https://yanzzzzzzzzz.github.io/img/inliners-and-outliers.png"  width="400"/></p>
+<p>隨機選取兩點得到直線後，藍色點為靠近線段的 inliers，紫色點為遠離線段的 outliers</p>
+<h3 id="RANSAC-流程"><a href="#RANSAC-流程" class="headerlink" title="RANSAC 流程"></a>RANSAC 流程</h3><p>循環 k 次迭代：</p>
+<ol>
+<li>在一組資料集中(ex:edge 點座標)隨機選擇要執行模型評估的最小數據集(ex:直線偵測下是兩個點)</li>
+<li>代入選擇的數據集來計算數據模型</li>
+<li>尋找此模型內的 inliers 數量</li>
+<li>比較當前模型結果與目前最佳模型結果數量，紀錄最大 inliers 數量與對應模型結果</li>
+<li>重新估算迭代次數 k</li>
+</ol>
+<img src="https://yanzzzzzzzzz.github.io/img/ransac-flow.png"  width="400"/>
+
+<h3 id="如何設定參數-k"><a href="#如何設定參數-k" class="headerlink" title="如何設定參數 k"></a>如何設定參數 k</h3><p>參數符號定義：</p>
+<ul>
+<li>假設$n$是建立模型所需的點數量(已知，ex:直線擬合需要兩點)</li>
+<li>$w$ 是 inliers 的數量&#x2F;數據集的總數量(未知)</li>
+<li>$w^n$是所有$n$個點均為是 inliers 的機率</li>
+<li>$1-w^n$是所有$n$個點有一個是 outliers 的機率</li>
+<li>迭代$k$次都沒辦法找到所有點是 inliers 的機率$(1-w^n)^k$</li>
+<li>迭代$k$次所有點是 inliers 的機率$1-(1-w^n)^k$</li>
+</ul>
+<p>選擇較高的迭代次數$k$來讓找到 inliers 的機率提高</p>
+<p>假設演算法跑完$k$次成功機率為$p$</p>
+<p>$1-p &#x3D; (1-w^n)^k$</p>
+<p>$p &#x3D; 1-(1-w^n)^k$</p>
+<p>$當n不變時、k越大、p越大，其中p自行定義$</p>
+<p>更新迭代次數$k$公式：</p>
+<p>$k&#x3D;\frac{log(1-p)}{log(1-w^n)}$</p>
+<p>改善 RANSAC 效率方法：</p>
+<ul>
+<li>先對資料集進行最小二乘法得到不錯的模型(全局最佳化)，再進行 RANSAC(本地最佳化)</li>
+</ul>
+<p>RANSAC 優缺點：</p>
+<ul>
+<li>優點<ul>
+<li>通用方法適合各種擬合問題</li>
+<li>好實現</li>
+</ul>
+</li>
+<li>缺點<ul>
+<li>對於資料集中 outliers 數量變多時，時間成本會大幅提升，真實問題通常都有較大佔比的 outliers(可能的解決方法：隨機選擇資料集中的子集合)</li>
+<li>非確定性算法：每次跑完結果可能不一樣，但會在一定機率下跑出合理的結果</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62238520">RANSAC 算法详解(附 Python 拟合直线模型代码)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/tangwei2014/article/details/38390463">随机抽样一致(Random Sample Consensus, RANSAC)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yanzzzzzzzzz.github.io/2021/02/21/2021-02-21-cs131-lecture-4-edge-detection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -478,7 +619,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-01 11:35:51" itemprop="dateModified" datetime="2023-09-01T11:35:51+08:00">2023-09-01</time>
+                <time title="Modified: 2023-11-01 17:34:28" itemprop="dateModified" datetime="2023-11-01T17:34:28+08:00">2023-11-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -512,7 +653,7 @@
 
 <ul>
 <li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
-<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越</li>
+<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越大越接近白色</li>
 <li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
 </ul>
 <h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
@@ -539,10 +680,7 @@
 <li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
 </ul>
 <p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
-<p>齊次坐標上的除法</p>
-<ul>
-<li>我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算<br>因此將他轉換為齊次座標，再進行除法運算</li>
-</ul>
+<h4 id="齊次坐標上的影像縮放"><a href="#齊次坐標上的影像縮放" class="headerlink" title="齊次坐標上的影像縮放"></a>齊次坐標上的影像縮放</h4><p>為何在加上每個向量末端加上”1”就可以進行縮放?<br>原因是在：我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算，因此將他轉換為齊次座標，再進行除法運算</p>
 <p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
 <p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
 <p>因此座標位置也跟著等比例縮小了</p>
@@ -939,7 +1077,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
