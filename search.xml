@@ -53,6 +53,84 @@
       </tags>
   </entry>
   <entry>
+    <title>cs131 lecture 3 Filters And Convolutions</title>
+    <url>/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
+</blockquote>
+<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
+<li>從影像中取出有用的訊息或轉換影像屬性<ul>
+<li>擷取特徵：edge, corners, blobs detection…</li>
+<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
+<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
+</ul>
+</li>
+</ul>
+<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
+<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
+<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
+<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 2 Images And Transformations</title>
+    <url>/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/</url>
+    <content><![CDATA[<h2 id="數位影像的類別"><a href="#數位影像的類別" class="headerlink" title="數位影像的類別"></a>數位影像的類別</h2><img src="https://yanzzzzzzzzz.github.io/img/image-type.jpg"  width="400"/>
+
+<ul>
+<li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
+<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越大越接近白色</li>
+<li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
+</ul>
+<h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
+<li>dpi：Dots Per Inch，每英寸點數，dpi 的數值越高，所輸出的解析度就越高，常用在印表機上的設定<img src="https://yanzzzzzzzzz.github.io/img/resolution.jpg"  width="400"/></li>
+</ul>
+<h2 id="影像轉換"><a href="#影像轉換" class="headerlink" title="影像轉換"></a>影像轉換</h2><h3 id="變換矩陣-transformation-matrix"><a href="#變換矩陣-transformation-matrix" class="headerlink" title="變換矩陣 transformation matrix"></a>變換矩陣 transformation matrix</h3><ul>
+<li><p>對原 x,y 座標進行縮放</p>
+<img src="https://yanzzzzzzzzz.github.io/img/transformation-matrices.png"  width="400"/>
+</li>
+<li><p>角度轉換</p>
+<img src="https://yanzzzzzzzzz.github.io/img/rotate-matrix.png"  width="400"/></li>
+</ul>
+<p>矩陣可以做多重轉換：</p>
+<p>$ p’&#x3D;R_2R_1Sp $</p>
+<p>其中 p 是座標點，$R_1 R_2 是角度轉換矩陣，S是縮放矩陣，p’是轉換後的座標點$</p>
+<p>多重轉換的細節：</p>
+<ul>
+<li>矩陣變換是由右到左做變換</li>
+<li>上列式子與 $ p’&#x3D;R_2(R_1(Sp)) $ 相等</li>
+<li>也與$ p’&#x3D;(R_2R_1S)p $ ，先做矩陣變換運算，再與座標變換</li>
+</ul>
+<h3 id="齊次坐標-Homogeneous-coordinates"><a href="#齊次坐標-Homogeneous-coordinates" class="headerlink" title="齊次坐標 Homogeneous coordinates"></a>齊次坐標 Homogeneous coordinates</h3><ul>
+<li>變換矩陣可以做縮放、旋轉，但卻不能加上常量進行平移</li>
+<li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
+</ul>
+<p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
+<h4 id="齊次坐標上的影像縮放"><a href="#齊次坐標上的影像縮放" class="headerlink" title="齊次坐標上的影像縮放"></a>齊次坐標上的影像縮放</h4><p>為何在加上每個向量末端加上”1”就可以進行縮放?<br>原因是在：我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算，因此將他轉換為齊次座標，再進行除法運算</p>
+<p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
+<p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
+<p>因此座標位置也跟著等比例縮小了</p>
+<h4 id="2D-座標平移、縮放、旋轉"><a href="#2D-座標平移、縮放、旋轉" class="headerlink" title="2D 座標平移、縮放、旋轉"></a>2D 座標平移、縮放、旋轉</h4><img src="https://yanzzzzzzzzz.github.io/img/shift-roate-scaling.png"  width="400"/>
+
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="http://vision.stanford.edu/teaching/cs131_fall2021/index.html">CS131 Computer Vision: Foundations and Applications</a></p>
+<p><a href="https://www.jianshu.com/p/7e701d7bfd79">写给大家看的“透视除法” —— 齐次坐标和投影</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs131 lecture 4 Edge Detection</title>
     <url>/2021/02/21/2021-02-21-cs131-lecture-4-edge-detection/</url>
     <content><![CDATA[<h2 id="edge-的重要性"><a href="#edge-的重要性" class="headerlink" title="edge 的重要性"></a>edge 的重要性</h2><ul>
@@ -140,34 +218,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 3 Filters And Convolutions</title>
-    <url>/2021/02/18/2021-02-18-cs131-lecture-3-Filters-and-convolutions/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>What is filtering：Forming a new image whose pixel values are transformed<br>from original pixel values</p>
-</blockquote>
-<p>影像處理中的濾波：把原來影像像素值透過某種轉換組合成新的影像</p>
-<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><ul>
-<li>從影像中取出有用的訊息或轉換影像屬性<ul>
-<li>擷取特徵：edge, corners, blobs detection…</li>
-<li>其他應用：超解析度成像 super-resolution, 影像修復 in-painting, 去噪 de-noising<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering.png"  width="400"/>
-<img src="https://yanzzzzzzzzz.github.io/img/feature-in-filtering_1.png"  width="400"/></li>
-</ul>
-</li>
-</ul>
-<h2 id="convolution-amp-correlation"><a href="#convolution-amp-correlation" class="headerlink" title="convolution &amp; correlation"></a>convolution &amp; correlation</h2><p>convolution 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/2D-Discrete-Convolution.png"  width="400"/></p>
-<p>correlation 公式：<br><img src="https://yanzzzzzzzzz.github.io/img/correlation.png"  width="400"/></p>
-<p>compare with convolution &amp; correlation<br><img src="https://yanzzzzzzzzz.github.io/img/convolution-cross-correlation.png"  width="400"/></p>
-<p>convolution 的符號是$ f*g $，correlation的符號是$ f**g $<br>convolution 先對 filter mask 做轉置再做 correlation</p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://la.mathworks.com/help/images/ref/inpaintexemplar.html">影像修復 matlab example</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 5 Features And Fitting-RANSAC</title>
     <url>/2021/02/28/2021-02-28-cs131-lecture-5-Features-and-fitting-RANSAC/</url>
     <content><![CDATA[<h2 id="線段檢測的難題"><a href="#線段檢測的難題" class="headerlink" title="線段檢測的難題"></a>線段檢測的難題</h2><ul>
@@ -231,56 +281,6 @@
 </li>
 </ul>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://zhuanlan.zhihu.com/p/62238520">RANSAC 算法详解(附 Python 拟合直线模型代码)</a><br><a href="https://blog.csdn.net/tangwei2014/article/details/38390463">随机抽样一致(Random Sample Consensus, RANSAC)</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 2 Images And Transformations</title>
-    <url>/2021/02/10/2021-02-10-cs131-lecture-2-Images-and-transformations/</url>
-    <content><![CDATA[<h2 id="數位影像的類別"><a href="#數位影像的類別" class="headerlink" title="數位影像的類別"></a>數位影像的類別</h2><img src="https://yanzzzzzzzzz.github.io/img/image-type.jpg"  width="400"/>
-
-<ul>
-<li>Binary ： 二值化影像，影像像素值非 0 即 1，在影像顯示中 0 表示黑色、1 代表白色</li>
-<li>Grayscale ： 灰階影像，影像像素值在<code>[0~255]</code>之間，像素值越大越接近白色</li>
-<li>Color ： 彩色影像，常見的是 RGB 和 CMYK，RGB 彩色影像是由紅、綠、藍三個色彩通道組合而成。CMYK 則是由青色(Cyan)、洋紅色(Magenta)、黃色(Yellow)、黑色(blacK)四個通道組成。<img src="https://yanzzzzzzzzz.github.io/img/rgb-cmyk.jpg"  width="400"/></li>
-</ul>
-<h2 id="影像解析度"><a href="#影像解析度" class="headerlink" title="影像解析度"></a>影像解析度</h2><ul>
-<li>dpi：Dots Per Inch，每英寸點數，dpi 的數值越高，所輸出的解析度就越高，常用在印表機上的設定<img src="https://yanzzzzzzzzz.github.io/img/resolution.jpg"  width="400"/></li>
-</ul>
-<h2 id="影像轉換"><a href="#影像轉換" class="headerlink" title="影像轉換"></a>影像轉換</h2><h3 id="變換矩陣-transformation-matrix"><a href="#變換矩陣-transformation-matrix" class="headerlink" title="變換矩陣 transformation matrix"></a>變換矩陣 transformation matrix</h3><ul>
-<li><p>對原 x,y 座標進行縮放</p>
-<img src="https://yanzzzzzzzzz.github.io/img/transformation-matrices.png"  width="400"/>
-</li>
-<li><p>角度轉換</p>
-<img src="https://yanzzzzzzzzz.github.io/img/rotate-matrix.png"  width="400"/></li>
-</ul>
-<p>矩陣可以做多重轉換：</p>
-<p>$ p’&#x3D;R_2R_1Sp $</p>
-<p>其中 p 是座標點，$R_1 R_2 是角度轉換矩陣，S是縮放矩陣，p’是轉換後的座標點$</p>
-<p>多重轉換的細節：</p>
-<ul>
-<li>矩陣變換是由右到左做變換</li>
-<li>上列式子與 $ p’&#x3D;R_2(R_1(Sp)) $ 相等</li>
-<li>也與$ p’&#x3D;(R_2R_1S)p $ ，先做矩陣變換運算，再與座標變換</li>
-</ul>
-<h3 id="齊次坐標-Homogeneous-coordinates"><a href="#齊次坐標-Homogeneous-coordinates" class="headerlink" title="齊次坐標 Homogeneous coordinates"></a>齊次坐標 Homogeneous coordinates</h3><ul>
-<li>變換矩陣可以做縮放、旋轉，但卻不能加上常量進行平移</li>
-<li>解決方法：每個向量末端加上”1”<img src="https://yanzzzzzzzzz.github.io/img/add-one-in-vector.png"  width="400"/></li>
-</ul>
-<p>新的轉換矩陣可以旋轉、縮放，還可以平移了，讚</p>
-<h4 id="齊次坐標上的影像縮放"><a href="#齊次坐標上的影像縮放" class="headerlink" title="齊次坐標上的影像縮放"></a>齊次坐標上的影像縮放</h4><p>為何在加上每個向量末端加上”1”就可以進行縮放?<br>原因是在：我們也許想透過除法的方式達到縮放的效果，但實際上矩陣運算並不能直接做除法運算，因此將他轉換為齊次座標，再進行除法運算</p>
-<p>用圖片來解釋比較清楚：<br>有個座標點為$ [x, y] &#x3D; [15, 21] $，今天想將它縮小3倍，<br>我們透過齊次座標的方式把$[x, y]$改寫成$[x, y, w] &#x3D; [15, 21, 3]$<br>其中的$W$把它想像成是我們的投影機距離<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide.png"  width="400"/></p>
-<p>將整個矩陣除與 3，$[ \frac{15}{3}, \frac{21}{3}, \frac{3}{3}] &#x3D; [5, 7, 1]$<br>就是在上面的圖片中將投影機向前推進到$W&#x3D;1$的位置<br><img src="https://yanzzzzzzzzz.github.io/img/Homogeneous-coordinates-divide-1.png"  width="400"/></p>
-<p>因此座標位置也跟著等比例縮小了</p>
-<h4 id="2D-座標平移、縮放、旋轉"><a href="#2D-座標平移、縮放、旋轉" class="headerlink" title="2D 座標平移、縮放、旋轉"></a>2D 座標平移、縮放、旋轉</h4><img src="https://yanzzzzzzzzz.github.io/img/shift-roate-scaling.png"  width="400"/>
-
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="http://vision.stanford.edu/teaching/cs131_fall2021/index.html">CS131 Computer Vision: Foundations and Applications</a></p>
-<p><a href="https://www.jianshu.com/p/7e701d7bfd79">写给大家看的“透视除法” —— 齐次坐标和投影</a></p>
 ]]></content>
       <categories>
         <category>course</category>
@@ -367,102 +367,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 6 Feature Descriptors-Laplacian &amp; DoG</title>
-    <url>/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/</url>
-    <content><![CDATA[<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
-<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
-<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
-
-<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
-<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
-<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
-<p>其中 G 是高斯函數</p>
-<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
-<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
-<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
-<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
-
-<ul>
-<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
-<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 6 Feature Descriptors-SIFT</title>
-    <url>/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/</url>
-    <content><![CDATA[<p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
-<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
-<ul>
-<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
-<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
-</ul>
-<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
-
-<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
-<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
-<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
-<ul>
-<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
-<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
-<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
-<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
-</ul>
-<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
-
-<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
-<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
-<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
-<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
-<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
-<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
-<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 6 Feature Descriptors-HoG</title>
-    <url>/2021/03/16/2021-03-16-cs131-lecture-6-Feature-Descriptors-HoG/</url>
-    <content><![CDATA[<p>另一種描述影像特徵的方法，HoG(Histogram of Oriented Gradients)，方向梯度直方圖<br>特徵描述子</p>
-<h2 id="HoG-簡介"><a href="#HoG-簡介" class="headerlink" title="HoG 簡介"></a>HoG 簡介</h2><p>局部的物件外觀與形狀經常由局部亮度梯度或邊緣方向顯現出來，因此透過局部梯度資訊建立一個梯度角度直方圖的特徵</p>
-<h2 id="HoG-流程"><a href="#HoG-流程" class="headerlink" title="HoG 流程"></a>HoG 流程</h2><p>把影像切分成多個小區塊(稱為 cells)，cells 的形狀可以是矩形或圓形，每個 cell 累加梯度方向的局部直方圖<br><img src="https://yanzzzzzzzzz.github.io/img/HoG-flow.png"  width="400"/></p>
-<img src="https://yanzzzzzzzzz.github.io/img/HoG-flow-1.png"  width="400"/>
-
-<p>把 cell 合成多個格子成為一個 block，對 block 內的亮度區域進行正規化</p>
-<p>結果：<br><img src="https://yanzzzzzzzzz.github.io/img/visualizing-HoG.png"  width="400"/></p>
-<h2 id="與-SIFT1-不同的地方"><a href="#與-SIFT1-不同的地方" class="headerlink" title="與 SIFT1 不同的地方"></a>與 SIFT1 不同的地方</h2><ul>
-<li>HoG 通常用來描述更大的影像區域，SIFT 用關鍵點來進行匹配</li>
-<li>SIFT 是對整體梯度進行正規化，HoG 是使用周圍的 cell 區塊</li>
-</ul>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/85829145">一文講解方向梯度直方圖（hog）</a></li>
-<li><a href="https://medium.com/analytics-vidhya/a-gentle-introduction-into-the-histogram-of-oriented-gradients-fdee9ed8f2aa">A Gentle Introduction Into The Histogram Of Oriented Gradients</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 9 Segmentation and Clustering-Agglomerative Clustering</title>
     <url>/2021/03/24/2021-03-24-cs131-lecture-9-Segmentation-and-Clustering/</url>
     <content><![CDATA[<h2 id="影像分割目的"><a href="#影像分割目的" class="headerlink" title="影像分割目的"></a>影像分割目的</h2><ul>
@@ -515,6 +419,130 @@
 <li>可能陷入局部最佳解</li>
 </ul>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://uiclub.tw/2015/09/05/visual-principles-gestalt-principles/">視覺法則 – 格式塔原則</a></p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-SIFT</title>
+    <url>/2021/03/15/2021-03-15-cs131-lecture-6-Feature-Descriptors-SIFT/</url>
+    <content><![CDATA[<p>我們在上一回找到了角點，但如何利用關鍵點的周圍資訊，來讓彼此匹配，也許可以把角點周圍的像素區塊取出來匹配，但如果遇到兩張影像角度不同時如何匹配?</p>
+<h1 id="SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform"><a href="#SIFT-descriptor-SIFT-x3D-Scale-Invariant-Feature-Transform" class="headerlink" title="SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)"></a>SIFT descriptor(SIFT&#x3D;Scale-Invariant Feature Transform)</h1><p>建構一個旋轉不變性描述子</p>
+<ul>
+<li>從 DoG 得到一個帶有尺度不變性的關鍵點</li>
+<li>從關鍵點周圍資訊找出特徵角度(不直接旋轉個別影像區塊進行匹配，因為很慢)<img src="https://yanzzzzzzzzz.github.io/img/keypoint-neightborhood.png"  width="400"/></li>
+</ul>
+<h2 id="SIFT-流程"><a href="#SIFT-流程" class="headerlink" title="SIFT 流程"></a>SIFT 流程</h2><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction.png"  width="400"/>
+
+<p>使用影像梯度計算關鍵點周圍的角度直方圖，並把角度切成八等分<br><img src="https://yanzzzzzzzzz.github.io/img/gradient-direction-1.png"  width="400"/></p>
+<p>把關鍵點周圍梯度值每 4x4 為一群，個別計算旋轉過的梯度方向直方圖<br>梯度的貢獻程度取決於距離，如果它在兩個直方圖位置的中間，它給兩個直方圖一半的貢獻<br><img src="https://yanzzzzzzzzz.github.io/img/descriptor-parameter.png"  width="400"/></p>
+<p>梯度直方圖的方向分為 8 份與每個區塊為 4x4 是由作者選出最佳的參數結果</p>
+<ul>
+<li>8 方向的直方圖，4x4 個直方圖陣列，會有 8x4x4&#x3D;128 個向量</li>
+<li>SIFT 描述子是一個長度為 128 的向量，並有帶有旋轉不變性與尺度不變性</li>
+<li>可以比較影像 A 與影像 B 的各自的向量來尋找配對的關鍵點</li>
+<li>很大的影像梯度通常來自 3D 照明效果(如：眩光)，將 128 維向量最大數值限制在 0.2 內，計算完後再進行正規化(乘上 256)</li>
+</ul>
+<h2 id="SIFT-測試結果"><a href="#SIFT-測試結果" class="headerlink" title="SIFT 測試結果"></a>SIFT 測試結果</h2><img src="https://yanzzzzzzzzz.github.io/img/noise.png"  width="400"/>
+
+<p>在隨機改變影像尺度、角度，再加上一定的 noise 的 dataset 下的特徵比對結果<br><img src="https://yanzzzzzzzzz.github.io/img/stability.png"  width="400"/></p>
+<p>在隨機改變影像尺度、角度、仿射變換並加入 2%的 noise 的 dataset，對 30000 個特徵進行最鄰近點搜尋的結果，測試穩定性<br><img src="https://yanzzzzzzzzz.github.io/img/Distinctiveness.png"  width="400"/></p>
+<p>對測試資料進行 30 度的仿射變換與 2%的 noise 後提取特徵點，計算單點最鄰近搜尋的準確率</p>
+<h2 id="SIFT-結論"><a href="#SIFT-結論" class="headerlink" title="SIFT 結論"></a>SIFT 結論</h2><ul>
+<li>SIFT 是一個具有尺度不變性、旋轉不變性，並具有獨特性的關鍵點提取方法</li>
+<li>有效率的計算速度，可以在一般的 PC 上做到接近即時處理的效果</li>
+<li>論文中也展示使用關鍵點加上最鄰近搜尋來進行物件檢測</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf">David G. Lowe,”Distinctive Image Features from Scale-Invariant Keypoints”,” International Journal of Computer Vision, 60, 2 (2004), pp. 91-110</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E8%AE%8A%E7%89%B9%E5%BE%B5%E8%BD%89%E6%8F%9B">wiki-尺度不變特徵轉換</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-Laplacian &amp; DoG</title>
+    <url>/2021/03/10/2021-03-10-cs131-lecture-6-Feature-Descriptors-Laplacian-DoG/</url>
+    <content><![CDATA[<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>Harris corner 沒有尺度不變性<br><img src="https://yanzzzzzzzzz.github.io/img/harris-corner-scale-invariant.png"  width="400"/></p>
+<p>在不同尺度下所呈現的角點響應函數都不同，Image 1 的最小圓圈範圍是跟 Image 2 最大圓圈範圍才會有相同的角點結果</p>
+<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><img src="https://yanzzzzzzzzz.github.io/img/scale-selection.png"  width="400"/>
+
+<p>希望能設計一個 scale invariant detection function 可以讓每張影像都找得到一個穩定的尖峰，才能在多尺度搜尋時找到相同的結果</p>
+<h2 id="Scale-Invariant-Detection"><a href="#Scale-Invariant-Detection" class="headerlink" title="Scale Invariant Detection"></a>Scale Invariant Detection</h2><p>使用 Laplacian 與 Difference of Gaussians kernel 來對影像進行不同尺度的縮放</p>
+<h3 id="Laplacian-kernel"><a href="#Laplacian-kernel" class="headerlink" title="Laplacian kernel"></a>Laplacian kernel</h3><p>$L &#x3D; \sigma^2(G_{xx}(x,y,\sigma)+G_{yy}(x,y,\sigma))$<br><img src="https://yanzzzzzzzzz.github.io/img/Laplacian-kernel.png"  width="400"/></p>
+<p>其中 G 是高斯函數</p>
+<p>$G(x,y,\sigma)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2+y^2}{2\sigma^2}}$</p>
+<h3 id="Difference-of-Gaussians-DoG"><a href="#Difference-of-Gaussians-DoG" class="headerlink" title="Difference of Gaussians(DoG)"></a>Difference of Gaussians(DoG)</h3><p>$DoG &#x3D; G(x,y,k{\sigma}) - G(x,y,{\sigma}) $<br><img src="https://yanzzzzzzzzz.github.io/img/DoG.png"  width="400"/></p>
+<p>對影像逐漸加深模糊度，越模糊所保留的細節越少<br>高斯差所得到的影像細節隨著$\sigma$越大細節越粗糙</p>
+<h2 id="Scale-Invariant-Detections"><a href="#Scale-Invariant-Detections" class="headerlink" title="Scale Invariant Detections"></a>Scale Invariant Detections</h2><img src="https://yanzzzzzzzzz.github.io/img/scale-invariant-detectors.png"  width="400"/>
+
+<ul>
+<li>Harris-Laplacian:結合 Laplacian kernel 的 harris corner，並取出局部最大值作為結果</li>
+<li>SIFT:使用 DoG 並對每個點取 3x3x3 鄰居 26 個點(不包含自己)，找出高斯差最小的數值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 6 Feature Descriptors-HoG</title>
+    <url>/2021/03/16/2021-03-16-cs131-lecture-6-Feature-Descriptors-HoG/</url>
+    <content><![CDATA[<p>另一種描述影像特徵的方法，HoG(Histogram of Oriented Gradients)，方向梯度直方圖<br>特徵描述子</p>
+<h2 id="HoG-簡介"><a href="#HoG-簡介" class="headerlink" title="HoG 簡介"></a>HoG 簡介</h2><p>局部的物件外觀與形狀經常由局部亮度梯度或邊緣方向顯現出來，因此透過局部梯度資訊建立一個梯度角度直方圖的特徵</p>
+<h2 id="HoG-流程"><a href="#HoG-流程" class="headerlink" title="HoG 流程"></a>HoG 流程</h2><p>把影像切分成多個小區塊(稱為 cells)，cells 的形狀可以是矩形或圓形，每個 cell 累加梯度方向的局部直方圖<br><img src="https://yanzzzzzzzzz.github.io/img/HoG-flow.png"  width="400"/></p>
+<img src="https://yanzzzzzzzzz.github.io/img/HoG-flow-1.png"  width="400"/>
+
+<p>把 cell 合成多個格子成為一個 block，對 block 內的亮度區域進行正規化</p>
+<p>結果：<br><img src="https://yanzzzzzzzzz.github.io/img/visualizing-HoG.png"  width="400"/></p>
+<h2 id="與-SIFT1-不同的地方"><a href="#與-SIFT1-不同的地方" class="headerlink" title="與 SIFT1 不同的地方"></a>與 SIFT1 不同的地方</h2><ul>
+<li>HoG 通常用來描述更大的影像區域，SIFT 用關鍵點來進行匹配</li>
+<li>SIFT 是對整體梯度進行正規化，HoG 是使用周圍的 cell 區塊</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/85829145">一文講解方向梯度直方圖（hog）</a></li>
+<li><a href="https://medium.com/analytics-vidhya/a-gentle-introduction-into-the-histogram-of-oriented-gradients-fdee9ed8f2aa">A Gentle Introduction Into The Histogram Of Oriented Gradients</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 11 Image Resizing-Image Retargeting Overview</title>
+    <url>/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/</url>
+    <content><![CDATA[<p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
+<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
+<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
+<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
+
+<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
+<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
+<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
+<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
+<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
+<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
+<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
+<p>重要指的可以是人眼經常會去特別關注的地方</p>
+<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
+
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
+<p><a href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
 ]]></content>
       <categories>
         <category>course</category>
@@ -676,34 +704,6 @@
         <tag>cs131</tag>
         <tag>clustering</tag>
         <tag>Unsupervised learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs131 lecture 11 Image Resizing-Image Retargeting Overview</title>
-    <url>/2021/04/07/2021-04-07-cs131-lecture-11-Image-Resizing-Overview/</url>
-    <content><![CDATA[<p>影像調整大小在生活上隨處可見，如在不同的螢幕解析度下就必須對輸入的影像進行變化</p>
-<p>但改變的同時常常造成比較重要的影像位置失去原先的樣貌特性</p>
-<p>該節就開始探討在Resize的同時又可以保持重要的影像訊息</p>
-<h2 id="Content-aware-Retargeting"><a href="#Content-aware-Retargeting" class="headerlink" title="Content-aware Retargeting"></a>Content-aware Retargeting</h2><img src='https://yanzzzzzzzzz.github.io/img/content-aware-retargeting.png'  width='400'/>
-
-<p>上圖可以看到紅區域處是重要的資訊，若直接改變影像尺寸會造成人物的變形</p>
-<p>若僅延展在影像中間處的雪地與天空區塊，就可以保留重要資訊</p>
-<h2 id="問題定義"><a href="#問題定義" class="headerlink" title="問題定義"></a>問題定義</h2><p>輸入影像尺寸$n \times m$與新的尺寸$n’ \times m’$</p>
-<p>輸出影像$n’ \times m’$並保有與原影像一樣好的影像細節</p>
-<p>但所謂好的影像縮放結果沒辦法用量化的方式來定義</p>
-<p>我們也不知道甚麼叫做重要的影像資訊，也許每個人對重要的影像區塊看法都不同</p>
-<h2 id="影像重要性-顯著性-量測"><a href="#影像重要性-顯著性-量測" class="headerlink" title="影像重要性(顯著性) 量測"></a>影像重要性(顯著性) 量測</h2><p>定義一個function來找出影像”重要”的地方</p>
-<p>重要指的可以是人眼經常會去特別關注的地方</p>
-<h2 id="相關論文與應用"><a href="#相關論文與應用" class="headerlink" title="相關論文與應用"></a>相關論文與應用</h2><img src='https://yanzzzzzzzzz.github.io/img/General-Retargeting-Framework.png'  width='400'/>
-
-<p><a href="https://dl.acm.org/doi/pdf/10.1145/1149488.1149499?casa_token=SjSfZM8ymrMAAAAA:HJhocyAvFY9Mthl1o32OI5gdJyl4BjWHLy72l-O6sTilK2dZAMwgIodXDLBXlanRQYKgxbr8-LCnUQ">Setlur, Vidya, et al. “Automatic image retargeting.” Proceedings of the 4th international conference on Mobile and ubiquitous multimedia. 2005.</a></p>
-<p><a href="https://www.cs.tau.ac.il/~dcor/articles/2006/Feature-aware-texturing.pdf">Gal, Ran, Olga Sorkine, and Daniel Cohen-Or. “Feature-Aware Texturing.” Rendering Techniques 2006.17th (2006): 2.</a></p>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
       </tags>
   </entry>
   <entry>
@@ -871,54 +871,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cs131 lecture 12 visual recognition</title>
-    <url>/2021/04/17/2021-04-17-visual-recognition-task/</url>
-    <content><![CDATA[<h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
-<li>Objection Detection</li>
-<li>Objection localization</li>
-<li>VQA(Visual Question Answering)</li>
-</ul>
-<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
-<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
-<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
-<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
-
-<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
-
-<p>訓練階段重點：</p>
-<ul>
-<li>訓練資料：輸入的訓練影像與標記類別</li>
-<li>定義要擷取的影像特徵</li>
-<li>訓練方法</li>
-</ul>
-<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
-<ul>
-<li>共有八類，每類41張影像，共有3280張影像</li>
-<li>解析度1024 * 768</li>
-<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
-</ul>
-<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
-
-<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
-
-<p>提到了幾個特徵提取方法</p>
-<ul>
-<li>Global RGB histogram</li>
-<li>整體形狀分析：PCA-based methods</li>
-<li>局部形狀特徵：<a href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
-<li>紋理：Filter banks</li>
-</ul>
-<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
-<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
-]]></content>
-      <categories>
-        <category>course</category>
-      </categories>
-      <tags>
-        <tag>cs131</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs131 lecture 13 Visual bag of words</title>
     <url>/2021/06/11/2021-06-11-Visual-bag-of-words/</url>
     <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>Visual bag of words視覺詞袋模型概念：將影像取出具有特徵的地方，存在待比對區域中，新影像進來時，逐一比對影像符合詞袋中哪個的特徵比較多，就跟詞袋中的影像越相似，常用來進行影像分類或影像檢索</p>
@@ -971,6 +923,54 @@
 <p>再透過k-means分群法將特徵分成1000群</p>
 <p>訓練一個SVM mdoel，輸入資料為k-means的群心與對應的類別標籤</p>
 <p>輸入測試資料進行分類評估model準確度</p>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
+      <tags>
+        <tag>cs131</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 12 visual recognition</title>
+    <url>/2021/04/17/2021-04-17-visual-recognition-task/</url>
+    <content><![CDATA[<h2 id="常見視覺辨識任務"><a href="#常見視覺辨識任務" class="headerlink" title="常見視覺辨識任務"></a>常見視覺辨識任務</h2><ul>
+<li>Objection Detection</li>
+<li>Objection localization</li>
+<li>VQA(Visual Question Answering)</li>
+</ul>
+<h2 id="Challenges-amp-amp-Nearest-Neighbor-Classifier"><a href="#Challenges-amp-amp-Nearest-Neighbor-Classifier" class="headerlink" title="Challenges &amp;&amp; Nearest Neighbor Classifier"></a>Challenges &amp;&amp; Nearest Neighbor Classifier</h2><p>參考cs231n Image Classification</p>
+<h2 id="Simple-object-recognition-pipeline"><a href="#Simple-object-recognition-pipeline" class="headerlink" title="Simple object recognition pipeline"></a>Simple object recognition pipeline</h2><p>參考 paper:<a href="http://web-info8.informatik.rwth-aachen.de/media/papers/leibe-categorization-cvpr03.pdf">Analyzing Appearance and Contour Based Methods for Object Categorization</a></p>
+<p>建造一個架構，用來辨識影像，輸入影像後會輸出對應類別結果</p>
+<img src='https://yanzzzzzzzzz.github.io/img/Object-recognitionframework.png'  width='400'/>
+
+<h2 id="訓練架構"><a href="#訓練架構" class="headerlink" title="訓練架構"></a>訓練架構</h2><img src='https://yanzzzzzzzzz.github.io/img/object-recognition-pipeline.png'  width='400'/>
+
+<p>訓練階段重點：</p>
+<ul>
+<li>訓練資料：輸入的訓練影像與標記類別</li>
+<li>定義要擷取的影像特徵</li>
+<li>訓練方法</li>
+</ul>
+<h3 id="訓練資料"><a href="#訓練資料" class="headerlink" title="訓練資料"></a>訓練資料</h3><p>dataset:<a href="https://github.com/Kai-Xuan/ETH-80">ETH-80 dataset</a></p>
+<ul>
+<li>共有八類，每類41張影像，共有3280張影像</li>
+<li>解析度1024 * 768</li>
+<li>但網路上找到的dataset並沒有到達這麼高的解析度(256 * 256)</li>
+</ul>
+<img src='https://yanzzzzzzzzz.github.io/img/eth80-dataset.png'  width='400'/>
+
+<h3 id="影像特徵"><a href="#影像特徵" class="headerlink" title="影像特徵"></a>影像特徵</h3><img src='https://yanzzzzzzzzz.github.io/img/Image-features.png'  width='400'/>
+
+<p>提到了幾個特徵提取方法</p>
+<ul>
+<li>Global RGB histogram</li>
+<li>整體形狀分析：PCA-based methods</li>
+<li>局部形狀特徵：<a href="https://people.eecs.berkeley.edu/~malik/papers/BMP-shape.pdf">shape context</a></li>
+<li>紋理：Filter banks</li>
+</ul>
+<h3 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h3><p>可使用KNN classifier</p>
+<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><img src='https://yanzzzzzzzzz.github.io/img/visual-recognition-result.png'  width='400'/>
 ]]></content>
       <categories>
         <category>course</category>
@@ -1060,6 +1060,39 @@
       <tags>
         <tag>Image Classification</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>cs131 lecture 15 Optical flow</title>
+    <url>/2021/11/08/2021-11-08-Optical%20Flow/</url>
+    <content><![CDATA[<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：</p>
+<ul>
+<li>運動方向檢測</li>
+<li>物件分割</li>
+<li>立體視差測量等等</li>
+</ul>
+<h2 id="如何得到影像中的光流"><a href="#如何得到影像中的光流" class="headerlink" title="如何得到影像中的光流"></a>如何得到影像中的光流</h2><p>舉例來說一個影片由多個連續影像組成，我們追蹤不同影像同一點P，第t個frame時位置是P(x1, y1)，在t+1時位置是P(x2, y2)，透過這兩點座標就可以算出運動方向與運動速度</p>
+<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_example.png'  width='400'/>
+
+<p>要算出這兩點光流的前提：</p>
+<h3 id="亮度恆定"><a href="#亮度恆定" class="headerlink" title="亮度恆定"></a>亮度恆定</h3><p>移動前後兩點的亮度應該是相等的</p>
+<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_brightness_constancy.png'  width='400'/>
+
+<p>$ I(x, y, t) &#x3D; I(x + u, y + v, t+1) $</p>
+<h3 id="微小的移動"><a href="#微小的移動" class="headerlink" title="微小的移動"></a>微小的移動</h3><img src='https://yanzzzzzzzzz.github.io/img/optical_flow_small_motion.png'  width='400'/>
+
+<p>在以上條件約束的前提下，亮度恆定與微小移動下</p>
+<p>$ I(x, y, t) &#x3D; I(x + u{\delta}t, y + v{\delta}t, {\delta}t) $</p>
+<p>對等號右邊的式子進行泰勒展開式,保留一階項</p>
+<p>$ I(x + u, y + v, t+1) \approx I(x,y,t)+I_x∙u+I_y∙v+I_t$</p>
+<p>假設亮度不變，下個時間同個點的亮度相等</p>
+<p>$ I_x∙u+I_y∙v+I_t \approx 0$</p>
+<p>$ \nabla I∙[u,v]^T + I_t &#x3D; 0 $<br>不能透過等式 $ \nabla I∙[u,v]^T + I_t &#x3D; 0 $ 解出u,v，因為只有一個等式內含有兩個未知數u,v</p>
+<h2 id="應用"><a href="#應用" class="headerlink" title="應用"></a>應用</h2><p>用來預估車流移動方向的光流法:</p>
+<img src='https://yanzzzzzzzzz.github.io/img/optical_flow.png'  width='400'/>
+]]></content>
+      <categories>
+        <category>course</category>
+      </categories>
   </entry>
   <entry>
     <title>cs131 lecture 14 Detecting Objects by Parts-Object detection  task and evaluation</title>
@@ -1252,39 +1285,6 @@
 ]]></content>
       <categories>
         <category>Machine Learning</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>cs131 lecture 15 Optical flow</title>
-    <url>/2021/11/08/2021-11-08-Optical%20Flow/</url>
-    <content><![CDATA[<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>光流是描述視覺運動的一個方法，透過具有時間序列的影像來得到影像中不同物件的運動速度與他們的運動角，有了運動光流資訊可以用來：</p>
-<ul>
-<li>運動方向檢測</li>
-<li>物件分割</li>
-<li>立體視差測量等等</li>
-</ul>
-<h2 id="如何得到影像中的光流"><a href="#如何得到影像中的光流" class="headerlink" title="如何得到影像中的光流"></a>如何得到影像中的光流</h2><p>舉例來說一個影片由多個連續影像組成，我們追蹤不同影像同一點P，第t個frame時位置是P(x1, y1)，在t+1時位置是P(x2, y2)，透過這兩點座標就可以算出運動方向與運動速度</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_example.png'  width='400'/>
-
-<p>要算出這兩點光流的前提：</p>
-<h3 id="亮度恆定"><a href="#亮度恆定" class="headerlink" title="亮度恆定"></a>亮度恆定</h3><p>移動前後兩點的亮度應該是相等的</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow_brightness_constancy.png'  width='400'/>
-
-<p>$ I(x, y, t) &#x3D; I(x + u, y + v, t+1) $</p>
-<h3 id="微小的移動"><a href="#微小的移動" class="headerlink" title="微小的移動"></a>微小的移動</h3><img src='https://yanzzzzzzzzz.github.io/img/optical_flow_small_motion.png'  width='400'/>
-
-<p>在以上條件約束的前提下，亮度恆定與微小移動下</p>
-<p>$ I(x, y, t) &#x3D; I(x + u{\delta}t, y + v{\delta}t, {\delta}t) $</p>
-<p>對等號右邊的式子進行泰勒展開式,保留一階項</p>
-<p>$ I(x + u, y + v, t+1) \approx I(x,y,t)+I_x∙u+I_y∙v+I_t$</p>
-<p>假設亮度不變，下個時間同個點的亮度相等</p>
-<p>$ I_x∙u+I_y∙v+I_t \approx 0$</p>
-<p>$ \nabla I∙[u,v]^T + I_t &#x3D; 0 $<br>不能透過等式 $ \nabla I∙[u,v]^T + I_t &#x3D; 0 $ 解出u,v，因為只有一個等式內含有兩個未知數u,v</p>
-<h2 id="應用"><a href="#應用" class="headerlink" title="應用"></a>應用</h2><p>用來預估車流移動方向的光流法:</p>
-<img src='https://yanzzzzzzzzz.github.io/img/optical_flow.png'  width='400'/>
-]]></content>
-      <categories>
-        <category>course</category>
       </categories>
   </entry>
   <entry>
@@ -1502,6 +1502,64 @@ public:
 </code></pre>
 <h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://www.geeksforgeeks.org/next-permutation/">geeksforgeeks-Next Permutation</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Image Classification</title>
+    <url>/2020/11/15/cs231n-Image-Classification/</url>
+    <content><![CDATA[<p>website:<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
+<p>影像分類是電腦視覺的核心任務，但其中有許多障礙要克服</p>
+<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><h3 id="Semantic-Gap-語義鴻溝"><a href="#Semantic-Gap-語義鴻溝" class="headerlink" title="Semantic Gap 語義鴻溝"></a>Semantic Gap 語義鴻溝</h3><ul>
+<li>Semantic Gap指的是在不同系統中形成的結構造成差異</li>
+<li>人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程</li>
+<li>人眼看到的是物體是光線照射到物體，經過反射後部份光線射入我們的眼睛。人腦所想的通常是高階特徵ex:飛機、汽車、室內空間</li>
+<li>在電腦中看到的數位影像是個三維tensor(R, G, B channel)。電腦主要觀察低階特徵ex:顏色分布、紋理(texture)</li>
+</ul>
+<h3 id="Viewpoint-variation-視野角度變化"><a href="#Viewpoint-variation-視野角度變化" class="headerlink" title="Viewpoint variation 視野角度變化"></a>Viewpoint variation 視野角度變化</h3><ul>
+<li>攝影機視野改變造成觀測結果產生變化</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/d3418806.jpg"  width="400"/>
+
+<h3 id="Background-Clutter-非均值的背景"><a href="#Background-Clutter-非均值的背景" class="headerlink" title="Background Clutter 非均值的背景"></a>Background Clutter 非均值的背景</h3><ul>
+<li>背景可能非常雜亂</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg"  width="400"/>
+
+<h3 id="Illumination-亮度的變化"><a href="#Illumination-亮度的變化" class="headerlink" title="Illumination 亮度的變化"></a>Illumination 亮度的變化</h3><ul>
+<li>不同的燈源，打光方式造成同一個物體不同成像結果</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg"  width="400"/>
+
+<h3 id="Occlusion-被遮蔽的物體"><a href="#Occlusion-被遮蔽的物體" class="headerlink" title="Occlusion 被遮蔽的物體"></a>Occlusion 被遮蔽的物體</h3><ul>
+<li>物體被遮擋一部分，但還是可以透過特徵來辨認出來</li>
+</ul>
+<img src="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg"  width="400"/>
+
+<h3 id="Deformation-物體形狀的變化"><a href="#Deformation-物體形狀的變化" class="headerlink" title="Deformation 物體形狀的變化"></a>Deformation 物體形狀的變化</h3><img src="https://yanzzzzzzzzz.github.io/img/liquid-cat.png"  width="400"/>
+
+<img src="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png"  width="400"/>
+
+<h3 id="Intraclass-variation-同類型的不同變化"><a href="#Intraclass-variation-同類型的不同變化" class="headerlink" title="Intraclass variation 同類型的不同變化"></a>Intraclass variation 同類型的不同變化</h3><img src="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg"  width="400"/>
+
+<p>沒辦法透過<a href="https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB">硬編碼</a>的方式在這些問題下輕易的分類出貓咪</p>
+<h2 id="機器學習-數據驅動方法"><a href="#機器學習-數據驅動方法" class="headerlink" title="機器學習: 數據驅動方法"></a>機器學習: 數據驅動方法</h2><p>寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。<br>因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。<br>流程：</p>
+<ol>
+<li>收集數據集(影像與對應的類別標記)</li>
+<li>機器學習演算法訓練分類器</li>
+<li>使用分類器預測新讀進來的影像</li>
+</ol>
+<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><h3 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h3><ul>
+<li>比較兩影像之間的距離<br>L1距離公式:$d_1(I_1, I_2) &#x3D; \sum_{p} |I^P_1 - I^P_2|$</li>
+</ul>
+<p>$其中I_1, I_2 是影像,P是I_1, I_2像素點的索引$</p>
+<p>這個距離公式就是<code>逐點計算兩影像像素值差異的總和</code>，加絕對值是為了避免正負號誤差加總後造成抵銷</p>
+<p><a href="https://github.com/yanzzzzzzzzz/K-Nearest-Neighbor-Classifier">實作KNN測試cifar10 in github</a></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/51979923">跟着cs231n学英语（Module 1)</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>cs231n</tag>
+      </tags>
   </entry>
   <entry>
     <title>使用Vue Teleport實作提示框功能</title>
@@ -1780,92 +1838,6 @@ public:
 ]]></content>
   </entry>
   <entry>
-    <title>Image Classification</title>
-    <url>/2020/11/15/cs231n-Image-Classification/</url>
-    <content><![CDATA[<p>website:<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></p>
-<p>影像分類是電腦視覺的核心任務，但其中有許多障礙要克服</p>
-<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><h3 id="Semantic-Gap-語義鴻溝"><a href="#Semantic-Gap-語義鴻溝" class="headerlink" title="Semantic Gap 語義鴻溝"></a>Semantic Gap 語義鴻溝</h3><ul>
-<li>Semantic Gap指的是在不同系統中形成的結構造成差異</li>
-<li>人眼傳送到大腦所看到的物體形成的過程!&#x3D;攝影機傳送到電腦看到物體形成的過程</li>
-<li>人眼看到的是物體是光線照射到物體，經過反射後部份光線射入我們的眼睛。人腦所想的通常是高階特徵ex:飛機、汽車、室內空間</li>
-<li>在電腦中看到的數位影像是個三維tensor(R, G, B channel)。電腦主要觀察低階特徵ex:顏色分布、紋理(texture)</li>
-</ul>
-<h3 id="Viewpoint-variation-視野角度變化"><a href="#Viewpoint-variation-視野角度變化" class="headerlink" title="Viewpoint variation 視野角度變化"></a>Viewpoint variation 視野角度變化</h3><ul>
-<li>攝影機視野改變造成觀測結果產生變化</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/d3418806.jpg"  width="400"/>
-
-<h3 id="Background-Clutter-非均值的背景"><a href="#Background-Clutter-非均值的背景" class="headerlink" title="Background Clutter 非均值的背景"></a>Background Clutter 非均值的背景</h3><ul>
-<li>背景可能非常雜亂</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/cat-in-background.jpg"  width="400"/>
-
-<h3 id="Illumination-亮度的變化"><a href="#Illumination-亮度的變化" class="headerlink" title="Illumination 亮度的變化"></a>Illumination 亮度的變化</h3><ul>
-<li>不同的燈源，打光方式造成同一個物體不同成像結果</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/Black_cat_in_the_dark.jpg"  width="400"/>
-
-<h3 id="Occlusion-被遮蔽的物體"><a href="#Occlusion-被遮蔽的物體" class="headerlink" title="Occlusion 被遮蔽的物體"></a>Occlusion 被遮蔽的物體</h3><ul>
-<li>物體被遮擋一部分，但還是可以透過特徵來辨認出來</li>
-</ul>
-<img src="https://yanzzzzzzzzz.github.io/img/cat-hidden.jpg"  width="400"/>
-
-<h3 id="Deformation-物體形狀的變化"><a href="#Deformation-物體形狀的變化" class="headerlink" title="Deformation 物體形狀的變化"></a>Deformation 物體形狀的變化</h3><img src="https://yanzzzzzzzzz.github.io/img/liquid-cat.png"  width="400"/>
-
-<img src="https://yanzzzzzzzzz.github.io/img/sleeping-cat.png"  width="400"/>
-
-<h3 id="Intraclass-variation-同類型的不同變化"><a href="#Intraclass-variation-同類型的不同變化" class="headerlink" title="Intraclass variation 同類型的不同變化"></a>Intraclass variation 同類型的不同變化</h3><img src="https://yanzzzzzzzzz.github.io/img/Black_white_cats.jpg"  width="400"/>
-
-<p>沒辦法透過<a href="https://zh.wikipedia.org/wiki/%E5%AF%AB%E6%AD%BB">硬編碼</a>的方式在這些問題下輕易的分類出貓咪</p>
-<h2 id="機器學習-數據驅動方法"><a href="#機器學習-數據驅動方法" class="headerlink" title="機器學習: 數據驅動方法"></a>機器學習: 數據驅動方法</h2><p>寫一個影像分類演算法與排序演算法非常不同，假設今天是要辨識一隻貓咪，我們必須考慮到貓咪的各種形狀、顏色等變化。<br>因此，與其透過硬編碼方式定義出複雜的經驗法則，不如透過給予很多數據來建立一個學習演算法。<br>流程：</p>
-<ol>
-<li>收集數據集(影像與對應的類別標記)</li>
-<li>機器學習演算法訓練分類器</li>
-<li>使用分類器預測新讀進來的影像</li>
-</ol>
-<h2 id="Nearest-Neighbor-Classifier"><a href="#Nearest-Neighbor-Classifier" class="headerlink" title="Nearest Neighbor Classifier"></a>Nearest Neighbor Classifier</h2><h3 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h3><ul>
-<li>比較兩影像之間的距離<br>L1距離公式:$d_1(I_1, I_2) &#x3D; \sum_{p} |I^P_1 - I^P_2|$</li>
-</ul>
-<p>$其中I_1, I_2 是影像,P是I_1, I_2像素點的索引$</p>
-<p>這個距離公式就是<code>逐點計算兩影像像素值差異的總和</code>，加絕對值是為了避免正負號誤差加總後造成抵銷</p>
-<p><a href="https://github.com/yanzzzzzzzzz/K-Nearest-Neighbor-Classifier">實作KNN測試cifar10 in github</a></p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/51979923">跟着cs231n学英语（Module 1)</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>cs231n</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MSSQL 無法連線至XXX 問題</title>
-    <url>/2023/09/01/mssql-login-problem/</url>
-    <content><![CDATA[<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-fail.png" />
-
-<p>以下可能原因:</p>
-<span id="more"></span>
-<h2 id="伺服器僅設定為Windows驗證模式"><a href="#伺服器僅設定為Windows驗證模式" class="headerlink" title="伺服器僅設定為Windows驗證模式"></a>伺服器僅設定為Windows驗證模式</h2><p>物件總管-&gt;伺服器右鍵選擇屬性-&gt;安全性-&gt;變更伺服器驗證為SQL Server及Windows驗證模式</p>
-<img src="https://yanzzzzzzzzz.github.io/img/mssql-setting-login-mode.png" />
-
-<p>需要重新啟動SQL SERVER</p>
-<img src="https://yanzzzzzzzzz.github.io/img/mssql-reboot.png" />
-
-<h2 id="不存在的user"><a href="#不存在的user" class="headerlink" title="不存在的user"></a>不存在的user</h2><p>新建一個跟登入名稱相同的user</p>
-<img src="https://yanzzzzzzzzz.github.io/img/mssql-create-new-user.png" />
-
-<p>設定讀取資料庫權限</p>
-<img src="https://yanzzzzzzzzz.github.io/img/mssql-user-db-permit-setting.png" />
-
-<h2 id="未啟用的user"><a href="#未啟用的user" class="headerlink" title="未啟用的user"></a>未啟用的user</h2><p>如果是已經創建的user, 檢查是否被設置為停用user</p>
-<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-type-enable.png" />
-
-<p>物件總管-&gt;伺服器-&gt;安全性-&gt;登入-&gt;找到指定user名稱右鍵-&gt;屬性-&gt;狀態</p>
-<p>登入的地方把<code>已停用</code>改為<code>已啟用</code></p>
-<h2 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h2><p><a href="https://shaurong.blogspot.com/2021/06/sql-server-2019.html">[研究] SQL Server 2019 - 與伺服器的連線已建立成功，但在登入程序時發生錯誤。</a></p>
-<p><a href="https://dog0416.blogspot.com/2015/04/databasesql-server-microsoft-sql-server.html">[Database][SQL Server] 使用者 的登入失敗。 Microsoft SQL Server, 錯誤: 18456</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Node Version Manager (NVM):安裝、切換Node.js版本的管理器</title>
     <url>/2022/11/21/nvm-install/</url>
     <content><![CDATA[<h2 id="nvm介紹"><a href="#nvm介紹" class="headerlink" title="nvm介紹"></a>nvm介紹</h2><p>Node Version Manager (NVM) 是用來管理Node.js版本，可以同時安裝多個不同版本，因應不同專案環境去快速做切換</p>
@@ -1913,6 +1885,34 @@ public:
       <tags>
         <tag>node</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>MSSQL 無法連線至XXX 問題</title>
+    <url>/2023/09/01/mssql-login-problem/</url>
+    <content><![CDATA[<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-fail.png" />
+
+<p>以下可能原因:</p>
+<span id="more"></span>
+<h2 id="伺服器僅設定為Windows驗證模式"><a href="#伺服器僅設定為Windows驗證模式" class="headerlink" title="伺服器僅設定為Windows驗證模式"></a>伺服器僅設定為Windows驗證模式</h2><p>物件總管-&gt;伺服器右鍵選擇屬性-&gt;安全性-&gt;變更伺服器驗證為SQL Server及Windows驗證模式</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-setting-login-mode.png" />
+
+<p>需要重新啟動SQL SERVER</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-reboot.png" />
+
+<h2 id="不存在的user"><a href="#不存在的user" class="headerlink" title="不存在的user"></a>不存在的user</h2><p>新建一個跟登入名稱相同的user</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-create-new-user.png" />
+
+<p>設定讀取資料庫權限</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-user-db-permit-setting.png" />
+
+<h2 id="未啟用的user"><a href="#未啟用的user" class="headerlink" title="未啟用的user"></a>未啟用的user</h2><p>如果是已經創建的user, 檢查是否被設置為停用user</p>
+<img src="https://yanzzzzzzzzz.github.io/img/mssql-login-type-enable.png" />
+
+<p>物件總管-&gt;伺服器-&gt;安全性-&gt;登入-&gt;找到指定user名稱右鍵-&gt;屬性-&gt;狀態</p>
+<p>登入的地方把<code>已停用</code>改為<code>已啟用</code></p>
+<h2 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h2><p><a href="https://shaurong.blogspot.com/2021/06/sql-server-2019.html">[研究] SQL Server 2019 - 與伺服器的連線已建立成功，但在登入程序時發生錯誤。</a></p>
+<p><a href="https://dog0416.blogspot.com/2015/04/databasesql-server-microsoft-sql-server.html">[Database][SQL Server] 使用者 的登入失敗。 Microsoft SQL Server, 錯誤: 18456</a></p>
+]]></content>
   </entry>
   <entry>
     <title>分層架構模式</title>
